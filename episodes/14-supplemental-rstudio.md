@@ -31,7 +31,7 @@ project with Git. To get started using Git in RStudio, we create a new project:
 ![](fig/RStudio_screenshot_newproject.png){alt='RStudio screenshot showing the file menu dropdown with "New Project..." selected'}
 
 This opens a dialog asking us how we want to create the project. We have
-some options here. Let's say that we want to use RStudio with the recipes
+some options here. Let's say that we want to use RStudio with the weather
 repository that we already made. Since that repository lives in a directory on
 our computer, we choose the option "Existing Directory":
 
@@ -82,9 +82,9 @@ to accept the Xcode license if you are using macOS.
 Next, RStudio will ask which existing directory we want to use. Click
 "Browse..." and navigate to the correct directory, then click "Create Project":
 
-![](fig/RStudio_screenshot_navigateexisting.png){alt='RStudio window showing the "Create Project From Existing Directory" dialog. In the dialog, the project working directory has been set to "~/Desktop/recipes"'}
+![](fig/RStudio_screenshot_navigateexisting.png){alt='RStudio window showing the "Create Project From Existing Directory" dialog. In the dialog, the project working directory has been set to "~/Desktop/weather"'}
 
-Ta-da! We have created a new project in RStudio within the existing recipes
+Ta-da! We have created a new project in RStudio within the existing weather
 repository. Notice the vertical "Git" menu in the menu bar. RStudio has
 recognized that the current directory is a Git repository, and gives us a
 number of tools to use Git:

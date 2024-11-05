@@ -34,11 +34,11 @@ world. To this end we are going to create a *remote* repository that will be lin
 ## 1\. Create a remote repository
 
 Log in to [GitHub](https://github.com), then click on the icon in the top right corner to
-create a new repository called `recipes`:
+create a new repository called `weather`:
 
 ![](fig/github-create-repo-01.png){alt='The first step in creating a repository on GitHub: clicking the "create new" button'}
 
-Name your repository "recipes" and then click "Create Repository".
+Name your repository "weather" and then click "Create Repository".
 
 Note: Since this repository will be connected to a local repository, it needs to be empty. Leave
 "Initialize this repository with a README" unchecked, and keep "None" as options for both "Add
@@ -55,22 +55,22 @@ information on how to configure your local repository:
 This effectively does the following on GitHub's servers:
 
 ```bash
-$ mkdir recipes
-$ cd recipes
+$ mkdir weather
+$ cd weather
 $ git init
 ```
 
 If you remember back to the earlier [episode](04-changes.md) where we added and
-committed our earlier work on `guacamole.md`, we had a diagram of the local repository
+committed our earlier work on `forecast.md`, we had a diagram of the local repository
 which looked like this:
 
 ![](fig/git-staging-area.svg){alt='A diagram showing how "git add" registers changes in the staging area, while "git commit" moves changes from the staging area to the repository'}
 
 Now that we have two repositories, we need a diagram like this:
 
-![](fig/git-freshly-made-github-repo.svg){alt='A diagram illustrating how the GitHub "recipes" repository is also a git repository like our local repository, but that it is currently empty'}
+![](fig/git-freshly-made-github-repo.svg){alt='A diagram illustrating how the GitHub "weather" repository is also a git repository like our local repository, but that it is currently empty'}
 
-Note that our local repository still contains our earlier work on `guacamole.md`, but the
+Note that our local repository still contains our earlier work on `forecast.md`, but the
 remote repository on GitHub appears empty as it doesn't contain any files yet.
 
 ## 2\. Connect local to remote repository
@@ -95,17 +95,15 @@ minimum level for GitHub.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-![](fig/github-find-repo-string.png){alt='Clicking the "Copy to Clipboard" button on GitHub to obtain the repository\'s URL'}
-
-Copy that URL from the browser, go into the local `recipes` repository, and run
+Copy that URL from the browser, go into the local `weather` repository, and run
 this command:
 
 ```bash
-$ git remote add origin git@github.com:alflin/recipes.git
+$ git remote add origin git@github.com:mo-eormerod/weather.git
 ```
 
-Make sure to use the URL for your repository rather than Alfredo's: the only
-difference should be your username instead of `alflin`.
+Make sure to use the URL for your repository: the only
+difference should be your username instead of `mo-eormerod`.
 
 `origin` is a local name used to refer to the remote repository. It could be called
 anything, but `origin` is a convention that is often used by default in git
@@ -118,8 +116,8 @@ $ git remote -v
 ```
 
 ```output
-origin   git@github.com:alflin/recipes.git (fetch)
-origin   git@github.com:alflin/recipes.git (push)
+origin   git@github.com:mo-eormerod/weather.git (fetch)
+origin   git@github.com:mo-eormerod/weather.git (push)
 ```
 
 We'll discuss remotes in more detail in the next episode, while
@@ -127,16 +125,17 @@ talking about how they might be used for collaboration.
 
 ## 3\. SSH Background and Setup
 
-Before Alfredo can connect to a remote repository, he needs to set up a way for his computer to authenticate with GitHub so it knows it's him trying to connect to his remote repository.
+Before you can connect to a remote repository, you need to set up a way for your computer to authenticate with GitHub so it knows it's you trying to connect to the remote repository.
 
-We are going to set up the method that is commonly used by many different services to authenticate access on the command line.  This method is called Secure Shell Protocol (SSH).  SSH is a cryptographic network protocol that allows secure communication between computers using an otherwise insecure network.
+We are going to set up the method that is commonly used by many different services to authenticate access on the command line.  This method is called Secure Shell Protocol (SSH). SSH is a cryptographic network protocol that allows secure communication between computers using an otherwise insecure network.
 
 SSH uses what is called a key pair. This is two keys that work together to validate access. One key is publicly known and called the public key, and the other key called the private key is kept private. Very descriptive names.
 
 You can think of the public key as a padlock, and only you have the key (the private key) to open it. You use the public key where you want a secure method of communication, such as your GitHub account.  You give this padlock, or public key, to GitHub and say "lock the communications to my account with this so that only computers that have my private key can unlock communications and send git commands as my GitHub account."
 
 What we will do now is the minimum required to set up the SSH keys and add the public key to a GitHub account.
-The first thing we are going to do is check if this has already been done on the computer you're on.  Because generally speaking, this setup only needs to happen once and then you can forget about it.
+The first thing we are going to do is check if this has already been done on the computer you're on.
+Because generally speaking, this setup only needs to happen once and then you can forget about it.
 
 :::::::::::::::::::::::::::::::::::::::::  callout
 
@@ -157,21 +156,21 @@ ls -al ~/.ssh
 
 Your output is going to look a little different depending on whether or not SSH has ever been set up on the computer you are using.
 
-Alfredo has not set up SSH on his computer, so his output is
+If you have not set up SSH on your computer, you will see
 
 ```output
 ls: cannot access '~/.ssh': No such file or directory
 ```
 
 If SSH has been set up on the computer you're using, the public and private key pairs will be listed. The file names are either `id_ed25519`/`id_ed25519.pub` or `id_rsa`/`id_rsa.pub` depending on how the key pairs were set up.
-Since they don't exist on Alfredo's computer, he uses this command to create them.
 
 ### 3\.1 Create an SSH key pair
 
-To create an SSH key pair Alfredo uses this command, where the `-t` option specifies which type of algorithm to use:
+To create an SSH key pair use the following command, 
+where the `-t` option specifies which type of algorithm to use:
 
 ```bash
-$ ssh-keygen -t ed25519 -C "a.linguini@ratatouille.fr"
+$ ssh-keygen -t ed25519 -C "e.ormerod@weather.com"
 ```
 
 The `-C` flag attaches a comment to the key.
@@ -184,13 +183,13 @@ If you are using a legacy system that doesn't support the Ed25519 algorithm, use
 
 ```output
 Generating public/private ed25519 key pair.
-Enter file in which to save the key (/c/Users/Alfredo/.ssh/id_ed25519):
+Enter file in which to save the key (~/.ssh/id_ed25519):
 ```
 
 We want to store our key in the file `~/.ssh/id_ed25519_github`.
 
 ```output
-Created directory '/c/Users/Alfredo/.ssh'.
+Created directory '~/.ssh'.
 Enter passphrase (empty for no passphrase):
 ```
 
@@ -212,10 +211,10 @@ Enter same passphrase again:
 After entering the same passphrase a second time, we receive the confirmation
 
 ```output
-Your identification has been saved in /c/Users/Alfredo/.ssh/id_ed25519_github
-Your public key has been saved in /c/Users/Alfredo/.ssh/id_ed25519_github.pub
+Your identification has been saved in ~/.ssh/id_ed25519_github
+Your public key has been saved in ~/.ssh/id_ed25519_github.pub
 The key fingerprint is:
-SHA256:SMSPIStNyA00KPxuYu94KpZgRAYjgt9g4BA4kFy3g1o a.linguini@ratatouille.fr
+SHA256:SMSPIStNyA00KPxuYu94KpZgRAYjgt9g4BA4kFy3g1o e.ormerod@weather.com
 The key's randomart image is:
 +--[ED25519 256]--+
 |^B== o.          |
@@ -230,8 +229,9 @@ The key's randomart image is:
 +----[SHA256]-----+
 ```
 
-The "identification" is actually the private key. You should never share it.  The public key is appropriately named.  The "key fingerprint"
-is a shorter version of a public key.
+The "identification" is actually the private key. You should never share it.
+The public key is appropriately named.
+The "key fingerprint" is a shorter version of a public key.
 
 Now that we have generated the SSH keys, we will find the SSH files when we check.
 
@@ -240,10 +240,10 @@ ls -al ~/.ssh
 ```
 
 ```output
-drwxr-xr-x 1 Alfredo   197121   0 Jul 16 14:48 ./
-drwxr-xr-x 1 Alfredo   197121   0 Jul 16 14:48 ../
--rw-r--r-- 1 Alfredo   197121 419 Jul 16 14:48 id_ed25519_github
--rw-r--r-- 1 Alfredo   197121 106 Jul 16 14:48 id_ed25519_github.pub
+drwxr-xr-x 1 Eleanor   197121   0 Jul 16 14:48 ./
+drwxr-xr-x 1 Eleanor   197121   0 Jul 16 14:48 ../
+-rw-r--r-- 1 Eleanor   197121 419 Jul 16 14:48 id_ed25519_github
+-rw-r--r-- 1 Eleanor   197121 106 Jul 16 14:48 id_ed25519_github.pub
 ```
 
 ### 3\.2 Copy the public key to GitHub
@@ -284,13 +284,13 @@ cat ~/.ssh/id_ed25519_github.pub
 ```
 
 ```output
-ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDmRA3d51X0uu9wXek559gfn6UFNF69yZjChyBIU2qKI a.linguini@ratatouille.fr
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDmRA3d51X0uu9wXek559gfn6UFNF69yZjChyBIU2qKI e.ormerod@weather.com
 ```
 
 Now, going to GitHub.com, click on your profile icon in the top right corner to get the drop-down menu.  Click "Settings", then on the
 settings page, click "SSH and GPG keys", on the left side "Access" menu. Click the "New SSH key" button on the right side. Now,
-you can add the title (Alfredo uses the title "Alfredo's Kitchen Laptop" so he can remember where the original key pair
-files are located), paste your SSH key into the field, and click the "Add SSH key" to complete the setup.
+you can add the title (normally an ID for the computer storing the keys such as "Work Linux"),
+paste your SSH key into the field, and click the "Add SSH key" to complete the setup.
 
 Now that we've set that up, let's check our authentication again from the command line.
 
@@ -299,7 +299,7 @@ $ ssh -T git@github.com
 ```
 
 ```output
-Hi Alfredo! You've successfully authenticated, but GitHub does not provide shell access.
+Hi Eleanor! You've successfully authenticated, but GitHub does not provide shell access.
 ```
 
 Good! This output confirms that the SSH key works as intended. We are now ready to push our work to the remote repository.
@@ -313,8 +313,7 @@ our local repository to the repository on GitHub:
 $ git push origin main
 ```
 
-Since Alfredo set up a passphrase, it will prompt him for it.  If you completed advanced settings for your authentication, it
-will not prompt for a passphrase.
+If you entered a passphrase when creating an shh key you will be prompted for it.
 
 ```output
 Enumerating objects: 16, done.
@@ -324,9 +323,20 @@ Compressing objects: 100% (11/11), done.
 Writing objects: 100% (16/16), 1.45 KiB | 372.00 KiB/s, done.
 Total 16 (delta 2), reused 0 (delta 0)
 remote: Resolving deltas: 100% (2/2), done.
-To https://github.com/alflin/recipes.git
+To https://github.com/mo-eormerod/weather.git
  * [new branch]      main -> main
 ```
+
+You can avoid typing `origin main` by setting the upstream remote branch
+for the local branch `main`:
+
+```bash
+git push --set-upstream origin main
+```
+
+This command run from the local repositories main branch tells git that when
+we run `git push` we want to push to `origin`'s, the remote GitHub repository,
+`main` branch.
 
 :::::::::::::::::::::::::::::::::::::::::  callout
 
@@ -401,7 +411,7 @@ $ git pull origin main
 ```
 
 ```output
-From https://github.com/alflin/recipes
+From https://github.com/mo-eormerod/weather
  * branch            main     -> FETCH_HEAD
 Already up-to-date.
 ```
@@ -414,7 +424,7 @@ GitHub, though, this command would download them to our local repository.
 
 ## GitHub GUI
 
-Browse to your `recipes` repository on GitHub.
+Browse to your `weather` repository on GitHub.
 Under the Code tab, find and click on the text that says "XX commits" (where "XX" is some number).
 Hover over, and click on, the three buttons to the right of each commit.
 What information can you gather/explore from these buttons?
@@ -531,7 +541,7 @@ remote: Enumerating objects: 3, done.
 remote: Counting objects: 100% (3/3), done.
 remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
 Unpacking objects: 100% (3/3), done.
-From https://github.com/alflin/recipes
+From https://github.com/mo-eormerod/weather
  * branch            main     -> FETCH_HEAD
  * [new branch]      main     -> origin/main
 fatal: refusing to merge unrelated histories
@@ -546,7 +556,7 @@ $ git pull --allow-unrelated-histories origin main
 ```
 
 ```output
-From https://github.com/alflin/recipes
+From https://github.com/mo-eormerod/weather
  * branch            main     -> FETCH_HEAD
 Merge made by the 'recursive' strategy.
 README.md | 1 +

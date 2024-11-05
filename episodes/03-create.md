@@ -17,20 +17,18 @@ exercises: 0
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-Once Git is configured,
-we can start using it.
+Now that Git is configured, we can start using it.
 
-We will help Alfredo with his new project, create a repository with all his recipes.
-
-First, let's create a new directory in the `Desktop` folder for our work and then change the current working directory to the newly created one:
+First, let's create a new directory in the `Desktop` folder for our work 
+and then change the current working directory to the newly created one:
 
 ```bash
 $ cd ~/Desktop
-$ mkdir recipes
-$ cd recipes
+$ mkdir weather
+$ cd weather
 ```
 
-Then we tell Git to make `recipes` a [repository](../learners/reference.md#repository)
+Then we tell Git to make `weather` a [repository](../learners/reference.md#repository)
 \-- a place where Git can store versions of our files:
 
 ```bash
@@ -39,9 +37,9 @@ $ git init
 
 It is important to note that `git init` will create a repository that
 can include subdirectories and their files---there is no need to create
-separate repositories nested within the `recipes` repository, whether
+separate repositories nested within the `weather` repository, whether
 subdirectories are present from the beginning or added later. Also, note
-that the creation of the `recipes` directory and its initialization as a
+that the creation of the `weather` directory and its initialization as a
 repository are completely separate processes.
 
 If we use `ls` to show the directory's contents,
@@ -52,7 +50,7 @@ $ ls
 ```
 
 But if we add the `-a` flag to show everything,
-we can see that Git has created a hidden directory within `recipes` called `.git`:
+we can see that Git has created a hidden directory within `weather` called `.git`:
 
 ```bash
 $ ls -a
@@ -83,7 +81,8 @@ benefits of Git and distributed version control systems over FCM/SVN.
 
 :::
 
-We can now start using one of the most important git commands, which is particularly helpful to beginners. `git status` tells us the status of our project, and better, a list of changes in the project and options on what to do with those changes. We can use it as often as we want, whenever we want to understand what is going on.
+We can now start using one of the most important git commands, which is particularly helpful to beginners. `git status` tells us the status of our project, and better, a list of changes in the project and options on what to do with those changes.
+We can use it as often as we want, whenever we want to understand what is going on.
 
 ```bash
 $ git status
@@ -122,33 +121,33 @@ wording of the output might be slightly different.
 
 ## Places to Create Git Repositories
 
-Along with tracking information about recipes (the project we have already created),
-Alfredo would also like to track information about desserts specifically.
-Alfredo creates a `desserts` project inside his `recipes`
+Along with tracking information about weather (the project we have already created),
+you might also want to track information about clouds specifically.
+Imagine you create a `clouds` project inside your `weather`
 project with the following sequence of commands:
 
 ```bash
 $ cd ~/Desktop    # return to Desktop directory
-$ cd recipes      # go into recipes directory, which is already a Git repository
-$ ls -a           # ensure the .git subdirectory is still present in the recipes directory
-$ mkdir desserts # make a sub-directory recipes/desserts
-$ cd desserts    # go into desserts subdirectory
-$ git init        # make the desserts subdirectory a Git repository
+$ cd weather      # go into weather directory, which is already a Git repository
+$ ls -a           # ensure the .git subdirectory is still present in the weather directory
+$ mkdir clouds    # make a sub-directory weather/clouds
+$ cd clouds       # go into clouds subdirectory
+$ git init        # make the clouds subdirectory a Git repository
 $ ls -a           # ensure the .git subdirectory is present indicating we have created a new Git repository
 ```
 
-Is the `git init` command, run inside the `desserts` subdirectory, required for
-tracking files stored in the `desserts` subdirectory?
+Is the `git init` command, run inside the `clouds` subdirectory, required for
+tracking files stored in the `clouds` subdirectory?
 
 :::::::::::::::  solution
 
 ## Solution
 
-No. Alfredo does not need to make the `desserts` subdirectory a Git repository
-because the `recipes` repository will track all files, sub-directories, and
-subdirectory files under the `recipes` directory.  Thus, in order to track
-all information about desserts, Alfredo only needed to add the `desserts` subdirectory
-to the `recipes` directory.
+No. You do not need to make the `clouds` subdirectory a Git repository
+because the `weather` repository will track all files, sub-directories, and
+subdirectory files under the `weather` directory.  Thus, in order to track
+all information about clouds, you only needed to add the `clouds` subdirectory
+to the `weather` directory.
 
 Additionally, Git repositories can interfere with each other if they are "nested":
 the outer repository will try to version-control
@@ -170,9 +169,9 @@ fatal: Not a git repository (or any of the parent directories): .git
 
 ## Correcting `git init` Mistakes
 
-Jimmy explains to Alfredo how a nested repository is redundant and may cause confusion
-down the road. Alfredo would like to go back to a single git repository. How can Alfredo undo
-his last `git init` in the `desserts` subdirectory?
+A colleague explains to you how a nested repository is redundant and may cause confusion
+down the road. You would like to go back to a single git repository.
+How can you undo the last `git init` in the `clouds` subdirectory?
 
 :::::::::::::::  solution
 
@@ -195,11 +194,11 @@ becomes another change that we will need to track, as we will see in the next ep
 ### Solution
 
 Git keeps all of its files in the `.git` directory.
-To recover from this little mistake, Alfredo can remove the `.git`
-folder in the desserts subdirectory by running the following command from inside the `recipes` directory:
+To recover from this little mistake, you can remove the `.git`
+folder in the clouds subdirectory by running the following command from inside the `weather` directory:
 
 ```bash
-$ rm -rf desserts/.git
+$ rm -rf clouds/.git
 ```
 
 But be careful! Running this command in the wrong directory will remove

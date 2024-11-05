@@ -25,48 +25,48 @@ different changes to each copy.  Version control helps us manage these
 [resolve](../learners/reference.md#resolve) overlapping changes.
 
 To see how we can resolve conflicts, we must first create one.  The file
-`guacamole.md` currently looks like this in both partners' copies of our `recipes`
+`forecast.md` currently looks like this in both partners' copies of our `weather`
 repository:
 
 ```bash
-$ cat guacamole.md
+$ cat forecast.md
 ```
 
 ```output
-# Guacamole
-## Ingredients
-* avocado
-* lime
-* salt
-## Instructions
+# Forecast
+## Today
+Cloudy with a chance of sun.
+Mild temperatures around 16°C.
+## Tomorrow
+Morning rainbows followed by light showers.
 ```
 
 Let's add a line to the collaborator's copy only:
 
 ```bash
-$ nano guacamole.md
-$ cat guacamole.md
+$ nano forecast.md
+$ cat forecast.md
 ```
 
 ```output
-# Guacamole
-## Ingredients
-* avocado
-* lime
-* salt
-## Instructions
-* put one avocado into a bowl.
+# Forecast
+## Today
+Cloudy with a chance of sun.
+Mild temperatures around 16°C.
+## Tomorrow
+Morning rainbows followed by light showers.
+Ice forming overnight.
 ```
 
 and then push the change to GitHub:
 
 ```bash
-$ git add guacamole.md
-$ git commit -m "First step on the instructions"
+$ git add forecast.md
+$ git commit -m "Add ice forecast for tomorrow evening"
 ```
 
 ```output
-[main 5ae9631] First step on the instructions
+[main 5ae9631] Add ice forecast for tomorrow evening
  1 file changed, 1 insertion(+)
 ```
 
@@ -82,7 +82,7 @@ Compressing objects: 100% (3/3), done.
 Writing objects: 100% (3/3), 331 bytes | 331.00 KiB/s, done.
 Total 3 (delta 2), reused 0 (delta 0)
 remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
-To https://github.com/alflin/recipes.git
+To https://github.com/mo-eormerod/weather.git
    29aba7c..dabb4c8  main -> main
 ```
 
@@ -91,29 +91,29 @@ make a different change to their copy
 *without* updating from GitHub:
 
 ```bash
-$ nano guacamole.md
-$ cat guacamole.md
+$ nano forecast.md
+$ cat forecast.md
 ```
 
 ```output
-# Guacamole
-## Ingredients
-* avocado
-* lime
-* salt
-## Instructions
-* peel the avocados
+# Forecast
+## Today
+Cloudy with a chance of sun.
+Mild temperatures around 16°C.
+## Tomorrow
+Morning rainbows followed by light showers.
+Snow forming overnight.
 ```
 
 We can commit the change locally:
 
 ```bash
-$ git add guacamole.md
-$ git commit -m "Add first step"
+$ git add forecast.md
+$ git commit -m "Add snow forecast for tomorrow evening"
 ```
 
 ```output
-[main 07ebc69] Add first step
+[main 07ebc69] Add snow forecast for tomorrow evening
  1 file changed, 1 insertion(+)
 ```
 
@@ -124,9 +124,9 @@ $ git push origin main
 ```
 
 ```output
-To https://github.com/alflin/recipes.git
+To https://github.com/mo-eormerod/weather.git
  ! [rejected]        main -> main (fetch first)
-error: failed to push some refs to 'https://github.com/alflin/recipes.git'
+error: failed to push some refs to 'https://github.com/mo-eormerod/weather.git'
 hint: Updates were rejected because the remote contains work that you do
 hint: not have locally. This is usually caused by another repository pushing
 hint: to the same ref. You may want to first integrate the remote changes
@@ -152,11 +152,11 @@ remote: Counting objects: 100% (5/5), done.
 remote: Compressing objects: 100% (1/1), done.
 remote: Total 3 (delta 2), reused 3 (delta 2), pack-reused 0
 Unpacking objects: 100% (3/3), done.
-From https://github.com/alflin/recipes
+From https://github.com/mo-eormerod/weather
  * branch            main     -> FETCH_HEAD
     29aba7c..dabb4c8  main     -> origin/main
-Auto-merging guacamole.md
-CONFLICT (content): Merge conflict in guacamole.md
+Auto-merging forecast.md
+CONFLICT (content): Merge conflict in forecast.md
 Automatic merge failed; fix conflicts and then commit the result.
 ```
 
@@ -206,20 +206,20 @@ stop us from trampling on our previous work. The conflict is marked in
 in the affected file:
 
 ```bash
-$ cat guacamole.md
+$ cat forecast.md
 ```
 
 ```output
-# Guacamole
-## Ingredients
-* avocado
-* lime
-* salt
-## Instructions
+# Forecast
+## Today
+Cloudy with a chance of sun.
+Mild temperatures around 16°C.
+## Tomorrow
+Morning rainbows followed by light showers.
 <<<<<<< HEAD
-* peel the avocados
+Snow forming overnight.
 =======
-* put one avocado into a bowl.
+Ice forming overnight.
 >>>>>>> dabb4c8c450e8475aee9b14b4383acc99f42af1d
 ```
 
@@ -237,25 +237,25 @@ or get rid of the change entirely.
 Let's replace both so that the file looks like this:
 
 ```bash
-$ cat guacamole.md
+$ cat forecast.md
 ```
 
 ```output
-# Guacamole
-## Ingredients
-* avocado
-* lime
-* salt
-## Instructions
-* peel the avocados and put them into a bowl.
+# Forecast
+## Today
+Cloudy with a chance of sun.
+Mild temperatures around 16°C.
+## Tomorrow
+Morning rainbows followed by light showers.
+Snow forming overnight with a chance of icy patches.
 ```
 
 To finish merging,
-we add `guacamole.md` to the changes being made by the merge
+we add `forecast.md` to the changes being made by the merge
 and then commit:
 
 ```bash
-$ git add guacamole.md
+$ git add forecast.md
 $ git status
 ```
 
@@ -266,7 +266,7 @@ All conflicts fixed but you are still merging.
 
 Changes to be committed:
 
-	modified:   guacamole.md
+	modified:   forecast.md
 
 ```
 
@@ -292,7 +292,7 @@ Compressing objects: 100% (6/6), done.
 Writing objects: 100% (6/6), 645 bytes | 645.00 KiB/s, done.
 Total 6 (delta 4), reused 0 (delta 0)
 remote: Resolving deltas: 100% (4/4), completed with 2 local objects.
-To https://github.com/alflin/recipes.git
+To https://github.com/mo-eormerod/weather.git
    dabb4c8..2abf2b1  main -> main
 ```
 
@@ -310,29 +310,29 @@ remote: Counting objects: 100% (10/10), done.
 remote: Compressing objects: 100% (2/2), done.
 remote: Total 6 (delta 4), reused 6 (delta 4), pack-reused 0
 Unpacking objects: 100% (6/6), done.
-From https://github.com/alflin/recipes
+From https://github.com/mo-eormerod/weather
  * branch            main     -> FETCH_HEAD
     dabb4c8..2abf2b1  main     -> origin/main
 Updating dabb4c8..2abf2b1
 Fast-forward
- guacamole.md | 2 +-
+ forecast.md | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 ```
 
 We get the merged file:
 
 ```bash
-$ cat guacamole.md
+$ cat forecast.md
 ```
 
 ```output
-# Guacamole
-## Ingredients
-* avocado
-* lime
-* salt
-## Instructions
-* peel the avocados and put them into a bowl.
+# Forecast
+## Today
+Cloudy with a chance of sun.
+Mild temperatures around 16°C.
+## Tomorrow
+Morning rainbows followed by light showers.
+Snow forming overnight with a chance of icy patches.
 ```
 
 We don't need to merge again because Git knows someone has already done that.
@@ -384,49 +384,49 @@ that is stored in version control?
 
 ## Solution
 
-Let's try it. Suppose Alfredo takes a picture of its guacamole and
-calls it `guacamole.jpg`.
+Let's try it. Suppose you take a picture of the television forecast and
+call it `forecast.jpg`.
 
-If you do not have an image file of guacamole available, you can create
+If you do not have an image file of forecast available, you can create
 a dummy binary file like this:
 
 ```bash
-$ head --bytes 1024 /dev/urandom > guacamole.jpg
-$ ls -lh guacamole.jpg
+$ head --bytes 1024 /dev/urandom > forecast.jpg
+$ ls -lh forecast.jpg
 ```
 
 ```output
--rw-r--r-- 1 alflin 57095 1.0K Mar  8 20:24 guacamole.jpg
+-rw-r--r-- 1 mo-eormerod 57095 1.0K Mar  8 20:24 forecast.jpg
 ```
 
 `ls` shows us that this created a 1-kilobyte file. It is full of
 random bytes read from the special file, `/dev/urandom`.
 
-Now, suppose Alfredo adds `guacamole.jpg` to his repository:
+Now, suppose you add `forecast.jpg` to your repository:
 
 ```bash
-$ git add guacamole.jpg
-$ git commit -m "Add picture of guacamole"
+$ git add forecast.jpg
+$ git commit -m "Add picture of forecast"
 ```
 
 ```output
-[main 8e4115c] Add picture of guacamole
+[main 8e4115c] Add picture of forecast
  1 file changed, 0 insertions(+), 0 deletions(-)
- create mode 100644 guacamole.jpg
+ create mode 100644 forecast.jpg
 ```
 
 Suppose that Jimmy has added a similar picture in the meantime.
-His is a picture of a guacamole with nachos, but it is *also* called `guacamole.jpg`.
-When Alfredo tries to push, he gets a familiar message:
+His is a picture of a forecast from Chile, but it is *also* called `forecast.jpg`.
+When you try to push, you get a familiar message:
 
 ```bash
 $ git push origin main
 ```
 
 ```output
-To https://github.com/alflin/recipes.git
+To https://github.com/mo-eormerod/weather.git
  ! [rejected]        main -> main (fetch first)
-error: failed to push some refs to 'https://github.com/alflin/recipes.git'
+error: failed to push some refs to 'https://github.com/mo-eormerod/weather.git'
 hint: Updates were rejected because the remote contains work that you do
 hint: not have locally. This is usually caused by another repository pushing
 hint: to the same ref. You may want to first integrate the remote changes
@@ -449,20 +449,20 @@ remote: Counting objects: 3, done.
 remote: Compressing objects: 100% (3/3), done.
 remote: Total 3 (delta 0), reused 0 (delta 0)
 Unpacking objects: 100% (3/3), done.
-From https://github.com/alflin/recipes.git
+From https://github.com/mo-eormerod/weather.git
  * branch            main     -> FETCH_HEAD
    6a67967..439dc8c  main     -> origin/main
-warning: Cannot merge binary files: guacamole.jpg (HEAD vs. 439dc8c08869c342438f6dc4a2b615b05b93c76e)
-Auto-merging guacamole.jpg
-CONFLICT (add/add): Merge conflict in guacamole.jpg
+warning: Cannot merge binary files: forecast.jpg (HEAD vs. 439dc8c08869c342438f6dc4a2b615b05b93c76e)
+Auto-merging forecast.jpg
+CONFLICT (add/add): Merge conflict in forecast.jpg
 Automatic merge failed; fix conflicts and then commit the result.
 ```
 
-The conflict message here is mostly the same as it was for `guacamole.md`, but
+The conflict message here is mostly the same as it was for `forecast.md`, but
 there is one key additional line:
 
 ```output
-warning: Cannot merge binary files: guacamole.jpg (HEAD vs. 439dc8c08869c342438f6dc4a2b615b05b93c76e)
+warning: Cannot merge binary files: forecast.jpg (HEAD vs. 439dc8c08869c342438f6dc4a2b615b05b93c76e)
 ```
 
 Git cannot automatically insert conflict markers into an image as it does
@@ -470,31 +470,31 @@ for text files. So, instead of editing the image file, we must check out
 the version we want to keep. Then we can add and commit this version.
 
 On the key line above, Git has conveniently given us commit identifiers
-for the two versions of `guacamole.jpg`. Our version is `HEAD`, and Jimmy's
+for the two versions of `forecast.jpg`. Our version is `HEAD`, and Jimmy's
 version is `439dc8c0...`. If we want to use our version, we can use
 `git checkout`:
 
 ```bash
-$ git checkout HEAD guacamole.jpg
-$ git add guacamole.jpg
-$ git commit -m "Use image of just guacamole instead of with nachos"
+$ git checkout HEAD forecast.jpg
+$ git add forecast.jpg
+$ git commit -m "Use image of just the local forecast"
 ```
 
 ```output
-[main 21032c3] Use image of just guacamole instead of with nachos
+[main 21032c3] Use image of just the local forecast
 ```
 
 If instead we want to use Jimmy's version, we can use `git checkout` with
 Jimmy's commit identifier, `439dc8c0`:
 
 ```bash
-$ git checkout 439dc8c0 guacamole.jpg
-$ git add guacamole.jpg
-$ git commit -m "Use image of guacamole with nachos instead of just guacamole"
+$ git checkout 439dc8c0 forecast.jpg
+$ git add forecast.jpg
+$ git commit -m "Use image of just the local forecast"
 ```
 
 ```output
-[main da21b34] Use image of guacamole with nachos instead of just guacamole
+[main da21b34] Use image of forecast with nachos instead of just forecast
 ```
 
 We can also keep *both* images. The catch is that we cannot keep them
@@ -503,29 +503,29 @@ and *rename* it, then add the renamed versions. First, check out each
 image and rename it:
 
 ```bash
-$ git checkout HEAD guacamole.jpg
-$ git mv guacamole.jpg guacamole-only.jpg
-$ git checkout 439dc8c0 guacamole.jpg
-$ mv guacamole.jpg guacamole-nachos.jpg
+$ git checkout HEAD forecast.jpg
+$ git mv forecast.jpg forecast-only.jpg
+$ git checkout 439dc8c0 forecast.jpg
+$ mv forecast.jpg forecast-chile.jpg
 ```
 
-Then, remove the old `guacamole.jpg` and add the two new files:
+Then, remove the old `forecast.jpg` and add the two new files:
 
 ```bash
-$ git rm guacamole.jpg
-$ git add guacamole-only.jpg
-$ git add guacamole-nachos.jpg
-$ git commit -m "Use two images: just guacamole and with nachos"
+$ git rm forecast.jpg
+$ git add forecast-only.jpg
+$ git add forecast-chile.jpg
+$ git commit -m "Use two images: local forecast and Chile forecast"
 ```
 
 ```output
-[main 94ae08c] Use two images: just guacamole and with nachos
+[main 94ae08c] Use two images: local forecast and Chile forecast
  2 files changed, 0 insertions(+), 0 deletions(-)
- create mode 100644 guacamole-nachos.jpg
- rename guacamole.jpg => guacamole-only.jpg (100%)
+ create mode 100644 forecast-chile.jpg
+ rename forecast.jpg => forecast-only.jpg (100%)
 ```
 
-Now both images of guacamole are checked into the repository, and `guacamole.jpg`
+Now both images of forecast are checked into the repository, and `forecast.jpg`
 no longer exists.
 
 

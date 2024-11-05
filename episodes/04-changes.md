@@ -34,50 +34,51 @@ and learn what to do when you accidentally commit to main.
 :::
 
 First let's make sure we're still in the right directory.
-You should be in the `recipes` directory.
+You should be in the `weather` directory.
 
 ```bash
-$ cd ~/Desktop/recipes
+$ cd ~/Desktop/weather
 ```
 
-Let's create a file called `guacamole.md` that contains the basic structure to
+Let's create a file called `forecast.md` that contains the basic structure to
 have a recipe.
 We'll use `nano` to edit the file;
 you can use whatever editor you like.
 In particular, this does not have to be the `core.editor` you set globally earlier. But remember, the steps to create create or edit a new file will depend on the editor you choose (it might not be nano). For a refresher on text editors, check out ["Which Editor?"](https://swcarpentry.github.io/shell-novice/03-create.html#which-editor) in [The Unix Shell](https://swcarpentry.github.io/shell-novice/) lesson.
 
 ```bash
-$ nano guacamole.md
+$ nano forecast.md
 ```
 
-Type the text below into the `guacamole.md` file:
+Type the text below into the `forecast.md` file:
 
 ```output
-# Guacamole
-## Ingredients
-## Instructions
+# Forecast
+## Today
+Cloudy with a chance of pizza.
 ```
 
-Save the file and exit your editor. Next, let’s verify that the file was properly created by running the list command (`ls`):
+Save the file and exit your editor.
+Next, let’s verify that the file was properly created by running the list command (`ls`):
 
 ```bash
 $ ls
 ```
 
 ```output
-guacamole.md
+forecast.md
 ```
 
-`guacamole.md` contains three lines, which we can see by running:
+`forecast.md` contains three lines, which we can see by running:
 
 ```bash
-$ cat guacamole.md
+$ cat forecast.md
 ```
 
 ```output
-# Guacamole
-## Ingredients
-## Instructions
+# Forecast
+## Today
+Cloudy with a chance of pizza.
 ```
 
 If we check the status of our project again,
@@ -95,7 +96,7 @@ No commits yet
 Untracked files:
    (use "git add <file>..." to include in what will be committed)
 
-	guacamole.md
+	forecast.md
 
 nothing added to commit but untracked files present (use "git add" to track)
 ```
@@ -105,7 +106,7 @@ that Git isn't keeping track of.
 We can tell Git to track a file using `git add`:
 
 ```bash
-$ git add guacamole.md
+$ git add forecast.md
 ```
 
 and then check that the right thing happened:
@@ -122,30 +123,31 @@ No commits yet
 Changes to be committed:
   (use "git rm --cached <file>..." to unstage)
 
-	new file:   guacamole.md
+	new file:   forecast.md
 
 ```
 
-Git now knows that it's supposed to keep track of `guacamole.md`,
+Git now knows that it's supposed to keep track of `forecast.md`,
 but it hasn't recorded these changes as a commit yet.
 To get it to do that,
 we need to run one more command:
 
 ```bash
-$ git commit -m "Create a template for recipe"
+$ git commit -m "Create a md file with the forecast"
 ```
 
 ```output
-[main (root-commit) f22b25e] Create a template for recipe
- 1 file changed, 1 insertion(+)
- create mode 100644 guacamole.md
+[main (root-commit) f22b25e] Create a md file with the forecast
+ 1 file changed, 3 insertions(+)
+ create mode 100644 forecast.md
 ```
 
 When we run `git commit`,
 Git takes everything we have told it to save by using `git add`
 and stores a copy permanently inside the special `.git` directory.
 This permanent copy is called a [commit](../learners/reference.md#commit)
-(or [revision](../learners/reference.md#revision)) and its short identifier is `f22b25e`. Your commit may have another identifier.
+(or [revision](../learners/reference.md#revision)) and its short identifier is `f22b25e`.
+Your commit may have another identifier.
 
 We use the `-m` flag (for "message")
 to record a short, descriptive, and specific comment that will help us remember later on what we did and why.
@@ -195,7 +197,7 @@ it tells us everything is up to date.
 
 ## Where Are My Changes?
 
-If we run `ls` at this point, we will still see just one file called `guacamole.md`.
+If we run `ls` at this point, we will still see just one file called `forecast.md`.
 That's because Git saves information about files' history
 in the special `.git` directory mentioned earlier
 so that our filesystem doesn't become cluttered
@@ -204,22 +206,21 @@ so that our filesystem doesn't become cluttered
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-Now suppose Alfredo adds more information to the file.
+Now suppose you want to more information to the file.
 (Again, we'll edit with `nano` and then `cat` the file to show its contents;
 you may use a different editor, and don't need to `cat`.)
 
 ```bash
-$ nano guacamole.md
-$ cat guacamole.md
+$ nano forecast.md
+$ cat forecast.md
 ```
 
 ```output
-# Guacamole
-## Ingredients
-* avocado
-* lemon
-* salt
-## Instructions
+# Forecast
+## Today
+Cloudy with a chance of pizza.
+## Tomorrow
+Morning rainbows followed by light showers.
 ```
 
 When we run `git status` now,
@@ -235,7 +236,7 @@ Changes not staged for commit:
   (use "git add <file>..." to update what will be committed)
   (use "git restore <file>..." to discard changes in working directory)
 
-	modified:   guacamole.md
+	modified:   forecast.md
 
 no changes added to commit (use "git add" and/or "git commit -a")
 ```
@@ -256,17 +257,16 @@ $ git diff
 ```
 
 ```output
-diff --git a/guacamole.md b/guacamole.md
+diff --git a/forecast.md b/forecast.md
 index df0654a..315bf3a 100644
---- a/guacamole.md
-+++ b/guacamole.md
-@@ -1,3 +1,6 @@
- # Guacamole
- ## Ingredients
-+* avocado
-+* lemon
-+* salt
- ## Instructions
+--- a/forecast.md
++++ b/forecast.md
+@@ -1,3 +1,5 @@
+ # Forecast
+ ## Today
+ Cloudy with a chance of pizza.
++## Tomorrow
++Morning rainbows followed by light showers.
 ```
 
 The output is cryptic because
@@ -313,8 +313,7 @@ whether to launch the diff for every changed file.
 After reviewing our change, it's time to commit it:
 
 ```bash
-$ git commit -m "Add basic guacamole's ingredients"
-$ git status
+$ git commit -m "Add tomorrows forecast to forecast.md"
 ```
 
 ```output
@@ -323,7 +322,7 @@ Changes not staged for commit:
   (use "git add <file>..." to update what will be committed)
   (use "git restore <file>..." to discard changes in working directory)
 
-	modified:   guacamole.md
+	modified:   forecast.md
 
 no changes added to commit (use "git add" and/or "git commit -a")
 ```
@@ -333,13 +332,13 @@ Git won't commit because we didn't use `git add` first.
 Let's fix that:
 
 ```bash
-$ git add guacamole.md
-$ git commit -m "Add basic guacamole's ingredients"
+$ git add forecast.md
+$ git commit -m "Add tomorrows forecast to forecast.md"
 ```
 
 ```output
-[main 34961b1] Add basic guacamole's ingredient
- 1 file changed, 3 insertions(+)
+[main 34961b1] Add tomorrows forecast to forecast.md
+ 1 file changed, 2 insertions(+)
 ```
 
 Git insists that we add files to the set we want to commit
@@ -411,20 +410,19 @@ Let's watch as our changes to a file move from our editor
 to the staging area
 and into long-term storage.
 First,
-we'll improve our recipe by changing 'lemon' to 'lime':
+we'll improve our forecast by changing 'pizza' to 'Sun':
 
 ```bash
-$ nano guacamole.md
-$ cat guacamole.md
+$ nano forecast.md
+$ cat forecast.md
 ```
 
 ```output
-# Guacamole
-## Ingredients
-* avocado
-* lime
-* salt
-## Instructions
+# Forecast
+## Today
+Cloudy with a chance of Sun.
+## Tomorrow
+Morning rainbows followed by light showers.
 ```
 
 ```bash
@@ -432,18 +430,17 @@ $ git diff
 ```
 
 ```output
-diff --git a/guacamole.md b/guacamole.md
+diff --git a/forecast.md b/forecast.md
 index 315bf3a..b36abfd 100644
---- a/guacamole.md
-+++ b/guacamole.md
-@@ -1,6 +1,6 @@
- # Guacamole
- ## Ingredients
- * avocado
--* lemon
-+* lime
- * salt
- ## Instructions
+--- a/forecast.md
++++ b/forecast.md
+@@ -1,5 +1,5 @@
+ # Forecast
+ ## Today
+-Cloudy with a chance of pizza.
++Cloudy with a chance of Sun.
+ ## Tomorrow
+ Morning rainbows followed by light showers.
 ```
 
 So far, so good:
@@ -453,7 +450,7 @@ Now let's put that change in the staging area
 and see what `git diff` reports:
 
 ```bash
-$ git add guacamole.md
+$ git add forecast.md
 $ git diff
 ```
 
@@ -461,26 +458,24 @@ There is no output:
 as far as Git can tell,
 there's no difference between what it's been asked to save permanently
 and what's currently in the directory.
-However,
-if we do this:
+However, if we do this:
 
 ```bash
 $ git diff --staged
 ```
 
 ```output
-diff --git a/guacamole.md b/guacamole.md
+diff --git a/forecast.md b/forecast.md
 index 315bf3a..b36abfd 100644
---- a/guacamole.md
-+++ b/guacamole.md
-@@ -1,6 +1,6 @@
- # Guacamole
- ## Ingredients
- * avocado
--* lemon
-+* lime
- * salt
- ## Instructions
+--- a/forecast.md
++++ b/forecast.md
+@@ -1,5 +1,5 @@
+ # Forecast
+ ## Today
+-Cloudy with a chance of pizza.
++Cloudy with a chance of Sun.
+ ## Tomorrow
+ Morning rainbows followed by light showers.
 ```
 
 it shows us the difference between
@@ -489,12 +484,12 @@ and what's in the staging area.
 Let's save our changes:
 
 ```bash
-$ git commit -m "Modify guacamole to the traditional recipe"
+$ git commit -m "Modify the forecast to add a chance of Sun"
 ```
 
 ```output
-[main 005937f] Modify guacamole to the traditional recipe
- 1 file changed, 1 insertion(+)
+[main 005937f] Modify the forecast to add a chance of Sun
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 ```
 
 check our status:
@@ -530,13 +525,13 @@ Two important facts you should know about directories in Git.
   Try it for yourself:
   
   ```bash
-  $ mkdir cakes
+  $ mkdir symbols
   $ git status
-  $ git add cakes
+  $ git add symbols
   $ git status
   ```
   
-  Note, our newly created empty directory `cakes` does not appear in
+  Note, our newly created empty directory `symbols` does not appear in
   the list of untracked files even if we explicitly add it (*via* `git add`) to our
   repository. This is the reason why you will sometimes see `.gitkeep` files
   in otherwise empty directories. Unlike `.gitignore`, these files are not special
@@ -553,16 +548,16 @@ Two important facts you should know about directories in Git.
   Try it for yourself:
   
   ```bash
-  $ touch cakes/brownie cakes/lemon_drizzle
+  $ touch symbols/pressure.md symbols/pollen.md
   $ git status
-  $ git add cakes
+  $ git add symbols
   $ git status
   ```
   
   Before moving on, we will commit these changes.
   
   ```bash
-  $ git commit -m "Add some initial cakes"
+  $ git commit -m "Add some initial weather symbols"
   ```
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -579,11 +574,11 @@ repository (`git commit`):
 ## Choosing a Commit Message
 
 Which of the following commit messages would be most appropriate for the
-last commit made to `guacamole.md`?
+last commit made to `forecast.md`?
 
 1. "Changes"
-2. "Changed lemon for lime"
-3. "Guacamole modified to the traditional recipe"
+2. "Modify the forecast"
+3. "Modify the forecast to add a chance of Sun"
 
 :::::::::::::::  solution
 
@@ -643,10 +638,9 @@ to my local Git repository?
 The staging area can hold changes from any number of files
 that you want to commit as a single snapshot.
 
-1. Add some text to `guacamole.md` noting the rough price of the
-  ingredients.
-2. Create a new file `groceries.md` with a list of products and
-  their prices for different markets.
+1. Add some text to `forecast.md` noting the expected temperature.
+2. Create a new file `atlas.md` with a list of common weather such as
+   rain, sunshine, fog etc.
 3. Add changes from both files to the staging area,
    and commit those changes.
 
@@ -654,57 +648,59 @@ that you want to commit as a single snapshot.
 
 ## Solution
 
-First we make our changes to the `guacamole.md` and `groceries.md` files:
+First we make our changes to the `forecast.md` and `atlas.md` files:
 
 ```bash
-$ nano guacamole.md
-$ cat guacamole.md
+$ nano forecast.md
+$ cat forecast.md
 ```
 
 ```output
-# Guacamole
-## Ingredients
-* avocado (1.35)
-* lime (0.64)
-* salt (2)
+# Forecast
+## Today
+Cloudy with a chance of sun.
+Mild temperatures around 16°C.
+## Tomorrow
+Morning rainbows followed by light showers.
 ```
 
 ```bash
-$ nano groceries.md
-$ cat groceries.md
+$ nano atlas.md
+$ cat atlas.md
 ```
 
 ```output
-# Market A
-* avocado: 1.35 per unit.
-* lime: 0.64 per unit
-* salt: 2 per kg
+# Weather Atlas
+
+- rain
+- sunshine
+- fog
 ```
 
 Now you can add both files to the staging area. We can do that in one line:
 
 ```bash
-$ git add guacamole.md groceries.md
+$ git add forecast.md atlas.md
 ```
 
 Or with multiple commands:
 
 ```bash
-$ git add guacamole.md
-$ git add groceries.md
+$ git add forecast.md
+$ git add atlas.md
 ```
 
-Now the files are ready to commit. You can check that using `git status`. If you are ready to commit use:
+Now the files are ready to commit. You can check that using `git status`.
+If you are ready to commit use:
 
 ```bash
-$ git commit -m "Write prices for ingredients and their source"
+$ git commit -m "Add in the temperature to the forecast and create the weather atlas file"
 ```
 
 ```output
-[main cc127c2]
- Write prices for ingredients and their source
- 2 files changed, 7 insertions(+)
- create mode 100644 groceries.md
+[main cc127c2]Add in the temperature to the forecast and create the weather atlas file
+ 2 files changed, 6 insertions(+)
+ create mode 100644 atlas.md
 ```
 
 :::::::::::::::::::::::::
@@ -726,7 +722,7 @@ $ git commit -m "Write prices for ingredients and their source"
 
 ## Solution
 
-If needed, move out of the `recipes` folder:
+If needed, move out of the `weather` folder:
 
 ```bash
 $ cd ..

@@ -3,17 +3,9 @@ permalink: index.html
 site: sandpaper::sandpaper_site
 ---
 
-Jimmy and Alfredo have been hired by Ratatouille restaurant (a special
-restaurant from Euphoric State University) to investigate if it
-is possible to make the best recipes archive ever.  They want to
-be able to work on indexing the prices at the same time, but they have run into
-problems doing this in the past.  If they take turns, each one will
-spend a lot of time waiting for the other to finish, but if they work
-on their own copies and email changes back and forth things will be
-lost, overwritten, or duplicated.
-
-A colleague suggests using [version control](learners/reference.md#version-control) to
-manage their work. Version control is better than mailing files back and forth:
+[Version control](learners/reference.md#version-control) is fundamental to
+good quality assurance of science and code.
+Version control is better than mailing files back and forth:
 
 - Nothing that is committed to version control is ever lost, unless
   you work really, really hard at losing it. Since all old versions of

@@ -22,8 +22,8 @@ $ cat ~/.gitconfig
 
 ```output
 [user]
-	name = Alfredo Linguini
-	email = a.linguini@ratatouille.fr
+	name = Francis Beaufort
+	email = f.beaufort@weather.ie
 [color]
 	ui = true
 [core]
@@ -54,13 +54,13 @@ $ git config --global alias.co checkout
 Now if we return to the example from [Exploring History](../episodes/05-history.md) where we ran:
 
 ```bash
-$ git checkout f22b25e guacamole.md
+$ git checkout f22b25e forecast.md
 ```
 
 we could now instead type:
 
 ```bash
-$ git co f22b25e guacamole.md
+$ git co f22b25e forecast.md
 ```
 
 ## Styling Git's Log
@@ -131,41 +131,42 @@ This has various impacts on Git's performance and will make it difficult to
 compare different versions of your project.
 
 For a basic example to show the difference it makes,
-we're going to go see what would have happened if Alfredo had tried
+we're going to go see what would have happened if you had tried
 using outputs from a word processor instead of plain text.
 
 Create a new directory and go into it:
 
 ```bash
-$ mkdir recipes-nontext
-$ cd recipes-nontext
+$ mkdir weather-nontext
+$ cd weather-nontext
 ```
 
 Use a program such as Microsoft Word or LibreOffice Writer to create a new document.
 Enter the same text that we began with before:
 
 ```output
-# Ingredients
-# Instructions
+# Forecast
+## Today
+Cloudy with a chance of pizza.
 ```
 
-Save the document into the `recipes-nontext` directory with the name of `guacamole.doc`.
+Save the document into the `weather-nontext` directory with the name of `forecast.doc`.
 Back in the terminal, run the usual commands for setting up a new Git repository:
 
 ```bash
 $ git init
-$ git add guacamole.doc
-$ git commit -m "Create a template for recipe"
+$ git add forecast.doc
+$ git commit -m "Create a Word file with the forecast"
 ```
 
-Then make the same changes to `guacamole.doc` that we (or Alfredo) previously made to `guacamole.md`.
+Then make the same changes to `forecast.doc` that we previously made to `forecast.md`.
 
 ```output
-# Ingredients
-- avocado
-- lemon
-- salt
-# Instructions
+# Forecast
+## Today
+Cloudy with a chance of pizza.
+## Tomorrow
+Morning rainbows followed by light showers.
 ```
 
 Save and close the word processor.
@@ -176,24 +177,24 @@ $ git diff
 ```
 
 ```output
-diff --git a/guacamole.doc b/guacamole.doc
+diff --git a/forecast.doc b/forecast.doc
 index 53a66fd..6e988e9 100644
-Binary files a/guacamole.doc and b/guacamole.doc differ
+Binary files a/forecast.doc and b/forecast.doc differ
 ```
 
 Compare this to the earlier `git diff` obtained when using text files:
 
 ```output
-diff --git a/guacamole.md b/guacamole.md
+diff --git a/forecast.md b/forecast.md
 index df0654a..315bf3a 100644
---- a/guacamole.md
-+++ b/guacamole.md
-@@ -1,2 +1,5 @@
- # Ingredients
-+- avocado
-+- lemon
-+- salt
- # Instructions
+--- a/forecast.md
++++ b/forecast.md
+@@ -1,3 +1,5 @@
+ # Forecast
+ ## Today
+ Cloudy with a chance of pizza.
++## Tomorrow
++Morning rainbows followed by light showers.
 ```
 
 Notice how plain text files give a much more informative diff.
@@ -216,20 +217,20 @@ you will probably just want to replace the logo completely rather than merge lit
 ## Removing a File
 
 Adding and modifying files are not the only actions one might take
-when working on a project.  It might be required to remove a file
+when working on a project. It might be required to remove a file
 from the repository.
 
-Create a new file for the invisible ink:
+Create a new file:
 
 ```bash
-$ echo "This is where we keep the secret sauce" > invisible.md
+$ echo "This is where we store MEOP information" > MEOP.md
 ```
 
 Now add to the repository like you have learned earlier:
 
 ```bash
-$ git add invisible.md
-$ git commit -m 'Add secret sauce'
+$ git add MEOP.md
+$ git commit -m 'Add MEOP information'
 $ git status
 ```
 
@@ -238,11 +239,11 @@ On branch main
 nothing to commit, working directory clean
 ```
 
-Invisible ink is not a real food.  That was a silly idea.  Let us remove
-it from the disk and let Git know about it:
+Adding MEOP data to the weather repository was not a good idea.
+Let us remove it from the disk and let Git know about it:
 
 ```bash
-$ git rm invisible.md
+$ git rm MEOP.md
 $ git status
 ```
 
@@ -251,7 +252,7 @@ On branch main
 Changes to be committed:
    (use "git reset HEAD <file>..." to unstage)
 
-   deleted:    invisible.md
+   deleted:    MEOP.md
 
 ```
 
@@ -261,7 +262,7 @@ in the new commit.  The previous commit will still
 have the file, if you were to retrieve that specific commit.
 
 ```bash
-$ git commit -m 'Remove info on Invisible ink.  It is not an edible sauce!'
+$ git commit -m 'Remove info on MEOP seals'
 ```
 
 ## Removing a File with Unix
@@ -272,15 +273,15 @@ Git is smart enough to notice the missing file. Let us recreate the file and
 commit it again.
 
 ```bash
-$ echo "This is another way to make invisible ink" > secret.md
-$ git add secret.md
-$ git commit -m 'Add invisible ink again'
+$ echo "More MEOP info" > MEOP-info.md
+$ git add MEOP-info.md
+$ git commit -m 'Add MEOP info again'
 ```
 
 Now we remove the file with Unix `rm`:
 
 ```bash
-$ rm secret.md
+$ rm MEOP-info.md
 $ git status
 ```
 
@@ -290,18 +291,18 @@ Changes not staged for commit:
    (use "git add/rm <file>..." to update what will be committed)
    (use "git checkout -- <file>..." to discard changes in working directory)
 
-    deleted:    secret.md
+    deleted:    MEOP-info.md
 
 no changes added to commit (use "git add" and/or "git commit -a")
 ```
 
-See how Git has noticed that the file `secret.md` has been removed
+See how Git has noticed that the file `MEOP-info.md` has been removed
 from the disk.  The next step is to "stage" the removal of the file
 from the repository.  This is done with the command `git rm` just as
 before.
 
 ```bash
-$ git rm secret.md
+$ git rm MEOP-info.md
 $ git status
 ```
 
@@ -310,7 +311,7 @@ On branch main
 Changes to be committed:
    (use "git reset HEAD <file>..." to unstage)
 
-   deleted:    secret.md
+   deleted:    MEOP-info.md
 
 ```
 
@@ -318,32 +319,31 @@ The change that was made in Unix has now been staged and needs to be
 committed.
 
 ```bash
-$ git commit -m 'Remove info on invisible ink, again!'
+$ git commit -m 'Remove info on MEOP seals, again!'
 ```
 
 ## Renaming a File
 
 Another common change when working on a project is to rename a file.
 
-Create a file for the whitesauce recipe:
+Create a file for cirrus clouds:
 
 ```bash
-$ echo "Very fun recipe to do" > whitesauce.md
+$ echo "Very wispy" > cirrus.md
 ```
 
 Add it to the repository:
 
 ```bash
-$ git add whitesauce.md
-$ git commit -m 'Add white sauce recipe'
+$ git add cirrus.md
+$ git commit -m 'Add cirrus clouds file'
 ```
 
-We all know that white sauce has a more sophisticated name.
-
-Rename the file `whitesauce.md` to `bechamel.md` with Git:
+You realise you identified the cloud incorrectly.
+Rename the file `cirrus.md` to `cumulus.md` with Git:
 
 ```bash
-$ git mv whitesauce.md bechamel.md
+$ git mv cirrus.md cumulus.md
 $ git status
 ```
 
@@ -352,13 +352,13 @@ On branch main
 Changes to be committed:
   (use "git reset HEAD <file>..." to unstage)
 
-	renamed:    whitesauce.md ->  bechamel.md
+	renamed:    cirrus.md ->  cumulus.md
 ```
 
 The final step is commit our change to the repository:
 
 ```bash
-$ git commit -m 'Use the French name for the whitesauce'
+$ git commit -m 'Correct the cloud type'
 ```
 
 ## Renaming a File with Unix
@@ -367,18 +367,18 @@ If you forgot to use Git and you used Unix `mv` instead
 of `git mv`, you will have a touch more work to do but Git will
 be able to deal with it. Let's try again renaming the file,
 this time with Unix `mv`. First, we need to recreate the
-`krypton.txt` file:
+`cirrus.md` file:
 
 ```bash
-$ echo "Very fun recipe to do" > whitesauce.md
-$ git add whitesauce.md
-$ git commit -m 'Add white sauce recipe'
+$ echo "Very wispy" > cirrus.md
+$ git add cirrus.md
+$ git commit -m 'Add cirrus clouds file'
 ```
 
 Let us rename the file and see what Git can figured out by itself:
 
 ```bash
-$ mv whitesauce.md bechamel.md
+$ mv cirrus.md cumulus.md
 $ git status
 ```
 
@@ -388,23 +388,23 @@ Changes not staged for commit:
   (use "git add/rm <file>..." to update what will be committed)
   (use "git checkout -- <file>..." to discard changes in working directory)
 
-        deleted:    whitesauce.md
+        deleted:    cirrus.md
 
 Untracked files:
   (use "git add <file>..." to include in what will be committed)
 
-    bechamel.md
+    cumulus.md
 
 no changes added to commit (use "git add" and/or "git commit -a")
 ```
 
-Git has noticed that the file `whitesauce.md` has disappeared from the
-file system and a new file `bechamel.md` has showed up.
+Git has noticed that the file `cirrus.md` has disappeared from the
+file system and a new file `cumulus.md` has showed up.
 
 Add those changes to the staging area:
 
 ```bash
-$ git add whitesauce.md bechamel.md
+$ git add cirrus.md cumulus.md
 $ git status
 ```
 
@@ -413,18 +413,23 @@ On branch main
 Changes to be committed:
   (use "git reset HEAD <file>..." to unstage)
 
-    renamed:    whitesauce.md -> bechamel.md
+    renamed:    cirrus.md -> cumulus.md
 
 ```
 
-Notice how Git has now figured out that the `whitesauce.md` has not
+Notice how Git has now figured out that the `cirrus.md` has not
 disappeared - it has simply been renamed.
 
 The final step, as before, is to commit our change to the repository:
 
 ```bash
-$ git commit -m 'Use the French name for the whitesauce'
+$ git commit -m 'Correct the cloud type'
 ```
+
+This works because git can tell that the file was only re-named, 
+they contain the same content.
+If you are renaming files add this change as a separate small commit 
+before you make changes to the file contents.
 
 ## Further .gitignore concepts
 

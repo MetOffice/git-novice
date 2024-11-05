@@ -31,11 +31,11 @@ $ git log
 ```
 
 ```output
-commit f22b25e3233b4645dabd0d81e651fe074bd8e73b
-Author: Alfredo Linguini <a.linguini@ratatouille.fr>
-Date:   Thu Aug 22 09:51:46 2013 -0400
+commit cdb7fa654c3f5aee731a655e57f2ba74d9c74582 (HEAD -> main)
+Author: Joanne Simpson <j.simpson@weather.com>
+Date:   Mon Nov 4 18:35:21 2024 +0000
 
-    Create a template for recipe
+    Add in the temperature to the forecast and create the weather atlas file
 ```
 
 `git log` lists all commits  made to a repository in reverse chronological order.
@@ -92,11 +92,11 @@ $ git log -1
 ```
 
 ```output
-commit 005937fbe2a98fb83f0ade869025dc2636b4dad5 (HEAD -> main)
-Author: Alfredo Linguini <a.linguini@ratatouille.fr>
-Date:   Thu Aug 22 10:14:07 2013 -0400
+commit cdb7fa654c3f5aee731a655e57f2ba74d9c74582 (HEAD -> main)
+Author: Joanne Simpson <j.simpson@weather.com>
+Date:   Mon Nov 4 18:35:21 2024 +0000
 
-   Modify guacamole to the traditional recipe
+    Add in the temperature to the forecast and create the weather atlas file
 ```
 
 You can also reduce the quantity of information using the
@@ -107,9 +107,10 @@ $ git log --oneline
 ```
 
 ```output
-005937f (HEAD -> main) Modify guacamole to the traditional recipe
-34961b1 Add basic guacamole's ingredients
-f22b25e Create a template for recipe
+cdb7fa6 (HEAD -> main) Add in the temperature to the forecast and create the weather atlas file
+62a9457 Modify the forecast to add a chance of Sun
+d3e4637 Add tomorrows forecast to forecast.md
+590c40c Create a md file with the forecast
 ```
 
 You can also combine the `--oneline` option with others. One useful
@@ -123,9 +124,10 @@ $ git log --oneline --graph
 ```
 
 ```output
-* 005937f (HEAD -> main) Modify guacamole to the traditional recipe
-* 34961b1 Add basic guacamole's ingredients
-* f22b25e Create a template for recipe
+* cdb7fa6 (HEAD -> main) Add in the temperature to the forecast and create the weather atlas file
+* 62a9457 Modify the forecast to add a chance of Sun
+* d3e4637 Add tomorrows forecast to forecast.md
+* 590c40c Create a md file with the forecast
 ```
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -136,41 +138,41 @@ As we saw in the previous episode, we can refer to commits by their
 identifiers.  You can refer to the *most recent commit* of the working
 directory by using the identifier `HEAD`.
 
-We've been adding small changes at a time to `guacamole.md`, so it's easy to track our
+We've been adding small changes at a time to `forecast.md`, so it's easy to track our
 progress by looking, so let's do that using our `HEAD`s.  Before we start,
-let's make a change to `guacamole.md`, adding yet another line.
+let's make a change to `forecast.md`, adding yet another line.
 
 ```bash
-$ nano guacamole.md
-$ cat guacamole.md
+$ nano forecast.md
+$ cat forecast.md
 ```
 
 ```output
-# Guacamole
-## Ingredients
-* avocado
-* lime
-* salt
-## Instructions
-An ill-considered change
+# Forecast
+## Today
+Cloudy with a chance of sun.
+Mild temperatures around 16°C.
+## Tomorrow
+Morning rainbows followed by light showers.
+An ill-considered change.
 ```
 
 Now, let's see what we get.
 
 ```bash
-$ git diff HEAD guacamole.md
+$ git diff HEAD forecast.md
 ```
 
 ```output
-diff --git a/guacamole.md b/guacamole.md
+diff --git a/forecast.md b/forecast.md
 index b36abfd..0848c8d 100644
---- a/guacamole.md
-+++ b/guacamole.md
-@@ -4,3 +4,4 @@
- * lime
- * salt
- ## Instructions
-+An ill-considered change
+--- a/forecast.md
++++ b/forecast.md
+@@ -4,3 +4,4 @@ Cloudy with a chance of sun.
+ Mild temperatures around 16<C2><B0>C.
+ ## Tomorrow
+ Morning rainbows followed by light showers.
++An ill-considered change.
 ```
 
 which is the same as what you would get if you leave out `HEAD` (try it).  The
@@ -180,28 +182,30 @@ that by adding `~1`
 to refer to the commit one before `HEAD`.
 
 ```bash
-$ git diff HEAD~1 guacamole.md
+$ git diff HEAD~1 forecast.md
 ```
 
 If we want to see the differences between older commits we can use `git diff`
 again, but with the notation `HEAD~1`, `HEAD~2`, and so on, to refer to them:
 
 ```bash
-$ git diff HEAD~2 guacamole.md
+$ git diff HEAD~2 forecast.md
 ```
 
 ```output
-diff --git a/guacamole.md b/guacamole.md
+diff --git a/forecast.md b/forecast.md
 index df0654a..b36abfd 100644
---- a/guacamole.md
-+++ b/guacamole.md
-@@ -1,3 +1,6 @@
- # Guacamole
- ## Ingredients
-+* avocado
-+* lime
-+* salt
- ## Instructions
+--- a/forecast.md
++++ b/forecast.md
+@@ -1,5 +1,7 @@
+ # Forecast
+ ## Today
+-Cloudy with a chance of pizza.
++Cloudy with a chance of sun.
++Mild temperatures around 16<C2><B0>C.
+ ## Tomorrow
+ Morning rainbows followed by light showers.
++An ill-considered change.
 ```
 
 We could also use `git show` which shows us what changes we made at an older commit as
@@ -209,25 +213,25 @@ well as the commit message, rather than the *differences* between a commit and o
 working directory that we see by using `git diff`.
 
 ```bash
-$ git show HEAD~2 guacamole.md
+$ git show HEAD~2 forecast.md
 ```
 
 ```output
-commit f22b25e3233b4645dabd0d81e651fe074bd8e73b
-Author: Alfredo Linguini <a.linguini@ratatouille.fr>
-Date:   Thu Aug 22 10:07:21 2013 -0400
+Author: Joanne Simpson <j.simpson@weather.com>
+Date:   Mon Nov 4 18:16:29 2024 +0000
 
-    Create a template for recipe
+    Add tomorrows forecast to forecast.md
 
-diff --git a/guacamole.md b/guacamole.md
-new file mode 100644
-index 0000000..df0654a
---- /dev/null
-+++ b/guacamole.md
-@@ -0,0 +1,3 @@
-+# Guacamole
-+## Ingredients
-+## Instructions
+diff --git a/forecast.md b/forecast.md
+index d8bc6ce..5b5d97e 100644
+--- a/forecast.md
++++ b/forecast.md
+@@ -1,3 +1,5 @@
+ # Forecast
+ ## Today
+ Cloudy with a chance of pizza.
++## Tomorrow
++Morning rainbows followed by light showers.
 ```
 
 In this way,
@@ -250,22 +254,23 @@ Our first commit was given the ID
 so let's try this:
 
 ```bash
-$ git diff f22b25e3233b4645dabd0d81e651fe074bd8e73b guacamole.md
+$ git diff f22b25e3233b4645dabd0d81e651fe074bd8e73b forecast.md
 ```
 
 ```output
-diff --git a/guacamole.md b/guacamole.md
+diff --git a/forecast.md b/forecast.md
 index df0654a..93a3e13 100644
---- a/guacamole.md
-+++ b/guacamole.md
+--- a/forecast.md
++++ b/forecast.md
 @@ -1,3 +1,7 @@
- # Guacamole
- ## Ingredients
-+* avocado
-+* lime
-+* salt
- ## Instructions
-+An ill-considered change
+ # Forecast
+ ## Today
+-Cloudy with a chance of pizza.
++Cloudy with a chance of sun.
++Mild temperatures around 16<C2><B0>C.
++## Tomorrow
++Morning rainbows followed by light showers.
++An ill-considered change.
 ```
 
 That's the right answer,
@@ -273,29 +278,30 @@ but typing out random 40-character strings is annoying,
 so Git lets us use just the first few characters (typically seven for normal size projects):
 
 ```bash
-$ git diff f22b25e guacamole.md
+$ git diff f22b25e forecast.md
 ```
 
 ```output
-diff --git a/guacamole.md b/guacamole.md
+diff --git a/forecast.md b/forecast.md
 index df0654a..93a3e13 100644
---- a/guacamole.md
-+++ b/guacamole.md
+--- a/forecast.md
++++ b/forecast.md
 @@ -1,3 +1,7 @@
- # Guacamole
- ## Ingredients
-+* avocado
-+* lime
-+* salt
- ## Instructions
-+An ill-considered change
+ # Forecast
+ ## Today
+-Cloudy with a chance of pizza.
++Cloudy with a chance of sun.
++Mild temperatures around 16<C2><B0>C.
++## Tomorrow
++Morning rainbows followed by light showers.
++An ill-considered change.
 ```
 
 All right! So
 we can save changes to files and see what we've changed. Now, how
 can we restore older versions of things?
 Let's suppose we change our mind about the last update to
-`guacamole.md` (the "ill-considered change").
+`forecast.md` (the "ill-considered change").
 
 `git status` now tells us that the file has been changed,
 but those changes haven't been staged:
@@ -309,7 +315,7 @@ On branch main
 Changes not staged for commit:
   (use "git add <file>..." to update what will be committed)
   (use "git restore <file>..." to discard changes in working directory)
-    modified:   guacamole.md
+    modified:   forecast.md
 
 no changes added to commit (use "git add" and/or "git commit -a")
 ```
@@ -318,17 +324,17 @@ We can put things back the way they were
 by using `git restore`:
 
 ```bash
-$ git restore guacamole.md
-$ cat guacamole.md
+$ git restore forecast.md
+$ cat forecast.md
 ```
 
 ```output
-# Guacamole
-## Ingredients
-* avocado
-* lime
-* salt
-## Instructions
+# Forecast
+## Today
+Cloudy with a chance of sun.
+Mild temperatures around 16°C.
+## Tomorrow
+Morning rainbows followed by light showers.
 ```
 
 As you might guess from its name,
@@ -349,21 +355,23 @@ $ fcm revert FILE
 
 :::
 
+## Restoring a file from further back
+
 If we want to go back even further,
 we can use a commit identifier instead, using `-s` option:
 
 ```bash
-$ git restore -s f22b25e guacamole.md
+$ git restore -s f22b25e forecast.md
 ```
 
 ```bash
-$ cat guacamole.md
+$ cat forecast.md
 ```
 
 ```output
-# Guacamole
-## Ingredients
-## Instructions
+# Forecast
+## Today
+Cloudy with a chance of pizza.
 ```
 
 ```bash
@@ -375,10 +383,9 @@ On branch main
 Changes not staged for commit:
   (use "git add <file>..." to update what will be committed)
   (use "git restore <file>..." to discard changes in working directory)
-    modified:   guacamole.md
+    modified:   forecast.md
 
 no changes added to commit (use "git add" and/or "git commit -a")
-
 ```
 
 Notice that the changes are not currently in the staging area, and have not been committed. 
@@ -386,17 +393,17 @@ If we wished, we can put things back the way they were at the last commit by usi
 the working copy with the last committed version:
 
 ```bash
-$ git restore guacamole.md
-$ cat guacamole.md
+$ git restore forecast.md
+$ cat forecast.md
 ```
 
 ```output
-# Guacamole
-## Ingredients
-* avocado
-* lime
-* salt
-## Instructions
+# Forecast
+## Today
+Cloudy with a chance of sun.
+Mild temperatures around 16°C.
+## Tomorrow
+Morning rainbows followed by light showers.
 ```
 
 It's important to remember that
@@ -418,6 +425,9 @@ If the introduction and conclusion are stored in separate files,
 on the other hand,
 moving backward and forward in time becomes much easier.
 
+## Reverting Changes
+
+Generally it is best to spot and revert mistakes before the commit stage.
 The table below summarises how to revert a change depending on where in the 
 commit process you are:
 
@@ -476,18 +486,21 @@ you should use `git restore .`
 
 ## Reverting a Commit
 
-Jennifer is collaborating with colleagues on her Python script.  She
-realizes her last commit to the project's repository contained an error, and
-wants to undo it.  Jennifer wants to undo correctly so everyone in the project's
+Ahmed is collaborating with colleagues on a Python script. He
+realizes his last commit to the project's repository contained an error, and
+wants to undo it. Ahmed wants to undo it correctly so everyone in the project's
 repository gets the correct change. The command `git revert [erroneous commit ID]` will create a
 new commit that reverses the erroneous commit.
 
 The command `git revert` is
-different from `git restore -s [commit ID] .` because `git restore` returns the
-files not yet committed within the local repository to a previous state, whereas `git revert`
-reverses changes committed to the local and project repositories.
+different from `git restore -s [commit ID] .`.
+`git restore` restores files within the local repository to a previous state, 
+whereas `git revert` restores the files to a previous state **and**
+adds then commits these changes to the local repository.
+So `git revert` here is the same as `git restore -s [commit ID]`  
+followed by `git commit -am Reverts: [commit]`.
 
-Below are the right steps and explanations for Jennifer to use `git revert`,
+Below are the right steps and explanations for Ahmed to use `git revert`,
 what is the missing command?
 
 1. `________ # Look at the git history of the project to find the commit ID`
@@ -507,8 +520,8 @@ what is the missing command?
 The command `git log` lists project history with commit IDs.
 
 The command `git show HEAD` shows changes made at the latest commit, and lists
-the commit ID; however, Jennifer should double-check it is the correct commit, and no one
-else has committed changes to the repository.
+the commit ID; however, Ahmed should double-check it is the correct commit, 
+and no one else has committed changes to the repository.
 
 
 
@@ -523,27 +536,27 @@ else has committed changes to the repository.
 What is the output of the last command in
 
 ```bash
-$ cd recipes
-$ echo "I like tomatoes, therefore I like ketchup" > ketchup.md
-$ git add ketchup.md
-$ echo "ketchup enhances pasta dishes" >> ketchup.md
-$ git commit -m "My opinions about the red sauce"
-$ git restore ketchup.md
-$ cat ketchup.md # this will print the content of ketchup.md on screen
+$ cd weather
+$ echo "Global Climate Data" > CMIP7.md
+$ git add CMIP7.md
+$ echo "Data from the 7th model intercomparison project" >> CMIP7.md
+$ git commit -m "Adds in CMIP7 data file"
+$ git restore CMIP7.md
+$ cat CMIP7.md  # this will print the content of CMIP7.md on screen
 ```
 
 1. ```output
-  ketchup enhances pasta dishes
+  Data from the 7th model intercomparison project
   ```
 2. ```output
-  I like tomatoes, therefore I like ketchup
+  Global Climate Data
   ```
 3. ```output
-  I like tomatoes, therefore I like ketchup
-  ketchup enhances pasta dishes
+  Global Climate Data
+  Data from the 7th model intercomparison project
   ```
 4. ```output
-  Error because you have changed ketchup.md without committing the changes
+  Error because you have changed CMIP7.md without committing the changes
   ```
 
 :::::::::::::::  solution
@@ -553,21 +566,20 @@ $ cat ketchup.md # this will print the content of ketchup.md on screen
 The answer is 2.
 
 The changes to the file from the second `echo` command are only applied to the working copy,
-The command `git add ketchup.md` places the current version of `ketchup.md` into the staging area.
 not the version in the staging area.
 
-So, when `git commit -m "My opinions about the red sauce"` is executed,
-the version of `ketchup.md` committed to the repository is the one from the staging area and
-has only one line.
+So, when `git commit -m "Adds in CMIP7 data file"` is executed,
+the version of `CMIP7.md` committed to the repository is the one from the staging area and
+only has one line, `Global Climate Data`.
 
 At this time, the working copy still has the second line (and
-
-`git status` will show that the file is modified). However, `git restore ketchup.md`
-replaces the working copy with the most recently committed version of `ketchup.md`.
-So, `cat ketchup.md` will output
+`git status` will show that the file is modified).
+However, `git restore CMIP7.md`
+removes all unstaged modifications to the `CMIP7.md` file, so the second line is removed.
+So, `cat CMIP7.md` will output
 
 ```output
-I like tomatoes, therefore I like ketchup
+Global Climate Data
 ```
 
 :::::::::::::::::::::::::
@@ -578,84 +590,13 @@ I like tomatoes, therefore I like ketchup
 
 ## Checking Understanding of `git diff`
 
-Consider this command: `git diff HEAD~9 guacamole.md`. What do you predict this command
+Consider this command: `git diff HEAD~9 forecast.md`. What do you predict this command
 will do if you execute it? What happens when you do execute it? Why?
 
-Try another command, `git diff [ID] guacamole.md`, where [ID] is replaced with
+Try another command, `git diff [ID] forecast.md`, where [ID] is replaced with
 the unique identifier for your most recent commit. What do you think will happen,
 and what does happen?
 
-
-::::::::::::::::::::::::::::::::::::::::::::::::::
-
-:::::::::::::::::::::::::::::::::::::::  challenge
-
-## Getting Rid of Staged Changes
-
-`git restore` can be used to restore a previous commit when unstaged changes have
-been made, but will it also work for changes that have been staged but not committed?
-Make a change to `guacamole.md`, add that change using `git add`,
-then use `git restore` to see if you can remove your change.
-
-:::::::::::::::  solution
-
-## Solution
-
-After adding a change, `git restore` can not be used directly.
-Let's look at the output of `git status`:
-
-```output
-On branch main
-Changes to be committed:
-  (use "git restore --staged <file>..." to unstage)
-        modified:   guacamole.md
-
-```
-
-Note that if you don't have the same output
-you may either have forgotten to change the file,
-or you have added it *and* committed it.
-
-Using the command `git restore guacamole.md` now does not give an error,
-but it does not restore the file either.
-Git helpfully tells us that we need to use `git restore --staged` first
-to unstage the file:
-
-```bash
-$ git restore --staged guacamole.md
-```
-
-
-Now, `git status` gives us:
-
-```bash
-$ git status
-```
-
-```output
-On branch main
-Changes not staged for commit:
-  (use "git add <file>..." to update what will be committed)
-  (use "git git restore <file>..." to discard changes in working directory)
-        modified:   guacamole.md
-
-no changes added to commit (use "git add" and/or "git commit -a")
-```
-
-This means we can now use `git restore` to restore the file
-to the previous commit:
-
-```bash
-$ git restore guacamole.md
-$ git status
-```
-
-```output
-On branch main
-nothing to commit, working tree clean
-```
-
-:::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -666,16 +607,16 @@ nothing to commit, working tree clean
 Exploring history is an important part of Git, and often it is a challenge to find
 the right commit ID, especially if the commit is from several months ago.
 
-Imagine the `recipes` project has more than 50 files.
-You would like to find a commit that modifies some specific text in `guacamole.md`.
+Imagine the `weather` project has more than 50 files.
+You would like to find a commit that modifies some specific text in `forecast.md`.
 When you type `git log`, a very long list appeared.
 How can you narrow down the search?
 
 Recall that the `git diff` command allows us to explore one specific file,
-e.g., `git diff guacamole.md`. We can apply a similar idea here.
+e.g., `git diff forecast.md`. We can apply a similar idea here.
 
 ```bash
-$ git log guacamole.md
+$ git log forecast.md
 ```
 
 Unfortunately some of these commit messages are very ambiguous, e.g., `update files`.
@@ -686,7 +627,7 @@ for you.
 Is it possible to combine both? Let's try the following:
 
 ```bash
-$ git log --patch guacamole.md
+$ git log --patch forecast.md
 ```
 
 You should get a long list of output, and you should be able to see both commit messages and
@@ -704,5 +645,7 @@ $ git log --patch HEAD~9 *.md
 
 - `git diff` displays differences between commits.
 - `git restore` recovers old versions of files.
+- `git reset` undoes staged changes.
+- `git revert` reverses a commit.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::

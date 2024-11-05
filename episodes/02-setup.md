@@ -26,15 +26,15 @@ of configurations we will set as we get started with Git:
 - and that we want to use these settings globally (i.e. for every project).
 
 On a command line, Git commands are written as `git verb options`,
-where `verb` is what we actually want to do and `options` is additional optional information which may be needed for the `verb`. So here is how
-Alfredo sets up his new laptop:
+where `verb` is what we actually want to do and `options` is additional optional information which may be needed for the `verb`. To set up a new computer:
 
 ```bash
-$ git config --global user.name "Alfredo Linguini"
-$ git config --global user.email "a.linguini@ratatouille.fr"
+$ git config --global user.name "Joanne Simpson"
+$ git config --global user.email "j.simpson@weather.com"
 ```
 
-Please use your own name and email address instead of Alfredo's. This user name and email will be associated with your subsequent Git activity,
+Please use your own name and email address.
+This user name and email will be associated with your subsequent Git activity,
 which means that any changes pushed to
 [GitHub](https://github.com/),
 [BitBucket](https://bitbucket.org/),
@@ -83,7 +83,8 @@ $ git config --global core.autocrlf true
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-Alfredo also has to set his favorite text editor, following this table:
+To set your preferred text editor, 
+find the correct configuration command from this table:
 
 | Editor                                | Configuration command | 
 | :-----------                          | :------------------------------ |
@@ -117,8 +118,8 @@ If you want to save your changes and quit, press <kbd>Esc</kbd> then type `:wq` 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 Git (2.28+) allows configuration of the name of the branch created when you
-initialize any new repository.  Alfredo decides to use that feature to set it to `main` so
-it matches the cloud service he will eventually use.
+initialize any new repository. We want to set this to `main` so
+it matches the cloud service we will eventually use.
 
 ```bash
 $ git config --global init.defaultBranch main

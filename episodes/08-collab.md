@@ -48,21 +48,21 @@ or check for email notification. Once there she can accept access to the Owner's
 Next, the Collaborator needs to download a copy of the Owner's repository to her
 machine. This is called "cloning a repo".
 
-The Collaborator doesn't want to overwrite her own version of `recipes.git`, so
+The Collaborator doesn't want to overwrite her own version of `weather.git`, so
 needs to clone the Owner's repository to a different location than her own
 repository with the same name.
 
 To clone the Owner's repo into her `Desktop` folder, the Collaborator enters:
 
 ```bash
-$ git clone git@github.com:alflin/recipes.git ~/Desktop/alflin-recipes
+$ git clone git@github.com:mo-eormerod/weather.git ~/Desktop/mo-eormerod-weather
 ```
 
-Replace 'alflin' with the Owner's username.
+Replace 'mo-eormerod' with the Owner's username.
 
 If you choose to clone without the clone path
-(`~/Desktop/alflin-recipes`) specified at the end,
-you will clone inside your own recipes folder!
+(`~/Desktop/mo-eormerod-weather`) specified at the end,
+you will clone inside your own weather folder!
 Make sure to navigate to the `Desktop` folder first.
 
 ![](fig/github-collaboration.svg){alt='A diagram showing that "git clone" can create a copy of a remote GitHub repository, allowing a second person to create their own local repository that they can make changes to.'}
@@ -71,28 +71,24 @@ The Collaborator can now make a change in her clone of the Owner's repository,
 exactly the same way as we've been doing before:
 
 ```bash
-$ cd ~/Desktop/alflin-recipes
-$ nano hummus.md
-$ cat hummus.md
+$ cd ~/Desktop/mo-eormerod-weather
+$ nano shipping-forecast.md
+$ cat shipping-forecast.md
 ```
 
 ```output
-# Hummus
-## Ingredients
-* chickpeas
-* lemon
-* olive oil
-* salt
+New high expected Dover 1028 by 0600 tomorrow.
+Low Trafalgar 1013 losing its identity
 ```
 
 ```bash
-$ git add hummus.md
-$ git commit -m "Add ingredients for hummus"
+$ git add shipping-forecast.md
+$ git commit -m "Add in the shipping forecast"
 ```
 
 ```output
- 1 file changed, 6 insertion(+)
- create mode 100644 hummus.md
+ 1 file changed, 2 insertion(+)
+ create mode shipping-forecast.md
 ```
 
 Then push the change to the *Owner's repository* on GitHub:
@@ -108,7 +104,7 @@ Delta compression using up to 4 threads.
 Compressing objects: 100% (2/2), done.
 Writing objects: 100% (3/3), 306 bytes, done.
 Total 3 (delta 0), reused 0 (delta 0)
-To https://github.com/alflin/recipes.git
+To https://github.com/mo-eormerod/weather.git
    9272da5..29aba7c  main -> main
 ```
 
@@ -135,7 +131,7 @@ You would pull from `upstream` from time to
 time to get the latest updates that other people have committed.
 
 Remember that the name you give to a remote only exists locally. It's
-an alias that you choose - whether `origin`, or `upstream`, or `alfred` -
+an alias that you choose - whether `origin`, or `upstream`, or `mo-eormerod` -
 and not something intrinstic to the remote repository.
 
 The `git remote` family of commands is used to set up and alter the remotes
@@ -151,7 +147,7 @@ associated with a repository. Here are some of the most useful ones:
   account, or from GitHub to a different hosting service. Or, if we made a typo when
   adding it!
 - `git remote rename [oldname] [newname]` changes the local alias by which a remote
-  is known - its name. For example, one could use this to change `upstream` to `alfred`.
+  is known - its name. For example, one could use this to change `upstream` to `mo-eormerod`.
   
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -168,14 +164,14 @@ remote: Counting objects: 100% (4/4), done.
 remote: Compressing objects: 100% (2/2), done.
 remote: Total 3 (delta 0), reused 3 (delta 0), pack-reused 0
 Unpacking objects: 100% (3/3), done.
-From https://github.com/alflin/recipes
+From https://github.com/mo-eormerod/weather
  * branch            main     -> FETCH_HEAD
    9272da5..29aba7c  main     -> origin/main
 Updating 9272da5..29aba7c
 Fast-forward
- hummus.md | 5 +
- 1 file changed, 5 insertion(+)
- create mode 100644 hummus.md
+ shipping-forecast.md | 2 +
+ 1 file changed, 2 insertion(+)
+ create mode 100644 shipping-forecast.md
 ```
 
 Now the three repositories (Owner's local, Collaborator's local, and Owner's on

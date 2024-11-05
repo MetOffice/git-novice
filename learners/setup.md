@@ -79,7 +79,7 @@ It trims long directory paths to only show the current and two parent directorie
 You can change this value or delete the line entirely based on your preference.
 
 ```bash
-/Documents/A/Really/Long/Path $ # without PROMPT_DIRTRIM
+/Desktop/A/Really/Long/Path $ # without PROMPT_DIRTRIM
 .../Really/Long/Path $          # with PROMPT_DIRTRIM
 ```
 

@@ -40,7 +40,7 @@ containing the material for this lesson.
 
 Let's break it down into parts:
 
-![](fig/github_repo_top_nav.png){alt='The GitHub nav at the top of a repository.'}
+![](fig/github_top_nav.png){alt='The GitHub nav at the top of a repository.'}
 
 When you navigate to a repository the top nav will display the 
 organisation the repository belongs to, `swcarpentry`, and the name of the 
@@ -49,7 +49,7 @@ In the top right you have access to GitHubs powerful search, buttons to open
 Issues and Pull requests (which will be explained later), and the notifications 
 and profile icon on the far right.
 
-![](fig/github_top_nav.png){alt='The GitHub navigation tabs for a repository.'}
+![](fig/github_repo_top_nav.png){alt='The GitHub navigation tabs for a repository.'}
 
 This next section displays tabs to navigate around your repository and various 
 buttons which allow you to watch for changes to a repository and star a project.
