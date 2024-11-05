@@ -151,7 +151,7 @@ $ cat forecast.md
 # Forecast
 ## Today
 Cloudy with a chance of sun.
-Mild temperatures around 16°C.
+Mild temperatures around 16 °C.
 ## Tomorrow
 Morning rainbows followed by light showers.
 An ill-considered change.
@@ -169,7 +169,7 @@ index b36abfd..0848c8d 100644
 --- a/forecast.md
 +++ b/forecast.md
 @@ -4,3 +4,4 @@ Cloudy with a chance of sun.
- Mild temperatures around 16<C2><B0>C.
+ Mild temperatures around 16 °C.
  ## Tomorrow
  Morning rainbows followed by light showers.
 +An ill-considered change.
@@ -202,7 +202,7 @@ index df0654a..b36abfd 100644
  ## Today
 -Cloudy with a chance of pizza.
 +Cloudy with a chance of sun.
-+Mild temperatures around 16<C2><B0>C.
++Mild temperatures around 16 °C.
  ## Tomorrow
  Morning rainbows followed by light showers.
 +An ill-considered change.
@@ -267,7 +267,7 @@ index df0654a..93a3e13 100644
  ## Today
 -Cloudy with a chance of pizza.
 +Cloudy with a chance of sun.
-+Mild temperatures around 16<C2><B0>C.
++Mild temperatures around 16 °C.
 +## Tomorrow
 +Morning rainbows followed by light showers.
 +An ill-considered change.
@@ -291,7 +291,7 @@ index df0654a..93a3e13 100644
  ## Today
 -Cloudy with a chance of pizza.
 +Cloudy with a chance of sun.
-+Mild temperatures around 16<C2><B0>C.
++Mild temperatures around 16 °C.
 +## Tomorrow
 +Morning rainbows followed by light showers.
 +An ill-considered change.
@@ -332,7 +332,7 @@ $ cat forecast.md
 # Forecast
 ## Today
 Cloudy with a chance of sun.
-Mild temperatures around 16°C.
+Mild temperatures around 16 °C.
 ## Tomorrow
 Morning rainbows followed by light showers.
 ```
@@ -401,7 +401,7 @@ $ cat forecast.md
 # Forecast
 ## Today
 Cloudy with a chance of sun.
-Mild temperatures around 16°C.
+Mild temperatures around 16 °C.
 ## Tomorrow
 Morning rainbows followed by light showers.
 ```
