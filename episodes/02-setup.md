@@ -30,7 +30,7 @@ where `verb` is what we actually want to do and `options` is additional optional
 
 ```bash
 $ git config --global user.name "Joanne Simpson"
-$ git config --global user.email "j.simpson@weather.com"
+$ git config --global user.email "j.simpson@weather.org"
 ```
 
 Please use your own name and email address.

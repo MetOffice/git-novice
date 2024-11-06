@@ -170,7 +170,7 @@ To create an SSH key pair use the following command,
 where the `-t` option specifies which type of algorithm to use:
 
 ```bash
-$ ssh-keygen -t ed25519 -C "e.ormerod@weather.com"
+$ ssh-keygen -t ed25519 -C "e.ormerod@weather.org"
 ```
 
 The `-C` flag attaches a comment to the key.
@@ -214,7 +214,7 @@ After entering the same passphrase a second time, we receive the confirmation
 Your identification has been saved in ~/.ssh/id_ed25519_github
 Your public key has been saved in ~/.ssh/id_ed25519_github.pub
 The key fingerprint is:
-SHA256:SMSPIStNyA00KPxuYu94KpZgRAYjgt9g4BA4kFy3g1o e.ormerod@weather.com
+SHA256:SMSPIStNyA00KPxuYu94KpZgRAYjgt9g4BA4kFy3g1o e.ormerod@weather.org
 The key's randomart image is:
 +--[ED25519 256]--+
 |^B== o.          |
@@ -284,7 +284,7 @@ cat ~/.ssh/id_ed25519_github.pub
 ```
 
 ```output
-ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDmRA3d51X0uu9wXek559gfn6UFNF69yZjChyBIU2qKI e.ormerod@weather.com
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDmRA3d51X0uu9wXek559gfn6UFNF69yZjChyBIU2qKI e.ormerod@weather.org
 ```
 
 Now, going to GitHub.com, click on your profile icon in the top right corner to get the drop-down menu.  Click "Settings", then on the
