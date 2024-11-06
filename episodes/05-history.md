@@ -32,7 +32,7 @@ $ git log
 
 ```output
 commit cdb7fa654c3f5aee731a655e57f2ba74d9c74582 (HEAD -> main)
-Author: Joanne Simpson <j.simpson@weather.org>
+Author: Joanne Simpson <j.simpson@mo-weather.uk>
 Date:   Mon Nov 4 18:35:21 2024 +0000
 
     Add in the temperature to the forecast and create the weather atlas file
@@ -93,7 +93,7 @@ $ git log -1
 
 ```output
 commit cdb7fa654c3f5aee731a655e57f2ba74d9c74582 (HEAD -> main)
-Author: Joanne Simpson <j.simpson@weather.org>
+Author: Joanne Simpson <j.simpson@mo-weather.uk>
 Date:   Mon Nov 4 18:35:21 2024 +0000
 
     Add in the temperature to the forecast and create the weather atlas file
@@ -217,7 +217,7 @@ $ git show HEAD~2 forecast.md
 ```
 
 ```output
-Author: Joanne Simpson <j.simpson@weather.org>
+Author: Joanne Simpson <j.simpson@mo-weather.uk>
 Date:   Mon Nov 4 18:16:29 2024 +0000
 
     Add tomorrows forecast to forecast.md
