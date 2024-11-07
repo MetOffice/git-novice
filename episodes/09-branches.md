@@ -67,7 +67,7 @@ Our current repository looks something like this:
 
 ```mermaid
     gitGraph
-    accDescr {A git graph showing three commits to the main branch.}
+        accDescr {A git graph showing three commits to the main branch.}
         commit id: '41c775b'
         commit id: 'a489b1f'
         commit id: 'cdb7fa6'
