@@ -40,7 +40,7 @@ $ git switch seasonal-forecast
 Now we can publish these changes to GitHub:
 
 ```bash
-$ git push --set-upstream origin seasonal-forecast
+$ git push
 ```
 
 Navigate to your `weather` GitHub repo. 
@@ -347,7 +347,7 @@ $ git commit -m "Add in a README file"
 4. Push the changes to GitHub
 
 ```bash
-$ git push --set-upstream origin add-readme
+$ git push
 ```
 
 ```output

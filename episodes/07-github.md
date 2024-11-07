@@ -338,6 +338,22 @@ This command run from the local repositories main branch tells git that when
 we run `git push` we want to push to `origin`'s, the remote GitHub repository,
 `main` branch.
 
+::: callout
+
+### Automatically set the upstream branch
+
+You can get git to automatically set the upstream branch.
+This avoids having to run git push with the `--set-upstream`
+option the first time you push from a new branch.
+
+Change your git config using:
+
+```bash
+$ git config --global push.autoSetupRemote true
+```
+
+:::
+
 :::::::::::::::::::::::::::::::::::::::::  callout
 
 ## Proxy
