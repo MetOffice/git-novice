@@ -67,10 +67,10 @@ Our current repository looks something like this:
 
 ```mermaid
     gitGraph
-    accDescr {A git graph showing three commits to the main branch.}
-        commit id: '41c775b'
-        commit id: 'a489b1f'
-        commit id: 'cdb7fa6'
+        accDescr {A git graph showing three commits to the main branch.}
+        commit id: "41c775b"
+        commit id: "a489b1f"
+        commit id: "cdb7fa6"
 ```
 
 All our commits, the circles with commit IDs, are on the main branch,
@@ -154,9 +154,9 @@ repository looks like this:
 ```mermaid
     gitGraph
         accDescr {A git graph showing three commits to the main branch and a new seasonal-forecast branch with no commits.}
-        commit id: '41c775b'
-        commit id: 'a489b1f'
-        commit id: 'cdb7fa6'
+        commit id: "41c775b"
+        commit id: "a489b1f"
+        commit id: "cdb7fa6"
         branch seasonal-forecast
 ```
 
@@ -277,11 +277,11 @@ Now our repository looks like this:
 ```mermaid
     gitGraph
         accDescr {A git graph showing three commits to the main branch and a new seasonal-forecast branch with one commit branched of the HEAD of main.}
-        commit id: '41c775b'
-        commit id: 'a489b1f'
-        commit id: 'cdb7fa6'
+        commit id: "41c775b"
+        commit id: "a489b1f"
+        commit id: "cdb7fa6"
         branch seasonal-forecast
-        commit id: '8136c6f Add in a seasonal forecasts file'
+        commit id: "8136c6f Add in a seasonal forecasts file"
 ```
 
 In the next episode we will explore a simple workflow to merge these
