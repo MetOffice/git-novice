@@ -27,8 +27,8 @@ exercises: 0
 In this lesson you will be making changes on `main`.
 The `main` branch normally contains stable production code and
 should **NEVER** be committed to directly.
-In a later episode you will learn a basic workflow to
-ensure you never commit to main;
+In the later GitHub and Branches episodes you will learn 
+a basic workflow to ensure you never commit to main;
 and learn what to do when you accidentally commit to main.
 
 :::

@@ -68,8 +68,9 @@ episodes:
 - Break.md
 - 07-github.md
 - 08-github-interface.md
-- 08-collab.md
-- 09-conflict.md
+- 09-branches.md
+- 10-pull-requests.md
+- End.md
 - 10-open.md
 - 11-licensing.md
 - 12-citation.md

@@ -30,7 +30,7 @@ you will be prompted with a large green button at the top of this page to sign i
 To access your settings click on your round profile icon in the top right 
 hand corner and select the `Settings` option.
 
-### 1\.1 Exploring the interface for a repository
+### 1 Exploring the interface for a repository
 
 The following image shows an example repository. In fact it is the repository 
 containing the material for this lesson.
