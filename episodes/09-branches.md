@@ -30,10 +30,59 @@ small — you create a new branch for your changes.
 This makes it harder for unstable code to get merged into the main code base, 
 and it gives you the chance to clean up your branch history before merging it into the main branch.
 
+```mermaid
+---
+config:
+  gitGraph:
+    showCommitLabel: false
+---
+    gitGraph
+        accDescr {A git graph showing four branches including the default
+        <code>main</code> branch.
+        Each circle is a commit.
+        A circle with an outline but no fill colour is a merge commit 
+        where one branch has been merged into another.
+        The two feature branches and the <code>bug_fix</code> branch 
+        all branch off of <code>main</code> at the same commit.
+        The <code>bug_fix</code> and <code>small_feature</code> branches
+        are merged back into <code>main</code> after
+        being developed on their branches.
+        The <code>large_feature</code> branch merges in the
+        changes to <code>main</code> to fix any conflicts
+        before the feature is ready to be merged
+        back into the <code>main</code> branch via a pull request.}
+        commit
+        commit
+        branch bug_fix
+        checkout main
+        branch small_feature
+        checkout main
+        branch large_feature
+        checkout bug_fix
+        commit
+        checkout large_feature
+        commit
+        checkout main
+        merge bug_fix
+        checkout small_feature
+        commit
+        checkout large_feature
+        commit
+        checkout small_feature
+        commit
+        checkout main
+        merge small_feature
+        checkout large_feature
+        commit
+        merge main
+        checkout main
+        merge large_feature
+```
+
 If you completed the pre-workshop [setup instructions for git autocomplete](learners/setup.md#git-autocomplete)
 you should see the current branch, `main`, in your terminal prompt:
 
-```bash
+```
 [~/Desktop/weather]:(main =)$
 ```
 
