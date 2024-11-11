@@ -64,6 +64,7 @@ episodes:
 - 03-create.md
 - 04-changes.md
 - 05-history.md
+- 06-reverting-changes.md
 - 06-ignore.md
 - Break.md
 - 07-github.md
