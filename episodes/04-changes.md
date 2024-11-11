@@ -168,6 +168,18 @@ messages may include inappropriate language.
 
 :::::::::::::::::::::::::::::::::::::::::::::::::
 
+::: caution
+
+### Using `git add .`
+
+Using `git add .` or the `-a` flag with `git commit` will add **all**
+your unstaged changes in your repository.
+
+This might include things you didn't mean to add.
+**Always use `git status` to check your changes before adding them.**
+We recommend you avoid using `git add .` and `git commit -a`.
+:::
+
 ::: spoiler
 
 ### FCM Comparison
