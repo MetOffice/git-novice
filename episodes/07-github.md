@@ -292,6 +292,20 @@ settings page, click "SSH and GPG keys", on the left side "Access" menu. Click t
 you can add the title (normally an ID for the computer storing the keys such as "Work Linux"),
 paste your SSH key into the field, and click the "Add SSH key" to complete the setup.
 
+::: callout
+
+## Single sign-on (SSO)
+
+If you are part of an organisation that requires single
+sign-on (SSO) to access their GitHub organisation you
+will need to authorise the key for use in the organisation.
+
+Next to the newly created SSH key in the GitHub settings
+click on "Configure SSO".
+Find the organisation in the list and click on "Authorise".
+
+:::
+
 Now that we've set that up, let's check our authentication again from the command line.
 
 ```bash
