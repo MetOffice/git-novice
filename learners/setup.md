@@ -87,6 +87,7 @@ different from the path in the example above.
 If you would like your own copy of the `git-prompt.sh` script you can 
 download the latest version from the 
 [git repository contrib directory](https://github.com/git/git/blob/master/contrib/completion/git-prompt.sh).
+Ensure the `GIT_PROMPT_PATH` matches where you decide to store the `git-prompt.sh` file.
 
 If your `~/.bashrc` file, or any file in the `~/.bashrc.d/` directory,
 already defines a `PROMPT_COMMAND` or `PS1`
