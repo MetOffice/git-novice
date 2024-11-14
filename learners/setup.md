@@ -49,7 +49,7 @@ if [[ $- =~ i ]]; then
         source "${GIT_PROMPT_PATH}" >&2
     else
         if [[ "$-" == *i* ]]; then
-            echo "${GIT_PROMPT_PATH} - not found, check version hasn't been updated" >&2
+            echo "${GIT_PROMPT_PATH} - not found" >&2
         fi
     fi
     export GIT_PS1_SHOWDIRTYSTATE=1
