@@ -39,32 +39,47 @@ If you are using MacOS or Windows please consult the
 [git autocomplete instructions](https://github.com/git/git/blob/master/contrib/completion/git-prompt.sh)
 at the top of the linked file.
 Your instructor may point you to another online resource for your OS.
-To enable this script add the following to your `~/.bashrc` 
+To enable this script add the following to a new `~/.bashrc.d/git.bash` 
 file:
 
 ```bash
-# open a new terminal in the current working directory
-source /etc/profile.d/vte.sh
-
-GIT_PROMPT_PATH=~/git-prompt.sh
-if [ -f "${GIT_PROMPT_PATH}" ]; then    
-    source "${GIT_PROMPT_PATH}"
-else
-    if [[ "$-" == *i* ]]; then
-        echo "${GIT_PROMPT_PATH} - not found, check version hasn't been updated"
+if [[ $- =~ i ]]; then
+    GIT_PROMPT_PATH=~/git-prompt.sh
+    if [[ -r "${GIT_PROMPT_PATH}" ]]; then    
+        source "${GIT_PROMPT_PATH}" >&2
+    else
+        if [[ "$-" == *i* ]]; then
+            echo "${GIT_PROMPT_PATH} - not found, check version hasn't been updated" >&2
+        fi
     fi
+    export GIT_PS1_SHOWDIRTYSTATE=1
+    export GIT_PS1_SHOWSTASHSTATE=1
+    export GIT_PS1_SHOWUPSTREAM="auto"
+    export GIT_PS1_SHOWCOLORHINTS=1
+    export GIT_PS1_SHOWUNTRACKEDFILES=1
+
+    export PROMPT_COMMAND=("${PROMPT_COMMAND[@]}" '__git_ps1 "${CONDA_PROMPT_MODIFIER}[\u@\h:\w]:" "\$ " "(%s)"')
+    export PS1='[\u@\h:\w]$(__git_ps1 "(%s)"):\$ '
+
+    # trim long working directory paths
+    PROMPT_DIRTRIM=3
 fi
-export GIT_PS1_SHOWDIRTYSTATE=1
-export GIT_PS1_SHOWSTASHSTATE=1
-export GIT_PS1_SHOWUPSTREAM="auto"
-export GIT_PS1_SHOWCOLORHINTS=1
-export GIT_PS1_SHOWUNTRACKEDFILES=1
+```
 
-export PROMPT_COMMAND='__git_ps1 "${CONDA_PROMPT_MODIFIER}[\u@\h:\w]:" "\W\$ " "(%s)"'
-export PS1='${CONDA_PROMPT_MODIFIER}[\u@\h:\w]$(__git_ps1 "(%s)"):\W\$ '
+And make sure your `~/.bashrc` file includes:
 
-# trim long working directory paths
-PROMPT_DIRTRIM=3
+```bash
+# User specific aliases and functions
+
+if [ -d ~/.bashrc.d ]; then
+	for rc in ~/.bashrc.d/*; do
+		if [ -f "$rc" ]; then
+			. "$rc"
+		fi
+	done
+fi
+
+unset rc
 ```
 
 Your instructor will let you know if the value of `GIT_PROMPT_PATH` is 
@@ -73,7 +88,8 @@ If you would like your own copy of the `git-prompt.sh` script you can
 download the latest version from the 
 [git repository contrib directory](https://github.com/git/git/blob/master/contrib/completion/git-prompt.sh).
 
-If your `~/.bashrc` file already defines a `PROMPT_COMMAND` or `PS1`
+If your `~/.bashrc` file, or any file in the `~/.bashrc.d/` directory,
+already defines a `PROMPT_COMMAND` or `PS1`
 you may need to merge what is shown above with your current script.
 Your instructor may be able to help you with this.
 
@@ -95,6 +111,20 @@ To see the changes to your terminal prompt run:
 ```bash
 source ~/.bashrc
 ```
+
+::: callout
+
+## Using MacOS or older versions of Bash
+
+If your version of Bash is less than 5.1 or you are using
+MacOS you might need to change the `export PROMPT_COMMAND`
+line to:
+
+```bash
+export PROMPT_COMMAND=${PROMPT_COMMAND:+"$PROMPT_COMMAND; "}'__git_ps1 "${CONDA_PROMPT_MODIFIER}[\w]:" "\$ " "(%s)"'
+```
+
+:::
 
 ## Creating a GitHub Account
 
