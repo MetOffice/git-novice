@@ -220,6 +220,9 @@ adds then commits these changes to the local repository.
 So `git revert` here is the same as `git restore -s [commit ID]`  
 followed by `git commit -am Reverts: [commit]`.
 
+`git revert` undoes a whole commit whereas
+`git restore -s` can be used restore individual files.
+
 Below are the right steps and explanations for Ahmed to use `git revert`,
 what is the missing command?
 
