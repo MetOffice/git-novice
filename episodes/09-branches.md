@@ -23,10 +23,11 @@ Branching is a feature available in most modern version control systems.
 Branching in other version control systems can be an expensive operation in both time and disk space.
 In git, branches are a part of your everyday development process.
 
-So far we have been working on the `main` branch.
-From this point on you should **NEVER** commit to `main`.
-When you want to add a new feature or fix a bug—no matter how big or how 
-small — you create a new branch for your changes.
+So far we have been working on the `main` branch
+and have made one commit, the **root-commit**.
+Committing the initial **root-commit** is the only time you should commit to `main`.
+When you want to add a new change or fix a bug, no matter how big or how 
+small, you create a new branch for your changes.
 This makes it harder for unstable code to get merged into the main code base, 
 and it gives you the chance to clean up your branch history before merging it into the main branch.
 
@@ -37,46 +38,12 @@ config:
     showCommitLabel: false
 ---
     gitGraph
-        accDescr {A git graph showing four branches including the default
-        <code>main</code> branch.
-        Each circle is a commit.
-        A circle with an outline but no fill colour is a merge commit 
-        where one branch has been merged into another.
-        The two feature branches and the <code>bug_fix</code> branch 
-        all branch off of <code>main</code> at the same commit.
-        The <code>bug_fix</code> and <code>small_feature</code> branches
-        are merged back into <code>main</code> after
-        being developed on their branches.
-        The <code>large_feature</code> branch merges in the
-        changes to <code>main</code> to fix any conflicts
-        before the feature is ready to be merged
-        back into the <code>main</code> branch via a pull request.}
-        commit
-        commit
-        branch bug_fix
+        accDescr {A git graph showing the root-commit on the main branch and a new forecast branch with one commit branched off the root-commit. This branch is then merged back into main via a merge commit on GitHub.}
+        commit id: '6f12a47'
+        branch forecast
+        commit id: '8136c6f Add in a seasonal forecasts file'
         checkout main
-        branch small_feature
-        checkout main
-        branch large_feature
-        checkout bug_fix
-        commit
-        checkout large_feature
-        commit
-        checkout main
-        merge bug_fix
-        checkout small_feature
-        commit
-        checkout large_feature
-        commit
-        checkout small_feature
-        commit
-        checkout main
-        merge small_feature
-        checkout large_feature
-        commit
-        merge main
-        checkout main
-        merge large_feature
+        merge forecast
 ```
 
 If you completed the pre-workshop [setup instructions for git autocomplete](learners/setup.md#git-autocomplete)
@@ -86,8 +53,7 @@ you should see the current branch, `main`, in your terminal prompt:
 [~/Desktop/weather]:(main =)$
 ```
 
-The `git status` command we have been using throughout earlier episodes
-also shows us the current branch:
+The `git status` command also shows us the current branch:
 
 ```bash
 $ git status
@@ -100,40 +66,27 @@ Your branch is up to date with 'origin/main'.
 nothing to commit, working tree clean
 ```
 
-::: callout
-
-### What are Branches?
-
-Remember a git commit is a snapshot of files, it has no branch information. Commits simply point to the previous 'parent' commits, forming a graph, and a branch is nothing more than a reference (pointer) to a commit.
-
-More practically you can think of a branch as a list of commits that are accessible from the branch's reference but not from main.
-
-:::
-
 ## Creating Branches
 
 Our current repository looks something like this:
 
 ```mermaid
     gitGraph
-        accDescr {A git graph showing three commits to the main branch.}
-        commit id: '41c775b'
-        commit id: 'a489b1f'
-        commit id: 'cdb7fa6'
+        accDescr {A git graph showing one commit, the root-commit on the main branch.}
+        commit id: '6f12a47'
 ```
 
-All our commits, the circles with commit IDs, are on the main branch,
-the top horizontal line.
-
-Say we want to add a longer seasonal forecast to our repository.
-We should make a branch to develop our changes on.
+To make any changes we should create a new branch.
 There are several ways to create a branch and switch to the new branch.
 While it's good to be aware of all these different methods we
 recommend using `git switch -c`.
 
-You should ensure the branch has a suitable name 
+You should ensure the branch has a suitable unique name 
 which will help you identify what the branch is for; even after several 
 months of inactivity.
+
+We are going to add a weather forecast to our repository
+so our branch will be named **forecast**:
 
 ::: tab
 
@@ -144,11 +97,11 @@ months of inactivity.
 switches you to a new branch:
 
 ```bash
-$ git switch -c seasonal-forecast
+$ git switch -c forecast
 ```
 
 ```output
-Switched to branch 'seasonal-forecast'
+Switched to branch 'forecast'
 ```
 
 ### git branch
@@ -156,18 +109,18 @@ Switched to branch 'seasonal-forecast'
 To create a new branch use `git branch <branch-name>`:
 
 ```bash
-$ git branch seasonal-forecast
+$ git branch forecast
 ```
 
 Now run `git status` and you will see you're still on the main branch.
 To navigate between branches use `git switch <branch-name>`:
 
 ```bash
-$ git switch seasonal-forecast
+$ git switch forecast
 ```
 
 ```output
-Switched to branch 'seasonal-forecast'
+Switched to branch 'forecast'
 ```
 
 ### git checkout -b
@@ -177,11 +130,11 @@ The `git checkout` command can also be used to navigate between branches.
 creates and switches you to the new branch:
 
 ```bash
-$ git checkout -b seasonal-forecast
+$ git checkout -b forecast
 ```
 
 ```output
-Switched to branch 'seasonal-forecast'
+Switched to branch 'forecast'
 ```
 
 :::
@@ -193,20 +146,18 @@ $ git status
 ```
 
 ```output
-On branch seasonal-forecast
+On branch forecast
 nothing to commit, working tree clean
 ```
 
-We haven't added anything yet so there is nothing to commit and our
-repository looks like this:
+Now we have created but not committed anything to this new branch
+so our repository looks like this:
 
 ```mermaid
     gitGraph
-        accDescr {A git graph showing three commits to the main branch and a new seasonal-forecast branch with no commits.}
-        commit id: '41c775b'
-        commit id: 'a489b1f'
-        commit id: 'cdb7fa6'
-        branch seasonal-forecast
+        accDescr {A git graph showing the root-commit on the main branch and a new forecast branch with no commits.}
+        commit id: '6f12a47'
+        branch forecast
 ```
 
 If we run `git branch` we can see the branches that exist in our repository.
@@ -216,17 +167,38 @@ $ git branch
 ```
 
 ```output
+* forecast
   main
-* seasonal-forecast
 ```
 
-The `*` indicates we are now on the `seasonal-forecast` branch.
+The `*` indicates we are now on the `forecast` branch.
+
+::: caution
+
+### Unique Branch Names
+
+To avoid creating a branch with the same name
+as a collaborators branch it is common to prefix
+the branch name with an Issue (ticket) number.
+
+You might choose to include your initials or
+username in your branch although this is less
+common than an Issue number.
+
+Separate words in branch names with `-` or `_`
+depending on your teams working practices.
+The [Git & GitHub Working Practices lesson](https://www.astropython.com/git-working-practices/),
+which you can take after this introductory lesson,
+will help you choose the working practices
+that are right for you and your team.
+
+:::
 
 ::::::::::::::::::::::::::::::::::::: challenge
 
 ## Switching Between Branches
 
-How would you switch back to the `main` branch from the `seasonal-forecast` branch?
+How would you switch back to the `main` branch from the `forecast` branch?
 
 :::::::::::::::: solution
 
@@ -290,52 +262,6 @@ git branch <branch-name> <start-point>
 :::::::::::::::::::::::::
 :::::::::::::::::::::::::::::::::::::::::::::::
 
-## Developing on a Branch
-
-Developing your changes on a branch is exactly the same as you practised
-in earlier episodes.
-Let's add a `seasonal-forecast.md` file:
-
-```bash
-$ nano seasonal-forecast.md
-$ cat seasonal-forecast.md
-```
-
-```output
-# Seasonal Forecast
-
-- Winter is cold
-- Summer is hot
-```
-
-And commit these changes:
-
-```bash
-$ git add seasonal-forecast.md
-$ git commit -m "Add in a seasonal forecasts file"
-```
-
-```output
-[seasonal-forecast 8136c6f] Add in a seasonal forecasts file
- 1 file changed, 4 insertions(+)
- create mode 100644 seasonal-forecast.md
-```
-
-Now our repository looks like this:
-
-```mermaid
-    gitGraph
-        accDescr {A git graph showing three commits to the main branch and a new seasonal-forecast branch with one commit branched of the HEAD of main.}
-        commit id: '41c775b'
-        commit id: 'a489b1f'
-        commit id: 'cdb7fa6'
-        branch seasonal-forecast
-        commit id: '8136c6f Add in a seasonal forecasts file'
-```
-
-In the next episode we will explore a simple workflow to merge these
-changes back into the `main` branch using GitHub.
-
 ## Deleting Branches
 
 A colleague of yours gets really excited about using branches and creates a new one:
@@ -348,29 +274,24 @@ $ git switch -c shipping-forecast
 Switched to a new branch 'shipping-forecast'
 ```
 
-In their excitement they forgot to switch back to the `main` branch 
-before running the `git switch -c` command.
-They have inadvertently branched off a branch that isn't `main`.
-Running `git branch` with the `-vv` verbosity flag gives:
+They then check their branches:
 
 ```bash
 $ git branch -vv
 ```
 
 ```output
-  main              41c775b [origin/main] Ignore png files and the data folder.
-  seasonal-forecast 8136c6f Add in a seasonal forecasts file
-* shipping-forecast 8136c6f Add in a seasonal forecasts file
+  forecast          6f12a47 Initial commit
+  main              6f12a47 Initial commit
+* shipping-forecast 6f12a47 Initial commit
 ```
 
-The `shipping-forecast` output line references the same commit as the `seasonal-forecast` one!
-This means the `shipping-forecast` branch was created from the `seasonal-forecast` branch at commit `8136c6f`.
-
-Sometimes it will make sense to branch off of branches that are not `main`.
-In this case your colleague decides to delete the branch since they haven't made any commits to it yet. To delete a branch first switch to any other branch:
+Your colleague decides to delete the branch
+since today's shipping forecast isn't ready.
+To delete a branch first switch to any other branch:
 
 ```bash
-$ git switch main
+$ git switch forecast
 ```
 
 and then delete the branch with `git branch -d`:
@@ -380,23 +301,40 @@ $ git branch -d shipping-forecast
 ```
 
 ```output
-error: The branch 'shipping-forecast' is not fully merged.
-If you are sure you want to delete it, run 'git branch -D shipping-forecast'.
+Deleted branch shipping-forecast (was 6f12a47).
 ```
 
-Notice our branch wasn't deleted!
-Git is telling us we didn't merge our changes onto another branch and might lose commits.
-Your colleague knows it is safe to delete the `shipping-forecast` branch 
-because it contains no commits.
-They go ahead and run the suggested command with the `-D`, force delete, flag:
+::: callout
 
-```bash
-$ git branch -D shipping-forecast
+## Check your branch point
+
+Always switch to the branch you want to branch from, usually `main`,
+or explicitly specify a branch point when creating new branches.
+This helps avoid accidentally branching of a branch
+which isn't `main` if you didn't mean to.
+
+Imagine a colleague has added more files to their `forecast` branch
+and just created a `tidal-forecast` branch.
+
+They run:
+
+```git
+$ git branch -vv
 ```
 
 ```output
-Deleted branch shipping-forecast (was 8136c6f).
+  forecast       8136c6f Add in a seasonal forecasts file
+  main           6f12a47 Initial commit
+* tidal-forecast 8136c6f Add in a seasonal forecasts file
 ```
+
+Here the hash for the `tidal-forecast` branch is the same
+as the `forecast` branch so `tidal-forecast`
+is not branched off `main`.
+If they meant to branch off `main` they should delete this branch,
+and re-create it from the correct branch point.
+
+:::
 
 ::::::::::::::::::::::::::::::::::::: challenge
 

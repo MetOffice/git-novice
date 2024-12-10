@@ -117,6 +117,65 @@ $ fcm info
 If you are using a different version of `git`, the exact
 wording of the output might be slightly different.
 
+## Initial Commit
+
+As soon as you initialise your repository
+you should make an initial commit.
+All repositories should have a `README` file
+which outlines the purpose of the repository
+and other useful information.
+For now we will create the file with just
+the repository name, **Weather** as the title:
+
+```bash
+$ echo "# Weather" > README.md
+$ cat README.md
+```
+
+```output
+# Weather
+```
+
+Now add and commit the `README.md` file
+using the `git add` and `git commit` commands:
+
+```bash
+$ git add README.md
+$ git commit -m "Initial commit"
+```
+
+```output
+[main (root-commit) 6f12a47] Initial commit
+ 1 file changed, 1 insertion(+)
+ create mode 100644 README.md
+```
+
+You've just added your first file to be version controlled with Git!
+This first commit is the special **root-commit**.
+It is the start of your version control history and
+like all commits has been given a unique alphanumeric hash (`6f12a47`).
+In the next few episodes you will explore
+tracking changes with `git add` and `git commit` in detail,
+and learn how to inspect your repositories history.
+
+::: callout
+
+### README Files
+
+All repositories should have a `README` file.
+The `README` file describes what is in your repository.
+The [makeareadme](https://www.makeareadme.com/) website is a great
+resource for `README` templates and inspiration.
+
+The `README.md` file we added is a [Markdown](https://www.markdownguide.org/basic-syntax/)
+file.
+Markdown is a simple markup language and
+GitHub can render Markdown files natively.
+The GitHub documentation pages on [Writing on GitHub](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
+have more info on writing in Markdown for GitHub.
+
+:::
+
 :::::::::::::::::::::::::::::::::::::::  challenge
 
 ## Places to Create Git Repositories

@@ -17,7 +17,9 @@ exercises: 15
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-Pull requests are a great way to collaborate with others using GitHub. Instead of making changes directly to a repository you can suggest changes to a repository using a pull request.
+Pull requests are a great way to collaborate with others using GitHub.
+Instead of making changes directly to a repository
+you can suggest changes to a repository using a pull request.
 
 Pull requests are where your changes go through the 
 vital steps of code and science review.
@@ -28,13 +30,13 @@ reduce the chance of human error when checking new code.
 
 ## Creating a Pull Request
 
-In the last episode on branches we developed a change 
-on the `seasonal-forecast` branch.
+In the previous episodes we developed our changes 
+on the `forecast` branch.
 Let's use a PR to merge these changes back into the `main` branch.
-Make sure you are still on the `seasonal-forecast` branch:
+Make sure you are still on the `forecast` branch:
 
 ```bash
-$ git switch seasonal-forecast
+$ git switch forecast
 ```
 
 Now we can publish these changes to GitHub:
@@ -45,16 +47,16 @@ $ git push
 
 Navigate to your `weather` GitHub repo. 
 You should see a notification appear with the text
-**`seasonal-forecast` had recent pushes**.
+**`forecast` had recent pushes**.
 
-![](fig/github_create_pr.png){alt='A screenshot of the weather repo showing the notification prompting us to Compare & pull request for the seasonal-forecast branch.'}
+![](fig/github_create_pr.png){alt='A screenshot of the weather repo showing the notification prompting us to Compare & pull request for the forecast branch.'}
 
 Click on the green **Compare & pull request** button.
 
-![](fig/github_create_pr_2.png){alt='A screenshot of the weather repo showing the creation of a pull request for the seasonal-forecast branch changes.'}
+![](fig/github_create_pr_2.png){alt='A screenshot of the weather repo showing the creation of a pull request for the forecast branch changes.'}
 
 This page lets us create a new pull request from the
-`seasonal-forecast` branch.
+`forecast` branch.
 The title has been autofilled with the message of the last commit.
 You can see all the commits on the branch at the bottom of this page.
 
@@ -80,7 +82,7 @@ aren't automatically assigned.
 Notice we've now moved to the **Pull Requests** tab.
 This is PR **#1** and underneath the title we see:
 
-> wants to merge 1 commit into `main` from `seasonal-forecast`
+> wants to merge 4 commits into `main` from `forecast`
 
 If you need to change the title or the branch you're merging into,
 in this case `main`, click on the **edit** button 
@@ -92,7 +94,7 @@ The PR has four tabs below the title section:
 - **Commits** shows all the commits we want to merge
 - **Checks** shows the output from any automated code and science checks
 - **Files Changed** shows a diff (difference) between the 
-  branch with your changes, `seasonal-forecast`,
+  branch with your changes, `forecast`,
   and the target branch, `main`.
 
 At this point you should use the diff in the **Files changed** tab to check your changes.
@@ -157,12 +159,12 @@ Then click on **Confirm squash and merge**.
 ![](fig/github_pr_closed.png){alt='A screenshot showing a closed pull request on the weather repository.'}
 
 The PR is now successfully merged into the `main` branch.
-We can safely delete the `seasonal-forecast` branch from the GitHub repo.
+We can safely delete the `forecast` branch from the GitHub repo.
 Click on the **Delete branch button**.
 
 ### Updating your Local Repo
 
-The new `seasonal-forecast.md` file is currently only on the `main` branch in GitHub.
+The new `forecast.md` file is currently only on the `main` branch in GitHub.
 We should pull the changes down to our local copy.
 Switch to the `main` branch:
 
@@ -186,9 +188,11 @@ From github.com:mo-eormerod/weather
    41c775b..49c845c  main       -> origin/main
 Updating 41c775b..49c845c
 Fast-forward
- seasonal-forecast.md | 4 ++++
- 1 file changed, 4 insertions(+)
- create mode 100644 seasonal-forecast.md
+ .gitignore  | 2 ++
+ forecast.md | 9 +++++++++
+ 2 files changed, 11 insertions(+)
+ create mode 100644 .gitignore
+ create mode 100644 forecast.md
 ```
 
 ::: callout
@@ -225,7 +229,7 @@ From github.com:mo-ormerod/weather
 
 ### Cleaning up your Local Branches
 
-We deleted our `seasonal-forecast` dev branch from GitHub
+We deleted our `forecast` dev branch from GitHub
 but we still have a local copy.
 Let's tidy up by deleting it.
 To see all our branches including remote GitHub branches run:
@@ -235,10 +239,10 @@ $ git branch -avv
 ```
 
 ```output
-* main                             49c845c [origin/main] Add in a seasonal forecasts file (#1)
-  seasonal-forecast                8136c6f [origin/seasonal-forecast] Add in a seasonal forecasts file
-  remotes/origin/main              49c845c Add in a seasonal forecasts file (#1)
-  remotes/origin/seasonal-forecast 8136c6f Add in a seasonal forecasts file
+  forecast                13e0329 [origin/forecast] Ignore png files and the data folder
+* main                    d1da035 [origin/main] #1 Add in a forecast file
+  remotes/origin/forecast 13e0329 Ignore png files and the data folder
+  remotes/origin/main     d1da035 #1 Add in a forecast file
 ```
 
 The first two branches are our local branches, the last two are the GitHub remotes.
@@ -251,54 +255,47 @@ $ git remote prune origin
 ```ouput
 Pruning origin
 URL: git@github.com:mo-eormerod/weather.git
- * [pruned] origin/seasonal-forecast
+ * [pruned] origin/forecast
 ```
 
 Running `git branch -avv` again now shows:
 
 ```ouptut
-* main                49c845c [origin/main] Add in a seasonal forecasts file (#1)
-  seasonal-forecast   8136c6f [origin/seasonal-forecast: gone] Add in a seasonal forecasts file
-  remotes/origin/main 49c845c Add in a seasonal forecasts file (#1)
+  forecast            13e0329 [origin/forecast: gone] Ignore png files and the data folder
+* main                d1da035 [origin/main] #1 Add in a forecast file
+  remotes/origin/main d1da035 #1 Add in a forecast file
 ```
 
-You can see the remote reference for the `seasonal-forecast` branch
+You can see the remote reference for the `forecast` branch
 has been removed.
-The second line with the local `seasonal-forecast` branch now has
+The second line with the local `forecast` branch now has
 `gone` in the brackets referencing the remote branch.
 
 To delete our local branch run:
 
 ```bash
-$ git branch -D seasonal-forecast
+$ git branch -D forecast
 ```
 
 Running `git branch -avv` again now shows:
 
 ```output
-* main                49c845c [origin/main] Add in a seasonal forecasts file (#1)
-  remotes/origin/main 49c845c Add in a seasonal forecasts file (#1)
+* main                d1da035 [origin/main] #1 Add in a forecast file
+  remotes/origin/main d1da035 #1 Add in a forecast file
 ```
 
 You've now successfully merged and tidied up after your first pull request.
-Remember from now on always create a new branch and open a PR
-when developing a new feature.
-**NEVER** commit to the `main` branch.
+Remember when making changes create a new branch
+and open a PR, **NEVER** commit to the `main` branch.
 
 ::::::::::::::::::::::::::::::::::::: challenge
 
-## Adding in a README.md file
+## Adding in a seasonal-forecast.md file
 
-All repositories should have a `README` file.
-The `README` file describes what is in your repository.
-The [makeareadme](https://www.makeareadme.com/) website is a great
-resource for `README` templates and inspiration.
-
-Use the [makeareadme](https://www.makeareadme.com/) site or other resources
-to add a `README.md` file to your repository:
+Try adding in a seasonal forecast using the following steps:
 
 1. Create a new branch with an appropriate name and switch to it
-2. Create the `README.md` file
+2. Create the `seasonal-forecast.md` file
 3. Add and commit the new file
 4. Push the changes to GitHub
 5. Open a PR on GitHub
@@ -311,37 +308,38 @@ to add a `README.md` file to your repository:
 1. Create a new branch with an appropriate name and switch to it
 
 ```bash
-$ git switch -c add-readme
+$ git switch -c add-seasonal-forecast
 ```
 
 ```output
-Switched to a new branch 'add-readme'
+Switched to a new branch 'add-seasonal-forecast'
 ```
 
-2. Create the `README.md` file
+2. Create the `seasonal-forecast.md` file
 
 ```bash
-$ nano README.md
-$ cat README.md
+$ nano seasonal-forecast.md
+$ cat seasonal-forecast.md
 ```
 
 ```output
-# Weather
+# Seasonal Forecast
 
-A repo for all things weather related!
+- Winter is wet
+- Summer is hot
 ```
 
 3. Add and commit the new file
 
 ```bash
-$ git add README.md
-$ git commit -m "Add in a README file"
+$ git add seasonal-forecast.md
+$ git commit -m "Add in a seasonal-forecast.md file"
 ```
 
 ```output
-[add-readme aeaf804] Add in a README file
- 1 file changed, 3 insertions(+)
- create mode 100644 README.md
+[add-seasonal-forecast aeaf804] Add in a seasonal-forecast.md file
+ 1 file changed, 4 insertions(+)
+ create mode 100644 seasonal-forecast.md
 ```
 
 4. Push the changes to GitHub
@@ -359,12 +357,12 @@ Writing objects: 100% (3/3), 326 bytes | 163.00 KiB/s, done.
 Total 3 (delta 1), reused 0 (delta 0), pack-reused 0
 remote: Resolving deltas: 100% (1/1), completed with 1 local object.
 remote: 
-remote: Create a pull request for 'add-readme' on GitHub by visiting:
-remote:      https://github.com/mo-ormerod/weather/pull/new/add-readme
+remote: Create a pull request for 'add-seasonal-forecast' on GitHub by visiting:
+remote:      https://github.com/mo-ormerod/weather/pull/new/add-seasonal-forecast
 remote: 
 To github.com:mo-ormerod/weather.git
- * [new branch]      add-readme -> add-readme
-branch 'add-readme' set up to track 'origin/add-readme'.
+ * [new branch]      add-seasonal-forecast -> add-seasonal-forecast
+branch 'add-seasonal-forecast' set up to track 'origin/add-seasonal-forecast'.
 ```
 
 5. Open a PR as shown in this very episode!
@@ -402,9 +400,9 @@ $ git pull
 ```output
 Updating 49c845c..e4bdab8
 Fast-forward
- README.md | 3 +++
- 1 file changed, 3 insertions(+)
- create mode 100644 README.md
+ seasonal-forecast.md | 4 +++
+ 1 file changed, 4 insertions(+)
+ create mode 100644 seasonal-forecast.md
 ```
 
 8. Tidy up your branches
@@ -416,15 +414,15 @@ $ git remote prune origin
 ```output
 Pruning origin
 URL: git@github.com:mo-ormerod/weather.git
- * [pruned] origin/add-readme
+ * [pruned] origin/add-seasonal-forecast
 ```
 
 ```bash
-$ git branch -D add-readme
+$ git branch -D add-seasonal-forecast
 ```
 
 ```output
-Deleted branch add-readme (was aeaf804).
+Deleted branch add-seasonal-forecast (was aeaf804).
 ```
 
 :::::::::::::::::::::::::

@@ -29,7 +29,7 @@ $ git log
 ```
 
 ```output
-commit cdb7fa654c3f5aee731a655e57f2ba74d9c74582 (HEAD -> main)
+commit cdb7fa654c3f5aee731a655e57f2ba74d9c74582 (HEAD -> forecast)
 Author: Joanne Simpson <j.simpson@mo-weather.uk>
 Date:   Mon Nov 4 18:35:21 2024 +0000
 
@@ -44,6 +44,8 @@ the short identifier printed by the `git commit` command earlier),
 the commit's author,
 when it was created,
 and the log message Git was given when the commit was created.
+The output above only shows the latest commit in the log for brevity,
+you should see all your commits!
 
 ::: spoiler
 
@@ -90,7 +92,7 @@ $ git log -1
 ```
 
 ```output
-commit cdb7fa654c3f5aee731a655e57f2ba74d9c74582 (HEAD -> main)
+commit cdb7fa654c3f5aee731a655e57f2ba74d9c74582 (HEAD -> forecast)
 Author: Joanne Simpson <j.simpson@mo-weather.uk>
 Date:   Mon Nov 4 18:35:21 2024 +0000
 
@@ -105,7 +107,7 @@ $ git log --oneline
 ```
 
 ```output
-cdb7fa6 (HEAD -> main) Add in the temperature to the forecast and create the weather atlas file
+cdb7fa6 (HEAD -> forecast) Add in the temperature to the forecast and create the weather atlas file
 62a9457 Modify the forecast to add a chance of Sun
 d3e4637 Add tomorrows forecast to forecast.md
 590c40c Create a md file with the forecast
@@ -122,7 +124,7 @@ $ git log --oneline --graph
 ```
 
 ```output
-* cdb7fa6 (HEAD -> main) Add in the temperature to the forecast and create the weather atlas file
+* cdb7fa6 (HEAD -> forecast) Add in the temperature to the forecast and create the weather atlas file
 * 62a9457 Modify the forecast to add a chance of Sun
 * d3e4637 Add tomorrows forecast to forecast.md
 * 590c40c Create a md file with the forecast
@@ -138,7 +140,8 @@ directory by using the identifier `HEAD`.
 
 We've been adding small changes at a time to `forecast.md`, so it's easy to track our
 progress by looking, so let's do that using our `HEAD`s.  Before we start,
-let's make a change to `forecast.md`, adding yet another line.
+let's make a change to `forecast.md`, adding yet another line with
+** an ill-considered change**.
 
 ```bash
 $ nano forecast.md
@@ -147,10 +150,14 @@ $ cat forecast.md
 
 ```output
 # Forecast
+
 ## Today
+
 Cloudy with a chance of sun.
 Mild temperatures around 16 °C.
+
 ## Tomorrow
+
 Morning rainbows followed by light showers.
 An ill-considered change.
 ```
@@ -166,9 +173,11 @@ diff --git a/forecast.md b/forecast.md
 index b36abfd..0848c8d 100644
 --- a/forecast.md
 +++ b/forecast.md
-@@ -4,3 +4,4 @@ Cloudy with a chance of sun.
+@@ -8,3 +8,4 @@
  Mild temperatures around 16 °C.
+ 
  ## Tomorrow
+ 
  Morning rainbows followed by light showers.
 +An ill-considered change.
 ```
@@ -195,13 +204,16 @@ diff --git a/forecast.md b/forecast.md
 index df0654a..b36abfd 100644
 --- a/forecast.md
 +++ b/forecast.md
-@@ -1,5 +1,7 @@
- # Forecast
+@@ -2,8 +2,10 @@
+ 
  ## Today
+
 -Cloudy with a chance of pizza.
 +Cloudy with a chance of sun.
 +Mild temperatures around 16 °C.
+ 
  ## Tomorrow
+ 
  Morning rainbows followed by light showers.
 +An ill-considered change.
 ```
@@ -224,11 +236,13 @@ diff --git a/forecast.md b/forecast.md
 index d8bc6ce..5b5d97e 100644
 --- a/forecast.md
 +++ b/forecast.md
-@@ -1,3 +1,5 @@
- # Forecast
+@@ -3,3 +3,7 @@
  ## Today
+ 
  Cloudy with a chance of pizza.
++
 +## Tomorrow
++
 +Morning rainbows followed by light showers.
 ```
 
@@ -247,7 +261,7 @@ These are unique IDs for the changes,
 and "unique" really does mean unique:
 every change to any set of files on any computer
 has a unique 40-character identifier.
-Our first commit was given the ID
+Our first commit on the `forecast` branch was given the ID
 `f22b25e3233b4645dabd0d81e651fe074bd8e73b`,
 so let's try this:
 
@@ -260,13 +274,16 @@ diff --git a/forecast.md b/forecast.md
 index df0654a..93a3e13 100644
 --- a/forecast.md
 +++ b/forecast.md
-@@ -1,3 +1,7 @@
- # Forecast
+@@ -2,4 +2,10 @@
+ 
  ## Today
+
 -Cloudy with a chance of pizza.
 +Cloudy with a chance of sun.
 +Mild temperatures around 16 °C.
++
 +## Tomorrow
++
 +Morning rainbows followed by light showers.
 +An ill-considered change.
 ```
@@ -284,13 +301,16 @@ diff --git a/forecast.md b/forecast.md
 index df0654a..93a3e13 100644
 --- a/forecast.md
 +++ b/forecast.md
-@@ -1,3 +1,7 @@
- # Forecast
+@@ -2,4 +2,10 @@
+ 
  ## Today
+
 -Cloudy with a chance of pizza.
 +Cloudy with a chance of sun.
 +Mild temperatures around 16 °C.
++
 +## Tomorrow
++
 +Morning rainbows followed by light showers.
 +An ill-considered change.
 ```
@@ -303,6 +323,7 @@ What is the output of the last command in
 
 ```bash
 $ cd weather
+$ git switch -c add_CMIP_data
 $ echo "Global Climate Data" > CMIP7.md
 $ git add CMIP7.md
 $ echo "Data from the 7th model intercomparison project" >> CMIP7.md

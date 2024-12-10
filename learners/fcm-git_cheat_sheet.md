@@ -5,7 +5,7 @@ title: FCM vs Git Cheat Sheet
 ## FCM vs Git
 
 If you are familiar with FCM then this cheat sheet is for you!
-Adapted from Tomek Trzeciak's comparison page.
+Adapted from Tomek Trzeciak's (Met Office) comparison page.
 
 ### fcm branch-create BRANCH_NAME (fcm bc)
 
