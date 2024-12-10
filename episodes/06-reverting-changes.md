@@ -31,7 +31,7 @@ $ git status
 ```
 
 ```output
-On branch main
+On branch forecast
 Changes not staged for commit:
   (use "git add <file>..." to update what will be committed)
   (use "git restore <file>..." to discard changes in working directory)
@@ -50,10 +50,14 @@ $ cat forecast.md
 
 ```output
 # Forecast
+
 ## Today
+
 Cloudy with a chance of sun.
 Mild temperatures around 16 °C.
+
 ## Tomorrow
+
 Morning rainbows followed by light showers.
 ```
 
@@ -90,7 +94,9 @@ $ cat forecast.md
 
 ```output
 # Forecast
+
 ## Today
+
 Cloudy with a chance of pizza.
 ```
 
@@ -99,7 +105,7 @@ $ git status
 ```
 
 ```output
-On branch main
+On branch forecast
 Changes not staged for commit:
   (use "git add <file>..." to update what will be committed)
   (use "git restore <file>..." to discard changes in working directory)
@@ -119,10 +125,14 @@ $ cat forecast.md
 
 ```output
 # Forecast
+
 ## Today
+
 Cloudy with a chance of sun.
 Mild temperatures around 16 °C.
+
 ## Tomorrow
+
 Morning rainbows followed by light showers.
 ```
 

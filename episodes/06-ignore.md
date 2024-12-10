@@ -34,7 +34,7 @@ $ git status
 ```
 
 ```output
-On branch main
+On branch forecast
 Untracked files:
   (use "git add <file>..." to include in what will be committed)
 
@@ -76,7 +76,7 @@ $ git status
 ```
 
 ```output
-On branch main
+On branch forecast
 Untracked files:
   (use "git add <file>..." to include in what will be committed)
 
@@ -93,12 +93,12 @@ Let's add and commit `.gitignore`:
 
 ```bash
 $ git add .gitignore
-$ git commit -m "Ignore png files and the data folder."
+$ git commit -m "Ignore png files and the data folder"
 $ git status
 ```
 
 ```output
-On branch main
+On branch forecast
 nothing to commit, working tree clean
 ```
 
@@ -124,7 +124,7 @@ $ git status --ignored
 ```
 
 ```output
-On branch main
+On branch forecast
 Ignored files:
  (use "git add -f <file>..." to include in what will be committed)
 

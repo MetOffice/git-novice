@@ -20,28 +20,14 @@ exercises: 0
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-::: caution
-
-### Committing to Main
-
-In this lesson you will be making changes on `main`.
-The `main` branch normally contains stable production code and
-should **NEVER** be committed to directly.
-In the later GitHub and Branches episodes you will learn 
-a basic workflow to ensure you never commit to main;
-and learn what to do when you accidentally commit to main.
-
-:::
-
-First let's make sure we're still in the right directory.
-You should be in the `weather` directory.
+First let's make sure we're still on the right branch.
+You should be on the `forecast` branch:
 
 ```bash
-$ cd ~/Desktop/weather
+$ git switch forecast
 ```
 
-Let's create a file called `forecast.md` that contains the basic structure to
-have a recipe.
+Let's create a file called `forecast.md` that contains a basic weather forecast.
 We'll use `nano` to edit the file;
 you can use whatever editor you like.
 In particular, this does not have to be the `core.editor` you set globally earlier. But remember, the steps to create create or edit a new file will depend on the editor you choose (it might not be nano). For a refresher on text editors, check out ["Which Editor?"](https://swcarpentry.github.io/shell-novice/03-create.html#which-editor) in [The Unix Shell](https://swcarpentry.github.io/shell-novice/) lesson.
@@ -54,7 +40,9 @@ Type the text below into the `forecast.md` file:
 
 ```output
 # Forecast
+
 ## Today
+
 Cloudy with a chance of pizza.
 ```
 
@@ -77,7 +65,9 @@ $ cat forecast.md
 
 ```output
 # Forecast
+
 ## Today
+
 Cloudy with a chance of pizza.
 ```
 
@@ -89,7 +79,7 @@ $ git status
 ```
 
 ```output
-On branch main
+On branch forecast
 
 No commits yet
 
@@ -116,7 +106,7 @@ $ git status
 ```
 
 ```output
-On branch main
+On branch forecast
 
 No commits yet
 
@@ -124,7 +114,6 @@ Changes to be committed:
   (use "git rm --cached <file>..." to unstage)
 
 	new file:   forecast.md
-
 ```
 
 Git now knows that it's supposed to keep track of `forecast.md`,
@@ -137,8 +126,8 @@ $ git commit -m "Create a md file with the forecast"
 ```
 
 ```output
-[main (root-commit) f22b25e] Create a md file with the forecast
- 1 file changed, 3 insertions(+)
+[forecast f22b25e] Create a md file with the forecast
+ 1 file changed, 5 insertions(+)
  create mode 100644 forecast.md
 ```
 
@@ -192,6 +181,16 @@ $ fcm commit
 
 :::
 
+Our repository now looks like this:
+
+```mermaid
+    gitGraph
+        accDescr {A git graph showing the root-commit on the main branch and a new forecast branch, branching off the root-commit, with one commit.}
+        commit id: 'Initial commit'
+        branch forecast
+        commit id: 'Create a md file with the forecast'
+```
+
 If we run `git status` now:
 
 ```bash
@@ -199,7 +198,7 @@ $ git status
 ```
 
 ```output
-On branch main
+On branch forecast
 nothing to commit, working tree clean
 ```
 
@@ -209,7 +208,8 @@ it tells us everything is up to date.
 
 ## Where Are My Changes?
 
-If we run `ls` at this point, we will still see just one file called `forecast.md`.
+If we run `ls` at this point, we will still see just our two files,
+`README.md` and `forecast.md`.
 That's because Git saves information about files' history
 in the special `.git` directory mentioned earlier
 so that our filesystem doesn't become cluttered
@@ -229,9 +229,13 @@ $ cat forecast.md
 
 ```output
 # Forecast
+
 ## Today
+
 Cloudy with a chance of pizza.
+
 ## Tomorrow
+
 Morning rainbows followed by light showers.
 ```
 
@@ -243,7 +247,7 @@ $ git status
 ```
 
 ```output
-On branch main
+On branch forecast
 Changes not staged for commit:
   (use "git add <file>..." to update what will be committed)
   (use "git restore <file>..." to discard changes in working directory)
@@ -273,11 +277,13 @@ diff --git a/forecast.md b/forecast.md
 index df0654a..315bf3a 100644
 --- a/forecast.md
 +++ b/forecast.md
-@@ -1,3 +1,5 @@
- # Forecast
+@@ -3,3 +3,7 @@
  ## Today
+ 
  Cloudy with a chance of pizza.
++
 +## Tomorrow
++
 +Morning rainbows followed by light showers.
 ```
 
@@ -329,7 +335,7 @@ $ git commit -m "Add tomorrows forecast to forecast.md"
 ```
 
 ```output
-On branch main
+On branch forecast
 Changes not staged for commit:
   (use "git add <file>..." to update what will be committed)
   (use "git restore <file>..." to discard changes in working directory)
@@ -349,8 +355,8 @@ $ git commit -m "Add tomorrows forecast to forecast.md"
 ```
 
 ```output
-[main 34961b1] Add tomorrows forecast to forecast.md
- 1 file changed, 2 insertions(+)
+[forecast 34961b1] Add tomorrows forecast to forecast.md
+ 1 file changed, 4 insertions(+)
 ```
 
 Git insists that we add files to the set we want to commit
@@ -418,6 +424,17 @@ $ fcm commit
 
 :::
 
+Our repository now looks like this:
+
+```mermaid
+    gitGraph
+        accDescr {A git graph showing the root-commit on the main branch and a new forecast branch, branching off the root-commit, with two commits.}
+        commit id: 'Initial commit'
+        branch forecast
+        commit id: 'Create a md file with the forecast'
+        commit id: 'Add tomorrows forecast to forecast.md'
+```
+
 Let's watch as our changes to a file move from our editor
 to the staging area
 and into long-term storage.
@@ -431,9 +448,13 @@ $ cat forecast.md
 
 ```output
 # Forecast
+
 ## Today
+
 Cloudy with a chance of Sun.
+
 ## Tomorrow
+
 Morning rainbows followed by light showers.
 ```
 
@@ -446,13 +467,15 @@ diff --git a/forecast.md b/forecast.md
 index 315bf3a..b36abfd 100644
 --- a/forecast.md
 +++ b/forecast.md
-@@ -1,5 +1,5 @@
- # Forecast
+@@ -2,7 +2,7 @@
+ 
  ## Today
+ 
 -Cloudy with a chance of pizza.
 +Cloudy with a chance of Sun.
+ 
  ## Tomorrow
- Morning rainbows followed by light showers.
+
 ```
 
 So far, so good:
@@ -481,13 +504,15 @@ diff --git a/forecast.md b/forecast.md
 index 315bf3a..b36abfd 100644
 --- a/forecast.md
 +++ b/forecast.md
-@@ -1,5 +1,5 @@
- # Forecast
+@@ -2,7 +2,7 @@
+ 
  ## Today
+ 
 -Cloudy with a chance of pizza.
 +Cloudy with a chance of Sun.
+ 
  ## Tomorrow
- Morning rainbows followed by light showers.
+
 ```
 
 it shows us the difference between
@@ -500,7 +525,7 @@ $ git commit -m "Modify the forecast to add a chance of Sun"
 ```
 
 ```output
-[main 005937f] Modify the forecast to add a chance of Sun
+[forecast 005937f] Modify the forecast to add a chance of Sun
  1 file changed, 1 insertion(+), 1 deletion(-)
 ```
 
@@ -511,8 +536,20 @@ $ git status
 ```
 
 ```output
-On branch main
+On branch forecast
 nothing to commit, working tree clean
+```
+
+Our repository now looks like this:
+
+```mermaid
+    gitGraph
+        accDescr {A git graph showing the root-commit on the main branch and a new forecast branch, branching off the root-commit, with three commits.}
+        commit id: 'Initial commit'
+        branch forecast
+        commit id: 'Create a md file with the forecast'
+        commit id: 'Add tomorrows forecast to forecast.md'
+        commit id: 'Modify the forecast to add a chance of Sun'
 ```
 
 :::::::::::::::::::::::::::::::::::::::::  callout
@@ -669,10 +706,14 @@ $ cat forecast.md
 
 ```output
 # Forecast
+
 ## Today
+
 Cloudy with a chance of sun.
 Mild temperatures around 16 °C.
+
 ## Tomorrow
+
 Morning rainbows followed by light showers.
 ```
 
@@ -710,7 +751,7 @@ $ git commit -m "Add in the temperature to the forecast and create the weather a
 ```
 
 ```output
-[main cc127c2]Add in the temperature to the forecast and create the weather atlas file
+[forecast cc127c2] Add in the temperature to the forecast and create the weather atlas file
  2 files changed, 6 insertions(+)
  create mode 100644 atlas.md
 ```

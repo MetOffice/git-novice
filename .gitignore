@@ -53,3 +53,5 @@ vendor/
 .docker-vendor/
 Gemfile.lock
 .*history
+
+.vscode

@@ -320,37 +320,47 @@ Good! This output confirms that the SSH key works as intended. We are now ready 
 
 ## 4\. Push local changes to a remote
 
-Now that authentication is setup, we can return to the remote.  This command will push the changes from
+Now that authentication is setup, we can return to the local repository.
+Ensure you are on the `main` branch:
+
+```bash
+$ git switch main
+```
+
+This command will push our main branch on
 our local repository to the repository on GitHub:
 
 ```bash
-$ git push origin main
+$ git push
 ```
+
+```output
+fatal: The current branch main has no upstream branch.
+To push the current branch and set the remote as upstream, use
+
+    git push --set-upstream origin main
+
+```
+
+Git is telling us it doesn't know what branch we want to push
+our local `main` branch to on GitHub.
+We can tell Git this by setting the upstream `origin` branch
+to also be named `main`.
 
 If you entered a passphrase when creating an shh key you will be prompted for it.
 
 ```output
 Enumerating objects: 16, done.
 Counting objects: 100% (16/16), done.
-Delta compression using up to 8 threads.
-Compressing objects: 100% (11/11), done.
-Writing objects: 100% (16/16), 1.45 KiB | 372.00 KiB/s, done.
-Total 16 (delta 2), reused 0 (delta 0)
-remote: Resolving deltas: 100% (2/2), done.
-To https://github.com/mo-eormerod/weather.git
+Delta compression using up to 4 threads
+Compressing objects: 100% (13/13), done.
+Writing objects: 100% (16/16), 1.69 KiB | 216.00 KiB/s, done.
+Total 16 (delta 1), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (1/1), done.
+To github.com:mo-eormerod/weather.git
  * [new branch]      main -> main
+branch 'main' set up to track 'origin/main'.
 ```
-
-You can avoid typing `origin main` by setting the upstream remote branch
-for the local branch `main`:
-
-```bash
-git push --set-upstream origin main
-```
-
-This command run from the local repositories main branch tells git that when
-we run `git push` we want to push to `origin`'s, the remote GitHub repository,
-`main` branch.
 
 ::: callout
 
@@ -431,18 +441,18 @@ command, and is used to associate the current branch with a remote branch so
 that the `git pull` command can be used without any arguments. To do this,
 simply use `git push -u origin main` once the remote has been set up.
 
+Here we are telling Git to push the branch
+to the origin, GitHub, repositories `main` branch.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 We can pull changes from the remote repository to the local one as well:
 
 ```bash
-$ git pull origin main
+$ git pull
 ```
 
 ```output
-From https://github.com/mo-eormerod/weather
- * branch            main     -> FETCH_HEAD
 Already up-to-date.
 ```
 

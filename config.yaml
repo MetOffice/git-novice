@@ -62,6 +62,7 @@ episodes:
 - 01-basics.md
 - 02-setup.md
 - 03-create.md
+- 09-branches.md
 - 04-changes.md
 - 05-history.md
 - 06-reverting-changes.md
@@ -69,7 +70,6 @@ episodes:
 - Break.md
 - 07-github.md
 - 08-github-interface.md
-- 09-branches.md
 - 10-pull-requests.md
 - End.md
 - 10-open.md
