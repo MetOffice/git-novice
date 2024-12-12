@@ -19,10 +19,13 @@ which focus on open science and code which you can read
 in your own time.
 
 You can revisit this training anytime.
-The Glossary, [Discussion](../learners/discuss.md),
-and [FCM to Git](../learners/fcm-git_cheat_sheet.md),
-and [Git cheatsheets](../learners/reference.md)
-are also available on this site.
+Useful page links:
+
+- [Glossary](../learners/reference.md#glossary)
+- [Key Points](./key-points.html)
+- [Discussion](../learners/discuss.md) page with extra information on some episodes
+- [FCM to Git](../learners/fcm-git_cheat_sheet.md) cheat sheet
+- [Git cheatsheets](../learners/reference.md)
 
 ## Summary
 

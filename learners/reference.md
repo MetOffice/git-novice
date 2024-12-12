@@ -13,6 +13,10 @@ title: 'Git Cheatsheets for Quick Reference'
 
 ## Glossary
 
+[branch]{#branch}
+:   A git branch is a pointer to a commit. Branches are used to develop
+changes in parallel, isolated from each other.
+
 [changeset]{#changeset}
 :   A group of changes to one or more files that are or will be added
 to a single [commit](#commit) in a [version control](#version-control)
