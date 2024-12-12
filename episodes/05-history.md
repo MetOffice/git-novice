@@ -141,7 +141,7 @@ directory by using the identifier `HEAD`.
 We've been adding small changes at a time to `forecast.md`, so it's easy to track our
 progress by looking, so let's do that using our `HEAD`s.  Before we start,
 let's make a change to `forecast.md`, adding yet another line with
-** an ill-considered change**.
+**an ill-considered change**.
 
 ```bash
 $ nano forecast.md

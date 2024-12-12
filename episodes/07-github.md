@@ -441,8 +441,8 @@ command, and is used to associate the current branch with a remote branch so
 that the `git pull` command can be used without any arguments. To do this,
 simply use `git push -u origin main` once the remote has been set up.
 
-Here we are telling Git to push the branch
-to the origin, GitHub, repositories `main` branch.
+Here, we are telling Git to push the branch
+to the origin (GitHub) repositories `main` branch.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 

@@ -6,7 +6,9 @@ Creating a new repository is not difficult, but does not happen frequently.
 Normally you will be contributing to a repository that has already been
 created on GitHub.
 
-There are two main ways of creating a new repository: GitHub-first, or local-first.
+There are two main ways of creating a new repository:
+[GitHub-first](./repo-quick-start.md#github-first),
+or [local-first](./repo-quick-start.md#local-first).
 They are only slightly different,
 so which method you use is largely down to preference,
 but the focus here is on GitHub-first as overall it is simpler.
