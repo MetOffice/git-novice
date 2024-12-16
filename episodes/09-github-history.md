@@ -39,18 +39,21 @@ Now we can push our local branch to GitHub:
 $ git push
 ```
 
-Navigate to your `weather` GitHub repo,
-then select the `forecast` branch from the branch drop down box:
+Navigate to your `weather` GitHub repo:
 
-![](fig/weather-repository-01.png){alt='A screenshot of the main branch of weather repository on GitHub, showing the branch drop down box.'}
+![](fig/weather-repository-01.png){alt='A screenshot of the main branch of weather repository on GitHub.'}
 
-Click on `commits`.
+Select the `forecast` branch from the branch drop down box:
 
-![](fig/weather-repository-02.png){alt='A screenshot of the forecast branch of weather repository on GitHub, showing how to navigate to the commits.'}
+![](fig/weather-repository-02.png){alt='A screenshot of the main branch of weather repository on GitHub, showing the branch drop down box.'}
+
+Click on `commits`:
+
+![](fig/weather-repository-03.png){alt='A screenshot of the forecast branch of weather repository on GitHub, showing how to navigate to the commits.'}
 
 This commits page shows all the commits on your branch:
 
-![](fig/weather-repository-03.png){alt='A screenshot of the commit on the forecast branch of the weather repository on GitHub.'}
+![](fig/weather-repository-04.png){alt='A screenshot of the commit on the forecast branch of the weather repository on GitHub.'}
 
 The Git commit unique identifiers here on GitHub
 match with those shown after running `git log` on the command line
