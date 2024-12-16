@@ -33,17 +33,6 @@ reduce the chance of human error when checking new code.
 In the previous episodes we developed our changes 
 on the `forecast` branch.
 Let's use a PR to merge these changes back into the `main` branch.
-Make sure you are still on the `forecast` branch:
-
-```bash
-$ git switch forecast
-```
-
-Now we can publish these changes to GitHub:
-
-```bash
-$ git push
-```
 
 Navigate to your `weather` GitHub repo. 
 You should see a notification appear with the text
