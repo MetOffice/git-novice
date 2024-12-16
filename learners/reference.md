@@ -17,6 +17,11 @@ title: 'Git Cheatsheets for Quick Reference'
 :   A git branch is a pointer to a commit. Branches are used to develop
 changes in parallel, isolated from each other.
 
+[centralised version control]{#cvc}
+:   In a centralised version control system such as Subversion
+a single server contains the main copy of a repository.
+Working on code requires internet access to the repository.
+
 [changeset]{#changeset}
 :   A group of changes to one or more files that are or will be added
 to a single [commit](#commit) in a [version control](#version-control)
@@ -34,6 +39,26 @@ all of the changes are recorded together.
 that is incompatible with changes made by other users.
 Helping users [resolve](#resolve) conflicts
 is one of version control's major tasks.
+
+[distributed version control]{#dvc}
+:   In a distributed version control system such as [Git](#git)
+each collaborator has an entire copy of the whole repository
+and its history.
+Working on code does not require internet access and there
+are multiple backups of the entire repository.
+
+[git]{#git}
+:   [Git](https://git-scm.com/) is a free and open source
+Version Control System (VCS) capable of tracking the history
+of our files and recover previous versions.
+Git is an example of a [distributed version control](#dvc) as
+opposed to a [centralised version control](#cvc) system such as Subversion.
+
+[GitHub]{#github}
+:   [GitHub](https://docs.github.com/en/get-started/start-your-journey/about-github-and-git)
+is a cloud-based platform where you can store, share,
+and work together with others to write code.
+It uses [git](#git) to version control files.
 
 [HTTP]{#http}
 :   The Hypertext Transfer [Protocol](#protocol) used for sharing web pages and other data

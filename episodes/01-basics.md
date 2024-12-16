@@ -62,6 +62,24 @@ metadata make up a [repository](../learners/reference.md#repository).
 Repositories can be kept in sync across different computers, facilitating
 collaboration among different people.
 
+## Terminology
+
+This workshop may contain language that is new to you.
+The [Glossary](../learners/reference.md#glossary) section
+outlines key Git & GitHub terminology for your reference.
+
+::: instructor
+
+### Explain Key Terminology
+
+Take this opportunity to show the learners where the glossary can be found.
+Explain the difference between Git & GitHub using the glossary!
+Or if there is time to spare, the first challenge on this page
+gets the learners to use the glossary to explain the difference
+to a partner or write it down in their own words.
+
+:::
+
 :::::::::::::::::::::::::::::::::::::::::  callout
 
 ## The Long History of Version Control Systems
@@ -98,6 +116,16 @@ fcm ...
 ```
 
 :::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+Use the [Glossary](../learners/reference.md#glossary) to describe
+the difference between Git & GitHub in your own words.
+
+Share your description with other learners if you
+are comfortable doing so.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
