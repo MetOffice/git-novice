@@ -30,103 +30,6 @@ git version 2.47.0
 If a version number is printed like the output above Git is installed and 
 ready to use.
 
-## Git Autocomplete
-
-Git provides a script which lets us display the version control status in your 
-terminal prompt.
-The following instructions have been tested on **Linux**.
-If you are using MacOS or Windows please consult the
-[git autocomplete instructions](https://github.com/git/git/blob/master/contrib/completion/git-prompt.sh)
-at the top of the linked file.
-Your instructor may point you to another online resource for your OS.
-To enable this script add the following to a new `~/.bashrc.d/git.bash` 
-file:
-
-```bash
-if [[ $- =~ i ]]; then
-    GIT_PROMPT_PATH=~/git-prompt.sh
-    if [[ -r "${GIT_PROMPT_PATH}" ]]; then    
-        source "${GIT_PROMPT_PATH}" >&2
-    else
-        if [[ "$-" == *i* ]]; then
-            echo "${GIT_PROMPT_PATH} - not found" >&2
-        fi
-    fi
-    export GIT_PS1_SHOWDIRTYSTATE=1
-    export GIT_PS1_SHOWSTASHSTATE=1
-    export GIT_PS1_SHOWUPSTREAM="auto"
-    export GIT_PS1_SHOWCOLORHINTS=1
-    export GIT_PS1_SHOWUNTRACKEDFILES=1
-
-    export PROMPT_COMMAND=("${PROMPT_COMMAND[@]}" '__git_ps1 "${CONDA_PROMPT_MODIFIER}[\u@\h:\w]:" "\$ " "(%s)"')
-    export PS1='[\u@\h:\w]$(__git_ps1 "(%s)"):\$ '
-
-    # trim long working directory paths
-    PROMPT_DIRTRIM=3
-fi
-```
-
-And make sure your `~/.bashrc` file includes:
-
-```bash
-# User specific aliases and functions
-
-if [ -d ~/.bashrc.d ]; then
-	for rc in ~/.bashrc.d/*; do
-		if [ -f "$rc" ]; then
-			. "$rc"
-		fi
-	done
-fi
-
-unset rc
-```
-
-Your instructor will let you know if the value of `GIT_PROMPT_PATH` is 
-different from the path in the example above.
-If you would like your own copy of the `git-prompt.sh` script you can 
-download the latest version from the 
-[git repository contrib directory](https://github.com/git/git/blob/master/contrib/completion/git-prompt.sh).
-Ensure the `GIT_PROMPT_PATH` matches where you decide to store the `git-prompt.sh` file.
-
-If your `~/.bashrc` file, or any file in the `~/.bashrc.d/` directory,
-already defines a `PROMPT_COMMAND` or `PS1`
-you may need to merge what is shown above with your current script.
-Your instructor may be able to help you with this.
-
-If adding in your username, `\u`, and hostname, `\h`, makes the terminal prompt
-too long you can remove the `\u` and or `\h` from the `PROMPT_COMMAND` and
-`PS1` lines.
-
-The `PROMPT_DIRTRIM=3` line is optional.
-It trims long directory paths to only show the current and two parent directories.
-You can change this value or delete the line entirely based on your preference.
-
-```bash
-/Desktop/A/Really/Long/Path $ # without PROMPT_DIRTRIM
-.../Really/Long/Path $          # with PROMPT_DIRTRIM
-```
-
-To see the changes to your terminal prompt run:
-
-```bash
-source ~/.bashrc
-```
-
-::: callout
-
-## Using MacOS or older versions of Bash
-
-If your version of Bash is less than 5.1 or you are using
-MacOS you might need to change the `export PROMPT_COMMAND`
-line to:
-
-```bash
-export PROMPT_COMMAND=${PROMPT_COMMAND:+"$PROMPT_COMMAND; "}'__git_ps1 "${CONDA_PROMPT_MODIFIER}[\w]:" "\$ " "(%s)"'
-```
-
-:::
-
 ## Creating a GitHub Account
 
 You will need an account for [GitHub](https://github.com) to follow episodes 7 & 8 in this lesson.
@@ -169,3 +72,174 @@ To completely avoid having authentication for work purposes on a personal device
 
 [workshop-setup]: https://carpentries.github.io/workshop-template/install_instructions/#git
 
+## Optional: Git Autocomplete
+
+Git provides a script which lets us display the version control status in your 
+terminal prompt.
+The following instructions have been tested on **Linux**.
+If you are using MacOS or Windows please consult the
+[git autocomplete instructions](https://github.com/git/git/blob/master/contrib/completion/git-prompt.sh)
+at the top of the linked file.
+Your instructor may point you to another online resource for your OS.
+To enable this script add the following to a new `~/.bashrc.d/git.bash` 
+file:
+
+```bash
+if [[ $- =~ i ]]; then
+    GIT_PROMPT_PATH=/usr/share/doc/git/contrib/completion/git-prompt.sh
+    if [[ -r "${GIT_PROMPT_PATH}" ]]; then    
+        source "${GIT_PROMPT_PATH}" >&2
+    else
+        if [[ "$-" == *i* ]]; then
+            echo "${GIT_PROMPT_PATH} - not found" >&2
+        fi
+    fi
+    export GIT_PS1_SHOWDIRTYSTATE=1
+    export GIT_PS1_SHOWSTASHSTATE=1
+    export GIT_PS1_SHOWUPSTREAM="auto"
+    export GIT_PS1_SHOWCOLORHINTS=1
+    export GIT_PS1_SHOWUNTRACKEDFILES=1
+
+    export PS1='[\u@\h:\w]$(__git_ps1 "(%s)"):\$ '
+
+fi
+```
+
+And make sure your `~/.bashrc` file includes:
+
+```bash
+# User specific aliases and functions
+
+if [ -d ~/.bashrc.d ]; then
+	for rc in ~/.bashrc.d/*; do
+		if [ -f "$rc" ]; then
+			. "$rc"
+		fi
+	done
+fi
+
+unset rc
+```
+
+::: caution
+
+### GIT_PROMPT_PATH
+
+Your instructor will let you know if the value of `GIT_PROMPT_PATH` is 
+different from the path in the example above.
+The following paths are for Met Office colleagues.
+If you are external to the Met Office please consult
+your institutions IT services or download your own copy of the `git-prompt.sh` script.
+Download the latest version from the 
+[git repository contrib directory](https://github.com/git/git/blob/master/contrib/completion/git-prompt.sh).
+Ensure the `GIT_PROMPT_PATH` matches where you decide to store the `git-prompt.sh` file.
+
+For Azure Spice, the path in the snippet above is correct:
+
+```bash
+GIT_PROMPT_PATH=/usr/share/doc/git/contrib/completion/git-prompt.sh
+```
+
+For old Spice:
+
+```bash
+GIT_PROMPT_PATH=/usr/share/doc/git236-2.36.6/contrib/completion/git-prompt.sh
+```
+
+:::
+
+To see the changes to your terminal prompt run:
+
+```bash
+source ~/.bashrc
+```
+
+::: callout
+
+### If you have already modified your `PS1`
+
+If your `~/.bashrc` file, or any file in the `~/.bashrc.d/` directory,
+already modifies your `PS1` command you can
+`export PROMPT_COMMAND` instead or seek help from your instructor
+on how to merge your current `PS1` command with the one above.
+
+Replace the `export PS1` line with:
+
+```bash
+export PROMPT_COMMAND=("${PROMPT_COMMAND[@]}" '__git_ps1 "${CONDA_PROMPT_MODIFIER}[\u@\h:\w]:" "\$ " "(%s)"')
+```
+
+If your version of Bash is less than 5.1 or you are using
+MacOS you might need to use:
+
+```bash
+export PROMPT_COMMAND=${PROMPT_COMMAND:+"$PROMPT_COMMAND; "}'__git_ps1 "${CONDA_PROMPT_MODIFIER}[\w]:" "\$ " "(%s)"'
+```
+
+:::
+
+::: callout
+
+### How to get help
+
+Your instructor will be able to help you with this setup.
+At the Met Office please email the
+[Science Git Migration Project](mailto:ScienceGitMigrationProjectSupport@metoffice.gov.uk)
+and come to a Git & GitHub surgery to receive help.
+Details of surgeries can be found on the Science Git Migration Project
+SharePoint homepage and MetNets homepage.
+
+:::
+
+### Long Terminal Prompts
+
+You might find that with long paths and usernames your prompt takes up the
+entire width of the terminal; there are several ways to reduce the prompt length:
+
+#### Removing `\u` and `\h`
+
+If adding in your username, `\u`, and hostname, `\h`, makes the terminal prompt
+too long you can remove the `\u` and or `\h` from the `PROMPT_COMMAND` or
+`PS1` lines.
+
+#### Add in `PROMPT_DIRTRIM`
+
+Just before the final `fi` line you may add:
+
+```bash
+PROMPT_DIRTRIM=3
+```
+
+This trims long directory paths to only show the current and two parent directories.
+You can change this value to show more or fewer directories.
+
+```output
+/Desktop/A/Really/Long/Path $ # without PROMPT_DIRTRIM
+.../Really/Long/Path $        # with PROMPT_DIRTRIM
+```
+
+#### Add in a newline
+
+Just before the `\$` symbol in the `PS1` or `PROMPT_COMMAND`
+lines you may add `\n`.
+This will add in a newline before the `$` symbol,
+separating your prompt from your terminal commands.
+
+Before:
+
+```output
+(conda_env) [~/Documents/git-novice]:(branch_name) $ _
+```
+
+After:
+
+```output
+(conda_env) [~/Documents/git-novice]:(branch_name)
+$ _
+```
+
+To see the changes to your terminal prompt run:
+
+```bash
+source ~/.bashrc
+```
