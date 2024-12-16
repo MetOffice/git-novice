@@ -62,6 +62,70 @@ metadata make up a [repository](../learners/reference.md#repository).
 Repositories can be kept in sync across different computers, facilitating
 collaboration among different people.
 
+## Distributed Version Control
+
+Git is an example of a
+[distributed version control](../learners/reference.md#glossary) system.
+This means that each collaborator has a copy of the entire repository.
+
+```mermaid
+---
+title: Distributed Version Control (e.g. Git)
+---
+flowchart TD
+    accDescr {A flowchart showing a remote server on GitHub and three local repository copies on collaborators computers. This is a distributed version control system as everyone has a copy of the entire repository and its history.}
+    subgraph "Remote Server (GitHub)"
+        r1[(Origin Repository)]
+    end
+    subgraph "<div style="margin-top: 14em">Computer 3</div>"
+        r2[(Repository)]
+        id2[Working Copy]
+    end
+    subgraph "<div style="margin-top: 14em">Computer 2</div>"
+        r3[(Repository)]
+        id3[Working Copy]
+    end
+    subgraph "<div style="margin-top: 14em">Computer 1</div>"
+        r4[(Repository)]
+        id4[Working Copy]
+    end
+    r1 -->|pull| r2 -.->|push| r1
+    r1 -->|pull| r3 -.->|push| r1
+    r1 -->|pull| r4 -.->|push| r1
+    r2 -->|checkout| id2 -.->|commit| r2
+    r3 -->|checkout| id3 -.->|commit| r3
+    r4 -->|checkout| id4 -.->|commit| r4
+```
+
+### Centralised (FCM)
+
+FCM and SVN are examples of
+[centralised version control](../learners/reference.md#glossary) systems.
+Here there is only one repository on a central server.
+
+```mermaid
+---
+title: Centralised Version Control (e.g. SVN)
+---
+flowchart TD
+    accDescr {A flowchart showing a central remote server and three local working copies on collaborators computers.}
+    subgraph "Remote Server"
+        id1[(Central Repository)]
+    end
+    subgraph "<div style="margin-top: 5em">Computer 3</div>"
+        id2[Working Copy]
+    end
+    subgraph "<div style="margin-top: 5em">Computer 2</div>"
+        id3[Working Copy]
+    end
+    subgraph "<div style="margin-top: 5em">Computer 1</div>"
+        id4[Working Copy]
+    end
+    id1 -->|checkout| id2 -.->|commit| id1
+    id1 -->|checkout| id3 -.->|commit| id1
+    id1 -->|checkout| id4 -.->|commit| id1
+```
+
 :::::::::::::::::::::::::::::::::::::::::  callout
 
 ## The Long History of Version Control Systems
