@@ -288,6 +288,21 @@ You've now successfully merged and tidied up after your first pull request.
 Remember when making changes create a new branch
 and open a PR, **NEVER** commit to the `main` branch.
 
+::: callout
+
+### Automatically Prune Deleted Remote Branches
+
+If you set the following Git configuration:
+
+```bash
+$ git config --global fetch.prune true
+```
+
+Git will automatically prune the links to remote branches
+that were deleted on GitHub when you run `git fetch` or `git pull`.
+
+:::
+
 ::::::::::::::::::::::::::::::::::::: challenge
 
 ## Adding in a seasonal-forecast.md file
