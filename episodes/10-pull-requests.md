@@ -153,7 +153,22 @@ This helps keep the commit history of the `main` branch tidy and linear[^squash-
 
 Once you've selected the squash option click on the green
 **Squash and merge** button.
-Edit the commit title and description if necessary.
+Edit the commit title so that the PR number is at the start of the message.
+For instance:
+
+```output
+Add in a forecast file (#1)
+```
+
+Would be changed to:
+
+```output
+#1 Add in a forecast file
+```
+
+This makes it easier to navigate to the PR for a change
+when you're on the GitHub repositories code view.
+Change the description if necessary.
 Then click on **Confirm squash and merge**.
 
 ![](fig/github_pr_closed.png){alt='A screenshot showing a closed pull request on the weather repository.'}
