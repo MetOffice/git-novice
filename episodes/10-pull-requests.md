@@ -195,6 +195,47 @@ Fast-forward
  create mode 100644 forecast.md
 ```
 
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+## You may need to tell Git what to do
+
+If you see the below in your output, Git is asking what it should do.
+
+```output
+hint: You have divergent branches and need to specify how to reconcile them.
+hint: You can do so by running one of the following commands sometime before
+hint: your next pull:
+hint:
+hint:   git config pull.rebase false  # merge (the default strategy)
+hint:   git config pull.rebase true   # rebase
+hint:   git config pull.ff only       # fast-forward only
+hint:
+hint: You can replace "git config" with "git config --global" to set a default
+hint: preference for all repositories. You can also pass --rebase, --no-rebase,
+hint: or --ff-only on the command line to override the configured default per
+hint: invocation.
+```
+
+In newer versions of Git it gives you the option of specifying different
+behaviours when a pull would merge divergent branches.
+The Git & GitHub Working Practices training will help you decide
+which option is best for your teams repositories.
+For now we will use the [`fast-forward only` strategy](https://blog.sffc.xyz/post/185195398930/why-you-should-use-git-pull-ff-only).
+To use this strategy run the following command to
+select it as the default thing git should do.
+
+```bash
+$ git config pull.ff only
+```
+
+Then attempt the pull again.
+
+```bash
+$ git pull
+```
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
 ::: callout
 
 ### How do I know there are Changes to Pull?
