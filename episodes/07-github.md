@@ -47,6 +47,23 @@ explanation of why the repository needs to be empty.
 
 ![](fig/github-create-repo-02.png){alt='The second step in creating a repository on GitHub: filling out the new repository form to provide the repository name, and specify that neither a readme nor a license should be created'}
 
+::: spoiler
+
+### Repository Visibility
+
+Here we have chosen to make our repository public.
+The visibility of your repository depends on which option you choose:
+
+- Private: only you
+- Internal (organisations only): read permissions to anyone in the organisation
+- Public: read permissions to anyone
+
+Some organisations will restrict the creation of public repositories
+so you may find their default is internal.
+If your project deals with sensitive material then create a private repository.
+
+:::
+
 As soon as the repository is created, GitHub displays a page with a URL and some
 information on how to configure your local repository.
 Ignore the suggested commands for now as we will run these later.
