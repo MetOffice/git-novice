@@ -162,7 +162,7 @@ The PR is now successfully merged into the `main` branch.
 We can safely delete the `forecast` branch from the GitHub repo.
 Click on the **Delete branch button**.
 
-### Updating your Local Repo
+## Updating your Local Repo
 
 The new `forecast.md` file is currently only on the `main` branch in GitHub.
 We should pull the changes down to our local copy.
@@ -194,6 +194,12 @@ Fast-forward
  create mode 100644 .gitignore
  create mode 100644 forecast.md
 ```
+
+`git pull` and GitHub's Pull Requests are not the same.
+GitHub Pull Requests are where we performed code and science review,
+then merged our feature branch changes into the `main` branch.
+`git pull` is fetching changes to the remote branch on GitHub
+and merging them into your local copy.
 
 ::: callout
 

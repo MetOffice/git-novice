@@ -438,7 +438,7 @@ Our local and remote repositories are now in this state:
 You may see a `-u` option used with `git push` in some documentation.  This
 option is synonymous with the `--set-upstream-to` option for the `git branch`
 command, and is used to associate the current branch with a remote branch so
-that the `git pull` command can be used without any arguments. To do this,
+that the `git push` command can be used without any arguments. To do this,
 simply use `git push -u origin main` once the remote has been set up.
 
 Here, we are telling Git to push the branch
