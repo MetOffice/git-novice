@@ -125,6 +125,22 @@ talking about how they might be used for collaboration.
 
 ## 3\. SSH Background and Setup
 
+::: instructor
+
+Some learners may have set up an ssh key already.
+If they have a key with this name: `~/.ssh/id_ed25519_github`
+and can successfully authenticate with `ssh -T git@github.com`
+they can skip this section.
+
+If their ssh key name does not match the one above we **strongly**
+recommend they follow the instructions below.
+
+Those who are skipping this section can revisit the challenges
+in earlier episodes (yellow callouts with a lightning bolt)
+or read through the [discussion notes](../learners/discuss.md).
+
+:::
+
 Before you can connect to a remote repository, you need to set up a way for your computer to authenticate with GitHub so it knows it's you trying to connect to the remote repository.
 
 We are going to set up the method that is commonly used by many different services to authenticate access on the command line.  This method is called Secure Shell Protocol (SSH). SSH is a cryptographic network protocol that allows secure communication between computers using an otherwise insecure network.
@@ -317,6 +333,25 @@ Hi Eleanor! You've successfully authenticated, but GitHub does not provide shell
 ```
 
 Good! This output confirms that the SSH key works as intended. We are now ready to push our work to the remote repository.
+
+::: spoiler
+
+### Troubleshooting SSH Setup
+
+If your new key failed to connect you may need to alter your ssh config.
+
+1. Create the `~/.ssh/config` file if it doesn't exist
+2. Add the following to the file:
+
+```ssh-config
+Host github.com
+  IdentityFile ~/.ssh/id_ed25519_github
+```
+
+This explicitly states which key to use for github.com
+and is needed if you have many SSH keys already for other hosts.
+
+:::
 
 ## 4\. Push local changes to a remote
 
