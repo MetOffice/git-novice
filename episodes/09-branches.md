@@ -66,6 +66,23 @@ Your branch is up to date with 'origin/main'.
 nothing to commit, working tree clean
 ```
 
+::: spoiler
+
+### FCM Comparison
+
+`main` == `trunk`
+
+In an earlier episode we set our default branch
+to be called `main`.
+This is where our stable production code
+lives and is equivalent to `trunk`.
+
+We could have also named this branch `trunk` in Git.
+We chose `main` as it is a more common default branch name
+for Git and matches the default on GitHub.
+
+:::
+
 ## Creating Branches
 
 Our current repository looks something like this:
