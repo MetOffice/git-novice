@@ -48,7 +48,8 @@ explanation of why the repository needs to be empty.
 ![](fig/github-create-repo-02.png){alt='The second step in creating a repository on GitHub: filling out the new repository form to provide the repository name, and specify that neither a readme nor a license should be created'}
 
 As soon as the repository is created, GitHub displays a page with a URL and some
-information on how to configure your local repository:
+information on how to configure your local repository.
+Ignore the suggested commands for now as we will run these later.
 
 ![](fig/github-create-repo-03.png){alt='The summary page displayed by GitHub after a new repository has been created. It contains instructions for configuring the new GitHub repository as a git remote'}
 
