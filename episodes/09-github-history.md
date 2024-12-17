@@ -27,7 +27,7 @@ to show the commits to our branch.
 We can also see the commits to our branch on GitHub.
 But first we need to push our local branch to GitHub.
 
-Make sure you are still on the `forecast` branch:
+Make sure you are on the `forecast` branch:
 
 ```bash
 $ git switch forecast
@@ -65,7 +65,7 @@ In an earlier episode,
 we used `git diff` on the command line in our local repository
 to show the differences between two commits on our branch.
 
-We can also see these difference on GitHub.
+We can also see these differences on GitHub.
 
 In a new tab, navigate to your `weather` GitHub repo
 then add `compare` to the end of the URL.
