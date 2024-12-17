@@ -303,7 +303,7 @@ If we break it down into pieces:
   In particular,
   the `+` marker in the first column shows where we added a line.
 
-::: spoiler
+::: callout
 
 ### git difftool
 
@@ -318,13 +318,26 @@ The `-g` flag launches the default gui diff tool. To change defaults:
 
 ```bash
 git config --global diff.tool <tool>
-git config --global diff.guitool <tool>
-git config --global --add difftool.prompt false
+git config --global diff.guitool <gui-tool>
+git config --global difftool.prompt false
+git config --global difftool.guiDefault auto
 ```
 
-Where `<tool>` is your preferred diffing tool such as [meld](https://gnome.pages.gitlab.gnome.org/meld/).
+Where `<tool>` is a diffing tool such as Vim,
+`<gui-tool>` is your preferred graphical user interface
+diffing tool such as [meld](https://gnome.pages.gitlab.gnome.org/meld/).
 The third line disables the Git prompt which asks you to confirm
 whether to launch the diff for every changed file.
+The last line automatically detects support for launching the
+gui based tool and launches `<gui-tool>` preferentially
+over `<tool>`. With this set to auto there is no need to
+add the `-g` flag when running `git difftool`.
+
+To see a list of available tools run:
+
+```bash
+$ git difftool --tool-help
+```
 
 :::
 
