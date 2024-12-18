@@ -42,7 +42,7 @@ is one of version control's major tasks.
 
 [distributed version control]{#dvc}
 :   In a distributed version control system such as [Git](#git)
-each collaborator has an entire copy of the whole repository
+each collaborator has a copy of the entire repository
 and its history.
 Working on code does not require internet access and there
 are multiple backups of the entire repository.
