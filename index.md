@@ -5,7 +5,7 @@ site: sandpaper::sandpaper_site
 
 [Version control](learners/reference.md#version-control) is fundamental to
 good quality assurance of science and code.
-Version control is better than mailing files back and forth:
+Using a Version Control System is better than mailing files back and forth:
 
 - Nothing that is committed to version control is ever lost, unless
   you work really, really hard at losing it. Since all old versions of

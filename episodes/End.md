@@ -11,8 +11,10 @@ for other learners.
 
 ## Where to next?
 
-The Git working practices lesson teaches you how to work
-collaboratively with others using git and GitHub.
+The Git & GitHub Working Practices lesson teaches you how to work
+collaboratively with others using Git and GitHub.
+It explores more complex workflows and topics,
+building on from this lesson.
 
 There are also a number of optional episodes after this page
 which focus on open science and code which you can read
@@ -38,25 +40,37 @@ You've now created a repository both locally on your computer
 and remotely on GitHub.
 You've developed changes on a feature branch,
 reviewed the changes on GitHub and merged them into `main`.
-Your local and remote repositories look something like this:
+The diagram below outlines the workflow you used during the course:
 
 ```mermaid
----
-config:
-  gitGraph:
-    showCommitLabel: false
----
-    gitGraph
-        accDescr {A git graph showing the root-commit on the main branch and a new forecast branch with five commits. The forecast branch has been merged into main using a merge commit via a GitHub Pull Request.}
-        commit id: 'Initial commit'
-        branch forecast
-        commit id: 'Create a md file with the forecast'
-        commit id: 'Add tomorrows forecast to forecast.md'
-        commit id: 'Modify the forecast to add a chance of Sun'
-        commit id: 'Add in the temperature to the forecast and create the weather atlas file'
-        commit id: 'Ignore png files and the data folder'
-        checkout main
-        merge forecast
+sequenceDiagram
+    autonumber
+    participant M as main
+    Note over M: Initialise the Repository
+    M ->> M: 
+    Note over M: Initial Commit
+    M ->> M: 
+    Note right of M: Create a Feature Branch
+    create participant F as forecast
+    M ->> F: 
+    loop 
+        Note over F: Develop Changes
+        F ->> F: 
+    end
+    Note right of M: Backup to GitHub
+    create participant GHM as origin main
+    M -->> GHM: 
+    Note right of F: Push changes to GitHub
+    create participant GHF as origin forecast
+    F -->> GHF: 
+    Note left of GHF: Pull Request and then Merge
+    destroy GHF
+    GHF ->> GHM: 
+    Note left of GHM: Update Local Branches
+    GHM -->> M: 
+    Note left of F: Tidy up Local Branches
+    destroy F
+    F ->> M: 
 ```
 
 A summary page outlining the steps we've taken to create

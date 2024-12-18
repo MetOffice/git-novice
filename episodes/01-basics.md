@@ -62,6 +62,22 @@ metadata make up a [repository](../learners/reference.md#repository).
 Repositories can be kept in sync across different computers, facilitating
 collaboration among different people.
 
+In this lesson you will be using a version control system
+called [Git](learners/reference.md#git) alongside a
+cloud-based platform, [GitHub](learners/reference.md#github).
+By the end of the lesson you will have:
+
+- Configured Git based on our recommended settings
+- Initialised a new [repository](../learners/reference.md#repository)
+- Committed files to the repository which places them under version control
+- Developed a change using a feature branch
+- Explored the history of your repository
+- Reverted changes to files
+- Ignored files you do not want to version control
+- Navigated around the GitHub interface
+- Created a backup on GitHub
+- Performed a code review on GitHub
+
 ## Terminology
 
 This workshop may contain language that is new to you.
