@@ -19,8 +19,8 @@ changes in parallel, isolated from each other.
 
 [centralised version control]{#cvc}
 :   In a centralised version control system such as Subversion
-a single server contains the main copy of a repository.
-Working on code requires internet access to the repository.
+a single, centralised server contains the main copy of a repository.
+Working on code requires internet access to the centralised server.
 
 [changeset]{#changeset}
 :   A group of changes to one or more files that are or will be added
