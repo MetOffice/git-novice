@@ -17,8 +17,8 @@ title: 'Git Cheatsheets for Quick Reference'
 :   A git branch is a pointer to a commit. Branches are used to develop
 changes in parallel, isolated from each other.
 
-[centralised version control]{#cvc}
-:   In a centralised version control system such as Subversion
+[Centralised Version Control System]{#cvc}
+:   In a Centralised Version Control System such as Subversion
 a single, centralised server contains the main copy of a repository.
 Working on code requires internet access to the centralised server.
 
@@ -40,19 +40,18 @@ that is incompatible with changes made by other users.
 Helping users [resolve](#resolve) conflicts
 is one of version control's major tasks.
 
-[distributed version control]{#dvc}
-:   In a distributed version control system such as [Git](#git)
+[Distributed Version Control System]{#dvc}
+:   In a Distributed Version Control System such as [Git](#git)
 each collaborator has a copy of the entire repository
 and its history.
 Working on code does not require internet access and there
 are multiple backups of the entire repository.
 
-[git]{#git}
+[Git]{#git}
 :   [Git](https://git-scm.com/) is a free and open source
 Version Control System (VCS) capable of tracking the history
 of our files and recover previous versions.
-Git is an example of a [distributed version control](#dvc) as
-opposed to a [centralised version control](#cvc) system such as Subversion.
+Git is an example of a [Distributed Version Control System](#dvc).
 
 [GitHub]{#github}
 :   [GitHub](https://docs.github.com/en/get-started/start-your-journey/about-github-and-git)
@@ -101,10 +100,8 @@ small.
 [timestamp]{#timestamp}
 :   A record of when a particular event occurred.
 
-[version control]{#version-control}
+[Version Control System (VCS)]{#version-control}
 :   A tool for managing changes to a set of files.
 Each set of changes creates a new [commit](#commit) of the files;
 the version control system allows users to recover old commits reliably,
 and helps manage conflicting changes made by different users.
-
-
