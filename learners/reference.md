@@ -17,6 +17,11 @@ title: 'Git Cheatsheets for Quick Reference'
 :   A git branch is a pointer to a commit. Branches are used to develop
 changes in parallel, isolated from each other.
 
+[Centralised Version Control System]{#cvc}
+:   In a Centralised Version Control System such as Subversion
+a single, centralised server contains the main copy of a repository.
+Working on code requires internet access to the centralised server.
+
 [changeset]{#changeset}
 :   A group of changes to one or more files that are or will be added
 to a single [commit](#commit) in a [version control](#version-control)
@@ -34,6 +39,25 @@ all of the changes are recorded together.
 that is incompatible with changes made by other users.
 Helping users [resolve](#resolve) conflicts
 is one of version control's major tasks.
+
+[Distributed Version Control System]{#dvc}
+:   In a Distributed Version Control System such as [Git](#git)
+each collaborator has a copy of the entire repository
+and its history.
+Working on code does not require internet access and there
+are multiple backups of the entire repository.
+
+[Git]{#git}
+:   [Git](https://git-scm.com/) is a free and open source
+Version Control System (VCS) capable of tracking the history
+of our files and recover previous versions.
+Git is an example of a [Distributed Version Control System](#dvc).
+
+[GitHub]{#github}
+:   [GitHub](https://docs.github.com/en/get-started/start-your-journey/about-github-and-git)
+is a cloud-based platform where you can store, share,
+and work together with others to write code.
+GitHub is built upon [Git](#git).
 
 [HTTP]{#http}
 :   The Hypertext Transfer [Protocol](#protocol) used for sharing web pages and other data
@@ -76,10 +100,8 @@ small.
 [timestamp]{#timestamp}
 :   A record of when a particular event occurred.
 
-[version control]{#version-control}
+[Version Control System (VCS)]{#version-control}
 :   A tool for managing changes to a set of files.
 Each set of changes creates a new [commit](#commit) of the files;
 the version control system allows users to recover old commits reliably,
 and helps manage conflicting changes made by different users.
-
-

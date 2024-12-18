@@ -132,11 +132,38 @@ $ git log --oneline --graph
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
+### A common alias for git log
+
+It is often useful to use the `--decorate`, `--oneline`, and `--graph`
+flags all at once.
+To avoid us having to write out the three flags each time we can set an alias:
+
+```bash
+$ git config --global alias.dog "log --decorate --oneline --graph"
+```
+
+This alias makes these two commands equivalent:
+
+```bash
+$ git dog
+$ git log --decorate --oneline --graph
+```
+
+`--decorate` ensures commits with reference names[^refs] are displayed
+when using older versions of git.
+
+[^refs]: [References](https://git-scm.com/book/ms/v2/Git-Internals-Git-References)
+in Git are user friendly links to specific commits.
+For instance `HEAD` is a reference to the latest commit on a branch.
+Programs with regular releases might add reference tags such as `v1.0`
+to a specific commit to mark a new release.
+These references can be used instead of a commit identifier such as `e48heu0`.
+
 ## Identifying Commits
 
 As we saw in the previous episode, we can refer to commits by their
 identifiers.  You can refer to the *most recent commit* of the working
-directory by using the identifier `HEAD`.
+directory by using the reference name `HEAD`.
 
 We've been adding small changes at a time to `forecast.md`, so it's easy to track our
 progress by looking, so let's do that using our `HEAD`s.  Before we start,
