@@ -159,6 +159,37 @@ Programs with regular releases might add reference tags such as `v1.0`
 to a specific commit to mark a new release.
 These references can be used instead of a commit identifier such as `e48heu0`.
 
+### `git show`
+
+The `git show` command lets you view information for specific commits.
+By default `git show` will show information for the latest commit
+on the current branch.
+
+```bash
+$ git show
+```
+
+```output
+commit cdb7fa654c3f5aee731a655e57f2ba74d9c74582 (HEAD -> forecast)
+Author: Joanne Simpson <j.simpson@mo-weather.uk>
+Date:   Mon Nov 4 18:35:21 2024 +0000
+
+    Add in the temperature to the forecast and create the weather atlas file
+
+diff --git a/atlas.md b/atlas.md
+new file mode 100644
+index 0000000..18fac28
+--- /dev/null
++++ b/atlas.md
+@@ -0,0 +1,5 @@
++# Weather Atlas
++
++- rain
++- sunshine
++- fog
+:
+```
+
 ## Identifying Commits
 
 As we saw in the previous episode, we can refer to commits by their
@@ -245,9 +276,7 @@ index df0654a..b36abfd 100644
 +An ill-considered change.
 ```
 
-We could also use `git show` which shows us what changes we made at an older commit as
-well as the commit message, rather than the *differences* between a commit and our
-working directory that we see by using `git diff`.
+We can also use identifiers with `git show`.
 
 ```bash
 $ git show HEAD~2 forecast.md
@@ -340,6 +369,29 @@ index df0654a..93a3e13 100644
 +
 +Morning rainbows followed by light showers.
 +An ill-considered change.
+```
+
+So far we have only been comparing a previous commit to the working copy.
+To get a difference between two specific commits use both their IDs:
+
+```bash
+$ git diff d3e4637 62a9457 forecast.md
+```
+
+```output
+diff --git a/forecast.md b/forecast.md
+index 4c96be7..541eee7 100644
+--- a/forecast.md
++++ b/forecast.md
+@@ -2,7 +2,7 @@
+ 
+ ## Today
+ 
+-Cloudy with a chance of pizza.
++Cloudy with a chance of Sun.
+ 
+ ## Tomorrow
+ 
 ```
 
 :::::::::::::::::::::::::::::::::::::::  challenge
