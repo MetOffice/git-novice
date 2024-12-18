@@ -161,11 +161,68 @@ Generally it is best to spot and revert mistakes before the commit stage.
 The table below summarises how to revert a change depending on where in the 
 commit process you are:
 
-| **To revert files you have ...** |     **git command**     |
-|:--------------------------------:|:-----------------------:|
-| modified                         | `$ git restore <files>` |
-| staged                           | `$ git reset <files>`   |
-| committed                        | `$ git revert <commit>` |
+| **To revert files you have ...** |         **git command**          |
+|:--------------------------------:|:--------------------------------:|
+| modified                         | `$ git restore <files>`          |
+| staged                           | `$ git restore --staged <files>` |
+| committed                        | `$ git revert <commit>`          |
+
+We have already practised restoring modified files.
+Now let's practise restoring staged changes.
+Go ahead and make a similar change like you did earlier
+to your `forecast.md`:
+
+```bash
+$ nano forecast.md
+$ cat forecast.md
+```
+
+```output
+# Forecast
+
+## Today
+
+Cloudy with a chance of sun.
+Mild temperatures around 16 °C.
+
+## Tomorrow
+
+Morning rainbows followed by light showers.
+Another ill-considered change.
+```
+
+Add the changes:
+
+```bash
+$ git add forecast.md
+```
+
+Now `git status` shows:
+
+```bash
+$ git status
+```
+
+```output
+On branch forecast
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+	modified:   forecast.md
+```
+
+And we can use the hint to unstage our changes:
+
+```bash
+$ git restore --staged forecast.md
+```
+
+Our modifications to the `forecast.md` file have been unstaged
+and are now back in the working copy.
+We can restore these modifications fully with:
+
+```bash
+$ git restore forecast.md
+```
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 

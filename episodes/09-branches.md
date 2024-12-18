@@ -70,6 +70,23 @@ The phrase **working tree clean** means there are no changes
 in your working directory and the current state of your
 repository is identical to the last commit.
 
+::: spoiler
+
+### FCM Comparison
+
+`main` == `trunk`
+
+In an earlier episode we set our default branch
+to be called `main`.
+This is where our stable production code
+lives and is equivalent to `trunk`.
+
+We could have also named this branch `trunk` in Git.
+We chose `main` as it is a more common default branch name
+for Git and matches the default on GitHub.
+
+:::
+
 ## Creating Branches
 
 Our current repository looks something like this:

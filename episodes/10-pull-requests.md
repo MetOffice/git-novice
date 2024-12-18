@@ -33,17 +33,6 @@ reduce the chance of human error when checking new code.
 In the previous episodes we developed our changes 
 on the `forecast` branch.
 Let's use a PR to merge these changes back into the `main` branch.
-Make sure you are still on the `forecast` branch:
-
-```bash
-$ git switch forecast
-```
-
-Now we can publish these changes to GitHub:
-
-```bash
-$ git push
-```
 
 Navigate to your `weather` GitHub repo. 
 You should see a notification appear with the text
@@ -153,7 +142,22 @@ This helps keep the commit history of the `main` branch tidy and linear[^squash-
 
 Once you've selected the squash option click on the green
 **Squash and merge** button.
-Edit the commit title and description if necessary.
+Edit the commit title so that the PR number is at the start of the message.
+For instance:
+
+```output
+Add in a forecast file (#1)
+```
+
+Would be changed to:
+
+```output
+#1 Add in a forecast file
+```
+
+This makes it easier to navigate to the PR for a change
+when you're on the GitHub repositories code view.
+Change the description if necessary.
 Then click on **Confirm squash and merge**.
 
 ![](fig/github_pr_closed.png){alt='A screenshot showing a closed pull request on the weather repository.'}
@@ -162,7 +166,7 @@ The PR is now successfully merged into the `main` branch.
 We can safely delete the `forecast` branch from the GitHub repo.
 Click on the **Delete branch button**.
 
-### Updating your Local Repo
+## Updating your Local Repo
 
 The new `forecast.md` file is currently only on the `main` branch in GitHub.
 We should pull the changes down to our local copy.
@@ -194,6 +198,53 @@ Fast-forward
  create mode 100644 .gitignore
  create mode 100644 forecast.md
 ```
+
+`git pull` and GitHub's Pull Requests are not the same.
+GitHub Pull Requests are where we performed code and science review,
+then merged our feature branch changes into the `main` branch.
+`git pull` is fetching changes to the remote branch on GitHub
+and merging them into your local copy.
+
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+## You may need to tell Git what to do
+
+If you see the below in your output, Git is asking what it should do.
+
+```output
+hint: You have divergent branches and need to specify how to reconcile them.
+hint: You can do so by running one of the following commands sometime before
+hint: your next pull:
+hint:
+hint:   git config pull.rebase false  # merge (the default strategy)
+hint:   git config pull.rebase true   # rebase
+hint:   git config pull.ff only       # fast-forward only
+hint:
+hint: You can replace "git config" with "git config --global" to set a default
+hint: preference for all repositories. You can also pass --rebase, --no-rebase,
+hint: or --ff-only on the command line to override the configured default per
+hint: invocation.
+```
+
+In newer versions of Git it gives you the option of specifying different
+behaviours when a pull would merge divergent branches.
+The Git & GitHub Working Practices training will help you decide
+which option is best for your teams repositories.
+For now we will use the [`fast-forward only` strategy](https://blog.sffc.xyz/post/185195398930/why-you-should-use-git-pull-ff-only).
+To use this strategy run the following command to
+select it as the default thing git should do.
+
+```bash
+$ git config pull.ff only
+```
+
+Then attempt the pull again.
+
+```bash
+$ git pull
+```
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::: callout
 
@@ -287,6 +338,21 @@ Running `git branch -avv` again now shows:
 You've now successfully merged and tidied up after your first pull request.
 Remember when making changes create a new branch
 and open a PR, **NEVER** commit to the `main` branch.
+
+::: callout
+
+### Automatically Prune Deleted Remote Branches
+
+If you set the following Git configuration:
+
+```bash
+$ git config --global fetch.prune true
+```
+
+Git will automatically prune the links to remote branches
+that were deleted on GitHub when you run `git fetch` or `git pull`.
+
+:::
 
 ::::::::::::::::::::::::::::::::::::: challenge
 

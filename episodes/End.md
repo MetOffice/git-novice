@@ -27,6 +27,11 @@ Useful page links:
 - [FCM to Git](../learners/fcm-git_cheat_sheet.md) cheat sheet
 - [Git cheatsheets](../learners/reference.md)
 
+You can keep your weather repositories around to practice with
+for as long as you like and
+when you are ready to delete them use the instructions
+at the end of this page.
+
 ## Summary
 
 You've now created a repository both locally on your computer
@@ -57,3 +62,28 @@ config:
 A summary page outlining the steps we've taken to create
 a new repository locally and connect it to a GitHub remote
 can be found in the extra [Quick Start Repository Guide](../learners/repo-quick-start.md).
+
+## Deleting a Repository
+
+Make sure you are certain you want to delete the repository.
+If you delete both the local and GitHub repositories you won't be able
+to recover your files!
+
+### Deleting a Local Repository
+
+```bash
+$ cd ~/Desktop
+$ rm -rf weather
+```
+
+### Deleting a GitHub Repository
+
+1. Navigate to `https://github.com/<your-username>/weather/settings`
+2. Scroll down to the last setting in the **Danger Zone**
+3. Click on `Delete this repository`
+
+You will be asked to confirm twice that you understand the effects
+of deleting the repository.
+You will also be asked to type out `<your-username>/weather`
+to confirm the deletion and you may have to confirm the deletion
+using MFA or your passkey.

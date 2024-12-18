@@ -47,6 +47,23 @@ explanation of why the repository needs to be empty.
 
 ![](fig/github-create-repo-02.png){alt='The second step in creating a repository on GitHub: filling out the new repository form to provide the repository name, and specify that neither a readme nor a license should be created'}
 
+::: spoiler
+
+### Repository Visibility
+
+Here we have chosen to make our repository public.
+The visibility of your repository depends on which option you choose:
+
+- Private: only you
+- Internal (organisations only): read permissions to anyone in the organisation
+- Public: read permissions to anyone
+
+Some organisations will restrict the creation of public repositories
+so you may find their default is internal.
+If your project deals with sensitive material then create a private repository.
+
+:::
+
 As soon as the repository is created, GitHub displays a page with a URL and some
 information on how to configure your local repository.
 Ignore the suggested commands for now as we will run these later.
@@ -125,6 +142,22 @@ We'll discuss remotes in more detail in the next episode, while
 talking about how they might be used for collaboration.
 
 ## 3\. SSH Background and Setup
+
+::: instructor
+
+Some learners may have set up an ssh key already.
+If they have a key with this name: `~/.ssh/id_ed25519_github`
+and can successfully authenticate with `ssh -T git@github.com`
+they can skip this section.
+
+If their ssh key name does not match the one above we **strongly**
+recommend they follow the instructions below.
+
+Those who are skipping this section can revisit the challenges
+in earlier episodes (yellow callouts with a lightning bolt)
+or read through the [discussion notes](../learners/discuss.md).
+
+:::
 
 Before you can connect to a remote repository, you need to set up a way for your computer to authenticate with GitHub so it knows it's you trying to connect to the remote repository.
 
@@ -319,6 +352,25 @@ Hi Eleanor! You've successfully authenticated, but GitHub does not provide shell
 
 Good! This output confirms that the SSH key works as intended. We are now ready to push our work to the remote repository.
 
+::: spoiler
+
+### Troubleshooting SSH Setup
+
+If your new key failed to connect you may need to alter your ssh config.
+
+1. Create the `~/.ssh/config` file if it doesn't exist
+2. Add the following to the file:
+
+```ssh-config
+Host github.com
+  IdentityFile ~/.ssh/id_ed25519_github
+```
+
+This explicitly states which key to use for github.com
+and is needed if you have many SSH keys already for other hosts.
+
+:::
+
 ## 4\. Push local changes to a remote
 
 Now that authentication is setup, we can return to the local repository.
@@ -439,7 +491,7 @@ Our local and remote repositories are now in this state:
 You may see a `-u` option used with `git push` in some documentation.  This
 option is synonymous with the `--set-upstream-to` option for the `git branch`
 command, and is used to associate the current branch with a remote branch so
-that the `git pull` command can be used without any arguments. To do this,
+that the `git push` command can be used without any arguments. To do this,
 simply use `git push -u origin main` once the remote has been set up.
 
 Here, we are telling Git to push the branch
