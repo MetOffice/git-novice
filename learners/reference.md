@@ -57,7 +57,7 @@ Git is an example of a [Distributed Version Control System](#dvc).
 :   [GitHub](https://docs.github.com/en/get-started/start-your-journey/about-github-and-git)
 is a cloud-based platform where you can store, share,
 and work together with others to write code.
-It uses [git](#git) to version control files.
+GitHub is built upon [Git](#git).
 
 [HTTP]{#http}
 :   The Hypertext Transfer [Protocol](#protocol) used for sharing web pages and other data
