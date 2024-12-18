@@ -68,15 +68,15 @@ cloud-based platform, [GitHub](learners/reference.md#github).
 By the end of the lesson you will have:
 
 - Configured Git based on our recommended settings
-- Initialised a new [repository](../learners/reference.md#repository)
+- Initialised a new [repository](../learners/reference.md#repository) with Git
 - Committed files to the repository which places them under version control
 - Developed a change using a feature branch
 - Explored the history of your repository
 - Reverted changes to files
 - Ignored files you do not want to version control
+- Created a backup of our repository on GitHub
 - Navigated around the GitHub interface
-- Created a backup on GitHub
-- Performed a code review on GitHub
+- Merged your feature branch changes through GitHub
 
 ## Terminology
 
