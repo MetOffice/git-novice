@@ -232,7 +232,7 @@ The Git & GitHub Working Practices training will help you decide
 which option is best for your teams repositories.
 For now we will use the [`fast-forward only` strategy](https://blog.sffc.xyz/post/185195398930/why-you-should-use-git-pull-ff-only).
 To use this strategy run the following command to
-select it as the default thing git should do.
+select it as the default thing Git should do.
 
 ```bash
 $ git config pull.ff only

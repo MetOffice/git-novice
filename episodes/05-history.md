@@ -150,7 +150,7 @@ $ git log --decorate --oneline --graph
 ```
 
 `--decorate` ensures commits with reference names[^refs] are displayed
-when using older versions of git.
+when using older versions of Git.
 
 [^refs]: [References](https://git-scm.com/book/ms/v2/Git-Internals-Git-References)
 in Git are user friendly links to specific commits.

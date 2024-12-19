@@ -426,7 +426,7 @@ The final step, as before, is to commit our change to the repository:
 $ git commit -m 'Correct the cloud type'
 ```
 
-This works because git can tell that the file was only re-named, 
+This works because Git can tell that the file was only re-named, 
 they contain the same content.
 If you are renaming files add this change as a separate small commit 
 before you make changes to the file contents.
@@ -434,7 +434,7 @@ before you make changes to the file contents.
 ## Further .gitignore concepts
 
 For additional documentation on .gitignore, please reference
-[the official git documentation](https://git-scm.com/docs/gitignore).
+[the official Git documentation](https://git-scm.com/docs/gitignore).
 
 In the ignore exercise, learners were presented with two variations of ignoring
 nested files. Depending on the organization of your repository, one may suit
@@ -442,7 +442,7 @@ your needs over another. Keep in mind that the way that Git travels along
 directory paths can be confusing.
 
 Sometimes the `**` pattern comes in handy, too, which matches multiple
-directory levels. E.g. `**/results/plots/*` would make git ignore the
+directory levels. E.g. `**/results/plots/*` would make Git ignore the
 `results/plots` directory in any root directory.
 
 :::::::::::::::::::::::::::::::::::::::  challenge

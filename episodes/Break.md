@@ -4,7 +4,7 @@ teaching: 0
 exercises: 0
 ---
 
-This marks the end of the git section.
+This marks the end of the Git section.
 Take a break and remember to fill out your minute card feedback.
 
 ## Summary
@@ -20,7 +20,7 @@ config:
     showCommitLabel: false
 ---
     gitGraph
-        accDescr {A git graph showing the root-commit on the main branch and a new forecast branch with five commits.}
+        accDescr {A Git graph showing the root-commit on the main branch and a new forecast branch with five commits.}
         commit id: 'Initial commit'
         branch forecast
         commit id: 'Create a md file with the forecast'

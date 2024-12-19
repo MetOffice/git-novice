@@ -61,7 +61,7 @@ If there is no version of Git on your computer, please follow the
 [Git installation instructions](https://swcarpentry.github.io/git-novice/#installing-git)
 in the setup of this lesson to install Git now. Next open your shell or command prompt
 and type `which git` (macOS, Linux), or `where git` (Windows).
-Copy the path to the git executable.
+Copy the path to the Git executable.
 
 On one Windows computer which had GitHub Desktop installed on it, the path was:
 `C:/Users/UserName/AppData/Local/GitHubDesktop/app-1.1.1/resources/app/git/cmd/git.exe`

@@ -14,7 +14,7 @@ title: 'Git Cheatsheets for Quick Reference'
 ## Glossary
 
 [branch]{#branch}
-:   A git branch is a pointer to a commit. Branches are used to develop
+:   A Git branch is a pointer to a commit. Branches are used to develop
 changes in parallel, isolated from each other.
 
 [Centralised Version Control System]{#cvc}

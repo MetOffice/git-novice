@@ -21,7 +21,7 @@ exercises: 10
 
 Branching is a feature available in most modern version control systems.
 Branching in other version control systems can be an expensive operation in both time and disk space.
-In git, branches are a part of your everyday development process.
+In Git, branches are a part of your everyday development process.
 
 So far we have been working on the `main` branch
 and have made one commit, the **root-commit**.
@@ -38,7 +38,7 @@ config:
     showCommitLabel: false
 ---
     gitGraph
-        accDescr {A git graph showing the root-commit on the main branch and a new forecast branch with one commit branched off the root-commit. This branch is then merged back into main via a merge commit on GitHub.}
+        accDescr {A Git graph showing the root-commit on the main branch and a new forecast branch with one commit branched off the root-commit. This branch is then merged back into main via a merge commit on GitHub.}
         commit id: '6f12a47'
         branch forecast
         commit id: '8136c6f Add in a seasonal forecasts file'
@@ -93,7 +93,7 @@ Our current repository looks something like this:
 
 ```mermaid
     gitGraph
-        accDescr {A git graph showing one commit, the root-commit on the main branch.}
+        accDescr {A Git graph showing one commit, the root-commit on the main branch.}
         commit id: '6f12a47'
 ```
 
@@ -176,7 +176,7 @@ so our repository looks like this:
 
 ```mermaid
     gitGraph
-        accDescr {A git graph showing the root-commit on the main branch and a new forecast branch with no commits.}
+        accDescr {A Git graph showing the root-commit on the main branch and a new forecast branch with no commits.}
         commit id: '6f12a47'
         branch forecast
 ```

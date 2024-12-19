@@ -86,7 +86,7 @@ This workflow ensures that the workflow files are up-to-date. The way it work is
 to download the update-workflows.sh script from GitHub and run it. The script 
 will do the following:
 
-1. check the recorded version of sandpaper against the current version on github
+1. check the recorded version of sandpaper against the current version on GitHub
 2. update the files if there is a difference in versions
 
 After the files are updated, if there are any changes, they are pushed to a

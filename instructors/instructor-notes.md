@@ -174,7 +174,7 @@ particular set of files in `.gitignore`.
   involved.
 
 - When pushing to a remote, the output from Git can vary slightly depending on
-  what leaners execute. The lesson displays the output from git if a learner
+  what leaners execute. The lesson displays the output from Git if a learner
   executes `git push origin main`. However, some learners might use syntax
   suggested by GitHub for pushing to a remote with an existing repository,
   which is `git push -u origin main`. Learners using syntax from GitHub,

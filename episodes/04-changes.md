@@ -185,7 +185,7 @@ Our repository now looks like this:
 
 ```mermaid
     gitGraph
-        accDescr {A git graph showing the root-commit on the main branch and a new forecast branch, branching off the root-commit, with one commit.}
+        accDescr {A Git graph showing the root-commit on the main branch and a new forecast branch, branching off the root-commit, with one commit.}
         commit id: 'Initial commit'
         branch forecast
         commit id: 'Create a md file with the forecast'
@@ -441,7 +441,7 @@ Our repository now looks like this:
 
 ```mermaid
     gitGraph
-        accDescr {A git graph showing the root-commit on the main branch and a new forecast branch, branching off the root-commit, with two commits.}
+        accDescr {A Git graph showing the root-commit on the main branch and a new forecast branch, branching off the root-commit, with two commits.}
         commit id: 'Initial commit'
         branch forecast
         commit id: 'Create a md file with the forecast'
@@ -557,7 +557,7 @@ Our repository now looks like this:
 
 ```mermaid
     gitGraph
-        accDescr {A git graph showing the root-commit on the main branch and a new forecast branch, branching off the root-commit, with three commits.}
+        accDescr {A Git graph showing the root-commit on the main branch and a new forecast branch, branching off the root-commit, with three commits.}
         commit id: 'Initial commit'
         branch forecast
         commit id: 'Create a md file with the forecast'
@@ -604,7 +604,7 @@ Two important facts you should know about directories in Git.
   you can add all files in the directory at once by:
   
   ```bash
-  git add <directory-with-files>
+  $ git add <directory-with-files>
   ```
   
   Try it for yourself:
@@ -801,7 +801,7 @@ $ mkdir bio
 $ cd bio
 ```
 
-Initialise git:
+Initialise the repository:
 
 ```bash
 $ git init

@@ -342,7 +342,7 @@ none of them will be ignored, and all `.csv` files will be tracked.
 ## Log Files
 
 You wrote a script that creates many intermediate log-files of the form `log_01`, `log_02`, `log_03`, etc.
-You want to keep them but you do not want to track them through `git`.
+You want to keep them but you do not want to track them through Git.
 
 1. Write **one** `.gitignore` entry that excludes files of the form `log_01`, `log_02`, etc.
 

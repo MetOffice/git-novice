@@ -229,7 +229,7 @@ fatal: Not a git repository (or any of the parent directories): .git
 ## Correcting `git init` Mistakes
 
 A colleague explains to you how a nested repository is redundant and may cause confusion
-down the road. You would like to go back to a single git repository.
+down the road. You would like to go back to a single Git repository.
 How can you undo the last `git init` in the `clouds` subdirectory?
 
 :::::::::::::::  solution

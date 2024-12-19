@@ -68,7 +68,7 @@ As soon as the repository is created, GitHub displays a page with a URL and some
 information on how to configure your local repository.
 Ignore the suggested commands for now as we will run these later.
 
-![](fig/github-create-repo-03.png){alt='The summary page displayed by GitHub after a new repository has been created. It contains instructions for configuring the new GitHub repository as a git remote'}
+![](fig/github-create-repo-03.png){alt='The summary page displayed by GitHub after a new repository has been created. It contains instructions for configuring the new GitHub repository as a Git remote'}
 
 This effectively does the following on GitHub's servers:
 
@@ -86,7 +86,7 @@ which looked like this:
 
 Now that we have two repositories, we need a diagram like this:
 
-![](fig/git-freshly-made-github-repo.svg){alt='A diagram illustrating how the GitHub "weather" repository is also a git repository like our local repository, but that it is currently empty'}
+![](fig/git-freshly-made-github-repo.svg){alt='A diagram illustrating how the GitHub "weather" repository is also a Git repository like our local repository, but that it is currently empty'}
 
 Note that our local repository still contains our earlier work on `forecast.md`, but the
 remote repository on GitHub appears empty as it doesn't contain any files yet.
@@ -124,7 +124,7 @@ Make sure to use the URL for your repository: the only
 difference should be your username instead of `mo-eormerod`.
 
 `origin` is a local name used to refer to the remote repository. It could be called
-anything, but `origin` is a convention that is often used by default in git
+anything, but `origin` is a convention that is often used by default in Git
 and GitHub, so it's helpful to stick with this unless there's a reason not to.
 
 We can check that the command has worked by running `git remote -v`:
@@ -366,7 +366,7 @@ Host github.com
   IdentityFile ~/.ssh/id_ed25519_github
 ```
 
-This explicitly states which key to use for github.com
+This explicitly states which key to use for `github.com`
 and is needed if you have many SSH keys already for other hosts.
 
 :::

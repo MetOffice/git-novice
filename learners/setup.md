@@ -78,7 +78,7 @@ Git provides a script which lets us display the version control status in your
 terminal prompt.
 The following instructions have been tested on **Linux**.
 If you are using MacOS or Windows please consult the
-[git autocomplete instructions](https://github.com/git/git/blob/master/contrib/completion/git-prompt.sh)
+[Git autocomplete instructions](https://github.com/git/git/blob/master/contrib/completion/git-prompt.sh)
 at the top of the linked file.
 Your instructor may point you to another online resource for your OS.
 To enable this script add the following to a new `~/.bashrc.d/git.bash` 
@@ -131,7 +131,7 @@ The following paths are for Met Office colleagues.
 If you are external to the Met Office please consult
 your institutions IT services or download your own copy of the `git-prompt.sh` script.
 Download the latest version from the 
-[git repository contrib directory](https://github.com/git/git/blob/master/contrib/completion/git-prompt.sh).
+[Git repository contrib directory](https://github.com/git/git/blob/master/contrib/completion/git-prompt.sh).
 Ensure the `GIT_PROMPT_PATH` matches where you decide to store the `git-prompt.sh` file.
 
 For Azure Spice, the path in the snippet above is correct:

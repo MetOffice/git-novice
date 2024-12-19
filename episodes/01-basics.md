@@ -183,7 +183,7 @@ the same files concurrently.
 
 If you currently use [FCM](https://metomi.github.io/fcm/doc/user_guide/getting_started.html) 
 (a wrapper around Subversion, SVN) then look out for the following dropdowns.
-They contain the FCM equivalent for git commands.
+They contain the FCM equivalent for Git commands.
 
 ::: spoiler
 
