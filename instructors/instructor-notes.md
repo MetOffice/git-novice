@@ -200,6 +200,27 @@ particular set of files in `.gitignore`.
   `git push -u origin main`, will have slightly different output, including
   the line `Branch main set up to track remote branch main from origin by rebasing.`
 
+### Met Office
+
+Why are we moving to Git and GitHub?
+
+- GitHub has better project management features
+- Git/GitHub provide better security (MFA)
+- GitHub has more useful features for collaboration than trac
+- Easier to collaborate with partners outside the Met Office with GitHub
+
+## [Exploring GitHub](../episodes/08-github-interface.md)
+
+When you are exploring the GitHub interface you may wish to show:
+
+- How to manage access to a repository (changes are only visible to those with access)
+- How to enable wiki pages, discussions, projects
+
+And mention that these are covered in more detail in the
+Git & GitHub Working Practices training.
+You can also mention that it is possible to edit files via the GitHub
+interface but we won't be doing that today.
+
 ## [Collaborating](../episodes/08-collab.md)
 
 NOT IN THE MET OFFICE VERSION
