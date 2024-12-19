@@ -25,14 +25,14 @@ open software repository landscape, so the time and effort required to teach
 fundamental Git is justified and worthwhile.
 
 Because of this complexity, we don't teach novice learners about many
-interesting topics, such as branching, hashes, and commit objects.
+interesting topics, such as hashes, and commit objects.
 
-Instead we try to convince them that version control is useful for researchers
+Instead we try to convince them that version control is useful for
 working in teams or not, because it is
 
 - a better way to "undo" changes,
 - a better way to collaborate than mailing files back and forth, and
-- a better way to share your code and other scientific work with the world.
+- a better way to share your code and other work with the world.
 
 ## Teaching Notes
 
@@ -98,7 +98,19 @@ working in teams or not, because it is
   and, "come on this really has to be the last version" to motivate version
   control as a better way to collaborate and as a better way to back work up.
 
+### Met Office
+
+Why are we moving to Git and GitHub?
+
+- FCM/SVN becoming unmaintainable
+- Git/GitHub provide better security (MFA)
+- GitHub has more useful features for collaboration than trac
+- Easier to collaborate with partners outside the Met Office with GitHub
+
 ## [Setting Up Git](../episodes/02-setup.md)
+
+Do **NOT** skip any steps setting the config.
+This may cause problems later especially if students end up with master branches.
 
 - We suggest instructors and students use `nano` as the text editor for this
   lessons because
@@ -139,6 +151,13 @@ working in teams or not, because it is
   
   The challenge suggests that it is a bad idea to create a Git repo inside another repo.
   For more discussion on this topic, please see [this issue][repos-in-repos].
+
+## [Branches](../episodes/09-branches.md)
+
+All Mermaid diagrams don't render atm in the Extract all Images page
+so be wary of this.
+Avoid putting your own preference into the training and teach
+`git switch` (although the other options are also given for reference).
 
 ## [Tracking Changes](../episodes/04-changes.md)
 
@@ -182,6 +201,8 @@ particular set of files in `.gitignore`.
   the line `Branch main set up to track remote branch main from origin by rebasing.`
 
 ## [Collaborating](../episodes/08-collab.md)
+
+NOT IN THE MET OFFICE VERSION
 
 - Decide in advance whether all the learners will work in one shared
   repository, or whether they will work in pairs (or other small groups) in
@@ -248,6 +269,8 @@ particular set of files in `.gitignore`.
   depending on the version of git, and if upstream (`-u`) is used.
 
 ## [Conflicts](../episodes/09-conflict.md)
+
+NOT IN THE MET OFFICE VERSION
 
 - Expect the learners to make mistakes. Expect *yourself* to make mistakes.
   This happens because it is late in the lesson and everyone is tired.
