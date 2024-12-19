@@ -42,6 +42,42 @@ The available options are described in the manual:
 $ git config --help
 ```
 
+### Recommended Settings
+
+We recommend setting the following:
+
+```gitconfig
+[merge]
+    ff = false
+    conflictStyle = diff3
+[mergetool]
+    keepBackup = false
+[fetch]
+    prune = true
+[pull]
+    ff = only
+```
+
+| Setting              | Value | Justification                                              |
+|----------------------|-------|------------------------------------------------------------|
+| merge.ff             | false | Make `git merge` always a "true merge"                     |
+| merge.conflictStyle  | diff3 | Add common ancestor to conflict markers                    |
+| mergetool.keepBackup | false | Tidy `*.orig` files when `mergetool` finishes              |
+| fetch.prune          | true  | Automatically delete references to deleted remote branches |
+| pull.ff              | only  | Make `git pull` only fast-forward                          |
+
+These settings will be explained in later episodes
+and in the follow on Git & GitHub Working Practices training.
+
+Set them using:
+
+```bash
+$ git config --global setting value
+$ git config --global merge.ff false
+```
+
+#### Aliases
+
 In particular, you might find it useful to add aliases.
 These are like shortcuts for longer Git commands.
 For example, if you get sick of typing `git checkout` all the time,
@@ -61,6 +97,66 @@ we could now instead type:
 
 ```bash
 $ git co f22b25e forecast.md
+```
+
+The following are some aliases others have found useful.
+We recommend returning to these once you have learnt more
+Git commands and become more comfortable with Git in general.
+
+```gitconfig
+[alias]
+    st = status
+    ci = commit
+    ca = commit -a
+    br = branch
+    co = checkout
+    cb = checkout -b
+    lg = log --oneline
+    graph = log --oneline --graph
+    dog = log --decorate --oneline --graph
+    sdiff = diff --staged
+    unstage = restore --staged
+    amend = commit --amend --no-edit
+    reword = commit --amend --only --
+    ff = merge --ff-only
+    update = "! git pull --ff-only && git push"
+```
+
+Set them using:
+
+```bash
+$ git config --global alias.<short> "<command>"
+$ git config --global alias.st "status"
+```
+
+### Viewing Settings
+
+```bash
+git config --list --show-origin  # Shows all configurations with their origins
+git config --global --list       # Shows global configurations
+git config --local --list        # Shows configurations for the current repository
+```
+
+### Removing Settings
+
+The following actions can **NOT** be undone.
+Be certain you wish to delete any settings.
+Simply add `--unset` before the key:
+
+```bash
+$ git config --global --unset alias.st
+```
+
+You may wish to completely clear your global settings:
+
+```bash
+$ rm ~/.gitconfig
+```
+
+Or your local settings:
+
+```bash
+$ rm .git/config
 ```
 
 ## Styling Git's Log

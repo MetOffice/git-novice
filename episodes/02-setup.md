@@ -25,8 +25,14 @@ of configurations we will set as we get started with Git:
 - what our preferred text editor is,
 - and that we want to use these settings globally (i.e. for every project).
 
+## Command Line Git Setup
+
 On a command line, Git commands are written as `git verb options`,
-where `verb` is what we actually want to do and `options` is additional optional information which may be needed for the `verb`. To set up a new computer:
+where `verb` is what we actually want to do and `options` is additional optional information which may be needed for the `verb`.
+
+### Authorship
+
+To set up a new computer:
 
 ```bash
 $ git config --global user.name "Joanne Simpson"
@@ -52,9 +58,7 @@ If you elect to use a private email address with GitHub, then use GitHub's no-re
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-:::::::::::::::::::::::::::::::::::::::::  callout
-
-## Line Endings
+### Line Endings
 
 As with other keys, when you press <kbd>Enter</kbd> or <kbd>↵</kbd> or on Macs, <kbd>Return</kbd> on your keyboard,
 your computer encodes this input as a character.
@@ -69,19 +73,23 @@ You can change the way Git recognizes and encodes line endings
 using the `core.autocrlf` command to `git config`.
 The following settings are recommended:
 
-On macOS and Linux:
+::: group-tab
+
+### Linux & MacOS
 
 ```bash
 $ git config --global core.autocrlf input
 ```
 
-And on Windows:
+### Windows
 
 ```bash
 $ git config --global core.autocrlf true
 ```
 
-::::::::::::::::::::::::::::::::::::::::::::::::::
+:::
+
+### Text Editor
 
 To set your preferred text editor, 
 find the correct configuration command from this table:
@@ -117,6 +125,8 @@ If you want to save your changes and quit, press <kbd>Esc</kbd> then type `:wq` 
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
+### Default Branch Name
+
 Git (2.28+) allows configuration of the name of the branch created when you
 initialize any new repository. We want to set this to `main` so
 it matches the cloud service we will eventually use.
@@ -127,10 +137,9 @@ $ git config --global init.defaultBranch main
 
 :::::::::::::::::::::::::::::::::::::::::  callout
 
-## Default Git branch naming
+## History of `main`
 
-Source file changes are associated with a "branch."
-For new learners in this lesson, it's enough to know that branches exist, and this lesson uses one branch.  
+Source file changes are associated with a "branch".
 By default, Git will create a branch called `master`
 when you create a new repository with `git init` (as explained in the next Episode). This term evokes
 the racist practice of human slavery and the
@@ -151,22 +160,27 @@ configuration, the `init.defaultBranch` value defaults to `master`.
 The five commands we just ran above only need to be run once: the flag `--global` tells Git
 to use the settings for every project, in your user account, on this computer.
 
+## Text Editor Git Setup
+
 Let's review those settings and test our `core.editor` right away:
 
 ```bash
 $ git config --global --edit
 ```
 
-Let's close the file without making any additional changes.  Remember, since typos in the config file will cause
-issues, it's safer to view the configuration with:
+Let's close the file without making any additional changes.
+Since typos in the config file will cause issues,
+it's safer to view the configuration with:
 
 ```bash
 $ git config --list
 ```
 
-And if necessary, change your configuration using the
-same commands to choose another editor or update your email address.
-This can be done as many times as you want.
+And alter the configuration via the command line.
+You can re-run the commands above as many times as you want
+to change your configuration.
+The [discussion](../learners/discuss.md#more-advanced-git-configuration)
+page has details on more recommended settings.
 
 :::::::::::::::::::::::::::::::::::::::::  callout
 
@@ -194,7 +208,7 @@ $ git config --global --unset https.proxy
 
 ## Git Help and Manual
 
-Always remember that if you forget the subcommands or options of a `git` command, you can access the
+If you forget the subcommands or options of a `git` command, you can access the
 relevant list of options typing `git <command> -h` or access the corresponding Git manual by typing
 `git <command> --help`, e.g.:
 
@@ -221,5 +235,3 @@ $ git help
 - Use `git config` with the `--global` option to configure a user name, email address, editor, and other preferences once per machine.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
-
-
