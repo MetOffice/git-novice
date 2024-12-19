@@ -75,7 +75,7 @@ The following settings are recommended:
 
 ::: group-tab
 
-### Linux & MacOS
+### Linux and MacOS
 
 ```bash
 $ git config --global core.autocrlf input
