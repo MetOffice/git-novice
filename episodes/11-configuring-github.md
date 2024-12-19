@@ -12,11 +12,14 @@ exercises: 0
 
 :::::::::::::::::::::::::::::::::::::::: questions
 
+- How do I edit my GitHub profile?
 - How do I change my notification preferences?
+- How do I change my organisation membership visibility,
+  and team memberships?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-In this section we will look at configuring some GitHub
+In this section we will look at configuring some optional GitHub
 settings on both a GitHub wide and repository level. 
 
 ## Profile Settings
@@ -28,9 +31,9 @@ Working down the page:
 
 1. Set your preferred name. This helps collaborators find you on GitHub.
 2. Set a public email, this also helps collaborators find your profile.
-   If you would like to keep your email address private click on **email settings**,
+   To keep your email address private click on **email settings**,
    then tick the **Keep my email addresses private** checkbox.
-3. Set your pronouns if you wish.
+3. Set your pronouns.
 4. If you have a professional website you can add a link to the URL section.
 5. If you have an [ORCID](https://orcid.org/) you can link your GitHub
    profile to your ID.
