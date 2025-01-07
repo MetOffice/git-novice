@@ -42,36 +42,7 @@ You've developed changes on a feature branch,
 reviewed the changes on GitHub and merged them into `main`.
 The diagram below outlines the workflow you used during the course:
 
-```mermaid
-sequenceDiagram
-    autonumber
-    participant M as main
-    Note over M: Initialise the Repository
-    M ->> M: 
-    Note over M: Initial Commit
-    M ->> M: 
-    Note right of M: Create a Feature Branch
-    create participant F as forecast
-    M ->> F: 
-    loop 
-        Note over F: Develop Changes
-        F ->> F: 
-    end
-    Note right of M: Backup to GitHub
-    create participant GHM as origin main
-    M -->> GHM: 
-    Note right of F: Push changes to GitHub
-    create participant GHF as origin forecast
-    F -->> GHF: 
-    Note left of GHF: Pull Request and then Merge
-    destroy GHF
-    GHF ->> GHM: 
-    Note left of GHM: Update Local Branches
-    GHM -->> M: 
-    Note left of F: Tidy up Local Branches
-    destroy F
-    F ->> M: 
-```
+![](fig/lesson-workflow-mermaid.svg){alt='A sequence diagram showing the workflow we used during the lesson.'}
 
 A summary page outlining the steps we've taken to create
 a new repository locally and connect it to a GitHub remote
