@@ -1,0 +1,1442 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto"><head>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-contrib/carpentries-theme-toggle-1.0.0/themetoggle.js"></script>
+<script src="../site_libs/quarto-contrib/carpentries-theme-toggle-1.0.0/scripts.js"></script>
+<link href="../site_libs/quarto-contrib/carpentries-css-1.0.0/styles.css" rel="stylesheet"><meta charset="utf-8">
+            <meta name="generator" content="quarto-1.5.57">
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+                    
+        <title>Remotes in GitHub – Version Control with Git</title>
+
+            <script src="site_libs/quarto-contrib/carpentries-theme-toggle-1.0.0/themetoggle.js"></script>
+        <script src="site_libs/quarto-contrib/carpentries-theme-toggle-1.0.0/scripts.js"></script>
+        <link href="site_libs/quarto-contrib/carpentries-css-1.0.0/styles.css" rel="stylesheet">
+        
+        <script src="site_libs/quarto-contrib/quarto-1.5.57/quarto-nav/quarto-nav.js"></script>
+        <script src="site_libs/quarto-contrib/quarto-1.5.57/quarto-nav/headroom.min.js"></script>
+        <script src="site_libs/quarto-contrib/quarto-1.5.57/clipboard/clipboard.min.js"></script>
+        <script src="site_libs/quarto-contrib/quarto-1.5.57/quarto-search/autocomplete.umd.js"></script>
+        <script src="site_libs/quarto-contrib/quarto-1.5.57/quarto-search/fuse.min.js"></script>
+        <script src="site_libs/quarto-contrib/quarto-1.5.57/quarto-search/quarto-search.js"></script>
+        <script src="site_libs/quarto-contrib/quarto-1.5.57/quarto-html/quarto.js"></script>
+        <script src="site_libs/quarto-contrib/quarto-1.5.57/quarto-html/popper.min.js"></script>
+        <script src="site_libs/quarto-contrib/quarto-1.5.57/quarto-html/tippy.umd.min.js"></script>
+        <script src="site_libs/quarto-contrib/quarto-1.5.57/quarto-html/anchor.min.js"></script>
+        <link href="site_libs/quarto-contrib/quarto-1.5.57/quarto-html/tippy.css" rel="stylesheet">
+
+        <!-- Responsive Favicon for The Carpentries -->
+        <link rel="apple-touch-icon" sizes="180x180" href="site_libs/quarto-contrib/carpentries-favicons-1.0.0/favicons/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="site_libs/quarto-contrib/carpentries-favicons-1.0.0/favicons/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="site_libs/quarto-contrib/carpentries-favicons-1.0.0/favicons/favicon-16x16.png">
+        <link rel="manifest" href="site_libs/quarto-contrib/carpentries-manifest-1.0.0/site.webmanifest">
+        <link rel="mask-icon" href="site_libs/quarto-contrib/carpentries-favicons-1.0.0/favicons/safari-pinned-tab.svg" color="#5bbad5">
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="theme-color" media="(prefers-color-scheme: light)" content="white">
+        <meta name="theme-color" media="(prefers-color-scheme: dark)" content="black">
+
+        <!--           <script id="quarto-search-options" type="application/json">{
+                         "location": "sidebar",
+                         "copy-button": false,
+                         "collapse-after": 3,
+                         "panel-placement": "start",
+                         "type": "textbox",
+                         "limit": 50,
+                         "keyboard-shortcut": [
+                           "f",
+                           "/",
+                           "s"
+                         ],
+                         "show-item-context": false,
+                         "language": {
+                           "search-no-results-text": "No results",
+                           "search-matching-documents-text": "matching documents",
+                           "search-copy-link-title": "Copy link to search",
+                           "search-hide-matches-text": "Hide additional matches",
+                           "search-more-match-text": "more match in this document",
+                           "search-more-matches-text": "more matches in this document",
+                           "search-clear-button-title": "Clear",
+                           "search-text-placeholder": "",
+                           "search-detached-cancel-button-title": "Cancel",
+                           "search-submit-button-title": "Submit",
+                           "search-label": "Search"
+                         }
+                       }</script>
+             -->  </head>
+  <body>
+        <div id="quarto-search-results"></div>
+        <!-- content -->
+        <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+        <!-- sidebar -->
+        <!-- margin-sidebar -->
+            <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+                <nav id="TOC" role="doc-toc" class="toc-active">
+                                                       <h2 id="toc-title">On this page</h2>
+                                                    
+                                                   <ul>
+                                                   <li><a href="#create-a-remote-repository" id="toc-create-a-remote-repository" class="nav-link active" data-scroll-target="#create-a-remote-repository">1. Create a remote repository</a></li>
+                                                   <li><a href="#connect-local-to-remote-repository" id="toc-connect-local-to-remote-repository" class="nav-link" data-scroll-target="#connect-local-to-remote-repository">2. Connect local to remote repository</a></li>
+                                                   <li><a href="#ssh-background-and-setup" id="toc-ssh-background-and-setup" class="nav-link" data-scroll-target="#ssh-background-and-setup">3. SSH Background and Setup</a>
+                                                   <ul class="collapse">
+                                                   <li><a href="#create-an-ssh-key-pair" id="toc-create-an-ssh-key-pair" class="nav-link" data-scroll-target="#create-an-ssh-key-pair">3.1 Create an SSH key pair</a></li>
+                                                   <li><a href="#copy-the-public-key-to-github" id="toc-copy-the-public-key-to-github" class="nav-link" data-scroll-target="#copy-the-public-key-to-github">3.2 Copy the public key to GitHub</a></li>
+                                                   </ul></li>
+                                                   <li><a href="#push-local-changes-to-a-remote" id="toc-push-local-changes-to-a-remote" class="nav-link" data-scroll-target="#push-local-changes-to-a-remote">4. Push local changes to a remote</a></li>
+                                                   </ul>
+                                               </nav>
+            </div>
+        <!-- main -->
+        <main class="content page-columns page-full" id="quarto-document-content">
+        <header id="top" class="navbar navbar-expand-md top-nav carpentries">
+          <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+            <symbol id="check2" viewbox="0 0 16 16">
+              <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"></path>
+            </symbol>
+            <symbol id="circle-half" viewbox="0 0 16 16">
+              <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"></path>
+            </symbol>
+            <symbol id="moon-stars-fill" viewbox="0 0 16 16">
+              <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"></path>
+              <path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"></path>
+            </symbol>
+            <symbol id="sun-fill" viewbox="0 0 16 16">
+              <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"></path>
+            </symbol>
+          </svg>
+          <a class="visually-hidden-focusable skip-link" href="#main-content">Skip to main content</a>
+          <div class="container-fluid top-nav-container">
+            <div class="col-md-8">
+              <div class="large-logo">
+                <img id="cp-logo" alt="Carpentries" src="site_libs/quarto-contrib/carpentries-images-1.0.0/images/carpentries-logo.svg">
+                                              </div>
+            </div>
+            <div class="selector-container">
+              <div id="theme-selector">
+                <li class="nav-item dropdown" id="theme-button-list">
+                  <button class="btn btn-link nav-link px-0 px-lg-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme (auto)">
+                    <svg class="bi my-1 theme-icon-active">
+                      <use href="#circle-half"></use>
+                    </svg>
+                    <i data-feather="chevron-down"></i>
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="bd-theme-text">
+                    <li>
+                      <button type="button" class="btn dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+                        <svg class="bi me-2 theme-icon">
+                          <use href="#sun-fill"></use>
+                        </svg>
+                        Light
+                        <svg class="bi ms-auto d-none">
+                          <use href="#check2"></use>
+                        </svg>
+                      </button>
+                    </li>
+                    <li>
+                      <button type="button" class="btn dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                        <svg class="bi me-2 theme-icon">
+                          <use href="#moon-stars-fill"></use>
+                        </svg>
+                        Dark
+                        <svg class="bi ms-auto d-none">
+                          <use href="#check2"></use>
+                        </svg>
+                      </button>
+                    </li>
+                    <li>
+                      <button type="button" class="btn dropdown-item d-flex align-items-center active" data-bs-theme-value="auto" aria-pressed="true">
+                        <svg class="bi me-2 theme-icon">
+                          <use href="#circle-half"></use>
+                        </svg>
+                        Auto
+                        <svg class="bi ms-auto d-none">
+                          <use href="#check2"></use>
+                        </svg>
+                      </button>
+                    </li>
+                  </ul>
+                </li>
+              </div>
+              <!-- NOTE: the language section will likely need to be generated on {sandpaper}, so we are not going to translate this now.
+                {{#yaml}}{{#language}}
+                <div class="dropdown">
+                  <button class="btn btn-secondary dropdown-toggle " type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                    English (US)  <i data-feather="chevron-down"></i>
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    <li><button class="dropdown-item" type="button">French</button></li>
+                  </ul>
+                </div>
+                {{/language}}{{/yaml}} -->
+              <div class="dropdown" id="instructor-dropdown">
+                        <button class="btn btn-secondary dropdown-toggle bordered-button" type="button" id="dropdownMenu1" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i aria-hidden="true" class="icon" data-feather="eye"></i> Learner View <i data-feather="chevron-down"></i>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                  <li><button class="dropdown-item" type="button" onclick="window.location.href='./instructor/07-github.html';">Instructor View</button></li>
+                </ul>
+                      </div>
+            </div>
+          </div>
+          <hr>
+        </header>
+        <nav class="navbar navbar-expand-xl bottom-nav carpentries" aria-label="Main Navigation">
+          <div class="container-fluid nav-container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle Navigation">
+              <span class="navbar-toggler-icon"></span>
+              <span class="menu-title">Menu</span>
+            </button>
+            <div class="nav-logo">
+              <img class="small-logo" alt="Carpentries" src="site_libs/quarto-contrib/carpentries-images-1.0.0/images/carpentries-logo-sm.svg">
+            </div>
+            <div class="lesson-title-md">
+              Version Control with Git
+            </div>
+            <div class="search-icon-sm">
+              <!-- TODO: do not show until we have search
+                  <i role="img" aria-label="Search the All In One page" data-feather="search"></i>
+                -->
+            </div>
+            <div class="desktop-nav">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                  <span class="lesson-title">
+                    Version Control with Git
+                  </span>
+                </li>
+                <!-- We want to include a setup link prominently in the resources for overview pages -->
+                <li>
+                  <!-- NOTE: the reason why we do not use the site root here is because we would need to set the site context _before_ overview -->
+                  <a class="nav-link" href="index.html#setup">Setup</a>
+                </li>
+                        <li class="nav-item">
+                  <a class="nav-link" href="key-points.html">Key Points</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="reference.html#glossary">Glossary</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="profiles.html">Learner Profiles</a>
+                </li>
+                                  <li class="nav-item dropdown">
+                    <button class="nav-link dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                      More <i data-feather="chevron-down"></i>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      
+
+                      <li><a class="dropdown-item" href="reference.html">Git Cheatsheets for Quick Reference</a></li>
+                      <li><a class="dropdown-item" href="discuss.html">Discussion</a></li>
+                      <li><a class="dropdown-item" href="fcm-git_cheat_sheet.html">FCM vs Git Cheat Sheet</a></li>
+                      <li><a class="dropdown-item" href="repo-quick-start.html">Quick Start Repository Guide</a></li>            </ul>
+                  </li>
+                      </ul>
+            </div>
+            <!--
+              <form class="d-flex col-md-2 search-form">
+                <fieldset disabled>
+                <input class="form-control me-2 searchbox" type="search" placeholder="Search" aria-label="Search">
+                  <button class="btn btn-outline-success tablet-search-button"  type="submit">
+                    <i class="search-icon" data-feather="search" role="img" aria-label="Search the All In One page"></i>
+                  </button>
+                </fieldset>
+              </form>
+              -->
+            <!--     <a id="search-button" class="btn btn-primary" href="aio.html" role="button"
+              aria-label="Search the All In One page">Search the All In One page</a>
+             -->
+            <div class="input-group">
+              <div id="quarto-search" class="form-outline" data-mdb-input-init="">
+                <!-- <input type="search" id="form1" class="form-control" /> -->
+                <!-- <label class="form-label" for="form1">Search</label> -->
+              </div>
+              <!-- <button type="button" class="btn btn-primary" data-mdb-ripple-init> -->
+                <!-- <i class="fas fa-search"></i> -->
+              <!-- </button> -->
+            </div>
+          </div><!--/div.container-fluid -->
+        </nav>
+
+        <div class="col-md-12 mobile-title">
+          Version Control with Git
+        </div>
+
+        <aside class="col-md-12 lesson-progress">
+          <div style="width: 0%" class="percentage">
+            0%
+          </div>
+          <div class="progress carpentries">
+            <div class="progress-bar carpentries" role="progressbar" style="width: 0%" aria-valuenow="0" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
+            </div>
+          </div>
+        </aside>    <div class="container">
+      <div class="row">
+        <div id="sidebar-col" class="col-lg-4">
+          <div id="sidebar" class="sidebar">
+            <nav aria-labelledby="flush-headingEleven">
+              <button role="button" aria-label="close menu" alt="close menu" aria-expanded="true" aria-controls="sidebar" class="collapse-toggle" data-collapse="Collapse" data-episodes="../Episodes">
+                <i class="search-icon" data-feather="x" role="img"></i>
+              </button>
+              <div class="sidebar-inner">
+                <div class="row mobile-row" id="theme-row-mobile">
+                  <div class="col" id="theme-selector">
+                    <li class="nav-item dropdown" id="theme-button-list">
+                      <button class="btn btn-link nav-link px-0 px-lg-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme (auto)">
+                        <svg class="bi my-1 theme-icon-active">
+                          <use href="#circle-half"></use>
+                        </svg>
+                        <span class="d-lg-none ms-1" id="bd-theme-text">Toggle Theme</span>
+                      </button>
+                      <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="bd-theme-text">
+                        <li>
+                          <button type="button" class="btn dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+                            <svg class="bi me-2 theme-icon">
+                              <use href="#sun-fill"></use>
+                            </svg>
+                            Light
+                            <svg class="bi ms-auto d-none">
+                              <use href="#check2"></use>
+                            </svg>
+                          </button>
+                        </li>
+                        <li>
+                          <button type="button" class="btn dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                            <svg class="bi me-2 theme-icon">
+                              <use href="#moon-stars-fill"></use>
+                            </svg>
+                            Dark
+                            <svg class="bi ms-auto d-none">
+                              <use href="#check2"></use>
+                            </svg>
+                          </button>
+                        </li>
+                        <li>
+                          <button type="button" class="btn dropdown-item d-flex align-items-center active" data-bs-theme-value="auto" aria-pressed="true">
+                            <svg class="bi me-2 theme-icon">
+                              <use href="#circle-half"></use>
+                            </svg>
+                            Auto
+                            <svg class="bi ms-auto d-none">
+                              <use href="#check2"></use>
+                            </svg>
+                          </button>
+                        </li>
+                      </ul>
+                    </li>
+                  </div>
+                </div>
+                <div class="row mobile-row">
+                  <div class="col">
+                    <div class="sidenav-view-selector">
+                      <div class="accordion accordion-flush" id="accordionFlush9">
+                        <div class="accordion-item">
+                                            <h2 class="accordion-header anchored" id="flush-headingNine">
+                            <button class="accordion-button collapsed" id="instructor" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseNine" aria-expanded="false" aria-controls="flush-collapseNine">
+                              <i id="eye" aria-hidden="true" class="icon" data-feather="eye"></i> Learner View
+                            </button>
+                          </h2>
+                          <div id="flush-collapseNine" class="accordion-collapse collapse" aria-labelledby="flush-headingNine" data-bs-parent="#accordionFlush2">
+                            <div class="accordion-body">
+                              <a href="instructor/07-github.html">Instructor View</a>
+                            </div>
+                          </div>
+                                          </div><!--/div.accordion-item-->
+                      </div><!--/div.accordion-flush-->
+                    </div><!--div.sidenav-view-selector -->
+                  </div><!--/div.col -->
+                  <!-- {{#yaml}}{{#language}}
+                  <div class="col">
+                    <div class="sidenav-language-selector">
+                      <div class="accordion accordion-flush" id="accordionFlush10">
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="flush-headingTen">
+                            <button class="accordion-button side-language collapsed" id="language" type="button"
+                              data-bs-toggle="collapse" data-bs-target="#flush-collapseTen" aria-expanded="false"
+                              aria-controls="flush-collapseTen">English (US)
+                            </button>
+                          </h2>
+                          <div id="flush-collapseTen" class="accordion-collapse collapse" aria-labelledby="flush-headingNine"
+                            data-bs-parent="#accordionFlush2">
+                            <div class="accordion-body">
+                              <a href="#">French</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {{/language}}{{/yaml}} -->
+                  <hr>
+                </div><!--/div.mobile-row -->
+
+                <div class="accordion accordion-flush" id="accordionFlush11">
+                  <div class="accordion-item">
+
+                    <button id="chapters" class="accordion-button show" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseEleven" aria-expanded="false" aria-controls="flush-collapseEleven">
+                      <h2 class="accordion-header chapters anchored" id="flush-headingEleven">../EPISODES</h2>
+                    </button>
+                    <div id="flush-collapseEleven" class="accordion-collapse show collapse" aria-labelledby="flush-headingEleven" data-bs-parent="#accordionFlush11">
+
+                      <div class="accordion-body">
+                        
+
+                                <div class="accordion accordion-flush" id="accordionFlush1">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading1">
+                                      <a href="index.html">Summary and Setup</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush2">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading2">
+                                      <a href="01-basics.html">1. Automated Version Control</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush3">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading3">
+                                      <a href="02-setup.html">2. Setting Up Git</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush4">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading4">
+                                      <a href="03-create.html">3. Creating a Repository</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush5">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading5">
+                                      <a href="09-branches.html">4. Branches</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush6">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading6">
+                                      <a href="04-changes.html">5. Tracking Changes</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush7">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading7">
+                                      <a href="05-history.html">6. Exploring History</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush8">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading8">
+                                      <a href="06-reverting-changes.html">7. Reverting Changes</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush9">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading9">
+                                      <a href="06-ignore.html">8. Ignoring Things</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush10">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading10">
+                                      <a href="Break.html">9. Break</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush11">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading11">
+                                      <a href="07-github.html">10. Remotes in GitHub</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush12">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading12">
+                                      <a href="08-github-interface.html">11. Exploring GitHub</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush13">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading13">
+                                      <a href="09-github-history.html">12. Exploring History on GitHub</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush14">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading14">
+                                      <a href="10-pull-requests.html">13. Pull Requests</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush15">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading15">
+                                      <a href="11-configuring-github.html">14. Configuring GitHub</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush16">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading16">
+                                      <a href="End.html">15. End</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush17">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading17">
+                                      <a href="10-open.html">16. Open Science</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush18">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading18">
+                                      <a href="11-licensing.html">17. Licensing</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush19">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading19">
+                                      <a href="12-citation.html">18. Citation</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush20">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading20">
+                                      <a href="13-hosting.html">19. Hosting</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush21">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading21">
+                                      <a href="14-supplemental-rstudio.html">20. 'Using Git from RStudio'</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->              </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- <a href="index.html">Home</a> -->
+
+                <hr class="half-width">
+                          <div class="accordion accordion-flush lesson-resources" id="accordionFlush12">
+                    <div class="accordion-item">
+                      <h2 class="accordion-header anchored" id="flush-headingTwelve">
+                        <button class="accordion-button collapsed" id="lesson-resources" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwelve" aria-expanded="false" aria-controls="flush-collapseTwelve">
+                          RESOURCES
+                        </button>
+                      </h2>
+                      <div id="flush-collapseTwelve" class="accordion-collapse collapse" aria-labelledby="flush-headingTwelve" data-bs-parent="#accordionFlush12">
+                        <div class="accordion-body">
+                          <ul>
+                            <!-- We want to include a setup link prominently in the resources for overview pages -->
+                            <li>
+                              <!-- NOTE: the reason why we do not use the site root here is because we would need to set the site
+                              context _before_ overview -->
+                              <a href="index.html#setup">Setup</a>
+                            </li>
+                                                <li>
+                              <a href="key-points.html">Key Points</a>
+                            </li>
+                            <li>
+                              <a href="reference.html#glossary">Glossary</a>
+                            </li>
+                            <li>
+                              <a href="profiles.html">Learner Profiles</a>
+                            </li>
+                                                <!-- {{{resources}}} -->
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- <hr class="half-width lesson-resources" /> -->
+                  
+                  
+                  <hr class="d-none d-sm-block d-md-none">
+
+                  <div class="d-grid gap-1">
+                              </div>
+                </div><!-- /div.accordion -->
+              </nav></div><!-- /div.sidebar-inner -->
+            
+          </div><!-- /div.sidebar -->
+        </div><!-- /div.sidebar-col -->                                <p>Version control really comes into its own when we begin to collaborate with other people. We already have most of the machinery we need to do this; the only thing missing is to copy changes from one repository to another.</p>
+                      <p>Systems like Git allow us to move work between any two repositories. In practice, though, it’s easiest to use one copy as a central hub, and to keep it on the web rather than on someone’s laptop. Most programmers use hosting services like <a href="https://github.com">GitHub</a>, <a href="https://bitbucket.org">Bitbucket</a> or <a href="https://gitlab.com/">GitLab</a> to hold those main copies; we’ll explore the pros and cons of this in a <a href="13-hosting.html">later episode</a>.</p>
+                      <p>Let’s now share the changes we’ve made to our current project with the world. To this end we are going to create a <em>remote</em> repository that will be linked to our <em>local</em> repository.</p>
+                      <section id="create-a-remote-repository" class="level2">
+                      <h2 class="anchored" data-anchor-id="create-a-remote-repository">1. Create a remote repository</h2>
+                      <p>Log in to <a href="https://github.com">GitHub</a>, then click on the icon in the top right corner to create a new repository called <code>weather</code>:</p>
+                      <p><img src="fig/github-create-repo-01.png" class="img-fluid" alt="The first step in creating a repository on GitHub: clicking the &quot;create new&quot; button"></p>
+                      <p>Name your repository “weather” and then click “Create Repository”.</p>
+                      <p>Note: Since this repository will be connected to a local repository, it needs to be empty. Leave “Initialize this repository with a README” unchecked, and keep “None” as options for both “Add .gitignore” and “Add a license.” See the “GitHub License and README files” exercise below for a full explanation of why the repository needs to be empty.</p>
+                      <p><img src="fig/github-create-repo-02.png" class="img-fluid" alt="The second step in creating a repository on GitHub: filling out the new repository form to provide the repository name, and specify that neither a readme nor a license should be created"></p>
+                      <div id="accordionSpoiler1" class="accordion spoiler-accordion accordion-flush">
+                      <div class="accordion-item">
+                      <button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
+                        <h3 class="accordion-header anchored" id="headingSpoiler1">
+                        <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div>
+                        Repository Visibility
+                        </h3>
+                      </button>
+                      <div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
+                      <div class="accordion-body">
+                      <p>Here we have chosen to make our repository public. The visibility of your repository depends on which option you choose:</p>
+                      <ul>
+                      <li>Private: only you</li>
+                      <li>Internal (organisations only): read permissions to anyone in the organisation</li>
+                      <li>Public: read permissions to anyone</li>
+                      </ul>
+                      <p>Some organisations will restrict the creation of public repositories so you may find their default is internal. If your project deals with sensitive material then create a private repository.</p>
+                      </div>
+                      </div>
+                      </div>
+                      </div>
+                      <p>As soon as the repository is created, GitHub displays a page with a URL and some information on how to configure your local repository. Ignore the suggested commands for now as we will run these later.</p>
+                      <p><img src="fig/github-create-repo-03.png" class="img-fluid" alt="The summary page displayed by GitHub after a new repository has been created. It contains instructions for configuring the new GitHub repository as a Git remote"></p>
+                      <p>This effectively does the following on GitHub’s servers:</p>
+                      <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> mkdir weather</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cd weather</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git init</span></code></pre></div>
+                      <p>If you remember back to the earlier <a href="04-changes.html">episode</a> where we added and committed our earlier work on <code>forecast.md</code>, we had a diagram of the local repository which looked like this:</p>
+                      <p><img src="fig/git-staging-area.svg" class="img-fluid" alt="A diagram showing how &quot;git add&quot; registers changes in the staging area, while &quot;git commit&quot; moves changes from the staging area to the repository"></p>
+                      <p>Now that we have two repositories, we need a diagram like this:</p>
+                      <p><img src="fig/git-freshly-made-github-repo.svg" class="img-fluid" alt="A diagram illustrating how the GitHub &quot;weather&quot; repository is also a Git repository like our local repository, but that it is currently empty"></p>
+                      <p>Note that our local repository still contains our earlier work on <code>forecast.md</code>, but the remote repository on GitHub appears empty as it doesn’t contain any files yet.</p>
+                      </section>
+                      <section id="connect-local-to-remote-repository" class="level2">
+                      <h2 class="anchored" data-anchor-id="connect-local-to-remote-repository">2. Connect local to remote repository</h2>
+                      <p>Now we connect the two repositories. We do this by making the GitHub repository a <a href="reference.html#remote">remote</a> for the local repository. The home page of the repository on GitHub includes the URL string we need to identify it:</p>
+                      <p><img src="fig/github-change-repo-string.png" class="img-fluid" alt="A screenshot showing that clicking on &quot;SSH&quot; will make GitHub provide the SSH URL for a repository instead of the HTTPS URL"></p>
+                      <p>Click on the ‘SSH’ link to change the <a href="reference.html#protocol">protocol</a> from HTTPS to SSH.</p>
+                      <div class="callout callout-style-simple callout-none no-icon callout-titled">
+                      <div class="callout-header d-flex align-content-center">
+                      <div class="callout-icon-container">
+                      <i class="callout-icon no-icon"></i>
+                      </div>
+                      <div class="callout-title-container flex-fill">
+                      HTTPS vs.&nbsp;SSH
+                      </div>
+                      </div>
+                      <div class="callout-body-container callout-body">
+                      <p>We use SSH here because, while it requires some additional configuration, it is a security protocol widely used by many applications. The steps below describe SSH at a minimum level for GitHub.</p>
+                      </div>
+                      </div>
+                      <p>Copy that URL from the browser, go into the local <code>weather</code> repository, and run this command:</p>
+                      <div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git remote add origin git@github.com:mo-eormerod/weather.git</span></code></pre></div>
+                      <p>Make sure to use the URL for your repository: the only difference should be your username instead of <code>mo-eormerod</code>.</p>
+                      <p><code>origin</code> is a local name used to refer to the remote repository. It could be called anything, but <code>origin</code> is a convention that is often used by default in Git and GitHub, so it’s helpful to stick with this unless there’s a reason not to.</p>
+                      <p>We can check that the command has worked by running <code>git remote -v</code>:</p>
+                      <div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git remote <span class="at">-v</span></span></code></pre></div>
+                      <pre class="output"><code>origin   git@github.com:mo-eormerod/weather.git (fetch)
+origin   git@github.com:mo-eormerod/weather.git (push)</code></pre>
+                      <p>We’ll discuss remotes in more detail in the next episode, while talking about how they might be used for collaboration.</p>
+                      </section>
+                      <section id="ssh-background-and-setup" class="level2">
+                      <h2 class="anchored" data-anchor-id="ssh-background-and-setup">3. SSH Background and Setup</h2>
+                      <div id="accordionInstructor1" class="accordion instructor-note accordion-flush">
+                      <div class="accordion-item">
+                      <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
+                        <h3 class="accordion-header anchored" id="headingInstructor1">
+                        <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div>
+                        Instructor Note
+                        </h3>
+                      </button>
+                      <div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
+                      <div class="accordion-body">
+                      <p>Some learners may have set up an ssh key already. If they have a key with this name: <code>~/.ssh/id_ed25519_github</code> and can successfully authenticate with <code>ssh -T git@github.com</code> they can skip this section.</p>
+                      <p>If their ssh key name does not match the one above we <strong>strongly</strong> recommend they follow the instructions below.</p>
+                      <p>Those who are skipping this section can revisit the challenges in earlier episodes (yellow callouts with a lightning bolt) or read through the <a href="discuss.html">discussion notes</a>.</p>
+                      </div>
+                      </div>
+                      </div>
+                      </div>
+                      <p>Before you can connect to a remote repository, you need to set up a way for your computer to authenticate with GitHub so it knows it’s you trying to connect to the remote repository.</p>
+                      <p>We are going to set up the method that is commonly used by many different services to authenticate access on the command line. This method is called Secure Shell Protocol (SSH). SSH is a cryptographic network protocol that allows secure communication between computers using an otherwise insecure network.</p>
+                      <p>SSH uses what is called a key pair. This is two keys that work together to validate access. One key is publicly known and called the public key, and the other key called the private key is kept private. Very descriptive names.</p>
+                      <p>You can think of the public key as a padlock, and only you have the key (the private key) to open it. You use the public key where you want a secure method of communication, such as your GitHub account. You give this padlock, or public key, to GitHub and say “lock the communications to my account with this so that only computers that have my private key can unlock communications and send git commands as my GitHub account.”</p>
+                      <p>What we will do now is the minimum required to set up the SSH keys and add the public key to a GitHub account. The first thing we are going to do is check if this has already been done on the computer you’re on. Because generally speaking, this setup only needs to happen once and then you can forget about it.</p>
+                      <div class="callout callout-style-simple callout-none no-icon callout-titled">
+                      <div class="callout-header d-flex align-content-center">
+                      <div class="callout-icon-container">
+                      <i class="callout-icon no-icon"></i>
+                      </div>
+                      <div class="callout-title-container flex-fill">
+                      Keeping your keys secure
+                      </div>
+                      </div>
+                      <div class="callout-body-container callout-body">
+                      <p>You shouldn’t really forget about your SSH keys, since they keep your account secure. It’s good practice to audit your secure shell keys every so often. Especially if you are using multiple computers to access your account.</p>
+                      </div>
+                      </div>
+                      <p>We will run the list command to check what key pairs already exist on your computer.</p>
+                      <div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-al</span> ~/.ssh</span></code></pre></div>
+                      <p>Your output is going to look a little different depending on whether or not SSH has ever been set up on the computer you are using.</p>
+                      <p>If you have not set up SSH on your computer, you will see</p>
+                      <pre class="output"><code>ls: cannot access '~/.ssh': No such file or directory</code></pre>
+                      <p>If SSH has been set up on the computer you’re using, the public and private key pairs will be listed. The file names are either <code>id_ed25519</code>/<code>id_ed25519.pub</code> or <code>id_rsa</code>/<code>id_rsa.pub</code> depending on how the key pairs were set up.</p>
+                      <section id="create-an-ssh-key-pair" class="level3">
+                      <h3 class="anchored" data-anchor-id="create-an-ssh-key-pair">3.1 Create an SSH key pair</h3>
+                      <p>To create an SSH key pair use the following command, where the <code>-t</code> option specifies which type of algorithm to use:</p>
+                      <div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ssh-keygen <span class="at">-t</span> ed25519 <span class="at">-C</span> <span class="st">"e.ormerod@mo-weather.uk"</span></span></code></pre></div>
+                      <p>The <code>-C</code> flag attaches a comment to the key. The comment has no effect on your key, you may place anything here to help you remember what the key is for. It makes no difference whether you use a public email or your no-reply private GitHub email in the comment.</p>
+                      <p>If you are using a legacy system that doesn’t support the Ed25519 algorithm, use: <code>$ ssh-keygen -t rsa -b 4096 -C "your_email@example.com"</code></p>
+                      <pre class="output"><code>Generating public/private ed25519 key pair.
+Enter file in which to save the key (~/.ssh/id_ed25519):</code></pre>
+                      <p>We want to store our key in the file <code>~/.ssh/id_ed25519_github</code>.</p>
+                      <pre class="output"><code>Created directory '~/.ssh'.
+Enter passphrase (empty for no passphrase):</code></pre>
+                      <p>Now you will be prompted for a passphrase. If the computer you work on is shared between multiple users you should set a passphrase. Be sure to use something memorable or save your passphrase somewhere, as there is no “reset my password” option. If you do not share your computer there is no need to set a passphrase so just press <kbd>Enter</kbd>.</p>
+                      <p>Note that, when typing a passphrase on a terminal, there won’t be any visual feedback of your typing. This is normal: your passphrase will be recorded even if you see nothing changing on your screen.</p>
+                      <pre class="output"><code>Enter same passphrase again:</code></pre>
+                      <p>After entering the same passphrase a second time, we receive the confirmation</p>
+                      <pre class="output"><code>Your identification has been saved in ~/.ssh/id_ed25519_github
+Your public key has been saved in ~/.ssh/id_ed25519_github.pub
+The key fingerprint is:
+SHA256:SMSPIStNyA00KPxuYu94KpZgRAYjgt9g4BA4kFy3g1o e.ormerod@mo-weather.uk
+The key's randomart image is:
++--[ED25519 256]--+
+|^B== o.          |
+|%*=.*.+          |
+|+=.E =.+         |
+| .=.+.o..        |
+|....  . S        |
+|.+ o             |
+|+ =              |
+|.o.o             |
+|oo+.             |
++----[SHA256]-----+</code></pre>
+                      <p>The “identification” is actually the private key. You should never share it. The public key is appropriately named. The “key fingerprint” is a shorter version of a public key.</p>
+                      <p>Now that we have generated the SSH keys, we will find the SSH files when we check.</p>
+                      <div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-al</span> ~/.ssh</span></code></pre></div>
+                      <pre class="output"><code>drwxr-xr-x 1 Eleanor   197121   0 Jul 16 14:48 ./
+drwxr-xr-x 1 Eleanor   197121   0 Jul 16 14:48 ../
+-rw-r--r-- 1 Eleanor   197121 419 Jul 16 14:48 id_ed25519_github
+-rw-r--r-- 1 Eleanor   197121 106 Jul 16 14:48 id_ed25519_github.pub</code></pre>
+                      </section>
+                      <section id="copy-the-public-key-to-github" class="level3">
+                      <h3 class="anchored" data-anchor-id="copy-the-public-key-to-github">3.2 Copy the public key to GitHub</h3>
+                      <p>Now we have a SSH key pair and we can run this command to check if GitHub can read our authentication.</p>
+                      <div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-T</span> git@github.com</span></code></pre></div>
+                      <pre class="output"><code>The authenticity of host 'github.com (192.30.255.112)' can't be established.
+RSA key fingerprint is SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? y
+Please type 'yes', 'no' or the fingerprint: yes
+Warning: Permanently added 'github.com' (RSA) to the list of known hosts.
+git@github.com: Permission denied (publickey).</code></pre>
+                      <p>Right, we forgot that we need to give GitHub our public key!</p>
+                      <div id="accordionSpoiler2" class="accordion spoiler-accordion accordion-flush">
+                      <div class="accordion-item">
+                      <button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler2" aria-expanded="false" aria-controls="collapseSpoiler2">
+                        <h3 class="accordion-header anchored" id="headingSpoiler2">
+                        <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div>
+                        Checking the GitHub RSA Key
+                        </h3>
+                      </button>
+                      <div id="collapseSpoiler2" class="accordion-collapse collapse" aria-labelledby="headingSpoiler2" data-bs-parent="#accordionSpoiler2">
+                      <div class="accordion-body">
+                      <p>Ideally before connecting to a new host, like <code>github.com</code> in the output above, you would check the RSA key fingerprint matches the expected value. GitHub publishes their public <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/githubs-ssh-key-fingerprints">SSH key fingerprints</a> for you to check against.</p>
+                      </div>
+                      </div>
+                      </div>
+                      </div>
+                      <p>First, we need to copy the public key. Be sure to include the <code>.pub</code> at the end, otherwise you’re looking at the private key.</p>
+                      <div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> ~/.ssh/id_ed25519_github.pub</span></code></pre></div>
+                      <pre class="output"><code>ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDmRA3d51X0uu9wXek559gfn6UFNF69yZjChyBIU2qKI e.ormerod@mo-weather.uk</code></pre>
+                      <p>Now, going to GitHub.com, click on your profile icon in the top right corner to get the drop-down menu. Click “Settings”, then on the settings page, click “SSH and GPG keys”, on the left side “Access” menu. Click the “New SSH key” button on the right side. Now, you can add the title (normally an ID for the computer storing the keys such as “Work Linux”), paste your SSH key into the field, and click the “Add SSH key” to complete the setup.</p>
+                      <div class="callout callout-style-simple callout-none no-icon callout-titled">
+                      <div class="callout-header d-flex align-content-center">
+                      <div class="callout-icon-container">
+                      <i class="callout-icon no-icon"></i>
+                      </div>
+                      <div class="callout-title-container flex-fill">
+                      Single sign-on (SSO)
+                      </div>
+                      </div>
+                      <div class="callout-body-container callout-body">
+                      <p>If you are part of an organisation that requires single sign-on (SSO) to access their GitHub organisation you will need to authorise the key for use in the organisation.</p>
+                      <p>Next to the newly created SSH key in the GitHub settings click on “Configure SSO”. Find the organisation in the list and click on “Authorise”.</p>
+                      </div>
+                      </div>
+                      <p>Now that we’ve set that up, let’s check our authentication again from the command line.</p>
+                      <div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ssh <span class="at">-T</span> git@github.com</span></code></pre></div>
+                      <pre class="output"><code>Hi Eleanor! You've successfully authenticated, but GitHub does not provide shell access.</code></pre>
+                      <p>Good! This output confirms that the SSH key works as intended. We are now ready to push our work to the remote repository.</p>
+                      <div id="accordionSpoiler3" class="accordion spoiler-accordion accordion-flush">
+                      <div class="accordion-item">
+                      <button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler3" aria-expanded="false" aria-controls="collapseSpoiler3">
+                        <h3 class="accordion-header anchored" id="headingSpoiler3">
+                        <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div>
+                        Troubleshooting SSH Setup
+                        </h3>
+                      </button>
+                      <div id="collapseSpoiler3" class="accordion-collapse collapse" aria-labelledby="headingSpoiler3" data-bs-parent="#accordionSpoiler3">
+                      <div class="accordion-body">
+                      <p>If your new key failed to connect you may need to alter your ssh config.</p>
+                      <ol type="1">
+                      <li>Create the <code>~/.ssh/config</code> file if it doesn’t exist</li>
+                      <li>Add the following to the file:</li>
+                      </ol>
+                      <pre class="ssh-config"><code>Host github.com
+  IdentityFile ~/.ssh/id_ed25519_github</code></pre>
+                      <p>This explicitly states which key to use for <code>github.com</code> and is needed if you have many SSH keys already for other hosts.</p>
+                      </div>
+                      </div>
+                      </div>
+                      </div>
+                      </section>
+                      </section>
+                      <section id="push-local-changes-to-a-remote" class="level2">
+                      <h2 class="anchored" data-anchor-id="push-local-changes-to-a-remote">4. Push local changes to a remote</h2>
+                      <p>Now that authentication is setup, we can return to the local repository. Ensure you are on the <code>main</code> branch:</p>
+                      <div class="sourceCode" id="cb21"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git switch main</span></code></pre></div>
+                      <p>This command will push our main branch on our local repository to the repository on GitHub:</p>
+                      <div class="sourceCode" id="cb22"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git push</span></code></pre></div>
+                      <pre class="output"><code>fatal: The current branch main has no upstream branch.
+To push the current branch and set the remote as upstream, use
+
+    git push --set-upstream origin main
+</code></pre>
+                      <p>Git is telling us it doesn’t know what branch we want to push our local <code>main</code> branch to on GitHub. We can tell Git this by setting the upstream <code>origin</code> branch to also be named <code>main</code>.</p>
+                      <p>If you entered a passphrase when creating an shh key you will be prompted for it.</p>
+                      <pre class="output"><code>Enumerating objects: 16, done.
+Counting objects: 100% (16/16), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (13/13), done.
+Writing objects: 100% (16/16), 1.69 KiB | 216.00 KiB/s, done.
+Total 16 (delta 1), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (1/1), done.
+To github.com:mo-eormerod/weather.git
+ * [new branch]      main -&gt; main
+branch 'main' set up to track 'origin/main'.</code></pre>
+                      <div class="callout callout-style-simple callout-none no-icon callout-titled">
+                      <div class="callout-header d-flex align-content-center">
+                      <div class="callout-icon-container">
+                      <i class="callout-icon no-icon"></i>
+                      </div>
+                      <div class="callout-title-container flex-fill">
+                      Automatically set the upstream branch
+                      </div>
+                      </div>
+                      <div class="callout-body-container callout-body">
+                      <p>You can get git to automatically set the upstream branch. This avoids having to run git push with the <code>--set-upstream</code> flag the first time you push from a new branch.</p>
+                      <p>Change your git config using:</p>
+                      <div class="sourceCode" id="cb25"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git config <span class="at">--global</span> push.autoSetupRemote true</span></code></pre></div>
+                      </div>
+                      </div>
+                      <div class="callout callout-style-simple callout-none no-icon callout-titled">
+                      <div class="callout-header d-flex align-content-center">
+                      <div class="callout-icon-container">
+                      <i class="callout-icon no-icon"></i>
+                      </div>
+                      <div class="callout-title-container flex-fill">
+                      Proxy
+                      </div>
+                      </div>
+                      <div class="callout-body-container callout-body">
+                      <p>If the network you are connected to uses a proxy, there is a chance that your last command failed with “Could not resolve hostname” as the error message. To solve this issue, you need to tell Git about the proxy:</p>
+                      <div class="sourceCode" id="cb26"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git config <span class="at">--global</span> http.proxy http://user:password@proxy.url</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git config <span class="at">--global</span> https.proxy https://user:password@proxy.url</span></code></pre></div>
+                      <p>When you connect to another network that doesn’t use a proxy, you will need to tell Git to disable the proxy using:</p>
+                      <div class="sourceCode" id="cb27"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git config <span class="at">--global</span> <span class="at">--unset</span> http.proxy</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git config <span class="at">--global</span> <span class="at">--unset</span> https.proxy</span></code></pre></div>
+                      </div>
+                      </div>
+                      <div class="callout callout-style-simple callout-none no-icon callout-titled">
+                      <div class="callout-header d-flex align-content-center">
+                      <div class="callout-icon-container">
+                      <i class="callout-icon no-icon"></i>
+                      </div>
+                      <div class="callout-title-container flex-fill">
+                      Password Managers
+                      </div>
+                      </div>
+                      <div class="callout-body-container callout-body">
+                      <p>If your operating system has a password manager configured, <code>git push</code> will try to use it when it needs your username and password. For example, this is the default behavior for Git Bash on Windows. If you want to type your username and password at the terminal instead of using a password manager, type:</p>
+                      <div class="sourceCode" id="cb28"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> unset SSH_ASKPASS</span></code></pre></div>
+                      <p>in the terminal, before you run <code>git push</code>. Despite the name, <a href="https://git-scm.com/docs/gitcredentials#_requesting_credentials">Git uses <code>SSH_ASKPASS</code> for all credential entry</a>, so you may want to unset <code>SSH_ASKPASS</code> whether you are using Git via SSH or https.</p>
+                      <p>You may also want to add <code>unset SSH_ASKPASS</code> at the end of your <code>~/.bashrc</code> to make Git default to using the terminal for usernames and passwords.</p>
+                      </div>
+                      </div>
+                      <p>Our local and remote repositories are now in this state:</p>
+                      <p><img src="fig/github-repo-after-first-push.svg" class="img-fluid" alt="A diagram showing how &quot;git push origin&quot; will push changes from the local repository to the remote, making the remote repository an exact copy of the local repository."></p>
+                      <div class="callout callout-style-simple callout-none no-icon callout-titled">
+                      <div class="callout-header d-flex align-content-center">
+                      <div class="callout-icon-container">
+                      <i class="callout-icon no-icon"></i>
+                      </div>
+                      <div class="callout-title-container flex-fill">
+                      The ‘-u’ Flag
+                      </div>
+                      </div>
+                      <div class="callout-body-container callout-body">
+                      <p>You may see a <code>-u</code> option used with <code>git push</code> in some documentation. This option is synonymous with the <code>--set-upstream-to</code> option for the <code>git branch</code> command, and is used to associate the current branch with a remote branch so that the <code>git push</code> command can be used without any arguments. To do this, simply use <code>git push -u origin main</code> once the remote has been set up.</p>
+                      <p>Here, we are telling Git to push the branch to the origin (GitHub) repositories <code>main</code> branch.</p>
+                      </div>
+                      </div>
+                      <p>We can pull changes from the remote repository to the local one as well:</p>
+                      <div class="sourceCode" id="cb29"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git pull</span></code></pre></div>
+                      <pre class="output"><code>Already up-to-date.</code></pre>
+                      <p>Pulling has no effect in this case because the two repositories are already synchronized. If someone else had pushed some changes to the repository on GitHub, though, this command would download them to our local repository.</p>
+                      <div id="discussion1" class="callout discussion">
+                      <div class="callout-square">
+                      <i class="callout-icon" data-feather="message-circle"></i>
+                      </div>
+                      <section id="github-gui" class="level3 callout-title callout-inner">
+                      <h3 class="callout-title anchored" data-anchor-id="github-gui">GitHub GUI</h3>
+                      <div class="callout-content">
+                      <p>Browse to your <code>weather</code> repository on GitHub. Under the Code tab, find and click on the text that says “XX commits” (where “XX” is some number). Hover over, and click on, the three buttons to the right of each commit. What information can you gather/explore from these buttons? How would you get that same information in the shell?</p>
+                      <div class="proof solution">
+                      <p><span class="proof-title"><em>Solution</em> (Solution). </span>The left-most button (with the picture of a clipboard) copies the full identifier of the commit to the clipboard. In the shell, <code>git log</code> will show you the full commit identifier for each commit.</p>
+                      <p>When you click on the middle button, you’ll see all of the changes that were made in that particular commit. Green shaded lines indicate additions and red ones removals. In the shell we can do the same thing with <code>git diff</code>. In particular, <code>git diff ID1..ID2</code> where ID1 and ID2 are commit identifiers (e.g.&nbsp;<code>git diff a3bf1e5..041e637</code>) will show the differences between those two commits.</p>
+                      <p>The right-most button lets you view all of the files in the repository at the time of that commit. To do this in the shell, we’d need to checkout the repository at that particular time. We can do this with <code>git checkout ID</code> where ID is the identifier of the commit we want to look at. If we do this, we need to remember to put the repository back to the right state afterwards!</p>
+                      </div>
+                      </div>
+                      </section>
+                      </div>
+                      <div class="callout callout-style-simple callout-none no-icon callout-titled">
+                      <div class="callout-header d-flex align-content-center">
+                      <div class="callout-icon-container">
+                      <i class="callout-icon no-icon"></i>
+                      </div>
+                      <div class="callout-title-container flex-fill">
+                      Uploading files directly in GitHub browser
+                      </div>
+                      </div>
+                      <div class="callout-body-container callout-body">
+                      <p>Github also allows you to skip the command line and upload files directly to your repository without having to leave the browser. There are two options. First you can click the “Upload files” button in the toolbar at the top of the file tree. Or, you can drag and drop files from your desktop onto the file tree. You can read more about this <a href="https://help.github.com/articles/adding-a-file-to-a-repository/">on this GitHub page</a>.</p>
+                      </div>
+                      </div>
+                      <div id="discussion2" class="callout discussion">
+                      <div class="callout-square">
+                      <i class="callout-icon" data-feather="message-circle"></i>
+                      </div>
+                      <section id="github-timestamp" class="level3 callout-title callout-inner">
+                      <h3 class="callout-title anchored" data-anchor-id="github-timestamp">GitHub Timestamp</h3>
+                      <div class="callout-content">
+                      <p>Create a remote repository on GitHub. Push the contents of your local repository to the remote. Make changes to your local repository and push these changes. Go to the repo you just created on GitHub and check the <a href="reference.html#timestamp">timestamps</a> of the files. How does GitHub record times, and why?</p>
+                      <div class="proof solution">
+                      <p><span class="proof-title"><em>Solution</em> (Solution). </span>GitHub displays timestamps in a human readable relative format (i.e.&nbsp;“22 hours ago” or “three weeks ago”). However, if you hover over the timestamp, you can see the exact time at which the last change to the file occurred.</p>
+                      </div>
+                      </div>
+                      </section>
+                      </div>
+                      <div id="discussion3" class="callout discussion">
+                      <div class="callout-square">
+                      <i class="callout-icon" data-feather="message-circle"></i>
+                      </div>
+                      <section id="push-vs.-commit" class="level3 callout-title callout-inner">
+                      <h3 class="callout-title anchored" data-anchor-id="push-vs.-commit">Push vs.&nbsp;Commit</h3>
+                      <div class="callout-content">
+                      <p>In this episode, we introduced the “git push” command. How is “git push” different from “git commit”?</p>
+                      <div class="proof solution">
+                      <p><span class="proof-title"><em>Solution</em> (Solution). </span>When we push changes, we’re interacting with a remote repository to update it with the changes we’ve made locally (often this corresponds to sharing the changes we’ve made with others). Commit only updates your local repository.</p>
+                      </div>
+                      </div>
+                      </section>
+                      </div>
+                      <div id="discussion4" class="callout discussion">
+                      <div class="callout-square">
+                      <i class="callout-icon" data-feather="message-circle"></i>
+                      </div>
+                      <section id="github-license-and-readme-files" class="level3 callout-title callout-inner">
+                      <h3 class="callout-title anchored" data-anchor-id="github-license-and-readme-files">GitHub License and README files</h3>
+                      <div class="callout-content">
+                      <p>In this episode we learned about creating a remote repository on GitHub, but when you initialized your GitHub repo, you didn’t add a README.md or a license file. If you had, what do you think would have happened when you tried to link your local and remote repositories?</p>
+                      <div class="proof solution">
+                      <p><span class="proof-title"><em>Solution</em> (Solution). </span>In this case, we’d see a merge conflict due to unrelated histories. When GitHub creates a README.md file, it performs a commit in the remote repository. When you try to pull the remote repository to your local repository, Git detects that they have histories that do not share a common origin and refuses to merge.</p>
+                      <div class="sourceCode" id="cb31"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git pull origin main</span></code></pre></div>
+                      <pre class="output"><code>warning: no common commits
+remote: Enumerating objects: 3, done.
+remote: Counting objects: 100% (3/3), done.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (3/3), done.
+From https://github.com/mo-eormerod/weather
+ * branch            main     -&gt; FETCH_HEAD
+ * [new branch]      main     -&gt; origin/main
+fatal: refusing to merge unrelated histories</code></pre>
+                      <p>You can force git to merge the two repositories with the option <code>--allow-unrelated-histories</code>. Be careful when you use this option and carefully examine the contents of local and remote repositories before merging.</p>
+                      <div class="sourceCode" id="cb33"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git pull <span class="at">--allow-unrelated-histories</span> origin main</span></code></pre></div>
+                      <pre class="output"><code>From https://github.com/mo-eormerod/weather
+ * branch            main     -&gt; FETCH_HEAD
+Merge made by the 'recursive' strategy.
+README.md | 1 +
+1 file changed, 1 insertion(+)
+create mode 100644 README.md</code></pre>
+                      </div>
+                      </div>
+                      </section>
+                      </div>
+                      <div id="keypoints1" class="callout keypoints">
+                      <div class="callout-square">
+                      <i class="callout-icon" data-feather="key"></i>
+                      </div>
+                      <section class="level3 callout-title callout-inner">
+                      <h3 class="callout-title anchored" data-anchor-id="">Keypoints</h3>
+                      <div class="callout-content">
+                      <ul>
+                      <li>A local Git repository can be connected to one or more remote repositories.</li>
+                      <li>Use the SSH protocol to connect to remote repositories.</li>
+                      <li><code>git push</code> copies changes from a local repository to a remote repository.</li>
+                      <li><code>git pull</code> copies changes from a remote repository to a local repository.</li>
+                      </ul>
+                      </div>
+                      </section>
+                      </div>
+                      
+                      
+                      </section>
+      </div>
+      		<footer class="row footer mx-md-3">
+      			<hr>
+      			<div class="col-md-6">
+              <p>This lesson is subject to the &lt;(Code of Conduct)&gt;</p>
+              <a href="https://github.com/MetOffice/git-novice/edit/main/README.md">Edit on GitHub</a>
+              | <a href="https://github.com/MetOffice/git-novice/blob/main/CONTRIBUTING.md">Contributing</a>
+              | <a href="https://github.com/MetOffice/git-novice/">Source</a><p></p>
+      				<p><a href="https://github.com/MetOffice/git-novice/blob/main/CITATION.cff">Cite</a> | <a href="mailto:d.theodorakis@metoffice.gov.uk">Contact</a> | <a href="https://carpentries.org/about/">About</a></p>
+      			</div>
+      			<div class="col-md-6">
+                      <p>Materials licensed under &lt;({license})&gt; by the authors</p>
+                      <p>Template licensed under &lt;(CC-BY 4.0)&gt; by {template_authors}</p>
+              <p>Built with Quarto</p>
+      			</div>
+      		</footer>
+      	</main></div> <!-- / div.container -->
+      	<div id="to-top">
+      		<a href="#top">
+            <i class="search-icon" data-feather="arrow-up" role="img" aria-label="Back To Top"></i><br>
+      			<!-- <span class="d-none d-sm-none d-md-none d-lg-none d-xl-block">Back</span> To Top -->
+            Back To Top
+      		</a>
+      	</div>
+        <!-- {{#json}}
+        <script type="application/ld+json">
+          {{ meta json}}
+        </script>
+        {{/json}} -->
+      	<script>
+      		feather.replace();
+      	</script>
+
+        <!-- {{#analytics}}
+        {{ meta analytics}}
+        {{/analytics}} -->      <!-- footer closes the container class div -->
+         <!-- /main -->
+        <script id="quarto-html-after-body" type="application/javascript">
+        window.document.addEventListener("DOMContentLoaded", function (event) {
+          const toggleBodyColorMode = (bsSheetEl) => {
+            const mode = bsSheetEl.getAttribute("data-mode");
+            const bodyEl = window.document.querySelector("body");
+            if (mode === "dark") {
+              bodyEl.classList.add("quarto-dark");
+              bodyEl.classList.remove("quarto-light");
+            } else {
+              bodyEl.classList.add("quarto-light");
+              bodyEl.classList.remove("quarto-dark");
+            }
+          }
+          const toggleBodyColorPrimary = () => {
+            const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+            if (bsSheetEl) {
+              toggleBodyColorMode(bsSheetEl);
+            }
+          }
+          toggleBodyColorPrimary();  
+          const icon = "";
+          const anchorJS = new window.AnchorJS();
+          anchorJS.options = {
+            placement: 'right',
+            icon: icon
+          };
+          anchorJS.add('.anchored');
+            var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+            var mailtoRegex = new RegExp(/^mailto:/);
+              var filterRegex = new RegExp("https:\/\/metoffice\.github\.io\/git-novice\/");
+            var isInternal = (href) => {
+                return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+            }
+            // Inspect non-navigation links and adorn them if external
+         	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+            for (var i=0; i<links.length; i++) {
+              const link = links[i];
+              if (!isInternal(link.href)) {
+                // undo the damage that might have been done by quarto-nav.js in the case of
+                // links that we want to consider external
+                if (link.dataset.originalHref !== undefined) {
+                  link.href = link.dataset.originalHref;
+                }
+              }
+            }
+          function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+            const config = {
+              allowHTML: true,
+              maxWidth: 500,
+              delay: 100,
+              arrow: false,
+              appendTo: function(el) {
+                  return el.parentElement;
+              },
+              interactive: true,
+              interactiveBorder: 10,
+              theme: 'quarto',
+              placement: 'bottom-start',
+            };
+            if (contentFn) {
+              config.content = contentFn;
+            }
+            if (onTriggerFn) {
+              config.onTrigger = onTriggerFn;
+            }
+            if (onUntriggerFn) {
+              config.onUntrigger = onUntriggerFn;
+            }
+            window.tippy(el, config); 
+          }
+          const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+          for (var i=0; i<noterefs.length; i++) {
+            const ref = noterefs[i];
+            tippyHover(ref, function() {
+              // use id or data attribute instead here
+              let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+              try { href = new URL(href).hash; } catch {}
+              const id = href.replace(/^#\/?/, "");
+              const note = window.document.getElementById(id);
+              if (note) {
+                return note.innerHTML;
+              } else {
+                return "";
+              }
+            });
+          }
+          const xrefs = window.document.querySelectorAll('a.quarto-xref');
+          const processXRef = (id, note) => {
+            // Strip column container classes
+            const stripColumnClz = (el) => {
+              el.classList.remove("page-full", "page-columns");
+              if (el.children) {
+                for (const child of el.children) {
+                  stripColumnClz(child);
+                }
+              }
+            }
+            stripColumnClz(note)
+            if (id === null || id.startsWith('sec-')) {
+              // Special case sections, only their first couple elements
+              const container = document.createElement("div");
+              if (note.children && note.children.length > 2) {
+                container.appendChild(note.children[0].cloneNode(true));
+                for (let i = 1; i < note.children.length; i++) {
+                  const child = note.children[i];
+                  if (child.tagName === "P" && child.innerText === "") {
+                    continue;
+                  } else {
+                    container.appendChild(child.cloneNode(true));
+                    break;
+                  }
+                }
+                if (window.Quarto?.typesetMath) {
+                  window.Quarto.typesetMath(container);
+                }
+                return container.innerHTML
+              } else {
+                if (window.Quarto?.typesetMath) {
+                  window.Quarto.typesetMath(note);
+                }
+                return note.innerHTML;
+              }
+            } else {
+              // Remove any anchor links if they are present
+              const anchorLink = note.querySelector('a.anchorjs-link');
+              if (anchorLink) {
+                anchorLink.remove();
+              }
+              if (window.Quarto?.typesetMath) {
+                window.Quarto.typesetMath(note);
+              }
+              // TODO in 1.5, we should make sure this works without a callout special case
+              if (note.classList.contains("callout")) {
+                return note.outerHTML;
+              } else {
+                return note.innerHTML;
+              }
+            }
+          }
+          for (var i=0; i<xrefs.length; i++) {
+            const xref = xrefs[i];
+            tippyHover(xref, undefined, function(instance) {
+              instance.disable();
+              let url = xref.getAttribute('href');
+              let hash = undefined; 
+              if (url.startsWith('#')) {
+                hash = url;
+              } else {
+                try { hash = new URL(url).hash; } catch {}
+              }
+              if (hash) {
+                const id = hash.replace(/^#\/?/, "");
+                const note = window.document.getElementById(id);
+                if (note !== null) {
+                  try {
+                    const html = processXRef(id, note.cloneNode(true));
+                    instance.setContent(html);
+                  } finally {
+                    instance.enable();
+                    instance.show();
+                  }
+                } else {
+                  // See if we can fetch this
+                  fetch(url.split('#')[0])
+                  .then(res => res.text())
+                  .then(html => {
+                    const parser = new DOMParser();
+                    const htmlDoc = parser.parseFromString(html, "text/html");
+                    const note = htmlDoc.getElementById(id);
+                    if (note !== null) {
+                      const html = processXRef(id, note);
+                      instance.setContent(html);
+                    } 
+                  }).finally(() => {
+                    instance.enable();
+                    instance.show();
+                  });
+                }
+              } else {
+                // See if we can fetch a full url (with no hash to target)
+                // This is a special case and we should probably do some content thinning / targeting
+                fetch(url)
+                .then(res => res.text())
+                .then(html => {
+                  const parser = new DOMParser();
+                  const htmlDoc = parser.parseFromString(html, "text/html");
+                  const note = htmlDoc.querySelector('main.content');
+                  if (note !== null) {
+                    // This should only happen for chapter cross references
+                    // (since there is no id in the URL)
+                    // remove the first header
+                    if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                      note.children[0].remove();
+                    }
+                    const html = processXRef(null, note);
+                    instance.setContent(html);
+                  } 
+                }).finally(() => {
+                  instance.enable();
+                  instance.show();
+                });
+              }
+            }, function(instance) {
+            });
+          }
+              let selectedAnnoteEl;
+              const selectorForAnnotation = ( cell, annotation) => {
+                let cellAttr = 'data-code-cell="' + cell + '"';
+                let lineAttr = 'data-code-annotation="' +  annotation + '"';
+                const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+                return selector;
+              }
+              const selectCodeLines = (annoteEl) => {
+                const doc = window.document;
+                const targetCell = annoteEl.getAttribute("data-target-cell");
+                const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+                const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+                const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+                const lineIds = lines.map((line) => {
+                  return targetCell + "-" + line;
+                })
+                let top = null;
+                let height = null;
+                let parent = null;
+                if (lineIds.length > 0) {
+                    //compute the position of the single el (top and bottom and make a div)
+                    const el = window.document.getElementById(lineIds[0]);
+                    top = el.offsetTop;
+                    height = el.offsetHeight;
+                    parent = el.parentElement.parentElement;
+                  if (lineIds.length > 1) {
+                    const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+                    const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+                    height = bottom - top;
+                  }
+                  if (top !== null && height !== null && parent !== null) {
+                    // cook up a div (if necessary) and position it 
+                    let div = window.document.getElementById("code-annotation-line-highlight");
+                    if (div === null) {
+                      div = window.document.createElement("div");
+                      div.setAttribute("id", "code-annotation-line-highlight");
+                      div.style.position = 'absolute';
+                      parent.appendChild(div);
+                    }
+                    div.style.top = top - 2 + "px";
+                    div.style.height = height + 4 + "px";
+                    div.style.left = 0;
+                    let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+                    if (gutterDiv === null) {
+                      gutterDiv = window.document.createElement("div");
+                      gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                      gutterDiv.style.position = 'absolute';
+                      const codeCell = window.document.getElementById(targetCell);
+                      const gutter = codeCell.querySelector('.code-annotation-gutter');
+                      gutter.appendChild(gutterDiv);
+                    }
+                    gutterDiv.style.top = top - 2 + "px";
+                    gutterDiv.style.height = height + 4 + "px";
+                  }
+                  selectedAnnoteEl = annoteEl;
+                }
+              };
+              const unselectCodeLines = () => {
+                const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+                elementsIds.forEach((elId) => {
+                  const div = window.document.getElementById(elId);
+                  if (div) {
+                    div.remove();
+                  }
+                });
+                selectedAnnoteEl = undefined;
+              };
+                // Handle positioning of the toggle
+            window.addEventListener(
+              "resize",
+              throttle(() => {
+                elRect = undefined;
+                if (selectedAnnoteEl) {
+                  selectCodeLines(selectedAnnoteEl);
+                }
+              }, 10)
+            );
+            function throttle(fn, ms) {
+            let throttle = false;
+            let timer;
+              return (...args) => {
+                if(!throttle) { // first call gets through
+                    fn.apply(this, args);
+                    throttle = true;
+                } else { // all the others get throttled
+                    if(timer) clearTimeout(timer); // cancel #2
+                    timer = setTimeout(() => {
+                      fn.apply(this, args);
+                      timer = throttle = false;
+                    }, ms);
+                }
+              };
+            }
+              // Attach click handler to the DT
+              const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+              for (const annoteDlNode of annoteDls) {
+                annoteDlNode.addEventListener('click', (event) => {
+                  const clickedEl = event.target;
+                  if (clickedEl !== selectedAnnoteEl) {
+                    unselectCodeLines();
+                    const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+                    if (activeEl) {
+                      activeEl.classList.remove('code-annotation-active');
+                    }
+                    selectCodeLines(clickedEl);
+                    clickedEl.classList.add('code-annotation-active');
+                  } else {
+                    // Unselect the line
+                    unselectCodeLines();
+                    clickedEl.classList.remove('code-annotation-active');
+                  }
+                });
+              }
+          const findCites = (el) => {
+            const parentEl = el.parentElement;
+            if (parentEl) {
+              const cites = parentEl.dataset.cites;
+              if (cites) {
+                return {
+                  el,
+                  cites: cites.split(' ')
+                };
+              } else {
+                return findCites(el.parentElement)
+              }
+            } else {
+              return undefined;
+            }
+          };
+          var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+          for (var i=0; i<bibliorefs.length; i++) {
+            const ref = bibliorefs[i];
+            const citeInfo = findCites(ref);
+            if (citeInfo) {
+              tippyHover(citeInfo.el, function() {
+                var popup = window.document.createElement('div');
+                citeInfo.cites.forEach(function(cite) {
+                  var citeDiv = window.document.createElement('div');
+                  citeDiv.classList.add('hanging-indent');
+                  citeDiv.classList.add('csl-entry');
+                  var biblioDiv = window.document.getElementById('ref-' + cite);
+                  if (biblioDiv) {
+                    citeDiv.innerHTML = biblioDiv.innerHTML;
+                  }
+                  popup.appendChild(citeDiv);
+                });
+                return popup.innerHTML;
+              });
+            }
+          }
+        });
+        </script>
+         <!-- /content -->
+      
+
+</body></html>

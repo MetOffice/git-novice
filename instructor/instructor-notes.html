@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto"><head>
+<meta name="quarto:offset" content="../">
+            <meta name="generator" content="quarto-1.5.57">
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+                    
+        <title>Instructor Notes – Version Control with Git</title>
+
+            <script src="../site_libs/quarto-contrib/carpentries-theme-toggle-1.0.0/themetoggle.js"></script>
+        <script src="../site_libs/quarto-contrib/carpentries-theme-toggle-1.0.0/scripts.js"></script>
+        <link href="../site_libs/quarto-contrib/carpentries-css-1.0.0/styles.css" rel="stylesheet">
+        
+        <script src="../site_libs/quarto-contrib/quarto-1.5.57/quarto-nav/quarto-nav.js"></script>
+        <script src="../site_libs/quarto-contrib/quarto-1.5.57/quarto-nav/headroom.min.js"></script>
+        <script src="../site_libs/quarto-contrib/quarto-1.5.57/clipboard/clipboard.min.js"></script>
+        <script src="../site_libs/quarto-contrib/quarto-1.5.57/quarto-search/autocomplete.umd.js"></script>
+        <script src="../site_libs/quarto-contrib/quarto-1.5.57/quarto-search/fuse.min.js"></script>
+        <script src="../site_libs/quarto-contrib/quarto-1.5.57/quarto-search/quarto-search.js"></script>
+        <script src="../site_libs/quarto-contrib/quarto-1.5.57/quarto-html/quarto.js"></script>
+        <script src="../site_libs/quarto-contrib/quarto-1.5.57/quarto-html/popper.min.js"></script>
+        <script src="../site_libs/quarto-contrib/quarto-1.5.57/quarto-html/tippy.umd.min.js"></script>
+        <script src="../site_libs/quarto-contrib/quarto-1.5.57/quarto-html/anchor.min.js"></script>
+        <link href="../site_libs/quarto-contrib/quarto-1.5.57/quarto-html/tippy.css" rel="stylesheet">
+
+        <!-- Responsive Favicon for The Carpentries -->
+        <link rel="apple-touch-icon" sizes="180x180" href="../site_libs/quarto-contrib/carpentries-favicons-1.0.0/favicons/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="../site_libs/quarto-contrib/carpentries-favicons-1.0.0/favicons/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="../site_libs/quarto-contrib/carpentries-favicons-1.0.0/favicons/favicon-16x16.png">
+        <link rel="manifest" href="../site_libs/quarto-contrib/carpentries-manifest-1.0.0/site.webmanifest">
+        <link rel="mask-icon" href="../site_libs/quarto-contrib/carpentries-favicons-1.0.0/favicons/safari-pinned-tab.svg" color="#5bbad5">
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="theme-color" media="(prefers-color-scheme: light)" content="white">
+        <meta name="theme-color" media="(prefers-color-scheme: dark)" content="black">
+
+        <!--           <script id="quarto-search-options" type="application/json">{
+                         "location": "sidebar",
+                         "copy-button": false,
+                         "collapse-after": 3,
+                         "panel-placement": "start",
+                         "type": "textbox",
+                         "limit": 50,
+                         "keyboard-shortcut": [
+                           "f",
+                           "/",
+                           "s"
+                         ],
+                         "show-item-context": false,
+                         "language": {
+                           "search-no-results-text": "No results",
+                           "search-matching-documents-text": "matching documents",
+                           "search-copy-link-title": "Copy link to search",
+                           "search-hide-matches-text": "Hide additional matches",
+                           "search-more-match-text": "more match in this document",
+                           "search-more-matches-text": "more matches in this document",
+                           "search-clear-button-title": "Clear",
+                           "search-text-placeholder": "",
+                           "search-detached-cancel-button-title": "Cancel",
+                           "search-submit-button-title": "Submit",
+                           "search-label": "Search"
+                         }
+                       }</script>
+             -->  </head>
+  <body>
+        <div id="quarto-search-results"></div>
+        <!-- content -->
+        <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+        <!-- sidebar -->
+        <!-- margin-sidebar -->
+            <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+                <nav id="TOC" role="doc-toc" class="toc-active">
+                                                       <h2 id="toc-title">On this page</h2>
+                                                    
+                                                   <ul>
+                                                   <li><a href="#overall" id="toc-overall" class="nav-link active" data-scroll-target="#overall">Overall</a></li>
+                                                   <li><a href="#teaching-notes" id="toc-teaching-notes" class="nav-link" data-scroll-target="#teaching-notes">Teaching Notes</a></li>
+                                                   <li><a href="#automated-version-control" id="toc-automated-version-control" class="nav-link" data-scroll-target="#automated-version-control">Automated Version Control</a>
+                                                   <ul class="collapse">
+                                                   <li><a href="#met-office" id="toc-met-office" class="nav-link" data-scroll-target="#met-office">Met Office</a></li>
+                                                   </ul></li>
+                                                   <li><a href="#setting-up-git" id="toc-setting-up-git" class="nav-link" data-scroll-target="#setting-up-git">Setting Up Git</a></li>
+                                                   <li><a href="#creating-a-repository" id="toc-creating-a-repository" class="nav-link" data-scroll-target="#creating-a-repository">Creating a Repository</a></li>
+                                                   <li><a href="#branches" id="toc-branches" class="nav-link" data-scroll-target="#branches">Branches</a></li>
+                                                   <li><a href="#tracking-changes" id="toc-tracking-changes" class="nav-link" data-scroll-target="#tracking-changes">Tracking Changes</a></li>
+                                                   <li><a href="#ignoring-things" id="toc-ignoring-things" class="nav-link" data-scroll-target="#ignoring-things">Ignoring Things</a></li>
+                                                   <li><a href="#remotes-in-github" id="toc-remotes-in-github" class="nav-link" data-scroll-target="#remotes-in-github">Remotes in GitHub</a>
+                                                   <ul class="collapse">
+                                                   <li><a href="#met-office-1" id="toc-met-office-1" class="nav-link" data-scroll-target="#met-office-1">Met Office</a></li>
+                                                   </ul></li>
+                                                   <li><a href="#exploring-github" id="toc-exploring-github" class="nav-link" data-scroll-target="#exploring-github">Exploring GitHub</a></li>
+                                                   <li><a href="#collaborating" id="toc-collaborating" class="nav-link" data-scroll-target="#collaborating">Collaborating</a></li>
+                                                   <li><a href="#conflicts" id="toc-conflicts" class="nav-link" data-scroll-target="#conflicts">Conflicts</a></li>
+                                                   <li><a href="#open-science" id="toc-open-science" class="nav-link" data-scroll-target="#open-science">Open Science</a></li>
+                                                   <li><a href="#licensing" id="toc-licensing" class="nav-link" data-scroll-target="#licensing">Licensing</a></li>
+                                                   <li><a href="#citation" id="toc-citation" class="nav-link" data-scroll-target="#citation">Citation</a></li>
+                                                   <li><a href="#hosting" id="toc-hosting" class="nav-link" data-scroll-target="#hosting">Hosting</a></li>
+                                                   </ul>
+                                               </nav>
+            </div>
+        <!-- main -->
+        <main class="content page-columns page-full" id="quarto-document-content">
+        <header id="top" class="navbar navbar-expand-md top-nav carpentries">
+          <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+            <symbol id="check2" viewbox="0 0 16 16">
+              <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"></path>
+            </symbol>
+            <symbol id="circle-half" viewbox="0 0 16 16">
+              <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"></path>
+            </symbol>
+            <symbol id="moon-stars-fill" viewbox="0 0 16 16">
+              <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"></path>
+              <path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"></path>
+            </symbol>
+            <symbol id="sun-fill" viewbox="0 0 16 16">
+              <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"></path>
+            </symbol>
+          </svg>
+          <a class="visually-hidden-focusable skip-link" href="#main-content">Skip to main content</a>
+          <div class="container-fluid top-nav-container">
+            <div class="col-md-8">
+              <div class="large-logo">
+                <img id="cp-logo" alt="Carpentries" src="../site_libs/quarto-contrib/carpentries-images-1.0.0/images/carpentries-logo.svg">
+                                              </div>
+            </div>
+            <div class="selector-container">
+              <div id="theme-selector">
+                <li class="nav-item dropdown" id="theme-button-list">
+                  <button class="btn btn-link nav-link px-0 px-lg-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme (auto)">
+                    <svg class="bi my-1 theme-icon-active">
+                      <use href="#circle-half"></use>
+                    </svg>
+                    <i data-feather="chevron-down"></i>
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="bd-theme-text">
+                    <li>
+                      <button type="button" class="btn dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+                        <svg class="bi me-2 theme-icon">
+                          <use href="#sun-fill"></use>
+                        </svg>
+                        Light
+                        <svg class="bi ms-auto d-none">
+                          <use href="#check2"></use>
+                        </svg>
+                      </button>
+                    </li>
+                    <li>
+                      <button type="button" class="btn dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                        <svg class="bi me-2 theme-icon">
+                          <use href="#moon-stars-fill"></use>
+                        </svg>
+                        Dark
+                        <svg class="bi ms-auto d-none">
+                          <use href="#check2"></use>
+                        </svg>
+                      </button>
+                    </li>
+                    <li>
+                      <button type="button" class="btn dropdown-item d-flex align-items-center active" data-bs-theme-value="auto" aria-pressed="true">
+                        <svg class="bi me-2 theme-icon">
+                          <use href="#circle-half"></use>
+                        </svg>
+                        Auto
+                        <svg class="bi ms-auto d-none">
+                          <use href="#check2"></use>
+                        </svg>
+                      </button>
+                    </li>
+                  </ul>
+                </li>
+              </div>
+              <!-- NOTE: the language section will likely need to be generated on {sandpaper}, so we are not going to translate this now.
+                {{#yaml}}{{#language}}
+                <div class="dropdown">
+                  <button class="btn btn-secondary dropdown-toggle " type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                    English (US)  <i data-feather="chevron-down"></i>
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    <li><button class="dropdown-item" type="button">French</button></li>
+                  </ul>
+                </div>
+                {{/language}}{{/yaml}} -->
+              <div class="dropdown" id="instructor-dropdown">
+                        <button class="btn btn-secondary dropdown-toggle bordered-button" type="button" id="dropdownMenu1" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i aria-hidden="true" class="icon" data-feather="eye"></i> Instructor View <i data-feather="chevron-down"></i>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                  <li><button class="dropdown-item" type="button" onclick="window.location.href='../instructor-notes.html';">Learner View</button></li>
+                </ul>
+                      </div>
+            </div>
+          </div>
+          <hr>
+        </header>
+        <nav class="navbar navbar-expand-xl bottom-nav carpentries" aria-label="Main Navigation">
+          <div class="container-fluid nav-container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle Navigation">
+              <span class="navbar-toggler-icon"></span>
+              <span class="menu-title">Menu</span>
+            </button>
+            <div class="nav-logo">
+              <img class="small-logo" alt="Carpentries" src="../site_libs/quarto-contrib/carpentries-images-1.0.0/images/carpentries-logo-sm.svg">
+            </div>
+            <div class="lesson-title-md">
+              Version Control with Git
+            </div>
+            <div class="search-icon-sm">
+              <!-- TODO: do not show until we have search
+                  <i role="img" aria-label="Search the All In One page" data-feather="search"></i>
+                -->
+            </div>
+            <div class="desktop-nav">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                  <span class="lesson-title">
+                    Version Control with Git
+                  </span>
+                </li>
+                <!-- We want to include a setup link prominently in the resources for overview pages -->
+                <li>
+                  <!-- NOTE: the reason why we do not use the site root here is because we would need to set the site context _before_ overview -->
+                  <a class="nav-link" href="index.html#setup">Setup</a>
+                </li>
+                        <li class="nav-item">
+                  <a class="nav-link" href="key-points.html">Key Points</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="instructor-notes.html">Instructor Notes</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="extract_all_images.html">Extract All Images</a>
+                </li>
+                                  <li class="nav-item dropdown">
+                    <button class="nav-link dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                      More <i data-feather="chevron-down"></i>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      
+
+                      <li><a class="dropdown-item" href="reference.html">Git Cheatsheets for Quick Reference</a></li>
+                      <li><a class="dropdown-item" href="discuss.html">Discussion</a></li>
+                      <li><a class="dropdown-item" href="fcm-git_cheat_sheet.html">FCM vs Git Cheat Sheet</a></li>
+                      <li><a class="dropdown-item" href="repo-quick-start.html">Quick Start Repository Guide</a></li>            </ul>
+                  </li>
+                      </ul>
+            </div>
+            <!--
+              <form class="d-flex col-md-2 search-form">
+                <fieldset disabled>
+                <input class="form-control me-2 searchbox" type="search" placeholder="Search" aria-label="Search">
+                  <button class="btn btn-outline-success tablet-search-button"  type="submit">
+                    <i class="search-icon" data-feather="search" role="img" aria-label="Search the All In One page"></i>
+                  </button>
+                </fieldset>
+              </form>
+              -->
+            <!--     <a id="search-button" class="btn btn-primary" href="instructor/aio.html" role="button"
+              aria-label="Search the All In One page">Search the All In One page</a>
+             -->
+            <div class="input-group">
+              <div id="quarto-search" class="form-outline" data-mdb-input-init="">
+                <!-- <input type="search" id="form1" class="form-control" /> -->
+                <!-- <label class="form-label" for="form1">Search</label> -->
+              </div>
+              <!-- <button type="button" class="btn btn-primary" data-mdb-ripple-init> -->
+                <!-- <i class="fas fa-search"></i> -->
+              <!-- </button> -->
+            </div>
+          </div><!--/div.container-fluid -->
+        </nav>
+
+        <div class="col-md-12 mobile-title">
+          Version Control with Git
+        </div>
+
+        <aside class="col-md-12 lesson-progress">
+          <div style="width: 0%" class="percentage">
+            0%
+          </div>
+          <div class="progress carpentries">
+            <div class="progress-bar carpentries" role="progressbar" style="width: 0%" aria-valuenow="0" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
+            </div>
+          </div>
+        </aside>    <div class="container">
+      <div class="row">
+        <div id="sidebar-col" class="col-lg-4">
+          <div id="sidebar" class="sidebar">
+            <nav aria-labelledby="flush-headingEleven">
+              <button role="button" aria-label="close menu" alt="close menu" aria-expanded="true" aria-controls="sidebar" class="collapse-toggle" data-collapse="Collapse" data-episodes="../Episodes">
+                <i class="search-icon" data-feather="x" role="img"></i>
+              </button>
+              <div class="sidebar-inner">
+                <div class="row mobile-row" id="theme-row-mobile">
+                  <div class="col" id="theme-selector">
+                    <li class="nav-item dropdown" id="theme-button-list">
+                      <button class="btn btn-link nav-link px-0 px-lg-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme (auto)">
+                        <svg class="bi my-1 theme-icon-active">
+                          <use href="#circle-half"></use>
+                        </svg>
+                        <span class="d-lg-none ms-1" id="bd-theme-text">Toggle Theme</span>
+                      </button>
+                      <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="bd-theme-text">
+                        <li>
+                          <button type="button" class="btn dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+                            <svg class="bi me-2 theme-icon">
+                              <use href="#sun-fill"></use>
+                            </svg>
+                            Light
+                            <svg class="bi ms-auto d-none">
+                              <use href="#check2"></use>
+                            </svg>
+                          </button>
+                        </li>
+                        <li>
+                          <button type="button" class="btn dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                            <svg class="bi me-2 theme-icon">
+                              <use href="#moon-stars-fill"></use>
+                            </svg>
+                            Dark
+                            <svg class="bi ms-auto d-none">
+                              <use href="#check2"></use>
+                            </svg>
+                          </button>
+                        </li>
+                        <li>
+                          <button type="button" class="btn dropdown-item d-flex align-items-center active" data-bs-theme-value="auto" aria-pressed="true">
+                            <svg class="bi me-2 theme-icon">
+                              <use href="#circle-half"></use>
+                            </svg>
+                            Auto
+                            <svg class="bi ms-auto d-none">
+                              <use href="#check2"></use>
+                            </svg>
+                          </button>
+                        </li>
+                      </ul>
+                    </li>
+                  </div>
+                </div>
+                <div class="row mobile-row">
+                  <div class="col">
+                    <div class="sidenav-view-selector">
+                      <div class="accordion accordion-flush" id="accordionFlush9">
+                        <div class="accordion-item">
+                                            <h2 class="accordion-header anchored" id="flush-headingNine">
+                            <button class="accordion-button collapsed" id="instructor" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseNine" aria-expanded="false" aria-controls="flush-collapseNine">
+                              <i id="eye" aria-hidden="true" class="icon" data-feather="eye"></i> Learner View
+                            </button>
+                          </h2>
+                          <div id="flush-collapseNine" class="accordion-collapse collapse" aria-labelledby="flush-headingNine" data-bs-parent="#accordionFlush2">
+                            <div class="accordion-body">
+                              <a href="instructor/instructor-notes.html">Instructor View</a>
+                            </div>
+                          </div>
+                                          </div><!--/div.accordion-item-->
+                      </div><!--/div.accordion-flush-->
+                    </div><!--div.sidenav-view-selector -->
+                  </div><!--/div.col -->
+                  <!-- {{#yaml}}{{#language}}
+                  <div class="col">
+                    <div class="sidenav-language-selector">
+                      <div class="accordion accordion-flush" id="accordionFlush10">
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="flush-headingTen">
+                            <button class="accordion-button side-language collapsed" id="language" type="button"
+                              data-bs-toggle="collapse" data-bs-target="#flush-collapseTen" aria-expanded="false"
+                              aria-controls="flush-collapseTen">English (US)
+                            </button>
+                          </h2>
+                          <div id="flush-collapseTen" class="accordion-collapse collapse" aria-labelledby="flush-headingNine"
+                            data-bs-parent="#accordionFlush2">
+                            <div class="accordion-body">
+                              <a href="#">French</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {{/language}}{{/yaml}} -->
+                  <hr>
+                </div><!--/div.mobile-row -->
+
+                <div class="accordion accordion-flush" id="accordionFlush11">
+                  <div class="accordion-item">
+
+                    <button id="chapters" class="accordion-button show" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseEleven" aria-expanded="false" aria-controls="flush-collapseEleven">
+                      <h2 class="accordion-header chapters anchored" id="flush-headingEleven">../EPISODES</h2>
+                    </button>
+                    <div id="flush-collapseEleven" class="accordion-collapse show collapse" aria-labelledby="flush-headingEleven" data-bs-parent="#accordionFlush11">
+
+                      <div class="accordion-body">
+                        
+
+                                <div class="accordion accordion-flush" id="accordionFlush1">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading1">
+                                      <a href="index.html">Summary and Setup</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush2">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading2">
+                                      <a href="01-basics.html">1. Automated Version Control</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush3">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading3">
+                                      <a href="02-setup.html">2. Setting Up Git</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush4">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading4">
+                                      <a href="03-create.html">3. Creating a Repository</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush5">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading5">
+                                      <a href="09-branches.html">4. Branches</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush6">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading6">
+                                      <a href="04-changes.html">5. Tracking Changes</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush7">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading7">
+                                      <a href="05-history.html">6. Exploring History</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush8">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading8">
+                                      <a href="06-reverting-changes.html">7. Reverting Changes</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush9">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading9">
+                                      <a href="06-ignore.html">8. Ignoring Things</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush10">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading10">
+                                      <a href="Break.html">9. Break</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush11">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading11">
+                                      <a href="07-github.html">10. Remotes in GitHub</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush12">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading12">
+                                      <a href="08-github-interface.html">11. Exploring GitHub</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush13">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading13">
+                                      <a href="09-github-history.html">12. Exploring History on GitHub</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush14">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading14">
+                                      <a href="10-pull-requests.html">13. Pull Requests</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush15">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading15">
+                                      <a href="11-configuring-github.html">14. Configuring GitHub</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush16">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading16">
+                                      <a href="End.html">15. End</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush17">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading17">
+                                      <a href="10-open.html">16. Open Science</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush18">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading18">
+                                      <a href="11-licensing.html">17. Licensing</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush19">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading19">
+                                      <a href="12-citation.html">18. Citation</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush20">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading20">
+                                      <a href="13-hosting.html">19. Hosting</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush21">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading21">
+                                      <a href="14-supplemental-rstudio.html">20. 'Using Git from RStudio'</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->              </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- <a href="index.html">Home</a> -->
+
+                <hr class="half-width">
+                          <div class="accordion accordion-flush lesson-resources" id="accordionFlush12">
+                    <div class="accordion-item">
+                      <h2 class="accordion-header anchored" id="flush-headingTwelve">
+                        <button class="accordion-button collapsed" id="lesson-resources" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwelve" aria-expanded="false" aria-controls="flush-collapseTwelve">
+                          RESOURCES
+                        </button>
+                      </h2>
+                      <div id="flush-collapseTwelve" class="accordion-collapse collapse" aria-labelledby="flush-headingTwelve" data-bs-parent="#accordionFlush12">
+                        <div class="accordion-body">
+                          <ul>
+                            <!-- We want to include a setup link prominently in the resources for overview pages -->
+                            <li>
+                              <!-- NOTE: the reason why we do not use the site root here is because we would need to set the site
+                              context _before_ overview -->
+                              <a href="index.html#setup">Setup</a>
+                            </li>
+                                                <li>
+                              <a href="key-points.html">Key Points</a>
+                            </li>
+                            <li>
+                              <a href="instructor-notes.html">Instructor Notes</a>
+                            </li>
+                            <li>
+                              <a href="extract_all_images.html">Extract All Images</a>
+                            </li>
+                                                <!-- {{{resources}}} -->
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- <hr class="half-width lesson-resources" /> -->
+                  
+                  
+                  <hr class="d-none d-sm-block d-md-none">
+
+                  <div class="d-grid gap-1">
+                              </div>
+                </div><!-- /div.accordion -->
+              </nav></div><!-- /div.sidebar-inner -->
+            
+          </div><!-- /div.sidebar -->
+        </div><!-- /div.sidebar-col -->                                <p>Using a software tool to handle the versions of your project files lets you focus on the more interesting/innovative aspects of your project.</p>
+                      <ul>
+                      <li>Version control’s advantages
+                      <ul>
+                      <li>It’s easy to set up</li>
+                      <li>Every copy of a Git repository is a full backup of a project and its history</li>
+                      <li>A few easy-to-remember commands are all you need for most day-to-day version control tasks</li>
+                      <li>The <a href="https://github.com/">GitHub</a> hosting service provides a web-based collaboration service</li>
+                      </ul></li>
+                      <li>Two main concepts
+                      <ul>
+                      <li><em>commit</em>: a recorded set of changes in your project’s files</li>
+                      <li><em>repository</em>: the history of all your project’s commits</li>
+                      </ul></li>
+                      <li>Why use GitHub?
+                      <ul>
+                      <li>No need for a server: easy to set up</li>
+                      <li>GitHub’s strong community: your colleagues are probably already there</li>
+                      </ul></li>
+                      </ul>
+                      <section id="overall" class="level2">
+                      <h2 class="anchored" data-anchor-id="overall">Overall</h2>
+                      <p>Version control might be the most important topic we teach, but Git is definitely the most complicated tool. However, GitHub presently dominates the open software repository landscape, so the time and effort required to teach fundamental Git is justified and worthwhile.</p>
+                      <p>Because of this complexity, we don’t teach novice learners about many interesting topics, such as hashes, and commit objects.</p>
+                      <p>Instead we try to convince them that version control is useful for working in teams or not, because it is</p>
+                      <ul>
+                      <li>a better way to “undo” changes,</li>
+                      <li>a better way to collaborate than mailing files back and forth, and</li>
+                      <li>a better way to share your code and other work with the world.</li>
+                      </ul>
+                      </section>
+                      <section id="teaching-notes" class="level2">
+                      <h2 class="anchored" data-anchor-id="teaching-notes">Teaching Notes</h2>
+                      <ul>
+                      <li><p>You can “split” your shell so that recent commands remain in view using <a href="https://github.com/rgaiacs/swc-shell-split-window">this</a> script.</p></li>
+                      <li><p>Make sure the network is working <em>before</em> starting this lesson.</p></li>
+                      <li><p>Drawings are particularly useful in this lesson: if you have a whiteboard, <a href="https://marklodato.github.io/visual-git-guide/index-en.html">use it</a>!</p></li>
+                      <li><p>Version control is usually not the first subject in a workshop, so get learners to create a GitHub account after the session before. Remind learners that the username and email they use for GitHub (and setup during Git configuration) will be viewable to the public by default. However, there are many reasons why a learner may not want their personal information viewable, and GitHub has <a href="https://help.github.com/articles/keeping-your-email-address-private/">resources for keeping an email address private</a>.</p></li>
+                      <li><p>If some learners are using Windows, there will inevitably be issues merging files with different line endings. (Even if everyone’s on some flavor of Unix, different editors may or may not add a newline to the last line of a file.) Take a moment to explain these issues, since learners will almost certainly trip over them again. If learners are running into line ending problems, GitHub has a <a href="https://docs.github.com/en/github/using-git/configuring-git-to-handle-line-endings">page</a> that helps with troubleshooting. Specifically, the <a href="https://docs.github.com/en/github/using-git/configuring-git-to-handle-line-endings#refreshing-a-repository-after-changing-line-endings">section on refreshing a repository</a> may be helpful if learners need to change the <code>core.autocrlf</code> setting after already having made one or more commits.</p></li>
+                      <li><p>We don’t use a Git GUI in these notes because we haven’t found one that installs easily and runs reliably on the three major operating systems, and because we want learners to understand what commands are being run. That said, instructors should demo a GUI on their desktop at some point during this lesson and point learners at <a href="https://git-scm.com/downloads/guis">this page</a>.</p></li>
+                      <li><p>Instructors should show learners graphical diff/merge tools like <a href="https://sourcegear.com/diffmerge/">DiffMerge</a>.</p></li>
+                      <li><p>When appropriate, explain that we teach Git rather than CVS, Subversion, or Mercurial primarily because of GitHub’s growing popularity: CVS and Subversion are now seen as legacy systems, and Mercurial isn’t nearly as widely used in the sciences right now.</p></li>
+                      <li><p>Further resources:</p>
+                      <ul>
+                      <li><a href="https://github.com/jlord/git-it">git-it</a> is a self-paced command-line Git demo, with <a href="https://github.com/jlord/git-it-electron">git-it-electron</a> its GitHub Desktop successor.</li>
+                      <li><a href="https://www.codeschool.com/">Code School</a> has a free interactive course, <a href="https://try.github.io">Try Git</a>.</li>
+                      <li>for instructors, <a href="https://tom.preston-werner.com/2009/05/19/the-git-parable.html">the Git parable</a> is useful background reading</li>
+                      </ul></li>
+                      </ul>
+                      </section>
+                      <section id="automated-version-control" class="level2">
+                      <h2 class="anchored" data-anchor-id="automated-version-control"><a href="01-basics.html">Automated Version Control</a></h2>
+                      <ul>
+                      <li><p>Ask, “Who uses ‘undo’ in their editor?” All say “Me”. ‘Undo’ is the simplest form of version control.</p></li>
+                      <li><p>Give learners a five-minute overview of what version control does for them before diving into the watch-and-do practicals. Most of them will have tried to co-author papers by emailing files back and forth, or will have biked into the office only to realize that the USB key with last night’s work is still on the kitchen table. Instructors can also make jokes about directories with names like “final version”, “final version revised”, “final version with reviewer three’s corrections”, “really final version”, and, “come on this really has to be the last version” to motivate version control as a better way to collaborate and as a better way to back work up.</p></li>
+                      </ul>
+                      <section id="met-office" class="level3">
+                      <h3 class="anchored" data-anchor-id="met-office">Met Office</h3>
+                      <p>Why are we moving to Git and GitHub?</p>
+                      <ul>
+                      <li>FCM/SVN becoming unmaintainable</li>
+                      <li>Git/GitHub provide better security (MFA)</li>
+                      <li>GitHub has more useful features for collaboration than trac</li>
+                      <li>Easier to collaborate with partners outside the Met Office with GitHub</li>
+                      </ul>
+                      </section>
+                      </section>
+                      <section id="setting-up-git" class="level2">
+                      <h2 class="anchored" data-anchor-id="setting-up-git"><a href="02-setup.html">Setting Up Git</a></h2>
+                      <p>Do <strong>NOT</strong> skip any steps setting the config. This may cause problems later especially if students end up with master branches.</p>
+                      <ul>
+                      <li><p>We suggest instructors and students use <code>nano</code> as the text editor for this lessons because</p>
+                      <ul>
+                      <li>it runs in all three major operating systems,</li>
+                      <li>it runs inside the shell (switching windows can be confusing to students), and</li>
+                      <li>it has shortcut help at the bottom of the window.</li>
+                      </ul>
+                      <p>Please point out to students during setup that they can and should use another text editor if they’re already familiar with it.</p></li>
+                      <li><p>When setting up Git, be very clear what learners have to enter: it is common for them to edit the instructor’s details (e.g.&nbsp;email). Check at the end using <code>git config --list</code>.</p></li>
+                      <li><p>When setting up the default branch name, if learners have a Git version older than 2.28, the default branch name can be changed for the lesson using <code>git branch -M main</code> if there are currently commits in the repository, or <code>git checkout -b main</code> if there are no commits/the repository is completely empty.</p></li>
+                      </ul>
+                      </section>
+                      <section id="creating-a-repository" class="level2">
+                      <h2 class="anchored" data-anchor-id="creating-a-repository"><a href="03-create.html">Creating a Repository</a></h2>
+                      <ul>
+                      <li><p>When you do <code>git status</code>, Mac users may see a <code>.DS_Store</code> file showing as untracked. This a file that Mac OS creates in each directory.</p></li>
+                      <li><p>The challenge “Places to create repositories” tries to reinforce the idea that the <code>.git</code> folder contains the whole Git repo and deleting this folder undoes a <code>git init</code>. It also gives the learner the way to fix the common mistake of putting unwanted folders (like <code>Desktop</code>) under version control.</p>
+                      <p>Instead of removing the <code>.git</code> folder directly, you can choose to move it first to a safer directory and remove it from there:</p>
+                      <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> mv .git temp_git</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> rm <span class="at">-rf</span>  temp_git</span></code></pre></div>
+                      <p>The challenge suggests that it is a bad idea to create a Git repo inside another repo. For more discussion on this topic, please see <a href="https://github.com/swcarpentry/git-novice/issues/272">this issue</a>.</p></li>
+                      </ul>
+                      </section>
+                      <section id="branches" class="level2">
+                      <h2 class="anchored" data-anchor-id="branches"><a href="09-branches.html">Branches</a></h2>
+                      <p>All Mermaid diagrams don’t render atm in the Extract all Images page so be wary of this. Avoid putting your own preference into the training and teach <code>git switch</code> (although the other options are also given for reference).</p>
+                      </section>
+                      <section id="tracking-changes" class="level2">
+                      <h2 class="anchored" data-anchor-id="tracking-changes"><a href="04-changes.html">Tracking Changes</a></h2>
+                      <ul>
+                      <li><p>It’s important that learners do a full commit cycle by themselves (make changes, <code>git diff</code>, <code>git add</code>, and <code>git commit</code>). The “<code>bio</code> repository” challenge does that.</p></li>
+                      <li><p>This is a good moment to show a diff with a graphical diff tool. If you skip it because you’re short on time, show it once in GitHub.</p></li>
+                      <li><p>One thing may cause confusion is recovering old versions. If, instead of doing <code>$ git checkout f22b25e forecast.md</code>, someone does <code>$ git checkout f22b25e</code>, they wind up in the “detached HEAD” state and confusion abounds. It’s then possible to keep on committing, but things like <code>git push origin main</code> a bit later will not give easily comprehensible results. It also makes it look like commits can be lost. To “re-attach” HEAD, use <code>git checkout main</code>.</p></li>
+                      <li><p>This is a good moment to show a log within a Git GUI. If you skip it because you’re short on time, show it once in GitHub.</p></li>
+                      </ul>
+                      </section>
+                      <section id="ignoring-things" class="level2">
+                      <h2 class="anchored" data-anchor-id="ignoring-things"><a href="06-ignore.html">Ignoring Things</a></h2>
+                      <p>Just remember that you can use wildcards and regular expressions to ignore a particular set of files in <code>.gitignore</code>.</p>
+                      </section>
+                      <section id="remotes-in-github" class="level2">
+                      <h2 class="anchored" data-anchor-id="remotes-in-github"><a href="07-github.html">Remotes in GitHub</a></h2>
+                      <ul>
+                      <li><p>Make it clear that Git and GitHub are not the same thing: Git is an open source version control tool, GitHub is a company that hosts Git repositories in the web and provides a web interface to interact with repos they host.</p></li>
+                      <li><p>It is very useful to draw a diagram showing the different repositories involved.</p></li>
+                      <li><p>When pushing to a remote, the output from Git can vary slightly depending on what leaners execute. The lesson displays the output from Git if a learner executes <code>git push origin main</code>. However, some learners might use syntax suggested by GitHub for pushing to a remote with an existing repository, which is <code>git push -u origin main</code>. Learners using syntax from GitHub, <code>git push -u origin main</code>, will have slightly different output, including the line <code>Branch main set up to track remote branch main from origin by rebasing.</code></p></li>
+                      </ul>
+                      <section id="met-office-1" class="level3">
+                      <h3 class="anchored" data-anchor-id="met-office-1">Met Office</h3>
+                      <p>Why are we moving to Git and GitHub?</p>
+                      <ul>
+                      <li>GitHub has better project management features</li>
+                      <li>Git/GitHub provide better security (MFA)</li>
+                      <li>GitHub has more useful features for collaboration than trac</li>
+                      <li>Easier to collaborate with partners outside the Met Office with GitHub</li>
+                      </ul>
+                      </section>
+                      </section>
+                      <section id="exploring-github" class="level2">
+                      <h2 class="anchored" data-anchor-id="exploring-github"><a href="08-github-interface.html">Exploring GitHub</a></h2>
+                      <p>When you are exploring the GitHub interface you may wish to show:</p>
+                      <ul>
+                      <li>How to manage access to a repository (changes are only visible to those with access)</li>
+                      <li>How to enable wiki pages, discussions, projects</li>
+                      </ul>
+                      <p>And mention that these are covered in more detail in the Git &amp; GitHub Working Practices training. You can also mention that it is possible to edit files via the GitHub interface but we won’t be doing that today.</p>
+                      </section>
+                      <section id="collaborating" class="level2">
+                      <h2 class="anchored" data-anchor-id="collaborating"><a href="08-collab.html">Collaborating</a></h2>
+                      <p>NOT IN THE MET OFFICE VERSION</p>
+                      <ul>
+                      <li><p>Decide in advance whether all the learners will work in one shared repository, or whether they will work in pairs (or other small groups) in separate repositories. The former is easier to set up; the latter runs more smoothly.</p></li>
+                      <li><p>Role playing between two instructors can be effective when teaching the collaboration and conflict sections of the lesson. One instructor can play the role of the repository owner, while the second instructor can play the role of the collaborator. If it is possible, try to use two projectors so that the computer screens of both instructors can be seen. This makes for a very clear illustration to the students as to who does what.</p></li>
+                      <li><p>It is also effective to pair up students during this lesson and assign one member of the pair to take the role of the owner and the other the role of the collaborator. In this setup, challenges can include asking the collaborator to make a change, commit it, and push the change to the remote repository so that the owner can then retrieve it, and vice-versa. The role playing between the instructors can get a bit “dramatic” in the conflicts part of the lesson if the instructors want to inject some humor into the room.</p></li>
+                      <li><p>If you don’t have two projectors, have two instructors at the front of the room. Each instructor does their piece of the collaboration demonstration on their own computer and then passes the projector cord back and forth with the other instructor when it’s time for them to do the other part of the collaborative workflow. It takes less than 10 seconds for each switchover, so it doesn’t interrupt the flow of the lesson. And of course it helps to give each of the instructors a different-colored hat, or put different-colored sticky notes on their foreheads.</p></li>
+                      <li><p>If you’re the only instructor, the best way to create is clone the two repos in your Desktop, but under different names, e.g., pretend one is your computer at work:</p>
+                      <div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git clone https://github.com/mo-eormerod/weather.git weather-at-work</span></code></pre></div></li>
+                      <li><p>It’s very common that learners mistype the remote alias or the remote URL when adding a remote, so they cannot <code>push</code>. You can diagnose this with <code>git remote -v</code> and checking carefully for typos.</p>
+                      <ul>
+                      <li>To fix a wrong alias, you can do <code>git remote rename &lt;old&gt; &lt;new&gt;</code>.</li>
+                      <li>To fix a wrong URL, you can do <code>git remote set-url &lt;alias&gt; &lt;newurl&gt;</code>.</li>
+                      </ul></li>
+                      <li><p>Before cloning the repo, be sure that nobody is inside another repo. The best way to achieve this is moving to the <code>Desktop</code> before cloning: <code>cd &amp;&amp; cd Desktop</code>.</p></li>
+                      <li><p>If both repos are in the <code>Desktop</code>, have them to clone their collaborator repo under a given directory using a second argument:</p>
+                      <div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git clone https://github.com/mo-eormerod/weather.git alflin-weather</span></code></pre></div></li>
+                      <li><p>The most common mistake is that learners <code>push</code> before <code>pull</code>ing. If they <code>pull</code> afterward, they may get a conflict.</p></li>
+                      <li><p>Conflicts, sometimes weird, will start to arise. Stay tight: conflicts are next.</p></li>
+                      <li><p>Learners may have slightly different output from <code>git push</code> and <code>git pull</code> depending on the version of git, and if upstream (<code>-u</code>) is used.</p></li>
+                      </ul>
+                      </section>
+                      <section id="conflicts" class="level2">
+                      <h2 class="anchored" data-anchor-id="conflicts"><a href="09-conflict.html">Conflicts</a></h2>
+                      <p>NOT IN THE MET OFFICE VERSION</p>
+                      <ul>
+                      <li><p>Expect the learners to make mistakes. Expect <em>yourself</em> to make mistakes. This happens because it is late in the lesson and everyone is tired.</p></li>
+                      <li><p>If you’re the only instructor, the best way to create a conflict is:</p>
+                      <ul>
+                      <li>Clone your repo in a different directory, pretending is your computer at work: <code>git clone https://github.com/mo-eormerod/weather.git weather-at-work</code>.</li>
+                      <li>At the office, you make a change, commit and push.</li>
+                      <li>At your laptop repo, you (forget to pull and) make a change, commit and try to push.</li>
+                      <li><code>git pull</code> now and show the conflict.</li>
+                      </ul></li>
+                      <li><p>Learners usually forget to <code>git add</code> the file after fixing the conflict and just (try to) commit. You can diagnose this with <code>git status</code>.</p></li>
+                      <li><p>Remember that you can discard one of the two parents of the merge:</p>
+                      <ul>
+                      <li>discard the remote file, <code>git checkout --ours conflicted_file.txt</code></li>
+                      <li>discard the local file, <code>git checkout --theirs conflicted_file.txt</code></li>
+                      </ul>
+                      <p>You still have to <code>git add</code> and <code>git commit</code> after this. This is particularly useful when working with binary files.</p></li>
+                      <li><p>Keep in mind that depending on the Git version used, the outputs for <code>git push</code> and <code>git pull</code> can vary slightly.</p></li>
+                      </ul>
+                      </section>
+                      <section id="open-science" class="level2">
+                      <h2 class="anchored" data-anchor-id="open-science"><a href="10-open.html">Open Science</a></h2>
+                      </section>
+                      <section id="licensing" class="level2">
+                      <h2 class="anchored" data-anchor-id="licensing"><a href="11-licensing.html">Licensing</a></h2>
+                      <p>We teach about licensing because questions about who owns what, or can use what, arise naturally once we start talking about using public services like GitHub to store files. Also, the discussion gives learners a chance to catch their breath after what is often a frustrating couple of hours.</p>
+                      <p>The Creative Commons family of licenses is recommended for many types of works (including software documentation and images used in software) but not software itself. Creative Commons <a href="https://creativecommons.org/faq/#can-i-apply-a-creative-commons-license-to-software">recommends</a> a software-specific license instead.</p>
+                      </section>
+                      <section id="citation" class="level2">
+                      <h2 class="anchored" data-anchor-id="citation"><a href="12-citation.html">Citation</a></h2>
+                      </section>
+                      <section id="hosting" class="level2">
+                      <h2 class="anchored" data-anchor-id="hosting"><a href="13-hosting.html">Hosting</a></h2>
+                      <p>A common concern for learners is having their work publicly available on GitHub. While we encourage open science, sometimes private repos are the only choice. It’s always interesting to mention the options to have web-hosted private repositories.</p>
+                      
+                      
+                      </section>
+      </div>
+      		<footer class="row footer mx-md-3">
+      			<hr>
+      			<div class="col-md-6">
+              <p>This lesson is subject to the &lt;(Code of Conduct)&gt;</p>
+              <a href="https://github.com/MetOffice/git-novice/edit/main/README.md">Edit on GitHub</a>
+              | <a href="https://github.com/MetOffice/git-novice/blob/main/CONTRIBUTING.md">Contributing</a>
+              | <a href="https://github.com/MetOffice/git-novice/">Source</a><p></p>
+      				<p><a href="https://github.com/MetOffice/git-novice/blob/main/CITATION.cff">Cite</a> | <a href="mailto:d.theodorakis@metoffice.gov.uk">Contact</a> | <a href="https://carpentries.org/about/">About</a></p>
+      			</div>
+      			<div class="col-md-6">
+                      <p>Materials licensed under &lt;({license})&gt; by the authors</p>
+                      <p>Template licensed under &lt;(CC-BY 4.0)&gt; by {template_authors}</p>
+              <p>Built with Quarto</p>
+      			</div>
+      		</footer>
+      	</main></div> <!-- / div.container -->
+      	<div id="to-top">
+      		<a href="#top">
+            <i class="search-icon" data-feather="arrow-up" role="img" aria-label="Back To Top"></i><br>
+      			<!-- <span class="d-none d-sm-none d-md-none d-lg-none d-xl-block">Back</span> To Top -->
+            Back To Top
+      		</a>
+      	</div>
+        <!-- {{#json}}
+        <script type="application/ld+json">
+          {{ meta json}}
+        </script>
+        {{/json}} -->
+      	<script>
+      		feather.replace();
+      	</script>
+
+        <!-- {{#analytics}}
+        {{ meta analytics}}
+        {{/analytics}} -->      <!-- footer closes the container class div -->
+         <!-- /main -->
+        <script id="quarto-html-after-body" type="application/javascript">
+        window.document.addEventListener("DOMContentLoaded", function (event) {
+          const toggleBodyColorMode = (bsSheetEl) => {
+            const mode = bsSheetEl.getAttribute("data-mode");
+            const bodyEl = window.document.querySelector("body");
+            if (mode === "dark") {
+              bodyEl.classList.add("quarto-dark");
+              bodyEl.classList.remove("quarto-light");
+            } else {
+              bodyEl.classList.add("quarto-light");
+              bodyEl.classList.remove("quarto-dark");
+            }
+          }
+          const toggleBodyColorPrimary = () => {
+            const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+            if (bsSheetEl) {
+              toggleBodyColorMode(bsSheetEl);
+            }
+          }
+          toggleBodyColorPrimary();  
+          const icon = "";
+          const anchorJS = new window.AnchorJS();
+          anchorJS.options = {
+            placement: 'right',
+            icon: icon
+          };
+          anchorJS.add('.anchored');
+            var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+            var mailtoRegex = new RegExp(/^mailto:/);
+              var filterRegex = new RegExp("https:\/\/metoffice\.github\.io\/git-novice\/instructor");
+            var isInternal = (href) => {
+                return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+            }
+            // Inspect non-navigation links and adorn them if external
+         	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+            for (var i=0; i<links.length; i++) {
+              const link = links[i];
+              if (!isInternal(link.href)) {
+                // undo the damage that might have been done by quarto-nav.js in the case of
+                // links that we want to consider external
+                if (link.dataset.originalHref !== undefined) {
+                  link.href = link.dataset.originalHref;
+                }
+              }
+            }
+          function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+            const config = {
+              allowHTML: true,
+              maxWidth: 500,
+              delay: 100,
+              arrow: false,
+              appendTo: function(el) {
+                  return el.parentElement;
+              },
+              interactive: true,
+              interactiveBorder: 10,
+              theme: 'quarto',
+              placement: 'bottom-start',
+            };
+            if (contentFn) {
+              config.content = contentFn;
+            }
+            if (onTriggerFn) {
+              config.onTrigger = onTriggerFn;
+            }
+            if (onUntriggerFn) {
+              config.onUntrigger = onUntriggerFn;
+            }
+            window.tippy(el, config); 
+          }
+          const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+          for (var i=0; i<noterefs.length; i++) {
+            const ref = noterefs[i];
+            tippyHover(ref, function() {
+              // use id or data attribute instead here
+              let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+              try { href = new URL(href).hash; } catch {}
+              const id = href.replace(/^#\/?/, "");
+              const note = window.document.getElementById(id);
+              if (note) {
+                return note.innerHTML;
+              } else {
+                return "";
+              }
+            });
+          }
+          const xrefs = window.document.querySelectorAll('a.quarto-xref');
+          const processXRef = (id, note) => {
+            // Strip column container classes
+            const stripColumnClz = (el) => {
+              el.classList.remove("page-full", "page-columns");
+              if (el.children) {
+                for (const child of el.children) {
+                  stripColumnClz(child);
+                }
+              }
+            }
+            stripColumnClz(note)
+            if (id === null || id.startsWith('sec-')) {
+              // Special case sections, only their first couple elements
+              const container = document.createElement("div");
+              if (note.children && note.children.length > 2) {
+                container.appendChild(note.children[0].cloneNode(true));
+                for (let i = 1; i < note.children.length; i++) {
+                  const child = note.children[i];
+                  if (child.tagName === "P" && child.innerText === "") {
+                    continue;
+                  } else {
+                    container.appendChild(child.cloneNode(true));
+                    break;
+                  }
+                }
+                if (window.Quarto?.typesetMath) {
+                  window.Quarto.typesetMath(container);
+                }
+                return container.innerHTML
+              } else {
+                if (window.Quarto?.typesetMath) {
+                  window.Quarto.typesetMath(note);
+                }
+                return note.innerHTML;
+              }
+            } else {
+              // Remove any anchor links if they are present
+              const anchorLink = note.querySelector('a.anchorjs-link');
+              if (anchorLink) {
+                anchorLink.remove();
+              }
+              if (window.Quarto?.typesetMath) {
+                window.Quarto.typesetMath(note);
+              }
+              // TODO in 1.5, we should make sure this works without a callout special case
+              if (note.classList.contains("callout")) {
+                return note.outerHTML;
+              } else {
+                return note.innerHTML;
+              }
+            }
+          }
+          for (var i=0; i<xrefs.length; i++) {
+            const xref = xrefs[i];
+            tippyHover(xref, undefined, function(instance) {
+              instance.disable();
+              let url = xref.getAttribute('href');
+              let hash = undefined; 
+              if (url.startsWith('#')) {
+                hash = url;
+              } else {
+                try { hash = new URL(url).hash; } catch {}
+              }
+              if (hash) {
+                const id = hash.replace(/^#\/?/, "");
+                const note = window.document.getElementById(id);
+                if (note !== null) {
+                  try {
+                    const html = processXRef(id, note.cloneNode(true));
+                    instance.setContent(html);
+                  } finally {
+                    instance.enable();
+                    instance.show();
+                  }
+                } else {
+                  // See if we can fetch this
+                  fetch(url.split('#')[0])
+                  .then(res => res.text())
+                  .then(html => {
+                    const parser = new DOMParser();
+                    const htmlDoc = parser.parseFromString(html, "text/html");
+                    const note = htmlDoc.getElementById(id);
+                    if (note !== null) {
+                      const html = processXRef(id, note);
+                      instance.setContent(html);
+                    } 
+                  }).finally(() => {
+                    instance.enable();
+                    instance.show();
+                  });
+                }
+              } else {
+                // See if we can fetch a full url (with no hash to target)
+                // This is a special case and we should probably do some content thinning / targeting
+                fetch(url)
+                .then(res => res.text())
+                .then(html => {
+                  const parser = new DOMParser();
+                  const htmlDoc = parser.parseFromString(html, "text/html");
+                  const note = htmlDoc.querySelector('main.content');
+                  if (note !== null) {
+                    // This should only happen for chapter cross references
+                    // (since there is no id in the URL)
+                    // remove the first header
+                    if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                      note.children[0].remove();
+                    }
+                    const html = processXRef(null, note);
+                    instance.setContent(html);
+                  } 
+                }).finally(() => {
+                  instance.enable();
+                  instance.show();
+                });
+              }
+            }, function(instance) {
+            });
+          }
+              let selectedAnnoteEl;
+              const selectorForAnnotation = ( cell, annotation) => {
+                let cellAttr = 'data-code-cell="' + cell + '"';
+                let lineAttr = 'data-code-annotation="' +  annotation + '"';
+                const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+                return selector;
+              }
+              const selectCodeLines = (annoteEl) => {
+                const doc = window.document;
+                const targetCell = annoteEl.getAttribute("data-target-cell");
+                const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+                const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+                const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+                const lineIds = lines.map((line) => {
+                  return targetCell + "-" + line;
+                })
+                let top = null;
+                let height = null;
+                let parent = null;
+                if (lineIds.length > 0) {
+                    //compute the position of the single el (top and bottom and make a div)
+                    const el = window.document.getElementById(lineIds[0]);
+                    top = el.offsetTop;
+                    height = el.offsetHeight;
+                    parent = el.parentElement.parentElement;
+                  if (lineIds.length > 1) {
+                    const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+                    const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+                    height = bottom - top;
+                  }
+                  if (top !== null && height !== null && parent !== null) {
+                    // cook up a div (if necessary) and position it 
+                    let div = window.document.getElementById("code-annotation-line-highlight");
+                    if (div === null) {
+                      div = window.document.createElement("div");
+                      div.setAttribute("id", "code-annotation-line-highlight");
+                      div.style.position = 'absolute';
+                      parent.appendChild(div);
+                    }
+                    div.style.top = top - 2 + "px";
+                    div.style.height = height + 4 + "px";
+                    div.style.left = 0;
+                    let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+                    if (gutterDiv === null) {
+                      gutterDiv = window.document.createElement("div");
+                      gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                      gutterDiv.style.position = 'absolute';
+                      const codeCell = window.document.getElementById(targetCell);
+                      const gutter = codeCell.querySelector('.code-annotation-gutter');
+                      gutter.appendChild(gutterDiv);
+                    }
+                    gutterDiv.style.top = top - 2 + "px";
+                    gutterDiv.style.height = height + 4 + "px";
+                  }
+                  selectedAnnoteEl = annoteEl;
+                }
+              };
+              const unselectCodeLines = () => {
+                const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+                elementsIds.forEach((elId) => {
+                  const div = window.document.getElementById(elId);
+                  if (div) {
+                    div.remove();
+                  }
+                });
+                selectedAnnoteEl = undefined;
+              };
+                // Handle positioning of the toggle
+            window.addEventListener(
+              "resize",
+              throttle(() => {
+                elRect = undefined;
+                if (selectedAnnoteEl) {
+                  selectCodeLines(selectedAnnoteEl);
+                }
+              }, 10)
+            );
+            function throttle(fn, ms) {
+            let throttle = false;
+            let timer;
+              return (...args) => {
+                if(!throttle) { // first call gets through
+                    fn.apply(this, args);
+                    throttle = true;
+                } else { // all the others get throttled
+                    if(timer) clearTimeout(timer); // cancel #2
+                    timer = setTimeout(() => {
+                      fn.apply(this, args);
+                      timer = throttle = false;
+                    }, ms);
+                }
+              };
+            }
+              // Attach click handler to the DT
+              const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+              for (const annoteDlNode of annoteDls) {
+                annoteDlNode.addEventListener('click', (event) => {
+                  const clickedEl = event.target;
+                  if (clickedEl !== selectedAnnoteEl) {
+                    unselectCodeLines();
+                    const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+                    if (activeEl) {
+                      activeEl.classList.remove('code-annotation-active');
+                    }
+                    selectCodeLines(clickedEl);
+                    clickedEl.classList.add('code-annotation-active');
+                  } else {
+                    // Unselect the line
+                    unselectCodeLines();
+                    clickedEl.classList.remove('code-annotation-active');
+                  }
+                });
+              }
+          const findCites = (el) => {
+            const parentEl = el.parentElement;
+            if (parentEl) {
+              const cites = parentEl.dataset.cites;
+              if (cites) {
+                return {
+                  el,
+                  cites: cites.split(' ')
+                };
+              } else {
+                return findCites(el.parentElement)
+              }
+            } else {
+              return undefined;
+            }
+          };
+          var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+          for (var i=0; i<bibliorefs.length; i++) {
+            const ref = bibliorefs[i];
+            const citeInfo = findCites(ref);
+            if (citeInfo) {
+              tippyHover(citeInfo.el, function() {
+                var popup = window.document.createElement('div');
+                citeInfo.cites.forEach(function(cite) {
+                  var citeDiv = window.document.createElement('div');
+                  citeDiv.classList.add('hanging-indent');
+                  citeDiv.classList.add('csl-entry');
+                  var biblioDiv = window.document.getElementById('ref-' + cite);
+                  if (biblioDiv) {
+                    citeDiv.innerHTML = biblioDiv.innerHTML;
+                  }
+                  popup.appendChild(citeDiv);
+                });
+                return popup.innerHTML;
+              });
+            }
+          }
+        });
+        </script>
+         <!-- /content -->
+      
+
+</body></html>

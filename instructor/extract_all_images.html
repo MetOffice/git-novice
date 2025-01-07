@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta name="generator" content="quarto-1.5.57">
+
+  <title>Version Control with Git</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto.css">
+  <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+
+  .callout {
+    margin-top: 1em;
+    margin-bottom: 1em;  
+    border-radius: .25rem;
+  }
+
+  .callout.callout-style-simple { 
+    padding: 0em 0.5em;
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+    display: flex;
+  }
+
+  .callout.callout-style-default {
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+  }
+
+  .callout .callout-body-container {
+    flex-grow: 1;
+  }
+
+  .callout.callout-style-simple .callout-body {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-style-default .callout-body {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-titled.callout-style-simple .callout-body {
+    margin-top: 0.2em;
+  }
+
+  .callout:not(.callout-titled) .callout-body {
+      display: flex;
+  }
+
+  .callout:not(.no-icon).callout-titled.callout-style-simple .callout-content {
+    padding-left: 1.6em;
+  }
+
+  .callout.callout-titled .callout-header {
+    padding-top: 0.2em;
+    margin-bottom: -0.2em;
+  }
+
+  .callout.callout-titled .callout-title  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+    
+  .callout.callout-titled.callout-style-simple .callout-content  p {
+    margin-top: 0;
+  }
+
+  .callout.callout-titled.callout-style-default .callout-content  p {
+    margin-top: 0.7em;
+  }
+
+  .callout.callout-style-simple div.callout-title {
+    border-bottom: none;
+    font-size: .9rem;
+    font-weight: 600;
+    opacity: 75%;
+  }
+
+  .callout.callout-style-default  div.callout-title {
+    border-bottom: none;
+    font-weight: 600;
+    opacity: 85%;
+    font-size: 0.9rem;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-default div.callout-content {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-simple .callout-icon::before {
+    height: 1rem;
+    width: 1rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+  }
+
+  .callout.callout-style-default .callout-icon::before {
+    height: 0.9rem;
+    width: 0.9rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 0.9rem 0.9rem;
+  }
+
+  .callout-title {
+    display: flex
+  }
+    
+  .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  .callout.no-icon::before {
+    display: none !important;
+  }
+
+  .callout.callout-titled .callout-body > .callout-content > :last-child {
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
+  }
+
+  .callout.callout-titled .callout-icon::before {
+    margin-top: .5rem;
+    padding-right: .5rem;
+  }
+
+  .callout:not(.callout-titled) .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  /* Callout Types */
+
+  div.callout-note {
+    border-left-color: #4582ec !important;
+  }
+
+  div.callout-note .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
+  }
+
+  div.callout-note.callout-style-default .callout-title {
+    background-color: #dae6fb
+  }
+
+  div.callout-important {
+    border-left-color: #d9534f !important;
+  }
+
+  div.callout-important .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-important.callout-style-default .callout-title {
+    background-color: #f7dddc
+  }
+
+  div.callout-warning {
+    border-left-color: #f0ad4e !important;
+  }
+
+  div.callout-warning .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-warning.callout-style-default .callout-title {
+    background-color: #fcefdc
+  }
+
+  div.callout-tip {
+    border-left-color: #02b875 !important;
+  }
+
+  div.callout-tip .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-tip.callout-style-default .callout-title {
+    background-color: #ccf1e3
+  }
+
+  div.callout-caution {
+    border-left-color: #fd7e14 !important;
+  }
+
+  div.callout-caution .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
+  }
+
+  div.callout-caution.callout-style-default .callout-title {
+    background-color: #ffe5d0
+  }
+
+  </style>
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+  <script src="../site_libs/quarto-diagram/mermaid-postprocess-shim.js"></script>
+  <style>
+  .reveal img.center-xy, svg.center-xy {
+    display:block;
+    margin-left:auto;
+    margin-right:auto;
+  }
+  div.center-xy img,svg {
+    display:block;
+    margin-left:auto;
+    margin-right:auto;
+  }
+  .reveal img[src$=".svg"],svg {
+    object-fit: contain;
+    /* max-width: inherit !important; */
+    /* max-height: 90vh !important; */
+  }
+  div.center-xy img[src$=".svg"],svg {
+    object-fit: contain;
+    /* max-width: inherit !important; */
+    /* max-height: 90vh !important; */
+  }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Version Control with Git</h1>
+  <p class="subtitle">Extract All Images</p>
+
+<div class="quarto-title-authors">
+</div>
+
+</section>
+<section>
+<section id="automated-version-control" class="title-slide slide level1 center">
+<h1>Automated Version Control</h1>
+
+</section>
+<section id="automated-version-control-1" class="slide level2">
+<h2>Automated Version Control-1</h2>
+<img data-src="fig/phd101212s.png" class="center-xy" alt="Comic: a PhD student sends &quot;FINAL.doc&quot; to their supervisor, but after several increasingly intense and frustrating rounds of comments and revisions they end up with a file named &quot;FINAL_rev.22.comments49.corrections.10.#@$%WHYDIDCOMETOGRADSCHOOL????.doc&quot;">
+</section>
+<section id="automated-version-control-2" class="slide level2">
+<h2>Automated Version Control-2</h2>
+<img data-src="fig/play-changes.svg" class="center-xy" alt="A diagram demonstrating how a single document grows as the result of sequential changes">
+</section>
+<section id="automated-version-control-3" class="slide level2">
+<h2>Automated Version Control-3</h2>
+<img data-src="fig/versions.svg" class="center-xy" alt="A diagram with one source document that has been modified in two different ways to produce two different versions of the document">
+</section>
+<section id="automated-version-control-4" class="slide level2">
+<h2>Automated Version Control-4</h2>
+<img data-src="fig/merge.svg" class="center-xy" alt="A diagram that shows the merging of two different document versions into one document that contains all of the changes from both versions">
+</section>
+<section id="terminology-1" class="slide level2">
+<h2>Terminology-1</h2>
+<div class="cell center-xy" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<svg aria-labelledby="chart-title-mermaid-1736249397754" aria-describedby="chart-desc-mermaid-1736249397754" aria-roledescription="flowchart-v2" role="graphics-document document" viewbox="-8 -50 748.17578125 652.7001953125" style="; display: block; margin: auto auto auto auto" xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" width="960" id="mermaid-figure-1" height="480">
+<title id="chart-title-mermaid-1736249397754">
+Distributed Version Control (e.g.&nbsp;Git)
+</title>
+<desc id="chart-desc-mermaid-1736249397754">A flowchart showing a remote server on GitHub and three local repository copies on collaborators computers. This is a distributed version control system as everyone has a copy of the entire repository and its history.</desc>
+<style>#mermaid-figure-1{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;fill:#333;}#mermaid-figure-1 .error-icon{fill:#552222;}#mermaid-figure-1 .error-text{fill:#552222;stroke:#552222;}#mermaid-figure-1 .edge-thickness-normal{stroke-width:2px;}#mermaid-figure-1 .edge-thickness-thick{stroke-width:3.5px;}#mermaid-figure-1 .edge-pattern-solid{stroke-dasharray:0;}#mermaid-figure-1 .edge-pattern-dashed{stroke-dasharray:3;}#mermaid-figure-1 .edge-pattern-dotted{stroke-dasharray:2;}#mermaid-figure-1 .marker{fill:#333333;stroke:#333333;}#mermaid-figure-1 .marker.cross{stroke:#333333;}#mermaid-figure-1 svg{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;}#mermaid-figure-1 .label{font-family:"trebuchet ms",verdana,arial,sans-serif;color:#333;}#mermaid-figure-1 .cluster-label text{fill:#333;}#mermaid-figure-1 .cluster-label span,#mermaid-figure-1 p{color:#333;}#mermaid-figure-1 .label text,#mermaid-figure-1 span,#mermaid-figure-1 p{fill:#333;color:#333;}#mermaid-figure-1 .node rect,#mermaid-figure-1 .node circle,#mermaid-figure-1 .node ellipse,#mermaid-figure-1 .node polygon,#mermaid-figure-1 .node path{fill:#ECECFF;stroke:#9370DB;stroke-width:1px;}#mermaid-figure-1 .flowchart-label text{text-anchor:middle;}#mermaid-figure-1 .node .label{text-align:center;}#mermaid-figure-1 .node.clickable{cursor:pointer;}#mermaid-figure-1 .arrowheadPath{fill:#333333;}#mermaid-figure-1 .edgePath .path{stroke:#333333;stroke-width:2.0px;}#mermaid-figure-1 .flowchart-link{stroke:#333333;fill:none;}#mermaid-figure-1 .edgeLabel{background-color:#e8e8e8;text-align:center;}#mermaid-figure-1 .edgeLabel rect{opacity:0.5;background-color:#e8e8e8;fill:#e8e8e8;}#mermaid-figure-1 .cluster rect{fill:#ffffde;stroke:#aaaa33;stroke-width:1px;}#mermaid-figure-1 .cluster text{fill:#333;}#mermaid-figure-1 .cluster span,#mermaid-figure-1 p{color:#333;}#mermaid-figure-1 div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:12px;background:hsl(80, 100%, 96.2745098039%);border:1px solid #aaaa33;border-radius:2px;pointer-events:none;z-index:100;}#mermaid-figure-1 .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#333;}#mermaid-figure-1 :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}</style>
+<g><marker orient="auto" markerheight="12" markerwidth="12" markerunits="userSpaceOnUse" refy="5" refx="10" viewbox="0 0 10 10" class="marker flowchart" id="flowchart-pointEnd"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 0 L 10 5 L 0 10 z"></path></marker><marker orient="auto" markerheight="12" markerwidth="12" markerunits="userSpaceOnUse" refy="5" refx="0" viewbox="0 0 10 10" class="marker flowchart" id="flowchart-pointStart"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 5 L 10 10 L 10 0 z"></path></marker><marker orient="auto" markerheight="11" markerwidth="11" markerunits="userSpaceOnUse" refy="5" refx="11" viewbox="0 0 10 10" class="marker flowchart" id="flowchart-circleEnd"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerheight="11" markerwidth="11" markerunits="userSpaceOnUse" refy="5" refx="-1" viewbox="0 0 10 10" class="marker flowchart" id="flowchart-circleStart"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerheight="11" markerwidth="11" markerunits="userSpaceOnUse" refy="5.2" refx="12" viewbox="0 0 11 11" class="marker cross flowchart" id="flowchart-crossEnd"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><marker orient="auto" markerheight="11" markerwidth="11" markerunits="userSpaceOnUse" refy="5.2" refx="-1" viewbox="0 0 11 11" class="marker cross flowchart" id="flowchart-crossStart"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><g class="root"><g class="clusters"><g id="subGraph3" class="cluster default flowchart-label"><rect height="282.7002258300781" width="298.22265625" y="0" x="0" ry="0" rx="0" style=""></rect><g transform="translate(107.314453125, 0)" class="cluster-label"><foreignobject height="243" width="83.59375">
+<div style="display: inline-block; white-space: nowrap;" data-xmlns="http://www.w3.org/1999/xhtml">
+<span class="nodeLabel">
+<div style="margin-top: 14em">
+Computer 1
+</div>
+</span>
+</div>
+</foreignobject></g></g><g id="subGraph2" class="cluster default flowchart-label"><rect height="218.3890151977539" width="220.23046875" y="351.7002258300781" x="271.71484375" ry="0" rx="0" style=""></rect><g transform="translate(340.033203125, 351.7002258300781)" class="cluster-label"><foreignobject height="243" width="83.59375">
+<div style="display: inline-block; white-space: nowrap;" data-xmlns="http://www.w3.org/1999/xhtml">
+<span class="nodeLabel">
+<div style="margin-top: 14em">
+Computer 2
+</div>
+</span>
+</div>
+</foreignobject></g></g><g id="subGraph1" class="cluster default flowchart-label"><rect height="218.3890151977539" width="220.23046875" y="351.7002258300781" x="511.9453125" ry="0" rx="0" style=""></rect><g transform="translate(580.263671875, 351.7002258300781)" class="cluster-label"><foreignobject height="243" width="83.59375">
+<div style="display: inline-block; white-space: nowrap;" data-xmlns="http://www.w3.org/1999/xhtml">
+<span class="nodeLabel">
+<div style="margin-top: 14em">
+Computer 3
+</div>
+</span>
+</div>
+</foreignobject></g></g><g id="subGraph0" class="cluster default flowchart-label"><rect height="123.31121063232422" width="392.13671875" y="159.3890151977539" x="318.22265625" ry="0" rx="0" style=""></rect><g transform="translate(428.791015625, 159.3890151977539)" class="cluster-label"><foreignobject height="19" width="171">
+<div style="display: inline-block; white-space: nowrap;" data-xmlns="http://www.w3.org/1999/xhtml">
+<span class="nodeLabel">Remote Server (GitHub)</span>
+</div>
+</foreignobject></g></g></g><g class="edgePaths"><path marker-end="url(#flowchart-pointEnd)" style="fill:none;" class="edge-thickness-normal edge-pattern-solid flowchart-link LS-r1 LE-r2" id="L-r1-r2-0" d="M550.8702380472259,255.40458488464637L555.2948598310217,259.95385837555165C559.7194816148173,264.50313186645695,568.5687251824087,273.60167884826757,572.9933469662043,283.9009523391728C577.41796875,294.2002258300781,577.41796875,305.7002258300781,577.41796875,317.2002258300781C577.41796875,328.7002258300781,577.41796875,340.2002258300781,581.3598540294362,350.5945268745261C585.3017393088725,360.98882791897404,593.1855098677448,370.27743000787,597.127395147181,374.92173105231797L601.0692804266172,379.566032096766"></path><path marker-end="url(#flowchart-pointEnd)" style="fill:none;stroke-width:2px;stroke-dasharray:3;" class="edge-thickness-normal edge-pattern-dotted flowchart-link LS-r2 LE-r1" id="L-r2-r1-0" d="M641.314854931997,376.9269966785437L642.5019624433309,372.72253487046606C643.6890699546647,368.5180730623885,646.0632849773324,360.1091494462333,647.2503924886662,350.15468763815574C648.4375,340.2002258300781,648.4375,328.7002258300781,648.4375,317.2002258300781C648.4375,305.7002258300781,648.4375,294.2002258300781,637.1627604166666,281.1732978915982C625.8880208333334,268.1463699531184,603.3385416666666,253.59251407615866,592.0638020833334,246.3155861376788L580.7890625,239.03865819919892"></path><path marker-end="url(#flowchart-pointEnd)" style="fill:none;" class="edge-thickness-normal edge-pattern-solid flowchart-link LS-r1 LE-r3" id="L-r1-r3-0" d="M443.1015625,235.5529702669291L428.955078125,243.4108461941206C414.80859375,251.2687221213121,386.515625,266.98447397569515,372.369140625,280.5923499028866C358.22265625,294.2002258300781,358.22265625,305.7002258300781,358.22265625,317.2002258300781C358.22265625,328.7002258300781,358.22265625,340.2002258300781,360.4453796534694,350.2532945508639C362.66810305693883,360.3063632716496,367.1135498638776,368.9125007132211,369.336273267347,373.2155694340069L371.5589966708164,377.51863815479265"></path><path marker-end="url(#flowchart-pointEnd)" style="fill:none;stroke-width:2px;stroke-dasharray:3;" class="edge-thickness-normal edge-pattern-dotted flowchart-link LS-r3 LE-r1" id="L-r3-r1-0" d="M415.90195627104566,378.777398399944L419.3304062675381,374.2645363049664C422.7588562640305,369.7516742099887,429.6157562570152,360.72595002003345,433.0442062535076,350.4630879250558C436.47265625,340.2002258300781,436.47265625,328.7002258300781,436.47265625,317.2002258300781C436.47265625,305.7002258300781,436.47265625,294.2002258300781,441.5730749293578,283.75595585589923C446.67349360871566,273.3116858817204,456.87433096743126,263.9231459333626,461.9747496467891,259.2288759591837L467.0751683261469,254.53460598500482"></path><path marker-end="url(#flowchart-pointEnd)" style="fill:none;" class="edge-thickness-normal edge-pattern-solid flowchart-link LS-r1 LE-r4" id="L-r1-r4-0" d="M443.1015625,203.87872442867186L413.3639322916667,196.4637728901855C383.6263020833333,189.0488213516992,324.1510416666667,174.21891827472655,294.4134114583333,161.05396673624023C264.67578125,147.8890151977539,264.67578125,136.3890151977539,257.6845772870685,123.9614403208768C250.693373324137,111.53386544399972,236.71096539827397,98.17871569024551,229.71976143534246,91.50114081336841L222.72855747241096,84.8235659364913"></path><path marker-end="url(#flowchart-pointEnd)" style="fill:none;stroke-width:2px;stroke-dasharray:3;" class="edge-thickness-normal edge-pattern-dotted flowchart-link LS-r4 LE-r1" id="L-r4-r1-0" d="M198.40790111730837,89.75413709844918L201.12181863942365,95.60995011499996C203.8357361615389,101.46576313155076,209.26357120576947,113.17738916465233,211.97748872788475,124.78320218120312C214.69140625,136.3890151977539,214.69140625,147.8890151977539,252.759765625,161.53505185634305C290.828125,175.18108851493218,366.96484375,190.97316183211046,405.033203125,198.86919849069963L443.1015625,206.76523514928874"></path><path marker-end="url(#flowchart-pointEnd)" style="fill:none;" class="edge-thickness-normal edge-pattern-solid flowchart-link LS-r2 LE-id2" id="L-r2-id2-0" d="M608.4909191578412,440.5467289723706L604.356364923201,446.5538143149475C600.2218106885608,452.56089965752443,591.9527022192805,464.5750703426782,593.2126981970189,476.33215568525515C594.4726941747573,488.08924102783203,605.2617945995146,499.58924102783203,610.6563448118933,505.33924102783203L616.0508950242719,511.08924102783203"></path><path marker-end="url(#flowchart-pointEnd)" style="fill:none;stroke-width:2px;stroke-dasharray:3;" class="edge-thickness-normal edge-pattern-dotted flowchart-link LS-id2 LE-r2" id="L-id2-r2-0" d="M642.3013501213592,511.08924102783203L645.785630309466,505.33924102783203C649.2699104975728,499.58924102783203,656.2384708737864,488.08924102783203,657.0522883098081,476.4868943040298C657.8661057458298,464.88454758022755,652.5251802416595,453.1798541326231,649.8547174895745,447.32750740882085L647.1842547374894,441.4751606850186"></path><path marker-end="url(#flowchart-pointEnd)" style="fill:none;" class="edge-thickness-normal edge-pattern-solid flowchart-link LS-r3 LE-id3" id="L-r3-id3-0" d="M366.8384766254692,440.7314351962736L362.9409180212244,446.7077361682C359.04335941697946,452.68403714012646,351.2482422084897,464.6366390839792,352.43601430812834,476.36294005590565C353.623786407767,488.08924102783203,363.79444781553394,499.58924102783203,368.8797785194174,505.33924102783203L373.96510922330094,511.08924102783203"></path><path marker-end="url(#flowchart-pointEnd)" style="fill:none;stroke-width:2px;stroke-dasharray:3;" class="edge-thickness-normal edge-pattern-dotted flowchart-link LS-id3 LE-r3" id="L-id3-r3-0" d="M400.21556432038835,511.08924102783203L404.0090640169903,505.33924102783203C407.80256371359224,499.58924102783203,415.38956310679606,488.08924102783203,416.27560442091755,476.4672128393738C417.16164573503914,464.84518465091554,411.34672897007823,453.101128273999,408.43927058759783,447.2291000855408L405.5318122051174,441.35707189708256"></path><path marker-end="url(#flowchart-pointEnd)" style="fill:none;" class="edge-thickness-normal edge-pattern-solid flowchart-link LS-r4 LE-id4" id="L-r4-id4-0" d="M137.9921875,74.40472999925461L126.94986979166667,82.81877753233783C115.90755208333333,91.23282506542104,93.82291666666667,108.06092013158748,82.78059895833333,122.2249676646707C71.73828125,136.3890151977539,71.73828125,147.8890151977539,74.05680958276339,161.08161608378092C76.37533791552677,174.27421696980795,81.01239458105354,189.15941874186197,83.33092291381693,196.602019627889L85.64945124658031,204.04462051391602"></path><path marker-end="url(#flowchart-pointEnd)" style="fill:none;stroke-width:2px;stroke-dasharray:3;" class="edge-thickness-normal edge-pattern-dotted flowchart-link LS-id4 LE-r4" id="L-id4-r4-0" d="M107.57606165884755,204.04462051391602L114.85700450737295,196.602019627889C122.13794735589836,189.15941874186197,136.69983305294917,174.27421696980795,143.98077590147457,161.08161608378092C151.26171875,147.8890151977539,151.26171875,136.3890151977539,153.97563627211528,124.78320218120312C156.68955379423053,113.17738916465233,162.1173888384611,101.46576313155076,164.83130636057635,95.60995011499996L167.54522388269163,89.75413709844918"></path></g><g class="edgeLabels"><g transform="translate(577.41796875, 317.2002258300781)" class="edgeLabel"><g transform="translate(-13.546875, -9.5)" class="label"><foreignobject height="19" width="27.09375">
+<div style="display: inline-block; white-space: nowrap;" data-xmlns="http://www.w3.org/1999/xhtml">
+<span class="edgeLabel">pull</span>
+</div>
+</foreignobject></g></g><g transform="translate(648.4375, 317.2002258300781)" class="edgeLabel"><g transform="translate(-16.4375, -9.5)" class="label"><foreignobject height="19" width="32.875">
+<div style="display: inline-block; white-space: nowrap;" data-xmlns="http://www.w3.org/1999/xhtml">
+<span class="edgeLabel">push</span>
+</div>
+</foreignobject></g></g><g transform="translate(358.22265625, 317.2002258300781)" class="edgeLabel"><g transform="translate(-13.546875, -9.5)" class="label"><foreignobject height="19" width="27.09375">
+<div style="display: inline-block; white-space: nowrap;" data-xmlns="http://www.w3.org/1999/xhtml">
+<span class="edgeLabel">pull</span>
+</div>
+</foreignobject></g></g><g transform="translate(436.47265625, 317.2002258300781)" class="edgeLabel"><g transform="translate(-16.4375, -9.5)" class="label"><foreignobject height="19" width="32.875">
+<div style="display: inline-block; white-space: nowrap;" data-xmlns="http://www.w3.org/1999/xhtml">
+<span class="edgeLabel">push</span>
+</div>
+</foreignobject></g></g><g transform="translate(264.67578125, 124.8890151977539)" class="edgeLabel"><g transform="translate(-13.546875, -9.5)" class="label"><foreignobject height="19" width="27.09375">
+<div style="display: inline-block; white-space: nowrap;" data-xmlns="http://www.w3.org/1999/xhtml">
+<span class="edgeLabel">pull</span>
+</div>
+</foreignobject></g></g><g transform="translate(214.69140625, 124.8890151977539)" class="edgeLabel"><g transform="translate(-16.4375, -9.5)" class="label"><foreignobject height="19" width="32.875">
+<div style="display: inline-block; white-space: nowrap;" data-xmlns="http://www.w3.org/1999/xhtml">
+<span class="edgeLabel">push</span>
+</div>
+</foreignobject></g></g><g transform="translate(583.68359375, 476.58924102783203)" class="edgeLabel"><g transform="translate(-32.53125, -9.5)" class="label"><foreignobject height="19" width="65.0625">
+<div style="display: inline-block; white-space: nowrap;" data-xmlns="http://www.w3.org/1999/xhtml">
+<span class="edgeLabel">checkout</span>
+</div>
+</foreignobject></g></g><g transform="translate(663.20703125, 476.58924102783203)" class="edgeLabel"><g transform="translate(-26.9921875, -9.5)" class="label"><foreignobject height="19" width="53.984375">
+<div style="display: inline-block; white-space: nowrap;" data-xmlns="http://www.w3.org/1999/xhtml">
+<span class="edgeLabel">commit</span>
+</div>
+</foreignobject></g></g><g transform="translate(343.453125, 476.58924102783203)" class="edgeLabel"><g transform="translate(-32.53125, -9.5)" class="label"><foreignobject height="19" width="65.0625">
+<div style="display: inline-block; white-space: nowrap;" data-xmlns="http://www.w3.org/1999/xhtml">
+<span class="edgeLabel">checkout</span>
+</div>
+</foreignobject></g></g><g transform="translate(422.9765625, 476.58924102783203)" class="edgeLabel"><g transform="translate(-26.9921875, -9.5)" class="label"><foreignobject height="19" width="53.984375">
+<div style="display: inline-block; white-space: nowrap;" data-xmlns="http://www.w3.org/1999/xhtml">
+<span class="edgeLabel">commit</span>
+</div>
+</foreignobject></g></g><g transform="translate(71.73828125, 124.8890151977539)" class="edgeLabel"><g transform="translate(-32.53125, -9.5)" class="label"><foreignobject height="19" width="65.0625">
+<div style="display: inline-block; white-space: nowrap;" data-xmlns="http://www.w3.org/1999/xhtml">
+<span class="edgeLabel">checkout</span>
+</div>
+</foreignobject></g></g><g transform="translate(151.26171875, 124.8890151977539)" class="edgeLabel"><g transform="translate(-26.9921875, -9.5)" class="label"><foreignobject height="19" width="53.984375">
+<div style="display: inline-block; white-space: nowrap;" data-xmlns="http://www.w3.org/1999/xhtml">
+<span class="edgeLabel">commit</span>
+</div>
+</foreignobject></g></g></g><g class="nodes"><g transform="translate(182.9765625, 57.69450759887695)" id="flowchart-r4-55" class="node default default flowchart-label"><path transform="translate(-44.984375,-32.69450501526384)" d="M 0,10.463003343509232 a 44.984375,10.463003343509232 0,0,0 89.96875 0 a 44.984375,10.463003343509232 0,0,0 -89.96875 0 l 0,44.46300334350923 a 44.984375,10.463003343509232 0,0,0 89.96875 0 l 0,-44.46300334350923" style=""></path><g transform="translate(-37.484375, -9.5)" style="" class="label"><rect></rect><foreignobject height="19" width="74.96875">
+<div style="display: inline-block; white-space: nowrap;" data-xmlns="http://www.w3.org/1999/xhtml">
+<span class="nodeLabel">Repository</span>
+</div>
+</foreignobject></g></g><g transform="translate(90.9453125, 221.04462051391602)" id="flowchart-id4-56" class="node default default flowchart-label"><rect height="34" width="111.890625" y="-17" x="-55.9453125" ry="0" rx="0" style="" class="basic label-container"></rect><g transform="translate(-48.4453125, -9.5)" style="" class="label"><rect></rect><foreignobject height="19" width="96.890625">
+<div style="display: inline-block; white-space: nowrap;" data-xmlns="http://www.w3.org/1999/xhtml">
+<span class="nodeLabel">Working Copy</span>
+</div>
+</foreignobject></g></g><g transform="translate(389, 409.3947334289551)" id="flowchart-r3-53" class="node default default flowchart-label"><path transform="translate(-44.984375,-32.69450501526384)" d="M 0,10.463003343509232 a 44.984375,10.463003343509232 0,0,0 89.96875 0 a 44.984375,10.463003343509232 0,0,0 -89.96875 0 l 0,44.46300334350923 a 44.984375,10.463003343509232 0,0,0 89.96875 0 l 0,-44.46300334350923" style=""></path><g transform="translate(-37.484375, -9.5)" style="" class="label"><rect></rect><foreignobject height="19" width="74.96875">
+<div style="display: inline-block; white-space: nowrap;" data-xmlns="http://www.w3.org/1999/xhtml">
+<span class="nodeLabel">Repository</span>
+</div>
+</foreignobject></g></g><g transform="translate(389, 528.089241027832)" id="flowchart-id3-54" class="node default default flowchart-label"><rect height="34" width="111.890625" y="-17" x="-55.9453125" ry="0" rx="0" style="" class="basic label-container"></rect><g transform="translate(-48.4453125, -9.5)" style="" class="label"><rect></rect><foreignobject height="19" width="96.890625">
+<div style="display: inline-block; white-space: nowrap;" data-xmlns="http://www.w3.org/1999/xhtml">
+<span class="nodeLabel">Working Copy</span>
+</div>
+</foreignobject></g></g><g transform="translate(632, 409.3947334289551)" id="flowchart-r2-51" class="node default default flowchart-label"><path transform="translate(-44.984375,-32.69450501526384)" d="M 0,10.463003343509232 a 44.984375,10.463003343509232 0,0,0 89.96875 0 a 44.984375,10.463003343509232 0,0,0 -89.96875 0 l 0,44.46300334350923 a 44.984375,10.463003343509232 0,0,0 89.96875 0 l 0,-44.46300334350923" style=""></path><g transform="translate(-37.484375, -9.5)" style="" class="label"><rect></rect><foreignobject height="19" width="74.96875">
+<div style="display: inline-block; white-space: nowrap;" data-xmlns="http://www.w3.org/1999/xhtml">
+<span class="nodeLabel">Repository</span>
+</div>
+</foreignobject></g></g><g transform="translate(632, 528.089241027832)" id="flowchart-id2-52" class="node default default flowchart-label"><rect height="34" width="111.890625" y="-17" x="-55.9453125" ry="0" rx="0" style="" class="basic label-container"></rect><g transform="translate(-48.4453125, -9.5)" style="" class="label"><rect></rect><foreignobject height="19" width="96.890625">
+<div style="display: inline-block; white-space: nowrap;" data-xmlns="http://www.w3.org/1999/xhtml">
+<span class="nodeLabel">Working Copy</span>
+</div>
+</foreignobject></g></g><g transform="translate(511.9453125, 221.04462051391602)" id="flowchart-r1-50" class="node default default flowchart-label"><path transform="translate(-68.84375,-36.65560314061385)" d="M 0,13.103735427075899 a 68.84375,13.103735427075899 0,0,0 137.6875 0 a 68.84375,13.103735427075899 0,0,0 -137.6875 0 l 0,47.1037354270759 a 68.84375,13.103735427075899 0,0,0 137.6875 0 l 0,-47.1037354270759" style=""></path><g transform="translate(-61.34375, -9.5)" style="" class="label"><rect></rect><foreignobject height="19" width="122.6875">
+<div style="display: inline-block; white-space: nowrap;" data-xmlns="http://www.w3.org/1999/xhtml">
+<span class="nodeLabel">Origin Repository</span>
+</div>
+</foreignobject></g></g></g></g></g><text class="flowchartTitleText" y="-25" x="366.087890625">Distributed Version Control (e.g.&nbsp;Git)</text>
+</svg>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="terminology-2" class="slide level2">
+<h2>Terminology-2</h2>
+<div class="cell center-xy" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<svg aria-labelledby="chart-title-mermaid-1736249400118" aria-describedby="chart-desc-mermaid-1736249400118" aria-roledescription="flowchart-v2" role="graphics-document document" viewbox="-8 -50 445.84375 503.5982971191406" style="; display: block; margin: auto auto auto auto" xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" width="960" id="mermaid-figure-9" height="480">
+<title id="chart-title-mermaid-1736249400118">
+Centralised Version Control (e.g.&nbsp;SVN)
+</title>
+<desc id="chart-desc-mermaid-1736249400118">A flowchart showing a central remote server and three local working copies on collaborators computers.</desc>
+<style>#mermaid-figure-9{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;fill:#333;}#mermaid-figure-9 .error-icon{fill:#552222;}#mermaid-figure-9 .error-text{fill:#552222;stroke:#552222;}#mermaid-figure-9 .edge-thickness-normal{stroke-width:2px;}#mermaid-figure-9 .edge-thickness-thick{stroke-width:3.5px;}#mermaid-figure-9 .edge-pattern-solid{stroke-dasharray:0;}#mermaid-figure-9 .edge-pattern-dashed{stroke-dasharray:3;}#mermaid-figure-9 .edge-pattern-dotted{stroke-dasharray:2;}#mermaid-figure-9 .marker{fill:#333333;stroke:#333333;}#mermaid-figure-9 .marker.cross{stroke:#333333;}#mermaid-figure-9 svg{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;}#mermaid-figure-9 .label{font-family:"trebuchet ms",verdana,arial,sans-serif;color:#333;}#mermaid-figure-9 .cluster-label text{fill:#333;}#mermaid-figure-9 .cluster-label span,#mermaid-figure-9 p{color:#333;}#mermaid-figure-9 .label text,#mermaid-figure-9 span,#mermaid-figure-9 p{fill:#333;color:#333;}#mermaid-figure-9 .node rect,#mermaid-figure-9 .node circle,#mermaid-figure-9 .node ellipse,#mermaid-figure-9 .node polygon,#mermaid-figure-9 .node path{fill:#ECECFF;stroke:#9370DB;stroke-width:1px;}#mermaid-figure-9 .flowchart-label text{text-anchor:middle;}#mermaid-figure-9 .node .label{text-align:center;}#mermaid-figure-9 .node.clickable{cursor:pointer;}#mermaid-figure-9 .arrowheadPath{fill:#333333;}#mermaid-figure-9 .edgePath .path{stroke:#333333;stroke-width:2.0px;}#mermaid-figure-9 .flowchart-link{stroke:#333333;fill:none;}#mermaid-figure-9 .edgeLabel{background-color:#e8e8e8;text-align:center;}#mermaid-figure-9 .edgeLabel rect{opacity:0.5;background-color:#e8e8e8;fill:#e8e8e8;}#mermaid-figure-9 .cluster rect{fill:#ffffde;stroke:#aaaa33;stroke-width:1px;}#mermaid-figure-9 .cluster text{fill:#333;}#mermaid-figure-9 .cluster span,#mermaid-figure-9 p{color:#333;}#mermaid-figure-9 div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:12px;background:hsl(80, 100%, 96.2745098039%);border:1px solid #aaaa33;border-radius:2px;pointer-events:none;z-index:100;}#mermaid-figure-9 .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#333;}#mermaid-figure-9 :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}</style>
+<g><marker orient="auto" markerheight="12" markerwidth="12" markerunits="userSpaceOnUse" refy="5" refx="10" viewbox="0 0 10 10" class="marker flowchart" id="flowchart-pointEnd"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 0 L 10 5 L 0 10 z"></path></marker><marker orient="auto" markerheight="12" markerwidth="12" markerunits="userSpaceOnUse" refy="5" refx="0" viewbox="0 0 10 10" class="marker flowchart" id="flowchart-pointStart"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 5 L 10 10 L 10 0 z"></path></marker><marker orient="auto" markerheight="11" markerwidth="11" markerunits="userSpaceOnUse" refy="5" refx="11" viewbox="0 0 10 10" class="marker flowchart" id="flowchart-circleEnd"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerheight="11" markerwidth="11" markerunits="userSpaceOnUse" refy="5" refx="-1" viewbox="0 0 10 10" class="marker flowchart" id="flowchart-circleStart"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerheight="11" markerwidth="11" markerunits="userSpaceOnUse" refy="5.2" refx="12" viewbox="0 0 11 11" class="marker cross flowchart" id="flowchart-crossEnd"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><marker orient="auto" markerheight="11" markerwidth="11" markerunits="userSpaceOnUse" refy="5.2" refx="-1" viewbox="0 0 11 11" class="marker cross flowchart" id="flowchart-crossStart"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><g class="root"><g class="clusters"><g id="subGraph3" class="cluster default flowchart-label"><rect height="84" width="200.46875" y="0" x="115.234375" ry="0" rx="0" style=""></rect><g transform="translate(173.671875, 0)" class="cluster-label"><foreignobject height="99" width="83.59375">
+<div style="display: inline-block; white-space: nowrap;" data-xmlns="http://www.w3.org/1999/xhtml">
+<span class="nodeLabel">
+<div style="margin-top: 5em">
+Computer 1
+</div>
+</span>
+</div>
+</foreignobject></g></g><g id="subGraph2" class="cluster default flowchart-label"><rect height="84" width="200.46875" y="346.59830474853516" x="0" ry="0" rx="0" style=""></rect><g transform="translate(58.4375, 346.59830474853516)" class="cluster-label"><foreignobject height="99" width="83.59375">
+<div style="display: inline-block; white-space: nowrap;" data-xmlns="http://www.w3.org/1999/xhtml">
+<span class="nodeLabel">
+<div style="margin-top: 5em">
+Computer 2
+</div>
+</span>
+</div>
+</foreignobject></g></g><g id="subGraph1" class="cluster default flowchart-label"><rect height="84" width="200.46875" y="346.59830474853516" x="220.46875" ry="0" rx="0" style=""></rect><g transform="translate(278.90625, 346.59830474853516)" class="cluster-label"><foreignobject height="99" width="83.59375">
+<div style="display: inline-block; white-space: nowrap;" data-xmlns="http://www.w3.org/1999/xhtml">
+<span class="nodeLabel">
+<div style="margin-top: 5em">
+Computer 3
+</div>
+</span>
+</div>
+</foreignobject></g></g><g id="subGraph0" class="cluster default flowchart-label"><rect height="124.59830474853516" width="429.84375" y="153" x="0" ry="0" rx="0" style=""></rect><g transform="translate(162.6328125, 153)" class="cluster-label"><foreignobject height="19" width="104.578125">
+<div style="display: inline-block; white-space: nowrap;" data-xmlns="http://www.w3.org/1999/xhtml">
+<span class="nodeLabel">Remote Server</span>
+</div>
+</foreignobject></g></g></g><g class="edgePaths"><path marker-end="url(#flowchart-pointEnd)" style="fill:none;" class="edge-thickness-normal edge-pattern-solid flowchart-link LS-id1 LE-id2" id="L-id1-id2-0" d="M259.66791224775926,250.5289387596074L264.0468279147994,255.04049975776203C268.4257435818395,259.55206075591667,277.18357491591973,268.5751827522259,281.56249058295987,278.83674375038055C285.94140625,289.09830474853516,285.94140625,300.59830474853516,285.94140625,312.09830474853516C285.94140625,323.59830474853516,285.94140625,335.09830474853516,290.3115234375,345.01497141520184C294.681640625,354.93163808186847,303.421875,363.26497141520184,307.7919921875,367.43163808186847L312.162109375,371.59830474853516"></path><path marker-end="url(#flowchart-pointEnd)" style="fill:none;stroke-width:2px;stroke-dasharray:3;" class="edge-thickness-normal edge-pattern-dotted flowchart-link LS-id2 LE-id1" id="L-id2-id1-0" d="M344.3501674107143,371.59830474853516L347.8692801339286,367.43163808186847C351.38839285714283,363.26497141520184,358.4266183035714,354.93163808186847,361.9457310267857,345.01497141520184C365.46484375,335.09830474853516,365.46484375,323.59830474853516,365.46484375,312.09830474853516C365.46484375,300.59830474853516,365.46484375,289.09830474853516,353.591796875,275.9914594536381C341.71875,262.884614158741,317.97265625,248.17092356894682,306.099609375,240.81407827404973L294.2265625,233.45723297915268"></path><path marker-end="url(#flowchart-pointEnd)" style="fill:none;" class="edge-thickness-normal edge-pattern-solid flowchart-link LS-id1 LE-id3" id="L-id1-id3-0" d="M146.7109375,231.412610598376L133.17122395833334,239.11022629006922C119.63151041666667,246.80784198176238,92.55208333333333,262.2030733651488,79.01236979166667,275.65068905684194C65.47265625,289.09830474853516,65.47265625,300.59830474853516,65.47265625,312.09830474853516C65.47265625,323.59830474853516,65.47265625,335.09830474853516,69.41727120535715,345.01497141520184C73.36188616071429,354.93163808186847,81.25111607142857,363.26497141520184,85.19573102678572,367.43163808186847L89.14034598214286,371.59830474853516"></path><path marker-end="url(#flowchart-pointEnd)" style="fill:none;stroke-width:2px;stroke-dasharray:3;" class="edge-thickness-normal edge-pattern-dotted flowchart-link LS-id3 LE-id1" id="L-id3-id1-0" d="M121.32840401785714,371.59830474853516L125.27301897321428,367.43163808186847C129.21763392857142,363.26497141520184,137.1068638392857,354.93163808186847,141.05147879464286,345.01497141520184C144.99609375,335.09830474853516,144.99609375,323.59830474853516,144.99609375,312.09830474853516C144.99609375,300.59830474853516,144.99609375,289.09830474853516,150.04382536523073,278.708824949866C155.09155698046143,268.31934515119684,165.1870202109229,259.0403855538586,170.2347518261536,254.40090575518943L175.28248344138433,249.7614259565203"></path><path marker-end="url(#flowchart-pointEnd)" style="fill:none;" class="edge-thickness-normal edge-pattern-solid flowchart-link LS-id1 LE-id4" id="L-id1-id4-0" d="M244.2745057735184,178.72424258376196L246.9338329362653,174.43686881980162C249.59316009901227,170.1494950558413,254.91181442450613,161.57474752792066,257.57114158725307,151.53737376396032C260.23046875,141.5,260.23046875,130,260.23046875,118.5C260.23046875,107,260.23046875,95.5,256.28585379464283,85.58333333333333C252.3412388392857,75.66666666666667,244.45200892857142,67.33333333333333,240.50739397321425,63.166666666666664L236.56277901785714,59"></path><path marker-end="url(#flowchart-pointEnd)" style="fill:none;stroke-width:2px;stroke-dasharray:3;" class="edge-thickness-normal edge-pattern-dotted flowchart-link LS-id4 LE-id1" id="L-id4-id1-0" d="M204.37472098214286,59L200.4301060267857,63.166666666666664C196.48549107142858,67.33333333333333,188.5962611607143,75.66666666666667,184.65164620535714,85.58333333333333C180.70703125,95.5,180.70703125,107,180.70703125,118.5C180.70703125,130,180.70703125,141.5,183.36635841274696,151.53737376396032C186.02568557549387,161.57474752792066,191.34433990098773,170.1494950558413,194.0036670637347,174.43686881980162L196.6629942264816,178.72424258376196"></path></g><g class="edgeLabels"><g transform="translate(285.94140625, 312.09830474853516)" class="edgeLabel"><g transform="translate(-32.53125, -9.5)" class="label"><foreignobject height="19" width="65.0625">
+<div style="display: inline-block; white-space: nowrap;" data-xmlns="http://www.w3.org/1999/xhtml">
+<span class="edgeLabel">checkout</span>
+</div>
+</foreignobject></g></g><g transform="translate(365.46484375, 312.09830474853516)" class="edgeLabel"><g transform="translate(-26.9921875, -9.5)" class="label"><foreignobject height="19" width="53.984375">
+<div style="display: inline-block; white-space: nowrap;" data-xmlns="http://www.w3.org/1999/xhtml">
+<span class="edgeLabel">commit</span>
+</div>
+</foreignobject></g></g><g transform="translate(65.47265625, 312.09830474853516)" class="edgeLabel"><g transform="translate(-32.53125, -9.5)" class="label"><foreignobject height="19" width="65.0625">
+<div style="display: inline-block; white-space: nowrap;" data-xmlns="http://www.w3.org/1999/xhtml">
+<span class="edgeLabel">checkout</span>
+</div>
+</foreignobject></g></g><g transform="translate(144.99609375, 312.09830474853516)" class="edgeLabel"><g transform="translate(-26.9921875, -9.5)" class="label"><foreignobject height="19" width="53.984375">
+<div style="display: inline-block; white-space: nowrap;" data-xmlns="http://www.w3.org/1999/xhtml">
+<span class="edgeLabel">commit</span>
+</div>
+</foreignobject></g></g><g transform="translate(260.23046875, 118.5)" class="edgeLabel"><g transform="translate(-32.53125, -9.5)" class="label"><foreignobject height="19" width="65.0625">
+<div style="display: inline-block; white-space: nowrap;" data-xmlns="http://www.w3.org/1999/xhtml">
+<span class="edgeLabel">checkout</span>
+</div>
+</foreignobject></g></g><g transform="translate(180.70703125, 118.5)" class="edgeLabel"><g transform="translate(-26.9921875, -9.5)" class="label"><foreignobject height="19" width="53.984375">
+<div style="display: inline-block; white-space: nowrap;" data-xmlns="http://www.w3.org/1999/xhtml">
+<span class="edgeLabel">commit</span>
+</div>
+</foreignobject></g></g></g><g class="nodes"><g transform="translate(220.46875, 42)" id="flowchart-id4-29" class="node default default flowchart-label"><rect height="34" width="111.890625" y="-17" x="-55.9453125" ry="0" rx="0" style="" class="basic label-container"></rect><g transform="translate(-48.4453125, -9.5)" style="" class="label"><rect></rect><foreignobject height="19" width="96.890625">
+<div style="display: inline-block; white-space: nowrap;" data-xmlns="http://www.w3.org/1999/xhtml">
+<span class="nodeLabel">Working Copy</span>
+</div>
+</foreignobject></g></g><g transform="translate(105.234375, 388.59830474853516)" id="flowchart-id3-28" class="node default default flowchart-label"><rect height="34" width="111.890625" y="-17" x="-55.9453125" ry="0" rx="0" style="" class="basic label-container"></rect><g transform="translate(-48.4453125, -9.5)" style="" class="label"><rect></rect><foreignobject height="19" width="96.890625">
+<div style="display: inline-block; white-space: nowrap;" data-xmlns="http://www.w3.org/1999/xhtml">
+<span class="nodeLabel">Working Copy</span>
+</div>
+</foreignobject></g></g><g transform="translate(329.9921875, 388.59830474853516)" id="flowchart-id2-27" class="node default default flowchart-label"><rect height="34" width="111.890625" y="-17" x="-55.9453125" ry="0" rx="0" style="" class="basic label-container"></rect><g transform="translate(-48.4453125, -9.5)" style="" class="label"><rect></rect><foreignobject height="19" width="96.890625">
+<div style="display: inline-block; white-space: nowrap;" data-xmlns="http://www.w3.org/1999/xhtml">
+<span class="nodeLabel">Working Copy</span>
+</div>
+</foreignobject></g></g><g transform="translate(220.46875, 215.29915237426758)" id="flowchart-id1-26" class="node default default flowchart-label"><path transform="translate(-73.7578125,-37.299151424803625)" d="M 0,13.53276761653575 a 73.7578125,13.53276761653575 0,0,0 147.515625 0 a 73.7578125,13.53276761653575 0,0,0 -147.515625 0 l 0,47.53276761653575 a 73.7578125,13.53276761653575 0,0,0 147.515625 0 l 0,-47.53276761653575" style=""></path><g transform="translate(-66.2578125, -9.5)" style="" class="label"><rect></rect><foreignobject height="19" width="132.515625">
+<div style="display: inline-block; white-space: nowrap;" data-xmlns="http://www.w3.org/1999/xhtml">
+<span class="nodeLabel">Central Repository</span>
+</div>
+</foreignobject></g></g></g></g></g><text class="flowchartTitleText" y="-25" x="214.921875">Centralised Version Control (e.g.&nbsp;SVN)</text>
+</svg>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section></section>
+<section id="setting-up-git" class="title-slide slide level1 center">
+<h1>Setting Up Git</h1>
+<p>This episode contains no images.</p>
+</section>
+
+<section id="creating-a-repository" class="title-slide slide level1 center">
+<h1>Creating a Repository</h1>
+<p>This episode contains no images.</p>
+</section>
+
+<section>
+<section id="branches" class="title-slide slide level1 center">
+<h1>Branches</h1>
+
+</section>
+<section id="branches-1" class="slide level2">
+<h2>Branches-1</h2>
+<div class="cell center-xy" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<svg id="mermaid-figure-8" width="960" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" height="480" viewbox="768 0 912 512" role="graphics-document document" aria-roledescription="error" style="; display: block; margin: auto auto auto auto">
+<style>#mermaid-figure-8{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;fill:#333;}#mermaid-figure-8 .error-icon{fill:#552222;}#mermaid-figure-8 .error-text{fill:#552222;stroke:#552222;}#mermaid-figure-8 .edge-thickness-normal{stroke-width:2px;}#mermaid-figure-8 .edge-thickness-thick{stroke-width:3.5px;}#mermaid-figure-8 .edge-pattern-solid{stroke-dasharray:0;}#mermaid-figure-8 .edge-pattern-dashed{stroke-dasharray:3;}#mermaid-figure-8 .edge-pattern-dotted{stroke-dasharray:2;}#mermaid-figure-8 .marker{fill:#333333;stroke:#333333;}#mermaid-figure-8 .marker.cross{stroke:#333333;}#mermaid-figure-8 svg{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;}#mermaid-figure-8 :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}</style>
+<g></g><g><path class="error-icon" d="m411.313,123.313c6.25-6.25 6.25-16.375 0-22.625s-16.375-6.25-22.625,0l-32,32-9.375,9.375-20.688-20.688c-12.484-12.5-32.766-12.5-45.25,0l-16,16c-1.261,1.261-2.304,2.648-3.31,4.051-21.739-8.561-45.324-13.426-70.065-13.426-105.867,0-192,86.133-192,192s86.133,192 192,192 192-86.133 192-192c0-24.741-4.864-48.327-13.426-70.065 1.402-1.007 2.79-2.049 4.051-3.31l16-16c12.5-12.492 12.5-32.758 0-45.25l-20.688-20.688 9.375-9.375 32.001-31.999zm-219.313,100.687c-52.938,0-96,43.063-96,96 0,8.836-7.164,16-16,16s-16-7.164-16-16c0-70.578 57.422-128 128-128 8.836,0 16,7.164 16,16s-7.164,16-16,16z"></path><path class="error-icon" d="m459.02,148.98c-6.25-6.25-16.375-6.25-22.625,0s-6.25,16.375 0,22.625l16,16c3.125,3.125 7.219,4.688 11.313,4.688 4.094,0 8.188-1.563 11.313-4.688 6.25-6.25 6.25-16.375 0-22.625l-16.001-16z"></path><path class="error-icon" d="m340.395,75.605c3.125,3.125 7.219,4.688 11.313,4.688 4.094,0 8.188-1.563 11.313-4.688 6.25-6.25 6.25-16.375 0-22.625l-16-16c-6.25-6.25-16.375-6.25-22.625,0s-6.25,16.375 0,22.625l15.999,16z"></path><path class="error-icon" d="m400,64c8.844,0 16-7.164 16-16v-32c0-8.836-7.156-16-16-16-8.844,0-16,7.164-16,16v32c0,8.836 7.156,16 16,16z"></path><path class="error-icon" d="m496,96.586h-32c-8.844,0-16,7.164-16,16 0,8.836 7.156,16 16,16h32c8.844,0 16-7.164 16-16 0-8.836-7.156-16-16-16z"></path><path class="error-icon" d="m436.98,75.605c3.125,3.125 7.219,4.688 11.313,4.688 4.094,0 8.188-1.563 11.313-4.688l32-32c6.25-6.25 6.25-16.375 0-22.625s-16.375-6.25-22.625,0l-32,32c-6.251,6.25-6.251,16.375-0.001,22.625z"></path><text class="error-text" x="1440" y="250" font-size="150px" style="text-anchor: middle;">Syntax error in text</text><text class="error-text" x="1250" y="400" font-size="100px" style="text-anchor: middle;">mermaid version 10.2.0-rc.2</text></g>
+</svg>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="creating-branches-1" class="slide level2">
+<h2>Creating Branches-1</h2>
+<div class="cell center-xy" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<svg id="mermaid-figure-7" width="960" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" height="480" viewbox="768 0 912 512" role="graphics-document document" aria-roledescription="error" style="; display: block; margin: auto auto auto auto">
+<style>#mermaid-figure-7{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;fill:#333;}#mermaid-figure-7 .error-icon{fill:#552222;}#mermaid-figure-7 .error-text{fill:#552222;stroke:#552222;}#mermaid-figure-7 .edge-thickness-normal{stroke-width:2px;}#mermaid-figure-7 .edge-thickness-thick{stroke-width:3.5px;}#mermaid-figure-7 .edge-pattern-solid{stroke-dasharray:0;}#mermaid-figure-7 .edge-pattern-dashed{stroke-dasharray:3;}#mermaid-figure-7 .edge-pattern-dotted{stroke-dasharray:2;}#mermaid-figure-7 .marker{fill:#333333;stroke:#333333;}#mermaid-figure-7 .marker.cross{stroke:#333333;}#mermaid-figure-7 svg{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;}#mermaid-figure-7 :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}</style>
+<g></g><g><path class="error-icon" d="m411.313,123.313c6.25-6.25 6.25-16.375 0-22.625s-16.375-6.25-22.625,0l-32,32-9.375,9.375-20.688-20.688c-12.484-12.5-32.766-12.5-45.25,0l-16,16c-1.261,1.261-2.304,2.648-3.31,4.051-21.739-8.561-45.324-13.426-70.065-13.426-105.867,0-192,86.133-192,192s86.133,192 192,192 192-86.133 192-192c0-24.741-4.864-48.327-13.426-70.065 1.402-1.007 2.79-2.049 4.051-3.31l16-16c12.5-12.492 12.5-32.758 0-45.25l-20.688-20.688 9.375-9.375 32.001-31.999zm-219.313,100.687c-52.938,0-96,43.063-96,96 0,8.836-7.164,16-16,16s-16-7.164-16-16c0-70.578 57.422-128 128-128 8.836,0 16,7.164 16,16s-7.164,16-16,16z"></path><path class="error-icon" d="m459.02,148.98c-6.25-6.25-16.375-6.25-22.625,0s-6.25,16.375 0,22.625l16,16c3.125,3.125 7.219,4.688 11.313,4.688 4.094,0 8.188-1.563 11.313-4.688 6.25-6.25 6.25-16.375 0-22.625l-16.001-16z"></path><path class="error-icon" d="m340.395,75.605c3.125,3.125 7.219,4.688 11.313,4.688 4.094,0 8.188-1.563 11.313-4.688 6.25-6.25 6.25-16.375 0-22.625l-16-16c-6.25-6.25-16.375-6.25-22.625,0s-6.25,16.375 0,22.625l15.999,16z"></path><path class="error-icon" d="m400,64c8.844,0 16-7.164 16-16v-32c0-8.836-7.156-16-16-16-8.844,0-16,7.164-16,16v32c0,8.836 7.156,16 16,16z"></path><path class="error-icon" d="m496,96.586h-32c-8.844,0-16,7.164-16,16 0,8.836 7.156,16 16,16h32c8.844,0 16-7.164 16-16 0-8.836-7.156-16-16-16z"></path><path class="error-icon" d="m436.98,75.605c3.125,3.125 7.219,4.688 11.313,4.688 4.094,0 8.188-1.563 11.313-4.688l32-32c6.25-6.25 6.25-16.375 0-22.625s-16.375-6.25-22.625,0l-32,32c-6.251,6.25-6.251,16.375-0.001,22.625z"></path><text class="error-text" x="1440" y="250" font-size="150px" style="text-anchor: middle;">Syntax error in text</text><text class="error-text" x="1250" y="400" font-size="100px" style="text-anchor: middle;">mermaid version 10.2.0-rc.2</text></g>
+</svg>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="creating-branches-2" class="slide level2">
+<h2>Creating Branches-2</h2>
+<div class="cell center-xy" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<svg id="mermaid-figure-6" width="960" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" height="480" viewbox="768 0 912 512" role="graphics-document document" aria-roledescription="error" style="; display: block; margin: auto auto auto auto">
+<style>#mermaid-figure-6{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;fill:#333;}#mermaid-figure-6 .error-icon{fill:#552222;}#mermaid-figure-6 .error-text{fill:#552222;stroke:#552222;}#mermaid-figure-6 .edge-thickness-normal{stroke-width:2px;}#mermaid-figure-6 .edge-thickness-thick{stroke-width:3.5px;}#mermaid-figure-6 .edge-pattern-solid{stroke-dasharray:0;}#mermaid-figure-6 .edge-pattern-dashed{stroke-dasharray:3;}#mermaid-figure-6 .edge-pattern-dotted{stroke-dasharray:2;}#mermaid-figure-6 .marker{fill:#333333;stroke:#333333;}#mermaid-figure-6 .marker.cross{stroke:#333333;}#mermaid-figure-6 svg{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;}#mermaid-figure-6 :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}</style>
+<g></g><g><path class="error-icon" d="m411.313,123.313c6.25-6.25 6.25-16.375 0-22.625s-16.375-6.25-22.625,0l-32,32-9.375,9.375-20.688-20.688c-12.484-12.5-32.766-12.5-45.25,0l-16,16c-1.261,1.261-2.304,2.648-3.31,4.051-21.739-8.561-45.324-13.426-70.065-13.426-105.867,0-192,86.133-192,192s86.133,192 192,192 192-86.133 192-192c0-24.741-4.864-48.327-13.426-70.065 1.402-1.007 2.79-2.049 4.051-3.31l16-16c12.5-12.492 12.5-32.758 0-45.25l-20.688-20.688 9.375-9.375 32.001-31.999zm-219.313,100.687c-52.938,0-96,43.063-96,96 0,8.836-7.164,16-16,16s-16-7.164-16-16c0-70.578 57.422-128 128-128 8.836,0 16,7.164 16,16s-7.164,16-16,16z"></path><path class="error-icon" d="m459.02,148.98c-6.25-6.25-16.375-6.25-22.625,0s-6.25,16.375 0,22.625l16,16c3.125,3.125 7.219,4.688 11.313,4.688 4.094,0 8.188-1.563 11.313-4.688 6.25-6.25 6.25-16.375 0-22.625l-16.001-16z"></path><path class="error-icon" d="m340.395,75.605c3.125,3.125 7.219,4.688 11.313,4.688 4.094,0 8.188-1.563 11.313-4.688 6.25-6.25 6.25-16.375 0-22.625l-16-16c-6.25-6.25-16.375-6.25-22.625,0s-6.25,16.375 0,22.625l15.999,16z"></path><path class="error-icon" d="m400,64c8.844,0 16-7.164 16-16v-32c0-8.836-7.156-16-16-16-8.844,0-16,7.164-16,16v32c0,8.836 7.156,16 16,16z"></path><path class="error-icon" d="m496,96.586h-32c-8.844,0-16,7.164-16,16 0,8.836 7.156,16 16,16h32c8.844,0 16-7.164 16-16 0-8.836-7.156-16-16-16z"></path><path class="error-icon" d="m436.98,75.605c3.125,3.125 7.219,4.688 11.313,4.688 4.094,0 8.188-1.563 11.313-4.688l32-32c6.25-6.25 6.25-16.375 0-22.625s-16.375-6.25-22.625,0l-32,32c-6.251,6.25-6.251,16.375-0.001,22.625z"></path><text class="error-text" x="1440" y="250" font-size="150px" style="text-anchor: middle;">Syntax error in text</text><text class="error-text" x="1250" y="400" font-size="100px" style="text-anchor: middle;">mermaid version 10.2.0-rc.2</text></g>
+</svg>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section id="tracking-changes" class="title-slide slide level1 center">
+<h1>Tracking Changes</h1>
+
+</section>
+<section id="tracking-changes-1" class="slide level2">
+<h2>Tracking Changes-1</h2>
+<div class="cell center-xy" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<svg id="mermaid-figure-5" width="960" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" height="480" viewbox="768 0 912 512" role="graphics-document document" aria-roledescription="error" style="; display: block; margin: auto auto auto auto">
+<style>#mermaid-figure-5{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;fill:#333;}#mermaid-figure-5 .error-icon{fill:#552222;}#mermaid-figure-5 .error-text{fill:#552222;stroke:#552222;}#mermaid-figure-5 .edge-thickness-normal{stroke-width:2px;}#mermaid-figure-5 .edge-thickness-thick{stroke-width:3.5px;}#mermaid-figure-5 .edge-pattern-solid{stroke-dasharray:0;}#mermaid-figure-5 .edge-pattern-dashed{stroke-dasharray:3;}#mermaid-figure-5 .edge-pattern-dotted{stroke-dasharray:2;}#mermaid-figure-5 .marker{fill:#333333;stroke:#333333;}#mermaid-figure-5 .marker.cross{stroke:#333333;}#mermaid-figure-5 svg{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;}#mermaid-figure-5 :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}</style>
+<g></g><g><path class="error-icon" d="m411.313,123.313c6.25-6.25 6.25-16.375 0-22.625s-16.375-6.25-22.625,0l-32,32-9.375,9.375-20.688-20.688c-12.484-12.5-32.766-12.5-45.25,0l-16,16c-1.261,1.261-2.304,2.648-3.31,4.051-21.739-8.561-45.324-13.426-70.065-13.426-105.867,0-192,86.133-192,192s86.133,192 192,192 192-86.133 192-192c0-24.741-4.864-48.327-13.426-70.065 1.402-1.007 2.79-2.049 4.051-3.31l16-16c12.5-12.492 12.5-32.758 0-45.25l-20.688-20.688 9.375-9.375 32.001-31.999zm-219.313,100.687c-52.938,0-96,43.063-96,96 0,8.836-7.164,16-16,16s-16-7.164-16-16c0-70.578 57.422-128 128-128 8.836,0 16,7.164 16,16s-7.164,16-16,16z"></path><path class="error-icon" d="m459.02,148.98c-6.25-6.25-16.375-6.25-22.625,0s-6.25,16.375 0,22.625l16,16c3.125,3.125 7.219,4.688 11.313,4.688 4.094,0 8.188-1.563 11.313-4.688 6.25-6.25 6.25-16.375 0-22.625l-16.001-16z"></path><path class="error-icon" d="m340.395,75.605c3.125,3.125 7.219,4.688 11.313,4.688 4.094,0 8.188-1.563 11.313-4.688 6.25-6.25 6.25-16.375 0-22.625l-16-16c-6.25-6.25-16.375-6.25-22.625,0s-6.25,16.375 0,22.625l15.999,16z"></path><path class="error-icon" d="m400,64c8.844,0 16-7.164 16-16v-32c0-8.836-7.156-16-16-16-8.844,0-16,7.164-16,16v32c0,8.836 7.156,16 16,16z"></path><path class="error-icon" d="m496,96.586h-32c-8.844,0-16,7.164-16,16 0,8.836 7.156,16 16,16h32c8.844,0 16-7.164 16-16 0-8.836-7.156-16-16-16z"></path><path class="error-icon" d="m436.98,75.605c3.125,3.125 7.219,4.688 11.313,4.688 4.094,0 8.188-1.563 11.313-4.688l32-32c6.25-6.25 6.25-16.375 0-22.625s-16.375-6.25-22.625,0l-32,32c-6.251,6.25-6.251,16.375-0.001,22.625z"></path><text class="error-text" x="1440" y="250" font-size="150px" style="text-anchor: middle;">Syntax error in text</text><text class="error-text" x="1250" y="400" font-size="100px" style="text-anchor: middle;">mermaid version 10.2.0-rc.2</text></g>
+</svg>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="tracking-changes-2" class="slide level2">
+<h2>Tracking Changes-2</h2>
+<img data-src="fig/git-staging-area.svg" class="center-xy" alt="A diagram showing how &quot;git add&quot; registers changes in the staging area, while &quot;git commit&quot; moves changes from the staging area to the repository">
+</section>
+<section id="tracking-changes-3" class="slide level2">
+<h2>Tracking Changes-3</h2>
+<div class="cell center-xy" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<svg id="mermaid-figure-4" width="960" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" height="480" viewbox="768 0 912 512" role="graphics-document document" aria-roledescription="error" style="; display: block; margin: auto auto auto auto">
+<style>#mermaid-figure-4{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;fill:#333;}#mermaid-figure-4 .error-icon{fill:#552222;}#mermaid-figure-4 .error-text{fill:#552222;stroke:#552222;}#mermaid-figure-4 .edge-thickness-normal{stroke-width:2px;}#mermaid-figure-4 .edge-thickness-thick{stroke-width:3.5px;}#mermaid-figure-4 .edge-pattern-solid{stroke-dasharray:0;}#mermaid-figure-4 .edge-pattern-dashed{stroke-dasharray:3;}#mermaid-figure-4 .edge-pattern-dotted{stroke-dasharray:2;}#mermaid-figure-4 .marker{fill:#333333;stroke:#333333;}#mermaid-figure-4 .marker.cross{stroke:#333333;}#mermaid-figure-4 svg{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;}#mermaid-figure-4 :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}</style>
+<g></g><g><path class="error-icon" d="m411.313,123.313c6.25-6.25 6.25-16.375 0-22.625s-16.375-6.25-22.625,0l-32,32-9.375,9.375-20.688-20.688c-12.484-12.5-32.766-12.5-45.25,0l-16,16c-1.261,1.261-2.304,2.648-3.31,4.051-21.739-8.561-45.324-13.426-70.065-13.426-105.867,0-192,86.133-192,192s86.133,192 192,192 192-86.133 192-192c0-24.741-4.864-48.327-13.426-70.065 1.402-1.007 2.79-2.049 4.051-3.31l16-16c12.5-12.492 12.5-32.758 0-45.25l-20.688-20.688 9.375-9.375 32.001-31.999zm-219.313,100.687c-52.938,0-96,43.063-96,96 0,8.836-7.164,16-16,16s-16-7.164-16-16c0-70.578 57.422-128 128-128 8.836,0 16,7.164 16,16s-7.164,16-16,16z"></path><path class="error-icon" d="m459.02,148.98c-6.25-6.25-16.375-6.25-22.625,0s-6.25,16.375 0,22.625l16,16c3.125,3.125 7.219,4.688 11.313,4.688 4.094,0 8.188-1.563 11.313-4.688 6.25-6.25 6.25-16.375 0-22.625l-16.001-16z"></path><path class="error-icon" d="m340.395,75.605c3.125,3.125 7.219,4.688 11.313,4.688 4.094,0 8.188-1.563 11.313-4.688 6.25-6.25 6.25-16.375 0-22.625l-16-16c-6.25-6.25-16.375-6.25-22.625,0s-6.25,16.375 0,22.625l15.999,16z"></path><path class="error-icon" d="m400,64c8.844,0 16-7.164 16-16v-32c0-8.836-7.156-16-16-16-8.844,0-16,7.164-16,16v32c0,8.836 7.156,16 16,16z"></path><path class="error-icon" d="m496,96.586h-32c-8.844,0-16,7.164-16,16 0,8.836 7.156,16 16,16h32c8.844,0 16-7.164 16-16 0-8.836-7.156-16-16-16z"></path><path class="error-icon" d="m436.98,75.605c3.125,3.125 7.219,4.688 11.313,4.688 4.094,0 8.188-1.563 11.313-4.688l32-32c6.25-6.25 6.25-16.375 0-22.625s-16.375-6.25-22.625,0l-32,32c-6.251,6.25-6.251,16.375-0.001,22.625z"></path><text class="error-text" x="1440" y="250" font-size="150px" style="text-anchor: middle;">Syntax error in text</text><text class="error-text" x="1250" y="400" font-size="100px" style="text-anchor: middle;">mermaid version 10.2.0-rc.2</text></g>
+</svg>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="tracking-changes-4" class="slide level2">
+<h2>Tracking Changes-4</h2>
+<div class="cell center-xy" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<svg id="mermaid-figure-3" width="960" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" height="480" viewbox="768 0 912 512" role="graphics-document document" aria-roledescription="error" style="; display: block; margin: auto auto auto auto">
+<style>#mermaid-figure-3{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;fill:#333;}#mermaid-figure-3 .error-icon{fill:#552222;}#mermaid-figure-3 .error-text{fill:#552222;stroke:#552222;}#mermaid-figure-3 .edge-thickness-normal{stroke-width:2px;}#mermaid-figure-3 .edge-thickness-thick{stroke-width:3.5px;}#mermaid-figure-3 .edge-pattern-solid{stroke-dasharray:0;}#mermaid-figure-3 .edge-pattern-dashed{stroke-dasharray:3;}#mermaid-figure-3 .edge-pattern-dotted{stroke-dasharray:2;}#mermaid-figure-3 .marker{fill:#333333;stroke:#333333;}#mermaid-figure-3 .marker.cross{stroke:#333333;}#mermaid-figure-3 svg{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;}#mermaid-figure-3 :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}</style>
+<g></g><g><path class="error-icon" d="m411.313,123.313c6.25-6.25 6.25-16.375 0-22.625s-16.375-6.25-22.625,0l-32,32-9.375,9.375-20.688-20.688c-12.484-12.5-32.766-12.5-45.25,0l-16,16c-1.261,1.261-2.304,2.648-3.31,4.051-21.739-8.561-45.324-13.426-70.065-13.426-105.867,0-192,86.133-192,192s86.133,192 192,192 192-86.133 192-192c0-24.741-4.864-48.327-13.426-70.065 1.402-1.007 2.79-2.049 4.051-3.31l16-16c12.5-12.492 12.5-32.758 0-45.25l-20.688-20.688 9.375-9.375 32.001-31.999zm-219.313,100.687c-52.938,0-96,43.063-96,96 0,8.836-7.164,16-16,16s-16-7.164-16-16c0-70.578 57.422-128 128-128 8.836,0 16,7.164 16,16s-7.164,16-16,16z"></path><path class="error-icon" d="m459.02,148.98c-6.25-6.25-16.375-6.25-22.625,0s-6.25,16.375 0,22.625l16,16c3.125,3.125 7.219,4.688 11.313,4.688 4.094,0 8.188-1.563 11.313-4.688 6.25-6.25 6.25-16.375 0-22.625l-16.001-16z"></path><path class="error-icon" d="m340.395,75.605c3.125,3.125 7.219,4.688 11.313,4.688 4.094,0 8.188-1.563 11.313-4.688 6.25-6.25 6.25-16.375 0-22.625l-16-16c-6.25-6.25-16.375-6.25-22.625,0s-6.25,16.375 0,22.625l15.999,16z"></path><path class="error-icon" d="m400,64c8.844,0 16-7.164 16-16v-32c0-8.836-7.156-16-16-16-8.844,0-16,7.164-16,16v32c0,8.836 7.156,16 16,16z"></path><path class="error-icon" d="m496,96.586h-32c-8.844,0-16,7.164-16,16 0,8.836 7.156,16 16,16h32c8.844,0 16-7.164 16-16 0-8.836-7.156-16-16-16z"></path><path class="error-icon" d="m436.98,75.605c3.125,3.125 7.219,4.688 11.313,4.688 4.094,0 8.188-1.563 11.313-4.688l32-32c6.25-6.25 6.25-16.375 0-22.625s-16.375-6.25-22.625,0l-32,32c-6.251,6.25-6.251,16.375-0.001,22.625z"></path><text class="error-text" x="1440" y="250" font-size="150px" style="text-anchor: middle;">Syntax error in text</text><text class="error-text" x="1250" y="400" font-size="100px" style="text-anchor: middle;">mermaid version 10.2.0-rc.2</text></g>
+</svg>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="tracking-changes-5" class="slide level2">
+<h2>Tracking Changes-5</h2>
+<img data-src="fig/git-committing.svg" class="center-xy" alt="A diagram showing two documents being separately staged using git add, before being combined into one commit using git commit">
+</section></section>
+<section id="exploring-history" class="title-slide slide level1 center">
+<h1>Exploring History</h1>
+<p>This episode contains no images.</p>
+</section>
+
+<section>
+<section id="reverting-changes" class="title-slide slide level1 center">
+<h1>Reverting Changes</h1>
+
+</section>
+<section id="restoring-a-file-from-further-back-1" class="slide level2">
+<h2>Restoring a file from further back-1</h2>
+<img data-src="fig/git-restore.svg" class="center-xy" alt="A diagram showing how git restore can be used to restore the previous version of two files">
+</section></section>
+<section id="ignoring-things" class="title-slide slide level1 center">
+<h1>Ignoring Things</h1>
+<p>This episode contains no images.</p>
+</section>
+
+<section>
+<section id="break" class="title-slide slide level1 center">
+<h1>Break</h1>
+
+</section>
+<section id="summary-1" class="slide level2">
+<h2>Summary-1</h2>
+<div class="cell center-xy" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<svg id="mermaid-figure-2" width="960" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" height="480" viewbox="768 0 912 512" role="graphics-document document" aria-roledescription="error" style="; display: block; margin: auto auto auto auto">
+<style>#mermaid-figure-2{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;fill:#333;}#mermaid-figure-2 .error-icon{fill:#552222;}#mermaid-figure-2 .error-text{fill:#552222;stroke:#552222;}#mermaid-figure-2 .edge-thickness-normal{stroke-width:2px;}#mermaid-figure-2 .edge-thickness-thick{stroke-width:3.5px;}#mermaid-figure-2 .edge-pattern-solid{stroke-dasharray:0;}#mermaid-figure-2 .edge-pattern-dashed{stroke-dasharray:3;}#mermaid-figure-2 .edge-pattern-dotted{stroke-dasharray:2;}#mermaid-figure-2 .marker{fill:#333333;stroke:#333333;}#mermaid-figure-2 .marker.cross{stroke:#333333;}#mermaid-figure-2 svg{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;}#mermaid-figure-2 :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}</style>
+<g></g><g><path class="error-icon" d="m411.313,123.313c6.25-6.25 6.25-16.375 0-22.625s-16.375-6.25-22.625,0l-32,32-9.375,9.375-20.688-20.688c-12.484-12.5-32.766-12.5-45.25,0l-16,16c-1.261,1.261-2.304,2.648-3.31,4.051-21.739-8.561-45.324-13.426-70.065-13.426-105.867,0-192,86.133-192,192s86.133,192 192,192 192-86.133 192-192c0-24.741-4.864-48.327-13.426-70.065 1.402-1.007 2.79-2.049 4.051-3.31l16-16c12.5-12.492 12.5-32.758 0-45.25l-20.688-20.688 9.375-9.375 32.001-31.999zm-219.313,100.687c-52.938,0-96,43.063-96,96 0,8.836-7.164,16-16,16s-16-7.164-16-16c0-70.578 57.422-128 128-128 8.836,0 16,7.164 16,16s-7.164,16-16,16z"></path><path class="error-icon" d="m459.02,148.98c-6.25-6.25-16.375-6.25-22.625,0s-6.25,16.375 0,22.625l16,16c3.125,3.125 7.219,4.688 11.313,4.688 4.094,0 8.188-1.563 11.313-4.688 6.25-6.25 6.25-16.375 0-22.625l-16.001-16z"></path><path class="error-icon" d="m340.395,75.605c3.125,3.125 7.219,4.688 11.313,4.688 4.094,0 8.188-1.563 11.313-4.688 6.25-6.25 6.25-16.375 0-22.625l-16-16c-6.25-6.25-16.375-6.25-22.625,0s-6.25,16.375 0,22.625l15.999,16z"></path><path class="error-icon" d="m400,64c8.844,0 16-7.164 16-16v-32c0-8.836-7.156-16-16-16-8.844,0-16,7.164-16,16v32c0,8.836 7.156,16 16,16z"></path><path class="error-icon" d="m496,96.586h-32c-8.844,0-16,7.164-16,16 0,8.836 7.156,16 16,16h32c8.844,0 16-7.164 16-16 0-8.836-7.156-16-16-16z"></path><path class="error-icon" d="m436.98,75.605c3.125,3.125 7.219,4.688 11.313,4.688 4.094,0 8.188-1.563 11.313-4.688l32-32c6.25-6.25 6.25-16.375 0-22.625s-16.375-6.25-22.625,0l-32,32c-6.251,6.25-6.251,16.375-0.001,22.625z"></path><text class="error-text" x="1440" y="250" font-size="150px" style="text-anchor: middle;">Syntax error in text</text><text class="error-text" x="1250" y="400" font-size="100px" style="text-anchor: middle;">mermaid version 10.2.0-rc.2</text></g>
+</svg>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section id="remotes-in-github" class="title-slide slide level1 center">
+<h1>Remotes in GitHub</h1>
+
+</section>
+<section id="create-a-remote-repository-1" class="slide level2">
+<h2>1. Create a remote repository-1</h2>
+<img data-src="fig/github-create-repo-01.png" class="center-xy" alt="The first step in creating a repository on GitHub: clicking the &quot;create new&quot; button">
+</section>
+<section id="create-a-remote-repository-2" class="slide level2">
+<h2>1. Create a remote repository-2</h2>
+<img data-src="fig/github-create-repo-02.png" class="center-xy" alt="The second step in creating a repository on GitHub: filling out the new repository form to provide the repository name, and specify that neither a readme nor a license should be created">
+</section>
+<section id="create-a-remote-repository-3" class="slide level2">
+<h2>1. Create a remote repository-3</h2>
+<img data-src="fig/github-create-repo-03.png" class="center-xy" alt="The summary page displayed by GitHub after a new repository has been created. It contains instructions for configuring the new GitHub repository as a Git remote">
+</section>
+<section id="create-a-remote-repository-4" class="slide level2">
+<h2>1. Create a remote repository-4</h2>
+<img data-src="fig/git-staging-area.svg" class="center-xy" alt="A diagram showing how &quot;git add&quot; registers changes in the staging area, while &quot;git commit&quot; moves changes from the staging area to the repository">
+</section>
+<section id="create-a-remote-repository-5" class="slide level2">
+<h2>1. Create a remote repository-5</h2>
+<img data-src="fig/git-freshly-made-github-repo.svg" class="center-xy" alt="A diagram illustrating how the GitHub &quot;weather&quot; repository is also a Git repository like our local repository, but that it is currently empty">
+</section>
+<section id="connect-local-to-remote-repository-1" class="slide level2">
+<h2>2. Connect local to remote repository-1</h2>
+<img data-src="fig/github-change-repo-string.png" class="center-xy" alt="A screenshot showing that clicking on &quot;SSH&quot; will make GitHub provide the SSH URL for a repository instead of the HTTPS URL">
+</section>
+<section id="push-local-changes-to-a-remote-1" class="slide level2">
+<h2>4. Push local changes to a remote-1</h2>
+<img data-src="fig/github-repo-after-first-push.svg" class="center-xy" alt="A diagram showing how &quot;git push origin&quot; will push changes from the local repository to the remote, making the remote repository an exact copy of the local repository.">
+</section></section>
+<section>
+<section id="exploring-github" class="title-slide slide level1 center">
+<h1>Exploring GitHub</h1>
+
+</section>
+<section id="exploring-github-1" class="slide level2">
+<h2>Exploring GitHub-1</h2>
+<img data-src="fig/github_home_full_page.png" class="center-xy" alt="The GitHub home page showing repositories on the left, and news in the centre.">
+</section>
+<section id="exploring-github-2" class="slide level2">
+<h2>Exploring GitHub-2</h2>
+<img data-src="fig/github_repo_full_page.png" class="center-xy" alt="A screenshot of the GitHub repository for the git-novice lesson.">
+</section>
+<section id="exploring-github-3" class="slide level2">
+<h2>Exploring GitHub-3</h2>
+<img data-src="fig/github_top_nav.png" class="center-xy" alt="The GitHub nav at the top of a repository.">
+</section>
+<section id="exploring-github-4" class="slide level2">
+<h2>Exploring GitHub-4</h2>
+<img data-src="fig/github_repo_top_nav.png" class="center-xy" alt="The GitHub navigation tabs for a repository.">
+</section>
+<section id="exploring-github-5" class="slide level2">
+<h2>Exploring GitHub-5</h2>
+<img data-src="fig/github_repo_code_section.png" class="center-xy" alt="A screenshot of the lower section of the repository interface.">
+</section></section>
+<section>
+<section id="exploring-history-on-github" class="title-slide slide level1 center">
+<h1>Exploring History on GitHub</h1>
+
+</section>
+<section id="viewing-the-history-of-a-repository-on-github-1" class="slide level2">
+<h2>Viewing the History of a Repository on GitHub-1</h2>
+<img data-src="fig/weather-repository-01.png" class="center-xy" alt="A screenshot of the main branch of weather repository on GitHub.">
+</section>
+<section id="viewing-the-history-of-a-repository-on-github-2" class="slide level2">
+<h2>Viewing the History of a Repository on GitHub-2</h2>
+<img data-src="fig/weather-repository-02.png" class="center-xy" alt="A screenshot of the main branch of weather repository on GitHub, showing the branch drop down box.">
+</section>
+<section id="viewing-the-history-of-a-repository-on-github-3" class="slide level2">
+<h2>Viewing the History of a Repository on GitHub-3</h2>
+<img data-src="fig/weather-repository-03.png" class="center-xy" alt="A screenshot of the forecast branch of weather repository on GitHub, showing how to navigate to the commits.">
+</section>
+<section id="viewing-the-history-of-a-repository-on-github-4" class="slide level2">
+<h2>Viewing the History of a Repository on GitHub-4</h2>
+<img data-src="fig/weather-repository-04.png" class="center-xy" alt="A screenshot of the commit on the forecast branch of the weather repository on GitHub.">
+</section>
+<section id="viewing-differences-between-commits-1" class="slide level2">
+<h2>Viewing Differences Between Commits-1</h2>
+<img data-src="fig/weather-repository-05.png" class="center-xy" alt="A screenshot of the compare page for the weather repository on GitHub.">
+</section>
+<section id="viewing-differences-between-commits-2" class="slide level2">
+<h2>Viewing Differences Between Commits-2</h2>
+<img data-src="fig/weather-repository-06.png" class="center-xy" alt="A screenshot showing the differences between two Git commit SHAs from the weather repository on GitHub.">
+</section></section>
+<section>
+<section id="pull-requests" class="title-slide slide level1 center">
+<h1>Pull Requests</h1>
+
+</section>
+<section id="creating-a-pull-request-1" class="slide level2">
+<h2>Creating a Pull Request-1</h2>
+<img data-src="fig/github_create_pr.png" class="center-xy" alt="A screenshot of the weather repo showing the notification prompting us to Compare &amp; pull request for the forecast branch.">
+</section>
+<section id="creating-a-pull-request-2" class="slide level2">
+<h2>Creating a Pull Request-2</h2>
+<img data-src="fig/github_create_pr_2.png" class="center-xy" alt="A screenshot of the weather repo showing the creation of a pull request for the forecast branch changes.">
+</section>
+<section id="creating-a-pull-request-3" class="slide level2">
+<h2>Creating a Pull Request-3</h2>
+<img data-src="fig/github_draft_pr.png" class="center-xy" alt="A screenshot showing the dropdown to swap from a normal pull request to a creating a draft pull request.">
+</section>
+<section id="creating-a-pull-request-4" class="slide level2">
+<h2>Creating a Pull Request-4</h2>
+<img data-src="fig/github_pr.png" class="center-xy" alt="A screenshot showing an open pull request on the weather repo.">
+</section>
+<section id="rulesets-1" class="slide level2">
+<h2>Rulesets-1</h2>
+<img data-src="fig/github_protect_main.png" class="center-xy" alt="A screenshot showing the creation of a rule to protect the main branch in the repository settings, rulesets page.">
+</section>
+<section id="merging-a-pull-request-1" class="slide level2">
+<h2>Merging a Pull Request-1</h2>
+<img data-src="fig/github_pr_merge.png" class="center-xy" alt="A screenshot showing the dropdown to swap from a normal merge to a squash merge.">
+</section>
+<section id="merging-a-pull-request-2" class="slide level2">
+<h2>Merging a Pull Request-2</h2>
+<img data-src="fig/github_pr_closed.png" class="center-xy" alt="A screenshot showing a closed pull request on the weather repository.">
+</section></section>
+<section>
+<section id="configuring-github" class="title-slide slide level1 center">
+<h1>Configuring GitHub</h1>
+
+</section>
+<section id="profile-settings-1" class="slide level2">
+<h2>Profile Settings-1</h2>
+<img data-src="fig/github-profile.png" class="center-xy" alt="A screenshot of a users GitHub profile.">
+</section>
+<section id="configuring-notifications-1" class="slide level2">
+<h2>Configuring Notifications-1</h2>
+<img data-src="fig/github-repo-notifications.png" class="center-xy" alt="A screenshot of the GitHub weather repo with the Unwatch dropdown expanded.">
+</section>
+<section id="organisation-membership-1" class="slide level2">
+<h2>Organisation Membership-1</h2>
+<img data-src="fig/github-org-membership.png" class="center-xy" alt="A screenshot of the GitHub organisation People settings for an organisation showing how to change your organisation visibility.">
+</section></section>
+<section>
+<section id="end" class="title-slide slide level1 center">
+<h1>End</h1>
+
+</section>
+<section id="summary-2" class="slide level2">
+<h2>Summary-1</h2>
+<img data-src="fig/lesson-workflow-mermaid.svg" class="center-xy" alt="A sequence diagram showing the workflow we used during the lesson.">
+</section></section>
+<section id="open-science" class="title-slide slide level1 center">
+<h1>Open Science</h1>
+<p>This episode contains no images.</p>
+</section>
+
+<section id="licensing" class="title-slide slide level1 center">
+<h1>Licensing</h1>
+<p>This episode contains no images.</p>
+</section>
+
+<section id="citation" class="title-slide slide level1 center">
+<h1>Citation</h1>
+<p>This episode contains no images.</p>
+</section>
+
+<section id="hosting" class="title-slide slide level1 center">
+<h1>Hosting</h1>
+<p>This episode contains no images.</p>
+</section>
+
+<section>
+<section id="using-git-from-rstudio" class="title-slide slide level1 center">
+<h1>‘Using Git from RStudio’</h1>
+
+</section>
+<section id="using-git-from-rstudio-1" class="slide level2">
+<h2>‘Using Git from RStudio’-1</h2>
+<img data-src="fig/RStudio_screenshot_newproject.png" class="center-xy" alt="RStudio screenshot showing the file menu dropdown with &quot;New Project...&quot; selected">
+</section>
+<section id="using-git-from-rstudio-2" class="slide level2">
+<h2>‘Using Git from RStudio’-2</h2>
+<img data-src="fig/RStudio_screenshot_existingdirectory.png" class="center-xy" alt="RStudio screenshot showing New Project dialog window with &quot;Create project from existing directory&quot; selected">
+</section>
+<section id="using-git-from-rstudio-3" class="slide level2">
+<h2>‘Using Git from RStudio’-3</h2>
+<img data-src="fig/RStudio_screenshot_navigateexisting.png" class="center-xy" alt="RStudio window showing the &quot;Create Project From Existing Directory&quot; dialog. In the dialog, the project working directory has been set to &quot;~/Desktop/weather&quot;">
+</section>
+<section id="using-git-from-rstudio-4" class="slide level2">
+<h2>‘Using Git from RStudio’-4</h2>
+<img data-src="fig/RStudio_screenshot_afterclone.png" class="center-xy" alt="RStudio window after new project is created with large arrow pointing to vertical Git menu bar.">
+</section>
+<section id="using-git-from-rstudio-5" class="slide level2">
+<h2>‘Using Git from RStudio’-5</h2>
+<img data-src="fig/RStudio_screenshot_editfiles.png" class="center-xy" alt="RStudio window demonstrating the use of the editor panel to modify the &quot;pluto.txt&quot; file">
+</section>
+<section id="using-git-from-rstudio-6" class="slide level2">
+<h2>‘Using Git from RStudio’-6</h2>
+<img data-src="fig/RStudio_screenshot_commit.png" class="center-xy" alt="RStudio screenshot showing the Git menu dropdown with the &quot;Commit...&quot; option selected">
+</section>
+<section id="using-git-from-rstudio-7" class="slide level2">
+<h2>‘Using Git from RStudio’-7</h2>
+<img data-src="fig/RStudio_screenshot_review.png" class="center-xy" alt="RStudio screenshow showing the &quot;Review Changes&quot; dialog. The top left panel shows the list of files that can be included or excluded from the commit. The top right panel is for writing a commit message. The bottom panel shows information about the currently selected file in the top left panel.">
+</section>
+<section id="using-git-from-rstudio-8" class="slide level2">
+<h2>‘Using Git from RStudio’-8</h2>
+<img data-src="fig/RStudio_screenshot_history.png" class="center-xy" alt="RStudio screenshot showing the git menu dropdown with the &quot;History&quot; option selected">
+</section>
+<section id="using-git-from-rstudio-9" class="slide level2">
+<h2>‘Using Git from RStudio’-9</h2>
+<img data-src="fig/RStudio_screenshot_viewhistory.png" class="center-xy" alt="RStudio screenshot showing the &quot;Review Changes&quot; dialog after pressing the &quot;History&quot; button. The top panel lists the commits in the repository, similar to git log. The bottom panel shows the changes included in the commit that has been selected in the top panel.">
+</section>
+<section id="using-git-from-rstudio-10" class="slide level2">
+<h2>‘Using Git from RStudio’-10</h2>
+<img data-src="fig/RStudio_screenshot_gitignore.png" class="center-xy" alt="RStudio screenshot showing .gitignore open in the editor pane with the files .Rproj.user, .Rhistory, .RData, and *.Rproj added to the end">
+
+<div class="quarto-auto-generated-content center-xy">
+<p><img src="../site_libs/quarto-contrib/carpentries-images-1.0.0/images/carpentries-logo-sm.svg" class="slide-logo"></p>
+<div class="footer footer-default">
+<p>Version Control with Git: Extract All Images</p>
+</div>
+</div>
+</section></section>
+    </div>
+  </div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'default',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+
+</body></html>

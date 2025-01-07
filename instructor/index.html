@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto"><head>
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><meta charset="utf-8">
+            <meta name="generator" content="quarto-1.5.57">
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+                    
+        <title>Version Control with Git</title>
+
+            <script src="../site_libs/quarto-contrib/carpentries-theme-toggle-1.0.0/themetoggle.js"></script>
+        <script src="../site_libs/quarto-contrib/carpentries-theme-toggle-1.0.0/scripts.js"></script>
+        <link href="../site_libs/quarto-contrib/carpentries-css-1.0.0/styles.css" rel="stylesheet">
+        
+        <script src="../site_libs/quarto-contrib/quarto-1.5.57/quarto-nav/quarto-nav.js"></script>
+        <script src="../site_libs/quarto-contrib/quarto-1.5.57/quarto-nav/headroom.min.js"></script>
+        <script src="../site_libs/quarto-contrib/quarto-1.5.57/clipboard/clipboard.min.js"></script>
+        <script src="../site_libs/quarto-contrib/quarto-1.5.57/quarto-search/autocomplete.umd.js"></script>
+        <script src="../site_libs/quarto-contrib/quarto-1.5.57/quarto-search/fuse.min.js"></script>
+        <script src="../site_libs/quarto-contrib/quarto-1.5.57/quarto-search/quarto-search.js"></script>
+        <script src="../site_libs/quarto-contrib/quarto-1.5.57/quarto-html/quarto.js"></script>
+        <script src="../site_libs/quarto-contrib/quarto-1.5.57/quarto-html/popper.min.js"></script>
+        <script src="../site_libs/quarto-contrib/quarto-1.5.57/quarto-html/tippy.umd.min.js"></script>
+        <script src="../site_libs/quarto-contrib/quarto-1.5.57/quarto-html/anchor.min.js"></script>
+        <link href="../site_libs/quarto-contrib/quarto-1.5.57/quarto-html/tippy.css" rel="stylesheet">
+
+        <!-- Responsive Favicon for The Carpentries -->
+        <link rel="apple-touch-icon" sizes="180x180" href="../site_libs/quarto-contrib/carpentries-favicons-1.0.0/favicons/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="../site_libs/quarto-contrib/carpentries-favicons-1.0.0/favicons/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="../site_libs/quarto-contrib/carpentries-favicons-1.0.0/favicons/favicon-16x16.png">
+        <link rel="manifest" href="../site_libs/quarto-contrib/carpentries-manifest-1.0.0/site.webmanifest">
+        <link rel="mask-icon" href="../site_libs/quarto-contrib/carpentries-favicons-1.0.0/favicons/safari-pinned-tab.svg" color="#5bbad5">
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="theme-color" media="(prefers-color-scheme: light)" content="white">
+        <meta name="theme-color" media="(prefers-color-scheme: dark)" content="black">
+
+        <!--           <script id="quarto-search-options" type="application/json">{
+                         "location": "sidebar",
+                         "copy-button": false,
+                         "collapse-after": 3,
+                         "panel-placement": "start",
+                         "type": "textbox",
+                         "limit": 50,
+                         "keyboard-shortcut": [
+                           "f",
+                           "/",
+                           "s"
+                         ],
+                         "show-item-context": false,
+                         "language": {
+                           "search-no-results-text": "No results",
+                           "search-matching-documents-text": "matching documents",
+                           "search-copy-link-title": "Copy link to search",
+                           "search-hide-matches-text": "Hide additional matches",
+                           "search-more-match-text": "more match in this document",
+                           "search-more-matches-text": "more matches in this document",
+                           "search-clear-button-title": "Clear",
+                           "search-text-placeholder": "",
+                           "search-detached-cancel-button-title": "Cancel",
+                           "search-submit-button-title": "Submit",
+                           "search-label": "Search"
+                         }
+                       }</script>
+             -->  </head>
+  <body>
+        <div id="quarto-search-results"></div>
+        <!-- content -->
+        <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+        <!-- sidebar -->
+        <!-- margin-sidebar -->
+            <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+                <nav id="TOC" role="doc-toc" class="toc-active">
+                                                       <h2 id="toc-title">On this page</h2>
+                                                    
+                                                   <ul>
+                                                   <li><a href="#pre-workshop-survey" id="toc-pre-workshop-survey" class="nav-link active" data-scroll-target="#pre-workshop-survey">Pre-workshop Survey</a></li>
+                                                   <li><a href="#installing-git" id="toc-installing-git" class="nav-link" data-scroll-target="#installing-git">Installing Git</a></li>
+                                                   <li><a href="#creating-a-github-account" id="toc-creating-a-github-account" class="nav-link" data-scroll-target="#creating-a-github-account">Creating a GitHub Account</a>
+                                                   <ul class="collapse">
+                                                   <li><a href="#multi-factor-authentication" id="toc-multi-factor-authentication" class="nav-link" data-scroll-target="#multi-factor-authentication">Multi-factor Authentication</a></li>
+                                                   <li><a href="#passkeys" id="toc-passkeys" class="nav-link" data-scroll-target="#passkeys">Passkeys</a></li>
+                                                   </ul></li>
+                                                   <li><a href="#optional-git-autocomplete" id="toc-optional-git-autocomplete" class="nav-link" data-scroll-target="#optional-git-autocomplete">Optional: Git Autocomplete</a>
+                                                   <ul class="collapse">
+                                                   <li><a href="#git_prompt_path" id="toc-git_prompt_path" class="nav-link" data-scroll-target="#git_prompt_path">GIT_PROMPT_PATH</a></li>
+                                                   <li><a href="#long-terminal-prompts" id="toc-long-terminal-prompts" class="nav-link" data-scroll-target="#long-terminal-prompts">Long Terminal Prompts</a></li>
+                                                   </ul></li>
+                                                   </ul>
+                                               </nav>
+            </div>
+        <!-- main -->
+        <main class="content page-columns page-full" id="quarto-document-content">
+        <header id="top" class="navbar navbar-expand-md top-nav carpentries">
+          <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+            <symbol id="check2" viewbox="0 0 16 16">
+              <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"></path>
+            </symbol>
+            <symbol id="circle-half" viewbox="0 0 16 16">
+              <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"></path>
+            </symbol>
+            <symbol id="moon-stars-fill" viewbox="0 0 16 16">
+              <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"></path>
+              <path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"></path>
+            </symbol>
+            <symbol id="sun-fill" viewbox="0 0 16 16">
+              <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"></path>
+            </symbol>
+          </svg>
+          <a class="visually-hidden-focusable skip-link" href="#main-content">Skip to main content</a>
+          <div class="container-fluid top-nav-container">
+            <div class="col-md-8">
+              <div class="large-logo">
+                <img id="cp-logo" alt="Carpentries" src="../site_libs/quarto-contrib/carpentries-images-1.0.0/images/carpentries-logo.svg">
+                                              </div>
+            </div>
+            <div class="selector-container">
+              <div id="theme-selector">
+                <li class="nav-item dropdown" id="theme-button-list">
+                  <button class="btn btn-link nav-link px-0 px-lg-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme (auto)">
+                    <svg class="bi my-1 theme-icon-active">
+                      <use href="#circle-half"></use>
+                    </svg>
+                    <i data-feather="chevron-down"></i>
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="bd-theme-text">
+                    <li>
+                      <button type="button" class="btn dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+                        <svg class="bi me-2 theme-icon">
+                          <use href="#sun-fill"></use>
+                        </svg>
+                        Light
+                        <svg class="bi ms-auto d-none">
+                          <use href="#check2"></use>
+                        </svg>
+                      </button>
+                    </li>
+                    <li>
+                      <button type="button" class="btn dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                        <svg class="bi me-2 theme-icon">
+                          <use href="#moon-stars-fill"></use>
+                        </svg>
+                        Dark
+                        <svg class="bi ms-auto d-none">
+                          <use href="#check2"></use>
+                        </svg>
+                      </button>
+                    </li>
+                    <li>
+                      <button type="button" class="btn dropdown-item d-flex align-items-center active" data-bs-theme-value="auto" aria-pressed="true">
+                        <svg class="bi me-2 theme-icon">
+                          <use href="#circle-half"></use>
+                        </svg>
+                        Auto
+                        <svg class="bi ms-auto d-none">
+                          <use href="#check2"></use>
+                        </svg>
+                      </button>
+                    </li>
+                  </ul>
+                </li>
+              </div>
+              <!-- NOTE: the language section will likely need to be generated on {sandpaper}, so we are not going to translate this now.
+                {{#yaml}}{{#language}}
+                <div class="dropdown">
+                  <button class="btn btn-secondary dropdown-toggle " type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                    English (US)  <i data-feather="chevron-down"></i>
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    <li><button class="dropdown-item" type="button">French</button></li>
+                  </ul>
+                </div>
+                {{/language}}{{/yaml}} -->
+              <div class="dropdown" id="instructor-dropdown">
+                        <button class="btn btn-secondary dropdown-toggle bordered-button" type="button" id="dropdownMenu1" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i aria-hidden="true" class="icon" data-feather="eye"></i> Instructor View <i data-feather="chevron-down"></i>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                  <li><button class="dropdown-item" type="button" onclick="window.location.href='../index.html';">Learner View</button></li>
+                </ul>
+                      </div>
+            </div>
+          </div>
+          <hr>
+        </header>
+        <nav class="navbar navbar-expand-xl bottom-nav carpentries" aria-label="Main Navigation">
+          <div class="container-fluid nav-container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle Navigation">
+              <span class="navbar-toggler-icon"></span>
+              <span class="menu-title">Menu</span>
+            </button>
+            <div class="nav-logo">
+              <img class="small-logo" alt="Carpentries" src="../site_libs/quarto-contrib/carpentries-images-1.0.0/images/carpentries-logo-sm.svg">
+            </div>
+            <div class="lesson-title-md">
+              
+            </div>
+            <div class="search-icon-sm">
+              <!-- TODO: do not show until we have search
+                  <i role="img" aria-label="Search the All In One page" data-feather="search"></i>
+                -->
+            </div>
+            <div class="desktop-nav">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                  <span class="lesson-title">
+                    
+                  </span>
+                </li>
+                <!-- We want to include a setup link prominently in the resources for overview pages -->
+                <li>
+                  <!-- NOTE: the reason why we do not use the site root here is because we would need to set the site context _before_ overview -->
+                  <a class="nav-link" href="index.html#setup">Setup</a>
+                </li>
+                        <li class="nav-item">
+                  <a class="nav-link" href="key-points.html">Key Points</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="instructor-notes.html">Instructor Notes</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="extract_all_images.html">Extract All Images</a>
+                </li>
+                                  <li class="nav-item dropdown">
+                    <button class="nav-link dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                      More <i data-feather="chevron-down"></i>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      
+
+                      <li><a class="dropdown-item" href="reference.html">Git Cheatsheets for Quick Reference</a></li>
+                      <li><a class="dropdown-item" href="discuss.html">Discussion</a></li>
+                      <li><a class="dropdown-item" href="fcm-git_cheat_sheet.html">FCM vs Git Cheat Sheet</a></li>
+                      <li><a class="dropdown-item" href="repo-quick-start.html">Quick Start Repository Guide</a></li>            </ul>
+                  </li>
+                      </ul>
+            </div>
+            <!--
+              <form class="d-flex col-md-2 search-form">
+                <fieldset disabled>
+                <input class="form-control me-2 searchbox" type="search" placeholder="Search" aria-label="Search">
+                  <button class="btn btn-outline-success tablet-search-button"  type="submit">
+                    <i class="search-icon" data-feather="search" role="img" aria-label="Search the All In One page"></i>
+                  </button>
+                </fieldset>
+              </form>
+              -->
+            <!--     <a id="search-button" class="btn btn-primary" href="instructor/aio.html" role="button"
+              aria-label="Search the All In One page">Search the All In One page</a>
+             -->
+            <div class="input-group">
+              <div id="quarto-search" class="form-outline" data-mdb-input-init="">
+                <!-- <input type="search" id="form1" class="form-control" /> -->
+                <!-- <label class="form-label" for="form1">Search</label> -->
+              </div>
+              <!-- <button type="button" class="btn btn-primary" data-mdb-ripple-init> -->
+                <!-- <i class="fas fa-search"></i> -->
+              <!-- </button> -->
+            </div>
+          </div><!--/div.container-fluid -->
+        </nav>
+
+        <div class="col-md-12 mobile-title">
+          
+        </div>
+
+        <aside class="col-md-12 lesson-progress">
+          <div style="width: 0%" class="percentage">
+            0%
+          </div>
+          <div class="progress carpentries">
+            <div class="progress-bar carpentries" role="progressbar" style="width: 0%" aria-valuenow="0" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
+            </div>
+          </div>
+        </aside>    <div class="container">
+      <div class="row">
+        <div id="sidebar-col" class="col-lg-4">
+          <div id="sidebar" class="sidebar">
+            <nav aria-labelledby="flush-headingEleven">
+              <button role="button" aria-label="close menu" alt="close menu" aria-expanded="true" aria-controls="sidebar" class="collapse-toggle" data-collapse="Collapse" data-episodes="Episodes">
+                <i class="search-icon" data-feather="x" role="img"></i>
+              </button>
+              <div class="sidebar-inner">
+                <div class="row mobile-row" id="theme-row-mobile">
+                  <div class="col" id="theme-selector">
+                    <li class="nav-item dropdown" id="theme-button-list">
+                      <button class="btn btn-link nav-link px-0 px-lg-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme (auto)">
+                        <svg class="bi my-1 theme-icon-active">
+                          <use href="#circle-half"></use>
+                        </svg>
+                        <span class="d-lg-none ms-1" id="bd-theme-text">Toggle Theme</span>
+                      </button>
+                      <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="bd-theme-text">
+                        <li>
+                          <button type="button" class="btn dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+                            <svg class="bi me-2 theme-icon">
+                              <use href="#sun-fill"></use>
+                            </svg>
+                            Light
+                            <svg class="bi ms-auto d-none">
+                              <use href="#check2"></use>
+                            </svg>
+                          </button>
+                        </li>
+                        <li>
+                          <button type="button" class="btn dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                            <svg class="bi me-2 theme-icon">
+                              <use href="#moon-stars-fill"></use>
+                            </svg>
+                            Dark
+                            <svg class="bi ms-auto d-none">
+                              <use href="#check2"></use>
+                            </svg>
+                          </button>
+                        </li>
+                        <li>
+                          <button type="button" class="btn dropdown-item d-flex align-items-center active" data-bs-theme-value="auto" aria-pressed="true">
+                            <svg class="bi me-2 theme-icon">
+                              <use href="#circle-half"></use>
+                            </svg>
+                            Auto
+                            <svg class="bi ms-auto d-none">
+                              <use href="#check2"></use>
+                            </svg>
+                          </button>
+                        </li>
+                      </ul>
+                    </li>
+                  </div>
+                </div>
+                <div class="row mobile-row">
+                  <div class="col">
+                    <div class="sidenav-view-selector">
+                      <div class="accordion accordion-flush" id="accordionFlush9">
+                        <div class="accordion-item">
+                                            <h2 class="accordion-header anchored" id="flush-headingNine">
+                            <button class="accordion-button collapsed" id="instructor" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseNine" aria-expanded="false" aria-controls="flush-collapseNine">
+                              <i id="eye" aria-hidden="true" class="icon" data-feather="eye"></i> Learner View
+                            </button>
+                          </h2>
+                          <div id="flush-collapseNine" class="accordion-collapse collapse" aria-labelledby="flush-headingNine" data-bs-parent="#accordionFlush2">
+                            <div class="accordion-body">
+                              <a href="instructor/index.html">Instructor View</a>
+                            </div>
+                          </div>
+                                          </div><!--/div.accordion-item-->
+                      </div><!--/div.accordion-flush-->
+                    </div><!--div.sidenav-view-selector -->
+                  </div><!--/div.col -->
+                  <!-- {{#yaml}}{{#language}}
+                  <div class="col">
+                    <div class="sidenav-language-selector">
+                      <div class="accordion accordion-flush" id="accordionFlush10">
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="flush-headingTen">
+                            <button class="accordion-button side-language collapsed" id="language" type="button"
+                              data-bs-toggle="collapse" data-bs-target="#flush-collapseTen" aria-expanded="false"
+                              aria-controls="flush-collapseTen">English (US)
+                            </button>
+                          </h2>
+                          <div id="flush-collapseTen" class="accordion-collapse collapse" aria-labelledby="flush-headingNine"
+                            data-bs-parent="#accordionFlush2">
+                            <div class="accordion-body">
+                              <a href="#">French</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {{/language}}{{/yaml}} -->
+                  <hr>
+                </div><!--/div.mobile-row -->
+
+                <div class="accordion accordion-flush" id="accordionFlush11">
+                  <div class="accordion-item">
+
+                    <button id="chapters" class="accordion-button show" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseEleven" aria-expanded="false" aria-controls="flush-collapseEleven">
+                      <h2 class="accordion-header chapters anchored" id="flush-headingEleven">EPISODES</h2>
+                    </button>
+                    <div id="flush-collapseEleven" class="accordion-collapse show collapse" aria-labelledby="flush-headingEleven" data-bs-parent="#accordionFlush11">
+
+                      <div class="accordion-body">
+                        
+
+                                <div class="accordion accordion-flush" id="accordionFlush1">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading1">
+                                      <a href="index.html">Summary and Setup</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush2">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading2">
+                                      <a href="01-basics.html">1. Automated Version Control</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush3">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading3">
+                                      <a href="02-setup.html">2. Setting Up Git</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush4">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading4">
+                                      <a href="03-create.html">3. Creating a Repository</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush5">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading5">
+                                      <a href="09-branches.html">4. Branches</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush6">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading6">
+                                      <a href="04-changes.html">5. Tracking Changes</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush7">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading7">
+                                      <a href="05-history.html">6. Exploring History</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush8">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading8">
+                                      <a href="06-reverting-changes.html">7. Reverting Changes</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush9">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading9">
+                                      <a href="06-ignore.html">8. Ignoring Things</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush10">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading10">
+                                      <a href="Break.html">9. Break</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush11">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading11">
+                                      <a href="07-github.html">10. Remotes in GitHub</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush12">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading12">
+                                      <a href="08-github-interface.html">11. Exploring GitHub</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush13">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading13">
+                                      <a href="09-github-history.html">12. Exploring History on GitHub</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush14">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading14">
+                                      <a href="10-pull-requests.html">13. Pull Requests</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush15">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading15">
+                                      <a href="11-configuring-github.html">14. Configuring GitHub</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush16">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading16">
+                                      <a href="End.html">15. End</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush17">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading17">
+                                      <a href="10-open.html">16. Open Science</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush18">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading18">
+                                      <a href="11-licensing.html">17. Licensing</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush19">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading19">
+                                      <a href="12-citation.html">18. Citation</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush20">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading20">
+                                      <a href="13-hosting.html">19. Hosting</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->
+
+
+                                <div class="accordion accordion-flush" id="accordionFlush21">
+                                  <div class="accordion-item">
+                                    <div class="accordion-header" id="flush-heading21">
+                                      <a href="14-supplemental-rstudio.html">20. 'Using Git from RStudio'</a>
+                                    </div><!--/div.accordion-header-->
+                                  </div><!--/div.accordion-item-->
+                                </div><!--/div.accordion-flush-->              </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- <a href="index.html">Home</a> -->
+
+                <hr class="half-width">
+                          <div class="accordion accordion-flush lesson-resources" id="accordionFlush12">
+                    <div class="accordion-item">
+                      <h2 class="accordion-header anchored" id="flush-headingTwelve">
+                        <button class="accordion-button collapsed" id="lesson-resources" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwelve" aria-expanded="false" aria-controls="flush-collapseTwelve">
+                          RESOURCES
+                        </button>
+                      </h2>
+                      <div id="flush-collapseTwelve" class="accordion-collapse collapse" aria-labelledby="flush-headingTwelve" data-bs-parent="#accordionFlush12">
+                        <div class="accordion-body">
+                          <ul>
+                            <!-- We want to include a setup link prominently in the resources for overview pages -->
+                            <li>
+                              <!-- NOTE: the reason why we do not use the site root here is because we would need to set the site
+                              context _before_ overview -->
+                              <a href="index.html#setup">Setup</a>
+                            </li>
+                                                <li>
+                              <a href="key-points.html">Key Points</a>
+                            </li>
+                            <li>
+                              <a href="instructor-notes.html">Instructor Notes</a>
+                            </li>
+                            <li>
+                              <a href="extract_all_images.html">Extract All Images</a>
+                            </li>
+                                                <!-- {{{resources}}} -->
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- <hr class="half-width lesson-resources" /> -->
+                  
+                  
+                  <hr class="d-none d-sm-block d-md-none">
+
+                  <div class="d-grid gap-1">
+                              </div>
+                </div><!-- /div.accordion -->
+              </nav></div><!-- /div.sidebar-inner -->
+            
+          </div><!-- /div.sidebar -->
+        </div><!-- /div.sidebar-col -->                                <p><a href="reference.html#version-control">Version control</a> is fundamental to good quality assurance of science and code. Using a Version Control System is better than mailing files back and forth:</p>
+                      <ul>
+                      <li><p>Nothing that is committed to version control is ever lost, unless you work really, really hard at losing it. Since all old versions of files are saved, it’s always possible to go back in time to see exactly who wrote what on a particular day, or what version of a program was used to generate a particular set of results.</p></li>
+                      <li><p>As we have this record of who made what changes when, we know who to ask if we have questions later on, and, if needed, revert to a previous version, much like the “undo” feature in an editor.</p></li>
+                      <li><p>When several people collaborate in the same project, it’s possible to accidentally overlook or overwrite someone’s changes. The version control system automatically notifies users whenever there’s a conflict between one person’s work and another’s.</p></li>
+                      </ul>
+                      <p>Teams are not the only ones to benefit from version control: lone researchers can benefit immensely. Keeping a record of what was changed, when, and why is extremely useful for all researchers if they ever need to come back to the project later on (e.g., a year later, when memory has faded).</p>
+                      <p>Version control is the lab notebook of the digital world: it’s what professionals use to keep track of what they’ve done and to collaborate with other people. Every large software development project relies on it, and most programmers use it for their small jobs as well. And it isn’t just for software: books, papers, small data sets, and anything that changes over time or needs to be shared can and should be stored in a version control system.</p>
+                      <div id="prereq1" class="callout prereq">
+                      <div class="callout-square">
+                      <i class="callout-icon" data-feather="check"></i>
+                      </div>
+                      <section id="prerequisites" class="level3 callout-title callout-inner">
+                      <h3 class="callout-title anchored" data-anchor-id="prerequisites">Prerequisites</h3>
+                      <div class="callout-content">
+                      <p>In this lesson we use Git from the Unix Shell. Some previous experience with the shell is expected, <em>but isn’t mandatory</em>.</p>
+                      </div>
+                      </section>
+                      </div>
+                      <section id="pre-workshop-survey" class="level2">
+                      <h2 class="anchored" data-anchor-id="pre-workshop-survey">Pre-workshop Survey</h2>
+                      <p>Please remember to fill out the pre-workshop survey prior to the start of the workshop. This information is vital for us to keep improving the lesson for other learners.</p>
+                      </section>
+                      <section id="installing-git" class="level2">
+                      <h2 class="anchored" data-anchor-id="installing-git">Installing Git</h2>
+                      <p>Since several Carpentries lessons rely on Git, please see <a href="https://carpentries.github.io/workshop-template/install_instructions/#git">this section of the workshop template</a> for instructions on installing Git for various operating systems.</p>
+                      <ul>
+                      <li><a href="https://carpentries.github.io/workshop-template/install_instructions/#git">Git installation on Windows</a></li>
+                      <li><a href="https://carpentries.github.io/workshop-template/install_instructions/#git">Git installation on MacOS</a></li>
+                      <li><a href="https://carpentries.github.io/workshop-template/install_instructions/#git">Git installation on Linux</a></li>
+                      </ul>
+                      <p>Your institution may have already installed Git on your work computer. Ask your instructor if this step is necessary or simply type:</p>
+                      <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git <span class="at">--version</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> version 2.47.0</span></code></pre></div>
+                      <p>If a version number is printed like the output above Git is installed and ready to use.</p>
+                      </section>
+                      <section id="creating-a-github-account" class="level2">
+                      <h2 class="anchored" data-anchor-id="creating-a-github-account">Creating a GitHub Account</h2>
+                      <p>You will need an account for <a href="https://github.com">GitHub</a> to follow episodes 7 &amp; 8 in this lesson.</p>
+                      <ol type="1">
+                      <li>Go to <a href="https://github.com" class="uri">https://github.com</a> and follow the “Sign up” link at the top-right of the window.</li>
+                      <li>Follow the instructions to create an account.</li>
+                      <li>Verify your email address with GitHub.</li>
+                      <li>Configure multifactor authentication and or a passkey (see below).</li>
+                      </ol>
+                      <p>There is no fixed guidance for choosing your GitHub username however you should ensure it is suitable for work. At the Met Office a common pattern for usernames is: <code>mo-{first name initial}{surname}</code>. So if your name is <code>Eleanor Ormerod</code> your username would be: <code>mo-eormerod</code></p>
+                      <section id="multi-factor-authentication" class="level3">
+                      <h3 class="anchored" data-anchor-id="multi-factor-authentication">Multi-factor Authentication</h3>
+                      <p>In 2023, GitHub introduced a requirement for all accounts to have <a href="https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa/about-two-factor-authentication">multi-factor authentication (2FA)</a> configured for extra security. Several options exist for setting up 2FA, which are summarised here:</p>
+                      <ol type="1">
+                      <li>If you already use an authenticator app, like <a href="https://support.google.com/accounts/answer/1066447?hl=en&amp;co=GENIE.Platform%3DiOS&amp;oco=0">Google Authenticator</a> or <a href="https://duo.com/product/multi-factor-authentication-mfa/duo-mobile-app">Duo Mobile</a> on your smartphone for example, <a href="https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa/configuring-two-factor-authentication#configuring-two-factor-authentication-using-a-totp-mobile-app">add GitHub to that app</a>.</li>
+                      <li>If you have access to a smartphone but do not already use an authenticator app, install one and <a href="https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa/configuring-two-factor-authentication#configuring-two-factor-authentication-using-a-totp-mobile-app">add GitHub to the app</a>.</li>
+                      <li>If you do not have access to a smartphone or do not want to install an authenticator app, you have two options:
+                      <ol type="1">
+                      <li><a href="https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa/configuring-two-factor-authentication#configuring-two-factor-authentication-using-text-messages">set up 2FA via text message</a> (<a href="https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa/countries-where-sms-authentication-is-supported">list of countries where authentication by SMS is supported</a>), or</li>
+                      <li><a href="https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa/configuring-two-factor-authentication#configuring-two-factor-authentication-using-a-security-key">use a hardware security key</a> like <a href="https://www.yubico.com/products/yubikey-5-overview/">YubiKey</a> or the <a href="https://store.google.com/us/product/titan_security_key?hl=en-US&amp;pli=1">Google Titan key</a>.</li>
+                      </ol></li>
+                      </ol>
+                      <p>The GitHub documentation provides <a href="https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa/configuring-two-factor-authentication">more details about configuring 2FA</a>.</p>
+                      </section>
+                      <section id="passkeys" class="level3">
+                      <h3 class="anchored" data-anchor-id="passkeys">Passkeys</h3>
+                      <p>To completely avoid having authentication for work purposes on a personal device you may choose to <a href="https://docs.github.com/en/authentication/authenticating-with-a-passkey/managing-your-passkeys">set up a passkey</a>. Your instructor and organisation will be able to provide guidance on suitable passkey providers and password managers.</p>
+                      </section>
+                      </section>
+                      <section id="optional-git-autocomplete" class="level2">
+                      <h2 class="anchored" data-anchor-id="optional-git-autocomplete">Optional: Git Autocomplete</h2>
+                      <p>Git provides a script which lets us display the version control status in your terminal prompt. The following instructions have been tested on <strong>Linux</strong>. If you are using MacOS or Windows please consult the <a href="https://github.com/git/git/blob/master/contrib/completion/git-prompt.sh">Git autocomplete instructions</a> at the top of the linked file. Your instructor may point you to another online resource for your OS. To enable this script add the following to a new <code>~/.bashrc.d/git.bash</code> file:</p>
+                      <div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">[[</span> <span class="va">$-</span> <span class="ot">=~</span> <span class="ss">i</span> <span class="kw">]];</span> <span class="cf">then</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">GIT_PROMPT_PATH</span><span class="op">=</span>/usr/share/doc/git/contrib/completion/git-prompt.sh</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">[[</span> <span class="ot">-r</span> <span class="st">"</span><span class="va">${GIT_PROMPT_PATH}</span><span class="st">"</span> <span class="kw">]];</span> <span class="cf">then</span>    </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">source</span> <span class="st">"</span><span class="va">${GIT_PROMPT_PATH}</span><span class="st">"</span> <span class="op">&gt;&amp;</span><span class="dv">2</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">[[</span> <span class="st">"</span><span class="va">$-</span><span class="st">"</span> <span class="ot">==</span> <span class="pp">*</span>i<span class="pp">*</span> <span class="kw">]];</span> <span class="cf">then</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>            <span class="bu">echo</span> <span class="st">"</span><span class="va">${GIT_PROMPT_PATH}</span><span class="st"> - not found"</span> <span class="op">&gt;&amp;</span><span class="dv">2</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">fi</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">fi</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">export</span> <span class="va">GIT_PS1_SHOWDIRTYSTATE</span><span class="op">=</span>1</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">export</span> <span class="va">GIT_PS1_SHOWSTASHSTATE</span><span class="op">=</span>1</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">export</span> <span class="va">GIT_PS1_SHOWUPSTREAM</span><span class="op">=</span><span class="st">"auto"</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">export</span> <span class="va">GIT_PS1_SHOWCOLORHINTS</span><span class="op">=</span>1</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="bu">export</span> <span class="va">GIT_PS1_SHOWUNTRACKEDFILES</span><span class="op">=</span>1</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">export</span> <span class="va">PS1</span><span class="op">=</span><span class="st">'[\u@\h:\w]$(__git_ps1 "(%s)"):\$ '</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span></code></pre></div>
+                      <p>And make sure your <code>~/.bashrc</code> file includes:</p>
+                      <div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># User specific aliases and functions</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="ot">-d</span> ~/.bashrc.d <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> rc <span class="kw">in</span> ~/.bashrc.d/<span class="pp">*</span><span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">[</span> <span class="ot">-f</span> <span class="st">"</span><span class="va">$rc</span><span class="st">"</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>            <span class="bu">.</span> <span class="st">"</span><span class="va">$rc</span><span class="st">"</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">fi</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">done</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="bu">unset</span> <span class="va">rc</span></span></code></pre></div>
+                      <section id="git_prompt_path" class="level3 caution">
+                      <h3 class="anchored" data-anchor-id="git_prompt_path">GIT_PROMPT_PATH</h3>
+                      <p>Your instructor will let you know if the value of <code>GIT_PROMPT_PATH</code> is different from the path in the example above. The following paths are for Met Office colleagues. If you are external to the Met Office please consult your institutions IT services or download your own copy of the <code>git-prompt.sh</code> script. Download the latest version from the <a href="https://github.com/git/git/blob/master/contrib/completion/git-prompt.sh">Git repository contrib directory</a>. Ensure the <code>GIT_PROMPT_PATH</code> matches where you decide to store the <code>git-prompt.sh</code> file.</p>
+                      <p>For Azure Spice, the path in the snippet above is correct:</p>
+                      <div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="va">GIT_PROMPT_PATH</span><span class="op">=</span>/usr/share/doc/git/contrib/completion/git-prompt.sh</span></code></pre></div>
+                      <p>For old Spice:</p>
+                      <div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="va">GIT_PROMPT_PATH</span><span class="op">=</span>/usr/share/doc/git236-2.36.6/contrib/completion/git-prompt.sh</span></code></pre></div>
+                      </section>
+                      <p>To see the changes to your terminal prompt run:</p>
+                      <div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/.bashrc</span></code></pre></div>
+                      <div class="callout callout-style-simple callout-none no-icon callout-titled">
+                      <div class="callout-header d-flex align-content-center">
+                      <div class="callout-icon-container">
+                      <i class="callout-icon no-icon"></i>
+                      </div>
+                      <div class="callout-title-container flex-fill">
+                      If you have already modified your <code>PS1</code>
+                      </div>
+                      </div>
+                      <div class="callout-body-container callout-body">
+                      <p>If your <code>~/.bashrc</code> file, or any file in the <code>~/.bashrc.d/</code> directory, already modifies your <code>PS1</code> command you can <code>export PROMPT_COMMAND</code> instead or seek help from your instructor on how to merge your current <code>PS1</code> command with the one above.</p>
+                      <p>Replace the <code>export PS1</code> line with:</p>
+                      <div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PROMPT_COMMAND</span><span class="op">=</span><span class="va">(</span><span class="st">"</span><span class="va">${PROMPT_COMMAND</span><span class="op">[@]</span><span class="va">}</span><span class="st">"</span> <span class="st">'__git_ps1 "${CONDA_PROMPT_MODIFIER}[\u@\h:\w]:" "\$ " "(%s)"'</span><span class="va">)</span></span></code></pre></div>
+                      <p>If your version of Bash is less than 5.1 or you are using MacOS you might need to use:</p>
+                      <div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PROMPT_COMMAND</span><span class="op">=</span><span class="va">${PROMPT_COMMAND</span><span class="op">:+</span><span class="st">"</span><span class="va">$PROMPT_COMMAND</span><span class="st">; "</span><span class="va">}</span><span class="st">'__git_ps1 "${CONDA_PROMPT_MODIFIER}[\w]:" "\$ " "(%s)"'</span></span></code></pre></div>
+                      </div>
+                      </div>
+                      <div class="callout callout-style-simple callout-none no-icon callout-titled">
+                      <div class="callout-header d-flex align-content-center">
+                      <div class="callout-icon-container">
+                      <i class="callout-icon no-icon"></i>
+                      </div>
+                      <div class="callout-title-container flex-fill">
+                      How to get help
+                      </div>
+                      </div>
+                      <div class="callout-body-container callout-body">
+                      <p>Your instructor will be able to help you with this setup. At the Met Office please email the <a href="mailto:ScienceGitMigrationProjectSupport@metoffice.gov.uk">Science Git Migration Project</a> and come to a Git &amp; GitHub surgery to receive help. Details of surgeries can be found on the Science Git Migration Project SharePoint homepage and MetNets homepage.</p>
+                      </div>
+                      </div>
+                      <section id="long-terminal-prompts" class="level3">
+                      <h3 class="anchored" data-anchor-id="long-terminal-prompts">Long Terminal Prompts</h3>
+                      <p>You might find that with long paths and usernames your prompt takes up the entire width of the terminal; there are several ways to reduce the prompt length:</p>
+                      <section id="removing-u-and-h" class="level4">
+                      <h4 class="anchored" data-anchor-id="removing-u-and-h">Removing <code>\u</code> and <code>\h</code></h4>
+                      <p>If adding in your username, <code>\u</code>, and hostname, <code>\h</code>, makes the terminal prompt too long you can remove the <code>\u</code> and or <code>\h</code> from the <code>PROMPT_COMMAND</code> or <code>PS1</code> lines.</p>
+                      </section>
+                      <section id="add-in-prompt_dirtrim" class="level4">
+                      <h4 class="anchored" data-anchor-id="add-in-prompt_dirtrim">Add in <code>PROMPT_DIRTRIM</code></h4>
+                      <p>Just before the final <code>fi</code> line you may add:</p>
+                      <div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="va">PROMPT_DIRTRIM</span><span class="op">=</span>3</span></code></pre></div>
+                      <p>This trims long directory paths to only show the current and two parent directories. You can change this value to show more or fewer directories.</p>
+                      <pre class="output"><code>/Desktop/A/Really/Long/Path $ # without PROMPT_DIRTRIM
+.../Really/Long/Path $        # with PROMPT_DIRTRIM</code></pre>
+                      </section>
+                      <section id="add-in-a-newline" class="level4">
+                      <h4 class="anchored" data-anchor-id="add-in-a-newline">Add in a newline</h4>
+                      <p>Just before the <code>\$</code> symbol in the <code>PS1</code> or <code>PROMPT_COMMAND</code> lines you may add <code>\n</code>. This will add in a newline before the <code>$</code> symbol, separating your prompt from your terminal commands.</p>
+                      <p>Before:</p>
+                      <pre class="output"><code>(conda_env) [~/Documents/git-novice]:(branch_name) $ _</code></pre>
+                      <p>After:</p>
+                      <pre class="output"><code>(conda_env) [~/Documents/git-novice]:(branch_name)
+$ _</code></pre>
+                      <p>To see the changes to your terminal prompt run:</p>
+                      <div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/.bashrc</span></code></pre></div>
+                      
+                      
+                      </section>
+                      </section>
+                      </section>
+      </div>
+      		<footer class="row footer mx-md-3">
+      			<hr>
+      			<div class="col-md-6">
+              <p>This lesson is subject to the &lt;(Code of Conduct)&gt;</p>
+              <a href="https://github.com/MetOffice/git-novice/edit/main/README.md">Edit on GitHub</a>
+              | <a href="https://github.com/MetOffice/git-novice/blob/main/CONTRIBUTING.md">Contributing</a>
+              | <a href="https://github.com/MetOffice/git-novice/">Source</a><p></p>
+      				<p><a href="https://github.com/MetOffice/git-novice/blob/main/CITATION.cff">Cite</a> | <a href="mailto:d.theodorakis@metoffice.gov.uk">Contact</a> | <a href="https://carpentries.org/about/">About</a></p>
+      			</div>
+      			<div class="col-md-6">
+                      <p>Materials licensed under &lt;({license})&gt; by the authors</p>
+                      <p>Template licensed under &lt;(CC-BY 4.0)&gt; by {template_authors}</p>
+              <p>Built with Quarto</p>
+      			</div>
+      		</footer>
+      	</main></div> <!-- / div.container -->
+      	<div id="to-top">
+      		<a href="#top">
+            <i class="search-icon" data-feather="arrow-up" role="img" aria-label="Back To Top"></i><br>
+      			<!-- <span class="d-none d-sm-none d-md-none d-lg-none d-xl-block">Back</span> To Top -->
+            Back To Top
+      		</a>
+      	</div>
+        <!-- {{#json}}
+        <script type="application/ld+json">
+          {{ meta json}}
+        </script>
+        {{/json}} -->
+      	<script>
+      		feather.replace();
+      	</script>
+
+        <!-- {{#analytics}}
+        {{ meta analytics}}
+        {{/analytics}} -->      <!-- footer closes the container class div -->
+         <!-- /main -->
+        <script id="quarto-html-after-body" type="application/javascript">
+        window.document.addEventListener("DOMContentLoaded", function (event) {
+          const toggleBodyColorMode = (bsSheetEl) => {
+            const mode = bsSheetEl.getAttribute("data-mode");
+            const bodyEl = window.document.querySelector("body");
+            if (mode === "dark") {
+              bodyEl.classList.add("quarto-dark");
+              bodyEl.classList.remove("quarto-light");
+            } else {
+              bodyEl.classList.add("quarto-light");
+              bodyEl.classList.remove("quarto-dark");
+            }
+          }
+          const toggleBodyColorPrimary = () => {
+            const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+            if (bsSheetEl) {
+              toggleBodyColorMode(bsSheetEl);
+            }
+          }
+          toggleBodyColorPrimary();  
+          const icon = "";
+          const anchorJS = new window.AnchorJS();
+          anchorJS.options = {
+            placement: 'right',
+            icon: icon
+          };
+          anchorJS.add('.anchored');
+            var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+            var mailtoRegex = new RegExp(/^mailto:/);
+              var filterRegex = new RegExp("https:\/\/metoffice\.github\.io\/git-novice\/instructor");
+            var isInternal = (href) => {
+                return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+            }
+            // Inspect non-navigation links and adorn them if external
+         	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+            for (var i=0; i<links.length; i++) {
+              const link = links[i];
+              if (!isInternal(link.href)) {
+                // undo the damage that might have been done by quarto-nav.js in the case of
+                // links that we want to consider external
+                if (link.dataset.originalHref !== undefined) {
+                  link.href = link.dataset.originalHref;
+                }
+              }
+            }
+          function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+            const config = {
+              allowHTML: true,
+              maxWidth: 500,
+              delay: 100,
+              arrow: false,
+              appendTo: function(el) {
+                  return el.parentElement;
+              },
+              interactive: true,
+              interactiveBorder: 10,
+              theme: 'quarto',
+              placement: 'bottom-start',
+            };
+            if (contentFn) {
+              config.content = contentFn;
+            }
+            if (onTriggerFn) {
+              config.onTrigger = onTriggerFn;
+            }
+            if (onUntriggerFn) {
+              config.onUntrigger = onUntriggerFn;
+            }
+            window.tippy(el, config); 
+          }
+          const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+          for (var i=0; i<noterefs.length; i++) {
+            const ref = noterefs[i];
+            tippyHover(ref, function() {
+              // use id or data attribute instead here
+              let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+              try { href = new URL(href).hash; } catch {}
+              const id = href.replace(/^#\/?/, "");
+              const note = window.document.getElementById(id);
+              if (note) {
+                return note.innerHTML;
+              } else {
+                return "";
+              }
+            });
+          }
+          const xrefs = window.document.querySelectorAll('a.quarto-xref');
+          const processXRef = (id, note) => {
+            // Strip column container classes
+            const stripColumnClz = (el) => {
+              el.classList.remove("page-full", "page-columns");
+              if (el.children) {
+                for (const child of el.children) {
+                  stripColumnClz(child);
+                }
+              }
+            }
+            stripColumnClz(note)
+            if (id === null || id.startsWith('sec-')) {
+              // Special case sections, only their first couple elements
+              const container = document.createElement("div");
+              if (note.children && note.children.length > 2) {
+                container.appendChild(note.children[0].cloneNode(true));
+                for (let i = 1; i < note.children.length; i++) {
+                  const child = note.children[i];
+                  if (child.tagName === "P" && child.innerText === "") {
+                    continue;
+                  } else {
+                    container.appendChild(child.cloneNode(true));
+                    break;
+                  }
+                }
+                if (window.Quarto?.typesetMath) {
+                  window.Quarto.typesetMath(container);
+                }
+                return container.innerHTML
+              } else {
+                if (window.Quarto?.typesetMath) {
+                  window.Quarto.typesetMath(note);
+                }
+                return note.innerHTML;
+              }
+            } else {
+              // Remove any anchor links if they are present
+              const anchorLink = note.querySelector('a.anchorjs-link');
+              if (anchorLink) {
+                anchorLink.remove();
+              }
+              if (window.Quarto?.typesetMath) {
+                window.Quarto.typesetMath(note);
+              }
+              // TODO in 1.5, we should make sure this works without a callout special case
+              if (note.classList.contains("callout")) {
+                return note.outerHTML;
+              } else {
+                return note.innerHTML;
+              }
+            }
+          }
+          for (var i=0; i<xrefs.length; i++) {
+            const xref = xrefs[i];
+            tippyHover(xref, undefined, function(instance) {
+              instance.disable();
+              let url = xref.getAttribute('href');
+              let hash = undefined; 
+              if (url.startsWith('#')) {
+                hash = url;
+              } else {
+                try { hash = new URL(url).hash; } catch {}
+              }
+              if (hash) {
+                const id = hash.replace(/^#\/?/, "");
+                const note = window.document.getElementById(id);
+                if (note !== null) {
+                  try {
+                    const html = processXRef(id, note.cloneNode(true));
+                    instance.setContent(html);
+                  } finally {
+                    instance.enable();
+                    instance.show();
+                  }
+                } else {
+                  // See if we can fetch this
+                  fetch(url.split('#')[0])
+                  .then(res => res.text())
+                  .then(html => {
+                    const parser = new DOMParser();
+                    const htmlDoc = parser.parseFromString(html, "text/html");
+                    const note = htmlDoc.getElementById(id);
+                    if (note !== null) {
+                      const html = processXRef(id, note);
+                      instance.setContent(html);
+                    } 
+                  }).finally(() => {
+                    instance.enable();
+                    instance.show();
+                  });
+                }
+              } else {
+                // See if we can fetch a full url (with no hash to target)
+                // This is a special case and we should probably do some content thinning / targeting
+                fetch(url)
+                .then(res => res.text())
+                .then(html => {
+                  const parser = new DOMParser();
+                  const htmlDoc = parser.parseFromString(html, "text/html");
+                  const note = htmlDoc.querySelector('main.content');
+                  if (note !== null) {
+                    // This should only happen for chapter cross references
+                    // (since there is no id in the URL)
+                    // remove the first header
+                    if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                      note.children[0].remove();
+                    }
+                    const html = processXRef(null, note);
+                    instance.setContent(html);
+                  } 
+                }).finally(() => {
+                  instance.enable();
+                  instance.show();
+                });
+              }
+            }, function(instance) {
+            });
+          }
+              let selectedAnnoteEl;
+              const selectorForAnnotation = ( cell, annotation) => {
+                let cellAttr = 'data-code-cell="' + cell + '"';
+                let lineAttr = 'data-code-annotation="' +  annotation + '"';
+                const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+                return selector;
+              }
+              const selectCodeLines = (annoteEl) => {
+                const doc = window.document;
+                const targetCell = annoteEl.getAttribute("data-target-cell");
+                const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+                const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+                const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+                const lineIds = lines.map((line) => {
+                  return targetCell + "-" + line;
+                })
+                let top = null;
+                let height = null;
+                let parent = null;
+                if (lineIds.length > 0) {
+                    //compute the position of the single el (top and bottom and make a div)
+                    const el = window.document.getElementById(lineIds[0]);
+                    top = el.offsetTop;
+                    height = el.offsetHeight;
+                    parent = el.parentElement.parentElement;
+                  if (lineIds.length > 1) {
+                    const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+                    const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+                    height = bottom - top;
+                  }
+                  if (top !== null && height !== null && parent !== null) {
+                    // cook up a div (if necessary) and position it 
+                    let div = window.document.getElementById("code-annotation-line-highlight");
+                    if (div === null) {
+                      div = window.document.createElement("div");
+                      div.setAttribute("id", "code-annotation-line-highlight");
+                      div.style.position = 'absolute';
+                      parent.appendChild(div);
+                    }
+                    div.style.top = top - 2 + "px";
+                    div.style.height = height + 4 + "px";
+                    div.style.left = 0;
+                    let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+                    if (gutterDiv === null) {
+                      gutterDiv = window.document.createElement("div");
+                      gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                      gutterDiv.style.position = 'absolute';
+                      const codeCell = window.document.getElementById(targetCell);
+                      const gutter = codeCell.querySelector('.code-annotation-gutter');
+                      gutter.appendChild(gutterDiv);
+                    }
+                    gutterDiv.style.top = top - 2 + "px";
+                    gutterDiv.style.height = height + 4 + "px";
+                  }
+                  selectedAnnoteEl = annoteEl;
+                }
+              };
+              const unselectCodeLines = () => {
+                const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+                elementsIds.forEach((elId) => {
+                  const div = window.document.getElementById(elId);
+                  if (div) {
+                    div.remove();
+                  }
+                });
+                selectedAnnoteEl = undefined;
+              };
+                // Handle positioning of the toggle
+            window.addEventListener(
+              "resize",
+              throttle(() => {
+                elRect = undefined;
+                if (selectedAnnoteEl) {
+                  selectCodeLines(selectedAnnoteEl);
+                }
+              }, 10)
+            );
+            function throttle(fn, ms) {
+            let throttle = false;
+            let timer;
+              return (...args) => {
+                if(!throttle) { // first call gets through
+                    fn.apply(this, args);
+                    throttle = true;
+                } else { // all the others get throttled
+                    if(timer) clearTimeout(timer); // cancel #2
+                    timer = setTimeout(() => {
+                      fn.apply(this, args);
+                      timer = throttle = false;
+                    }, ms);
+                }
+              };
+            }
+              // Attach click handler to the DT
+              const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+              for (const annoteDlNode of annoteDls) {
+                annoteDlNode.addEventListener('click', (event) => {
+                  const clickedEl = event.target;
+                  if (clickedEl !== selectedAnnoteEl) {
+                    unselectCodeLines();
+                    const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+                    if (activeEl) {
+                      activeEl.classList.remove('code-annotation-active');
+                    }
+                    selectCodeLines(clickedEl);
+                    clickedEl.classList.add('code-annotation-active');
+                  } else {
+                    // Unselect the line
+                    unselectCodeLines();
+                    clickedEl.classList.remove('code-annotation-active');
+                  }
+                });
+              }
+          const findCites = (el) => {
+            const parentEl = el.parentElement;
+            if (parentEl) {
+              const cites = parentEl.dataset.cites;
+              if (cites) {
+                return {
+                  el,
+                  cites: cites.split(' ')
+                };
+              } else {
+                return findCites(el.parentElement)
+              }
+            } else {
+              return undefined;
+            }
+          };
+          var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+          for (var i=0; i<bibliorefs.length; i++) {
+            const ref = bibliorefs[i];
+            const citeInfo = findCites(ref);
+            if (citeInfo) {
+              tippyHover(citeInfo.el, function() {
+                var popup = window.document.createElement('div');
+                citeInfo.cites.forEach(function(cite) {
+                  var citeDiv = window.document.createElement('div');
+                  citeDiv.classList.add('hanging-indent');
+                  citeDiv.classList.add('csl-entry');
+                  var biblioDiv = window.document.getElementById('ref-' + cite);
+                  if (biblioDiv) {
+                    citeDiv.innerHTML = biblioDiv.innerHTML;
+                  }
+                  popup.appendChild(citeDiv);
+                });
+                return popup.innerHTML;
+              });
+            }
+          }
+        });
+        </script>
+         <!-- /content -->
+      
+
+</body></html>
