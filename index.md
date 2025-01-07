@@ -46,4 +46,4 @@ Some previous experience with the shell is expected,
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-
+{{< include ./learners/setup.md >}}

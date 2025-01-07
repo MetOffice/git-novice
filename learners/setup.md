@@ -1,7 +1,3 @@
----
-title: Setup
----
-
 ## Pre-workshop Survey
 
 Please remember to fill out the pre-workshop survey prior

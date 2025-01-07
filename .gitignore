@@ -1,3 +1,21 @@
+# quarto files
+episodes/*html
+site
+site_libs
+_site
+!site/README.md
+*/favicons
+*/images
+*/javascripts
+*/*_files
+index_files
+episodes/aio.qmd
+episodes/extract_all_images.qmd
+episodes/key-points.qmd
+profiles/profiles.qmd
+_extensions/astrodimitrios/carpentries/templates/more-dropdown.html
+_extensions/astrodimitrios/carpentries/templates/nav.html
+
 # sandpaper files
 episodes/*html
 site/*
@@ -55,3 +73,5 @@ Gemfile.lock
 .*history
 
 .vscode
+
+/.quarto/
