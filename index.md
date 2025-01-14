@@ -40,10 +40,18 @@ to be shared can and should be stored in a version control system.
 
 ## Prerequisites
 
-In this lesson we use Git from the Unix Shell.
-Some previous experience with the shell is expected,
+No knowledge of Git and GitHub is required.
+In this lesson we use Git from the command line.
+Some previous experience with the command line is expected,
 *but isn't mandatory*.
+Access to the command line and
+a browser connected to the Internet are required.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-
+This lesson is platform-independent and can be taken
+on Linux, Windows, and MacOS.
+This lesson has been fully tested on Linux.
+Learners using either Windows or MacOS should email the support mailbox,
+[Science Git Migration Project](mailto:ScienceGitMigrationProjectSupport@metoffice.gov.uk),
+if you encounter any problems.
