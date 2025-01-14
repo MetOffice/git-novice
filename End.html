@@ -1,31 +1,43 @@
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="auto"><head>
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<script src="../site_libs/quarto-contrib/carpentries-theme-toggle-1.0.0/themetoggle.js"></script>
-<script src="../site_libs/quarto-contrib/carpentries-theme-toggle-1.0.0/scripts.js"></script>
-<link href="../site_libs/quarto-contrib/carpentries-css-1.0.0/styles.css" rel="stylesheet"><meta charset="utf-8">
-            <meta name="generator" content="quarto-1.5.57">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/quarto-contrib/carpentries-theme-toggle-1.0.0/themetoggle.js"></script>
+<script src="site_libs/quarto-contrib/carpentries-theme-toggle-1.0.0/scripts.js"></script>
+<link href="site_libs/quarto-contrib/carpentries-css-1.0.0/styles.css" rel="stylesheet"><meta charset="utf-8">
+            <meta name="generator" content="quarto-1.6.40">
         
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
                     
         <title>End – Version Control with Git</title>
 
-            <script src="site_libs/quarto-contrib/carpentries-theme-toggle-1.0.0/themetoggle.js"></script>
+        <!--     <script src="site_libs/quarto-contrib/carpentries-theme-toggle-1.0.0/themetoggle.js"></script>
         <script src="site_libs/quarto-contrib/carpentries-theme-toggle-1.0.0/scripts.js"></script>
         <link href="site_libs/quarto-contrib/carpentries-css-1.0.0/styles.css" rel="stylesheet">
-        
-        <script src="site_libs/quarto-contrib/quarto-1.5.57/quarto-nav/quarto-nav.js"></script>
-        <script src="site_libs/quarto-contrib/quarto-1.5.57/quarto-nav/headroom.min.js"></script>
-        <script src="site_libs/quarto-contrib/quarto-1.5.57/clipboard/clipboard.min.js"></script>
-        <script src="site_libs/quarto-contrib/quarto-1.5.57/quarto-search/autocomplete.umd.js"></script>
-        <script src="site_libs/quarto-contrib/quarto-1.5.57/quarto-search/fuse.min.js"></script>
-        <script src="site_libs/quarto-contrib/quarto-1.5.57/quarto-search/quarto-search.js"></script>
-        <script src="site_libs/quarto-contrib/quarto-1.5.57/quarto-html/quarto.js"></script>
-        <script src="site_libs/quarto-contrib/quarto-1.5.57/quarto-html/popper.min.js"></script>
-        <script src="site_libs/quarto-contrib/quarto-1.5.57/quarto-html/tippy.umd.min.js"></script>
-        <script src="site_libs/quarto-contrib/quarto-1.5.57/quarto-html/anchor.min.js"></script>
-        <link href="site_libs/quarto-contrib/quarto-1.5.57/quarto-html/tippy.css" rel="stylesheet">
+         -->
+
+        <!-- <script src="quarto-nav/quarto-nav.js"></script>
+        <script src="quarto-nav/headroom.min.js"></script>
+        <script src="clipboard/clipboard.min.js"></script>
+        <script src="quarto-search/autocomplete.umd.js"></script>
+        <script src="quarto-search/fuse.min.js"></script>
+        <script src="quarto-search/quarto-search.js"></script>
+        <script src="quarto-html/quarto.js"></script>
+        <script src="quarto-html/popper.min.js"></script>
+        <script src="quarto-html/tippy.umd.min.js"></script>
+        <script src="quarto-html/anchor.min.js"></script>
+        <link href="quarto-html/tippy.css" rel="stylesheet"> -->
 
         <!-- Responsive Favicon for The Carpentries -->
         <link rel="apple-touch-icon" sizes="180x180" href="site_libs/quarto-contrib/carpentries-favicons-1.0.0/favicons/apple-touch-icon.png">
@@ -64,6 +76,9 @@
                            "search-label": "Search"
                          }
                        }</script>
+              <script  src="site_libs/quarto-diagram/mermaid.min.js"></script>
+              <script  src="site_libs/quarto-diagram/mermaid-init.js"></script>
+              <link  href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet" />
              -->  </head>
   <body>
         <div id="quarto-search-results"></div>
@@ -87,7 +102,7 @@
                                                </nav>
             </div>
         <!-- main -->
-        <main class="content page-columns page-full" id="quarto-document-content">
+        <main class="content page-columns page-full" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
         <header id="top" class="navbar navbar-expand-md top-nav carpentries">
           <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
             <symbol id="check2" viewbox="0 0 16 16">
@@ -633,7 +648,45 @@
                       <section id="summary" class="level2">
                       <h2 class="anchored" data-anchor-id="summary">Summary</h2>
                       <p>You’ve now created a repository both locally on your computer and remotely on GitHub. You’ve developed changes on a feature branch, reviewed the changes on GitHub and merged them into <code>main</code>. The diagram below outlines the workflow you used during the course:</p>
-                      <p><img src="fig/lesson-workflow-mermaid.svg" class="img-fluid" alt="A sequence diagram showing the workflow we used during the lesson."></p>
+                      <div class="cell" data-layout-align="default">
+                      <div class="cell-output-display">
+                      <div>
+                      <p></p><figure class="figure"><p></p>
+                      <div>
+                      <pre class="mermaid mermaid-js">sequenceDiagram
+                          autonumber
+                          participant M as main
+                          Note over M: Initialise the Repository
+                          M -&gt;&gt; M: 
+                          Note over M: Initial Commit
+                          M -&gt;&gt; M: 
+                          Note right of M: Create a Feature Branch
+                          create participant F as forecast
+                          M -&gt;&gt; F: 
+                          loop 
+                              Note over F: Develop Changes
+                              F -&gt;&gt; F: 
+                          end
+                          Note right of M: Backup to GitHub
+                          create participant GHM as origin main
+                          M --&gt;&gt; GHM: 
+                          Note right of F: Push changes to GitHub
+                          create participant GHF as origin forecast
+                          F --&gt;&gt; GHF: 
+                          Note left of GHF: Pull Request and then Merge
+                          destroy GHF
+                          GHF -&gt;&gt; GHM: 
+                          Note left of GHM: Update Local Branches
+                          GHM --&gt;&gt; M: 
+                          Note left of F: Tidy up Local Branches
+                          destroy F
+                          F -&gt;&gt; M: 
+                      </pre>
+                      </div>
+                      <p></p></figure><p></p>
+                      </div>
+                      </div>
+                      </div>
                       <p>A summary page outlining the steps we’ve taken to create a new repository locally and connect it to a GitHub remote can be found in the extra <a href="repo-quick-start.html">Quick Start Repository Guide</a>.</p>
                       </section>
                       <section id="deleting-a-repository" class="level2">
@@ -824,7 +877,6 @@
               if (window.Quarto?.typesetMath) {
                 window.Quarto.typesetMath(note);
               }
-              // TODO in 1.5, we should make sure this works without a callout special case
               if (note.classList.contains("callout")) {
                 return note.outerHTML;
               } else {

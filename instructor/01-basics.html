@@ -1,28 +1,43 @@
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="auto"><head>
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-            <meta name="generator" content="quarto-1.5.57">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/quarto-contrib/carpentries-theme-toggle-1.0.0/themetoggle.js"></script>
+<script src="../site_libs/quarto-contrib/carpentries-theme-toggle-1.0.0/scripts.js"></script>
+<link href="../site_libs/quarto-contrib/carpentries-css-1.0.0/styles.css" rel="stylesheet"><meta charset="utf-8">
+            <meta name="generator" content="quarto-1.6.40">
         
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
                     
         <title>Automated Version Control – Version Control with Git</title>
 
-            <script src="../site_libs/quarto-contrib/carpentries-theme-toggle-1.0.0/themetoggle.js"></script>
+        <!--     <script src="../site_libs/quarto-contrib/carpentries-theme-toggle-1.0.0/themetoggle.js"></script>
         <script src="../site_libs/quarto-contrib/carpentries-theme-toggle-1.0.0/scripts.js"></script>
         <link href="../site_libs/quarto-contrib/carpentries-css-1.0.0/styles.css" rel="stylesheet">
-        
-        <script src="../site_libs/quarto-contrib/quarto-1.5.57/quarto-nav/quarto-nav.js"></script>
-        <script src="../site_libs/quarto-contrib/quarto-1.5.57/quarto-nav/headroom.min.js"></script>
-        <script src="../site_libs/quarto-contrib/quarto-1.5.57/clipboard/clipboard.min.js"></script>
-        <script src="../site_libs/quarto-contrib/quarto-1.5.57/quarto-search/autocomplete.umd.js"></script>
-        <script src="../site_libs/quarto-contrib/quarto-1.5.57/quarto-search/fuse.min.js"></script>
-        <script src="../site_libs/quarto-contrib/quarto-1.5.57/quarto-search/quarto-search.js"></script>
-        <script src="../site_libs/quarto-contrib/quarto-1.5.57/quarto-html/quarto.js"></script>
-        <script src="../site_libs/quarto-contrib/quarto-1.5.57/quarto-html/popper.min.js"></script>
-        <script src="../site_libs/quarto-contrib/quarto-1.5.57/quarto-html/tippy.umd.min.js"></script>
-        <script src="../site_libs/quarto-contrib/quarto-1.5.57/quarto-html/anchor.min.js"></script>
-        <link href="../site_libs/quarto-contrib/quarto-1.5.57/quarto-html/tippy.css" rel="stylesheet">
+         -->
+
+        <!-- <script src="quarto-nav/quarto-nav.js"></script>
+        <script src="quarto-nav/headroom.min.js"></script>
+        <script src="clipboard/clipboard.min.js"></script>
+        <script src="quarto-search/autocomplete.umd.js"></script>
+        <script src="quarto-search/fuse.min.js"></script>
+        <script src="quarto-search/quarto-search.js"></script>
+        <script src="quarto-html/quarto.js"></script>
+        <script src="quarto-html/popper.min.js"></script>
+        <script src="quarto-html/tippy.umd.min.js"></script>
+        <script src="quarto-html/anchor.min.js"></script>
+        <link href="quarto-html/tippy.css" rel="stylesheet"> -->
 
         <!-- Responsive Favicon for The Carpentries -->
         <link rel="apple-touch-icon" sizes="180x180" href="../site_libs/quarto-contrib/carpentries-favicons-1.0.0/favicons/apple-touch-icon.png">
@@ -84,7 +99,7 @@
                                                </nav>
             </div>
         <!-- main -->
-        <main class="content page-columns page-full" id="quarto-document-content">
+        <main class="content page-columns page-full" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
         <header id="top" class="navbar navbar-expand-md top-nav carpentries">
           <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
             <symbol id="check2" viewbox="0 0 16 16">
@@ -651,7 +666,7 @@
                         Explain Key Terminology
                         </h3>
                       </button>
-                      <div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
+                      <div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
                       <div class="accordion-body">
                       <p>Take this opportunity to show the learners where the glossary can be found. Explain the difference between Git &amp; GitHub using the glossary! Or if there is time to spare, the first challenge on this page gets the learners to use the glossary to explain the difference to a partner or write it down in their own words.</p>
                       </div>
@@ -764,7 +779,7 @@
                         FCM Comparison
                         </h3>
                       </button>
-                      <div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
+                      <div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
                       <div class="accordion-body">
                       <p>Running the <code>git ...</code> command is equivalent to:</p>
                       <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">fcm</span> ...</span></code></pre></div>
@@ -994,7 +1009,6 @@
               if (window.Quarto?.typesetMath) {
                 window.Quarto.typesetMath(note);
               }
-              // TODO in 1.5, we should make sure this works without a callout special case
               if (note.classList.contains("callout")) {
                 return note.outerHTML;
               } else {

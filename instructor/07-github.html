@@ -1,28 +1,43 @@
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="auto"><head>
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-            <meta name="generator" content="quarto-1.5.57">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/quarto-contrib/carpentries-theme-toggle-1.0.0/themetoggle.js"></script>
+<script src="../site_libs/quarto-contrib/carpentries-theme-toggle-1.0.0/scripts.js"></script>
+<link href="../site_libs/quarto-contrib/carpentries-css-1.0.0/styles.css" rel="stylesheet"><meta charset="utf-8">
+            <meta name="generator" content="quarto-1.6.40">
         
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
                     
         <title>Remotes in GitHub – Version Control with Git</title>
 
-            <script src="../site_libs/quarto-contrib/carpentries-theme-toggle-1.0.0/themetoggle.js"></script>
+        <!--     <script src="../site_libs/quarto-contrib/carpentries-theme-toggle-1.0.0/themetoggle.js"></script>
         <script src="../site_libs/quarto-contrib/carpentries-theme-toggle-1.0.0/scripts.js"></script>
         <link href="../site_libs/quarto-contrib/carpentries-css-1.0.0/styles.css" rel="stylesheet">
-        
-        <script src="../site_libs/quarto-contrib/quarto-1.5.57/quarto-nav/quarto-nav.js"></script>
-        <script src="../site_libs/quarto-contrib/quarto-1.5.57/quarto-nav/headroom.min.js"></script>
-        <script src="../site_libs/quarto-contrib/quarto-1.5.57/clipboard/clipboard.min.js"></script>
-        <script src="../site_libs/quarto-contrib/quarto-1.5.57/quarto-search/autocomplete.umd.js"></script>
-        <script src="../site_libs/quarto-contrib/quarto-1.5.57/quarto-search/fuse.min.js"></script>
-        <script src="../site_libs/quarto-contrib/quarto-1.5.57/quarto-search/quarto-search.js"></script>
-        <script src="../site_libs/quarto-contrib/quarto-1.5.57/quarto-html/quarto.js"></script>
-        <script src="../site_libs/quarto-contrib/quarto-1.5.57/quarto-html/popper.min.js"></script>
-        <script src="../site_libs/quarto-contrib/quarto-1.5.57/quarto-html/tippy.umd.min.js"></script>
-        <script src="../site_libs/quarto-contrib/quarto-1.5.57/quarto-html/anchor.min.js"></script>
-        <link href="../site_libs/quarto-contrib/quarto-1.5.57/quarto-html/tippy.css" rel="stylesheet">
+         -->
+
+        <!-- <script src="quarto-nav/quarto-nav.js"></script>
+        <script src="quarto-nav/headroom.min.js"></script>
+        <script src="clipboard/clipboard.min.js"></script>
+        <script src="quarto-search/autocomplete.umd.js"></script>
+        <script src="quarto-search/fuse.min.js"></script>
+        <script src="quarto-search/quarto-search.js"></script>
+        <script src="quarto-html/quarto.js"></script>
+        <script src="quarto-html/popper.min.js"></script>
+        <script src="quarto-html/tippy.umd.min.js"></script>
+        <script src="quarto-html/anchor.min.js"></script>
+        <link href="quarto-html/tippy.css" rel="stylesheet"> -->
 
         <!-- Responsive Favicon for The Carpentries -->
         <link rel="apple-touch-icon" sizes="180x180" href="../site_libs/quarto-contrib/carpentries-favicons-1.0.0/favicons/apple-touch-icon.png">
@@ -85,7 +100,7 @@
                                                </nav>
             </div>
         <!-- main -->
-        <main class="content page-columns page-full" id="quarto-document-content">
+        <main class="content page-columns page-full" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
         <header id="top" class="navbar navbar-expand-md top-nav carpentries">
           <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
             <symbol id="check2" viewbox="0 0 16 16">
@@ -631,7 +646,7 @@
                         Repository Visibility
                         </h3>
                       </button>
-                      <div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
+                      <div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
                       <div class="accordion-body">
                       <p>Here we have chosen to make our repository public. The visibility of your repository depends on which option you choose:</p>
                       <ul>
@@ -694,7 +709,7 @@ origin   git@github.com:mo-eormerod/weather.git (push)</code></pre>
                         Instructor Note
                         </h3>
                       </button>
-                      <div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
+                      <div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
                       <div class="accordion-body">
                       <p>Some learners may have set up an ssh key already. If they have a key with this name: <code>~/.ssh/id_ed25519_github</code> and can successfully authenticate with <code>ssh -T git@github.com</code> they can skip this section.</p>
                       <p>If their ssh key name does not match the one above we <strong>strongly</strong> recommend they follow the instructions below.</p>
@@ -786,7 +801,7 @@ git@github.com: Permission denied (publickey).</code></pre>
                         Checking the GitHub RSA Key
                         </h3>
                       </button>
-                      <div id="collapseSpoiler2" class="accordion-collapse collapse" aria-labelledby="headingSpoiler2" data-bs-parent="#accordionSpoiler2">
+                      <div id="collapseSpoiler2" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler2" aria-labelledby="headingSpoiler2">
                       <div class="accordion-body">
                       <p>Ideally before connecting to a new host, like <code>github.com</code> in the output above, you would check the RSA key fingerprint matches the expected value. GitHub publishes their public <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/githubs-ssh-key-fingerprints">SSH key fingerprints</a> for you to check against.</p>
                       </div>
@@ -823,7 +838,7 @@ git@github.com: Permission denied (publickey).</code></pre>
                         Troubleshooting SSH Setup
                         </h3>
                       </button>
-                      <div id="collapseSpoiler3" class="accordion-collapse collapse" aria-labelledby="headingSpoiler3" data-bs-parent="#accordionSpoiler3">
+                      <div id="collapseSpoiler3" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler3" aria-labelledby="headingSpoiler3">
                       <div class="accordion-body">
                       <p>If your new key failed to connect you may need to alter your ssh config.</p>
                       <ol type="1">
@@ -1207,7 +1222,6 @@ create mode 100644 README.md</code></pre>
               if (window.Quarto?.typesetMath) {
                 window.Quarto.typesetMath(note);
               }
-              // TODO in 1.5, we should make sure this works without a callout special case
               if (note.classList.contains("callout")) {
                 return note.outerHTML;
               } else {
