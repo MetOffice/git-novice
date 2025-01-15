@@ -76,9 +76,6 @@
                            "search-label": "Search"
                          }
                        }</script>
-              <script  src="../site_libs/quarto-diagram/mermaid.min.js"></script>
-              <script  src="../site_libs/quarto-diagram/mermaid-init.js"></script>
-              <link  href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet" />
              -->  </head>
   <body>
         <div id="quarto-search-results"></div>
@@ -676,77 +673,11 @@
                       <section id="distributed-version-control" class="level3">
                       <h3 class="anchored" data-anchor-id="distributed-version-control">Distributed Version Control</h3>
                       <p>Git is an example of a <a href="reference.html#glossary">distributed version control</a> system. This means that each collaborator has a copy of the entire repository.</p>
-                      <div class="cell" data-layout-align="default">
-                      <div class="cell-output-display">
-                      <div>
-                      <p></p><figure class="figure"><p></p>
-                      <div>
-                      <pre class="mermaid mermaid-js">---
-                      title: Distributed Version Control (e.g. Git)
-                      ---
-                      flowchart TD
-                          accDescr {A flowchart showing a remote server on GitHub and three local repository copies on collaborators computers. This is a distributed version control system as everyone has a copy of the entire repository and its history.}
-                          subgraph "Remote Server (GitHub)"
-                              r1[(Origin Repository)]
-                          end
-                          subgraph "&lt;div style="margin-top: 14em"&gt;Computer 3&lt;/div&gt;"
-                              r2[(Repository)]
-                              id2[Working Copy]
-                          end
-                          subgraph "&lt;div style="margin-top: 14em"&gt;Computer 2&lt;/div&gt;"
-                              r3[(Repository)]
-                              id3[Working Copy]
-                          end
-                          subgraph "&lt;div style="margin-top: 14em"&gt;Computer 1&lt;/div&gt;"
-                              r4[(Repository)]
-                              id4[Working Copy]
-                          end
-                          r1 --&gt;|pull| r2 -.-&gt;|push| r1
-                          r1 --&gt;|pull| r3 -.-&gt;|push| r1
-                          r1 --&gt;|pull| r4 -.-&gt;|push| r1
-                          r2 --&gt;|checkout| id2 -.-&gt;|commit| r2
-                          r3 --&gt;|checkout| id3 -.-&gt;|commit| r3
-                          r4 --&gt;|checkout| id4 -.-&gt;|commit| r4
-                      </pre>
-                      </div>
-                      <p></p></figure><p></p>
-                      </div>
-                      </div>
-                      </div>
+                      <p><img src="fig/distributed.svg" class="img-fluid"></p>
                       <section id="centralised-fcm" class="level4">
                       <h4 class="anchored">Centralised (FCM)</h4>
                       <p>FCM and SVN are examples of <a href="reference.html#glossary">centralised version control</a> systems. Here there is only one repository on a central server.</p>
-                      <div class="cell" data-layout-align="default">
-                      <div class="cell-output-display">
-                      <div>
-                      <p></p><figure class="figure"><p></p>
-                      <div>
-                      <pre class="mermaid mermaid-js">---
-                      title: Centralised Version Control (e.g. SVN)
-                      ---
-                      flowchart TD
-                          accDescr {A flowchart showing a central remote server and three local working copies on collaborators computers.}
-                          subgraph "Remote Server"
-                              id1[(Central Repository)]
-                          end
-                          subgraph "&lt;div style="margin-top: 5em"&gt;Computer 3&lt;/div&gt;"
-                              id2[Working Copy]
-                          end
-                          subgraph "&lt;div style="margin-top: 5em"&gt;Computer 2&lt;/div&gt;"
-                              id3[Working Copy]
-                          end
-                          subgraph "&lt;div style="margin-top: 5em"&gt;Computer 1&lt;/div&gt;"
-                              id4[Working Copy]
-                          end
-                          id1 --&gt;|checkout| id2 -.-&gt;|commit| id1
-                          id1 --&gt;|checkout| id3 -.-&gt;|commit| id1
-                          id1 --&gt;|checkout| id4 -.-&gt;|commit| id1
-                      </pre>
-                      </div>
-                      <p></p></figure><p></p>
-                      </div>
-                      </div>
-                      </div>
+                      <p><img src="fig/centralised.svg" class="img-fluid"></p>
                       <div class="callout callout-style-simple callout-none no-icon callout-titled">
                       <div class="callout-header d-flex align-content-center">
                       <div class="callout-icon-container">

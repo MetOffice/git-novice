@@ -76,9 +76,6 @@
                            "search-label": "Search"
                          }
                        }</script>
-              <script  src="site_libs/quarto-diagram/mermaid.min.js"></script>
-              <script  src="site_libs/quarto-diagram/mermaid-init.js"></script>
-              <link  href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet" />
              -->  </head>
   <body>
         <div id="quarto-search-results"></div>
@@ -648,45 +645,7 @@
                       <section id="summary" class="level2">
                       <h2 class="anchored" data-anchor-id="summary">Summary</h2>
                       <p>You’ve now created a repository both locally on your computer and remotely on GitHub. You’ve developed changes on a feature branch, reviewed the changes on GitHub and merged them into <code>main</code>. The diagram below outlines the workflow you used during the course:</p>
-                      <div class="cell" data-layout-align="default">
-                      <div class="cell-output-display">
-                      <div>
-                      <p></p><figure class="figure"><p></p>
-                      <div>
-                      <pre class="mermaid mermaid-js">sequenceDiagram
-                          autonumber
-                          participant M as main
-                          Note over M: Initialise the Repository
-                          M -&gt;&gt; M: 
-                          Note over M: Initial Commit
-                          M -&gt;&gt; M: 
-                          Note right of M: Create a Feature Branch
-                          create participant F as forecast
-                          M -&gt;&gt; F: 
-                          loop 
-                              Note over F: Develop Changes
-                              F -&gt;&gt; F: 
-                          end
-                          Note right of M: Backup to GitHub
-                          create participant GHM as origin main
-                          M --&gt;&gt; GHM: 
-                          Note right of F: Push changes to GitHub
-                          create participant GHF as origin forecast
-                          F --&gt;&gt; GHF: 
-                          Note left of GHF: Pull Request and then Merge
-                          destroy GHF
-                          GHF -&gt;&gt; GHM: 
-                          Note left of GHM: Update Local Branches
-                          GHM --&gt;&gt; M: 
-                          Note left of F: Tidy up Local Branches
-                          destroy F
-                          F -&gt;&gt; M: 
-                      </pre>
-                      </div>
-                      <p></p></figure><p></p>
-                      </div>
-                      </div>
-                      </div>
+                      <p><img src="fig/lesson-workflow-mermaid.svg" class="img-fluid" alt="A sequence diagram showing the workflow we used during the lesson."></p>
                       <p>A summary page outlining the steps we’ve taken to create a new repository locally and connect it to a GitHub remote can be found in the extra <a href="repo-quick-start.html">Quick Start Repository Guide</a>.</p>
                       </section>
                       <section id="deleting-a-repository" class="level2">
