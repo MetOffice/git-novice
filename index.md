@@ -3,9 +3,13 @@ permalink: index.html
 site: sandpaper::sandpaper_site
 ---
 
-[Version control](learners/reference.md#version-control) is fundamental to
-good quality assurance of science and code.
-Using a Version Control System is better than mailing files back and forth:
+Welcome to the Introduction to Git and GitHub training!
+This page contains learning outcomes
+and setup that must be completed before working through the lesson.
+
+Version control is fundamental to good quality assurance of science and code.
+Using a [Version Control System](learners/reference.md#version-control)
+is better than mailing files back and forth:
 
 - Nothing that is committed to version control is ever lost, unless
   you work really, really hard at losing it. Since all old versions of
@@ -52,6 +56,5 @@ a browser connected to the Internet are required.
 This lesson is platform-independent and can be taken
 on Linux, Windows, and MacOS.
 This lesson has been fully tested on Linux.
-Learners using either Windows or MacOS should email the support mailbox,
-[Science Git Migration Project](mailto:ScienceGitMigrationProjectSupport@metoffice.gov.uk),
-if you encounter any problems.
+If you encounter any problems using either Windows or MacOS
+please [reach out for support](./learners/setup.md#how-to-get-help).

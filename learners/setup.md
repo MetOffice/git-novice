@@ -2,10 +2,18 @@
 title: Setup
 ---
 
+## How to get help
+
+- Attend a Git and GitHub Surgery.
+- Email the [support mailbox](mailto:ScienceGitMigrationProjectSupport@metoffice.gov.uk).
+
+Details of surgeries can be found on the
+Science Git Migration Project Comms Site.
+
 ## Lesson Outcomes
 
 This lesson is split into two parts.
-Episodes before the break focus on Git.
+Episodes in the first half before the break focus on Git.
 Episodes in the second half after the break focus on GitHub.
 
 By the end of the Git section you will be able to:
@@ -33,8 +41,8 @@ And much more!
 ## Pre-lesson Survey
 
 Please remember to fill out the
-[pre-workshop survey](https://forms.office.com/e/XJPJUTn0mp)
-prior to the start of the workshop.
+[pre-lesson survey](https://forms.office.com/e/XJPJUTn0mp)
+prior to the start of the lesson.
 This information is vital for us to keep improving the lesson
 for other learners.
 
@@ -63,8 +71,8 @@ git version 2.47.1.windows.1
 
 ### Non-Met Office Systems
 
-Your institution may have already installed Git on your work computer.
-Ask your instructor if this step is necessary or simply type:
+The systems at your institution may already have Git installed.
+You can check this by typing:
 
 ```bash
 $ git --version
@@ -118,9 +126,10 @@ The GitHub documentation provides [more details about configuring MFA](https://d
 
 ### Passkeys
 
-To completely avoid having authentication for work purposes on a personal device you may choose to [set up a passkey](https://docs.github.com/en/authentication/authenticating-with-a-passkey/managing-your-passkeys). Your instructor and organisation will be able to provide guidance on suitable passkey providers and password managers.
-
-[workshop-setup]: https://carpentries.github.io/workshop-template/install_instructions/#git
+To completely avoid having authentication for work purposes on a personal device you may choose to [set up a passkey](https://docs.github.com/en/authentication/authenticating-with-a-passkey/managing-your-passkeys). Your instructor or organisation will be able to provide guidance on suitable passkey providers and password managers.
+At the Met Office the KeePass password manager is available.
+Search, "Using KeePass for one-time passwords" on SharePoint for
+setup instructions.
 
 ## Optional: Git Autocomplete
 
@@ -129,9 +138,8 @@ terminal prompt.
 The following instructions have been tested on **Linux**.
 If you are using MacOS or Windows please consult the
 [Git autocomplete instructions](https://github.com/git/git/blob/master/contrib/completion/git-prompt.sh)
-at the top of the linked file and email the support mailbox,
-[Science Git Migration Project](mailto:ScienceGitMigrationProjectSupport@metoffice.gov.uk),
-if you require help.
+at the top of the linked file and
+[reach out for support](./learners/setup.md#how-to-get-help) if you require help.
 To enable this script add the following to a new `~/.bashrc.d/prompt.bash` 
 file:
 
@@ -206,8 +214,7 @@ until you are in a directory containing a Git repository.
 
 If your `~/.bashrc` file, or any file in the `~/.bashrc.d/` directory,
 already modifies your prompt using the `PS1` command you can
-`export PROMPT_COMMAND` instead or seek help from your instructor
-on how to merge your current `PS1` command with the one above.
+`export PROMPT_COMMAND` instead.
 
 Replace the `export PS1` line with:
 
@@ -224,17 +231,7 @@ export PROMPT_COMMAND=${PROMPT_COMMAND:+"$PROMPT_COMMAND; "}'__git_ps1 "${CONDA_
 
 :::
 
-::: callout
-
-### How to get help
-
-- Attend a Git and GitHub Surgery.
-- Email the [support mailbox](mailto:ScienceGitMigrationProjectSupport@metoffice.gov.uk).
-
-Details of surgeries can be found on the
-Science Git Migration Project Comms Site.
-
-:::
+::: spoiler
 
 ### Long Terminal Prompts
 
@@ -288,3 +285,5 @@ To see the changes to your terminal prompt run:
 ```bash
 source ~/.bashrc
 ```
+
+:::
