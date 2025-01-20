@@ -46,6 +46,9 @@ when it was created,
 and the log message Git was given when the commit was created.
 The output above only shows the latest commit in the log for brevity,
 you should see all your commits!
+Your log output may be different from what's shown above
+depending on whether you completed the challenges
+in earlier episodes.
 
 ::: spoiler
 
