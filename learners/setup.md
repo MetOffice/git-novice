@@ -53,6 +53,7 @@ for other learners.
 ### Met Office Linux
 
 No setup is required, Git is installed for you.
+Your version number may be different to the example below.
 
 ```bash
 $ git --version
@@ -63,6 +64,7 @@ git version 2.47.0
 
 Please ensure Git is installed via the Company Portal.
 You should now have access to the **Git Bash** app.
+Your version number may be different to the example below.
 
 ```bash
 $ git --version
@@ -170,7 +172,15 @@ if [[ $- =~ i ]]; then
 fi
 ```
 
-And make sure your `~/.bashrc` file includes:
+You may use your preferred editor to create this file;
+these lesson materials use the [`nano`](https://www.nano-editor.org/) editor
+when a file needs creating or modifying.
+This is followed by the `cat` command in the material
+to show the file contents after the change.
+You do not have to use the `cat` command when following
+the lesson material.
+
+Make sure your `~/.bashrc` file includes:
 
 ```bash
 # User specific aliases and functions
