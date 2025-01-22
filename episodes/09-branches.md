@@ -90,6 +90,11 @@ for Git and matches the default on GitHub.
 Our current repository looks something like this:
 
 ```mermaid
+---
+config:
+  gitGraph:
+    showCommitLabel: false
+---
     gitGraph
         accDescr {A Git graph showing one commit, the root-commit on the main branch.}
         commit id: '6f12a47'
@@ -173,6 +178,11 @@ Now we have created but not committed anything to this new branch
 so our repository looks like this:
 
 ```mermaid
+---
+config:
+  gitGraph:
+    showCommitLabel: false
+---
     gitGraph
         accDescr {A Git graph showing the root-commit on the main branch and a new forecast branch with no commits.}
         commit id: '6f12a47'
