@@ -1,10 +1,10 @@
 project:
   type: website
   pre-render:
-    - _extensions\astrodimitrios\carpentries\create-aio-file.lua
-    - _extensions\astrodimitrios\carpentries\create-profiles-file.lua
-    - _extensions\astrodimitrios\carpentries\nav.lua
-    - _extensions\astrodimitrios\carpentries\more.lua
+    - _extensions/astrodimitrios/carpentries/create-aio-file.lua
+    - _extensions/astrodimitrios/carpentries/create-profiles-file.lua
+    - _extensions/astrodimitrios/carpentries/nav.lua
+    - _extensions/astrodimitrios/carpentries/more.lua
   render:
     - index.*
     - episodes/*
@@ -13,7 +13,7 @@ project:
     - instructors/*
     - profiles/*
   post-render:
-    - bash _extensions\astrodimitrios\carpentries\post-process-html.sh
+    - bash _extensions/astrodimitrios/carpentries/post-process-html.sh
 
 carpentries:
   source: https://github.com/MetOffice/git-novice
@@ -69,4 +69,4 @@ format:
   carpentries-html
 
 metadata-files:
-  - _extensions\astrodimitrios\carpentries\translate.yml
+  - _extensions/astrodimitrios/carpentries/translate.yml
