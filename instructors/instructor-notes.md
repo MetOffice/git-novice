@@ -19,20 +19,15 @@ lets you focus on the more interesting/innovative aspects of your project.
 
 ## Overall
 
-Version control might be the most important topic we teach, but Git is
-definitely the most complicated tool.  However, GitHub presently dominates the
-open software repository landscape, so the time and effort required to teach
-fundamental Git is justified and worthwhile.
-
-Because of this complexity, we don't teach novice learners about many
-interesting topics, such as hashes, and commit objects.
-
-Instead we try to convince them that version control is useful for
+We try to convince learners that version control is useful for
 working in teams or not, because it is
 
 - a better way to "undo" changes,
 - a better way to collaborate than mailing files back and forth, and
 - a better way to share your code and other work with the world.
+
+We teach version control using Git and GitHub because
+they are the most widelt used version control tools.
 
 ## Teaching Notes
 
@@ -83,6 +78,32 @@ working in teams or not, because it is
   - [Code School][code-school] has a free interactive course, [Try Git][try-git].
   - for instructors, [the Git parable][git-parable] is useful background reading
 
+## Introduction
+
+At the start of the lesson take some time to:
+
+While you are waiting for everyone post the pre-lesson survey form in the chat.
+If they haven't done this they must now.
+
+- Introduce the instructors and the helpers
+- Outline a rough schedule (there is a rough schedule in the instructor view setup page)
+  Or simply state that the morning focuses on Git and the afternoon on GitHub
+- Remember to take regular breaks
+- What are the outcomes of the lesson? They are on the Setup page!
+- How to navigate the material.
+  Where are the git and fcm to git cheatsheets?
+  Learners can do the challenges or the read the Discussion section if they are ahead.
+- We understand a large amount of the information in this course will likely be new to most of you,
+  so we encourage you to ask questions at any time.
+  Remember, there is no such thing as a stupid question!
+  (remember to let learners know how you want them to ask Qs
+  in-person learners can raise their hands or use green/red sticky notes,
+  online learners can raise their hand)
+- How to get help with anything related to Git and GitHub after the training (surgeries and support mailbox)
+- Mention about the feedback form and that any feedback will be used to improve the training
+- Ensure the material can be read by learners in the room (to change the font size in firefox use View --> Zoom --> Zoom In or <ctrl><+>)
+- Ensure learners can hear you well
+
 ## [Automated Version Control](../episodes/01-basics.md)
 
 - Ask, "Who uses 'undo' in their editor?" All say "Me". 'Undo' is the simplest
@@ -102,10 +123,10 @@ working in teams or not, because it is
 
 Why are we moving to Git and GitHub?
 
-- FCM/SVN becoming unmaintainable
-- Git/GitHub provide better security (MFA)
-- GitHub has more useful features for collaboration than trac
-- Easier to collaborate with partners outside the Met Office with GitHub
+- Business continuity: Using Git and GitHub mitigates risks of supporting (via single points of expertise at the MO) the ongoing need for provisioning and commissioning infrastructure to support the legacy Subversion and Trac
+- Productivity and skills: Git and GitHub enables improved, modern working practices via task management tools, in-line code review, and automated testing
+- Security: GitHub provides Multi-Factor Authentication (MFA) and corporate Single Sign-On (SSO)
+- Collaboration: GitHub facilitates collaboration and code sharing
 
 ## [Setting Up Git](../episodes/02-setup.md)
 
@@ -220,6 +241,12 @@ And mention that these are covered in more detail in the
 Git & GitHub Working Practices training.
 You can also mention that it is possible to edit files via the GitHub
 interface but we won't be doing that today.
+
+## [End](../episodes/End.md)
+
+Post a link to the post-lesson survey.
+Show them this page so they see the options for more learning.
+Mention the Git & GitHub Working Practices lesson.
 
 ## [Collaborating](../episodes/08-collab.md)
 

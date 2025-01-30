@@ -54,7 +54,7 @@ $ ls
 ```
 
 ```output
-forecast.md
+forecast.md README.md
 ```
 
 `forecast.md` contains three lines, which we can see by running:
@@ -80,9 +80,6 @@ $ git status
 
 ```output
 On branch forecast
-
-No commits yet
-
 Untracked files:
    (use "git add <file>..." to include in what will be committed)
 
@@ -107,9 +104,6 @@ $ git status
 
 ```output
 On branch forecast
-
-No commits yet
-
 Changes to be committed:
   (use "git rm --cached <file>..." to unstage)
 

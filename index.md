@@ -3,9 +3,13 @@ permalink: index.html
 site: sandpaper::sandpaper_site
 ---
 
-[Version control](learners/reference.md#version-control) is fundamental to
-good quality assurance of science and code.
-Using a Version Control System is better than mailing files back and forth:
+Welcome to the Introduction to Git and GitHub training!
+This page contains learning outcomes
+and setup that must be completed before working through the lesson.
+
+Version control is fundamental to good quality assurance of science and code.
+Using a [Version Control System](learners/reference.md#version-control)
+is better than mailing files back and forth:
 
 - Nothing that is committed to version control is ever lost, unless
   you work really, really hard at losing it. Since all old versions of
@@ -40,10 +44,19 @@ to be shared can and should be stored in a version control system.
 
 ## Prerequisites
 
-In this lesson we use Git from the Unix Shell.
-Some previous experience with the shell is expected,
+No knowledge of Git and GitHub is required.
+In this lesson we use Git from the command line.
+Some previous experience with the command line is expected,
 *but isn't mandatory*.
+Access to the command line and
+a browser connected to the Internet are required.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
+
+This lesson is platform-independent and can be taken
+on Linux, Windows, and MacOS.
+This lesson has been fully tested on Linux.
+If you encounter any problems using either Windows or MacOS
+please [reach out for support](./learners/setup.md#how-to-get-help).
 
 {{< include ./learners/setup.md >}}
