@@ -120,7 +120,7 @@ It is possible to reconfigure the text editor for Git whenever you want to chang
 
 Nedit won't be available on Azure SPICE VDI.
 Details are available in the [Met Office Azure SPICE Documentation](https://wwwspice/docs/software/removed/?h=nedit).
-Your closest editor in the table above is Gedit.
+The most similar editor in the table above is Gedit.
 
 :::
 
