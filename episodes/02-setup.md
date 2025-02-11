@@ -110,6 +110,7 @@ find the correct configuration command from this table:
 | Scratch (Linux)                       | `$ git config --global core.editor "scratch-text-editor"`                      | 
 | Emacs                                 | `$ git config --global core.editor "emacs"`                      | 
 | Vim                                   | `$ git config --global core.editor "vim"`                      | 
+| gVim                                  | `$ git config --global core.editor "gvim -f"`                      | 
 | VS Code                               | `$ git config --global core.editor "code --wait"`                      | 
 
 It is possible to reconfigure the text editor for Git whenever you want to change it.
