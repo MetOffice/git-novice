@@ -163,6 +163,25 @@ Switched to branch 'forecast'
 
 :::
 
+::: spoiler
+
+### Older Versions of Git / JASMIN Users
+
+The `git switch` command was added in
+Git version **2.23**.
+To check your version run:
+
+```bash
+$ git --version
+git version 2.47.0
+```
+
+If your version of Git is lower than **2.23**
+you should use the `git checkout` command
+to swap branches.
+
+:::
+
 Running `git status` now should output:
 
 ```bash
