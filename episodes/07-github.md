@@ -110,8 +110,35 @@ We use SSH here because, while it requires some additional configuration, it is 
 security protocol widely used by many applications.  The steps below describe SSH at a
 minimum level for GitHub.
 
-
 ::::::::::::::::::::::::::::::::::::::::::::::::::
+
+::: spoiler
+
+### Note for Personal Access Token Users
+
+If you use a Personal Access Token (PAT)
+to connect to GitHub you should select
+'HTTPS' **not** 'SSH'.
+
+We recommend you move to using SSH Keys
+instead of a PAT.
+Part [3](./07-github.md#3-ssh-background-and-setup)
+of this episode shows you how to set up an SSH key.
+
+If you choose to continue using your PAT,
+in the rest of the material any SSH links such as:
+
+```bash
+git@github.com:mo-eormerod/weather.git
+```
+
+should be converted to the HTTPS form like this:
+
+```bash
+https://github.com/mo-eormerod/weather.git
+```
+
+:::
 
 Copy that URL from the browser, go into the local `weather` repository, and run
 this command:
