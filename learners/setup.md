@@ -160,7 +160,7 @@ Hi <username>! You've successfully authenticated, but GitHub does not provide sh
 We recommend you move to using SSH Keys
 instead of a PAT (instructions below).
 This material will work using a PAT,
-please note the **Note for Personal Access Token Users** 
+please see the **Note for Personal Access Token Users** 
 dropdown in the [first GitHub episode](../episodes/07-github.md).
 
 :::
