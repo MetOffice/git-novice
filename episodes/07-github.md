@@ -248,6 +248,10 @@ $ ssh-keygen -t ed25519 -C "e.ormerod@mo-weather.uk"
 
 If this command fails:
 
+Replace the `ssh-keygen` command with `ssh-keygen.exe`.
+
+Or:
+
 1. Open the Windows command prompt by searching for **cmd** in the search bar or start menu.
 2. Re-run the command above in the command prompt.
 
