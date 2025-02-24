@@ -230,9 +230,28 @@ If SSH has been set up on the computer you're using, the public and private key 
 To create an SSH key pair use the following command, 
 where the `-t` option specifies which type of algorithm to use:
 
+::: group-tab
+
+### Linux & MacOS
+
 ```bash
 $ ssh-keygen -t ed25519 -C "e.ormerod@mo-weather.uk"
 ```
+
+### Windows
+
+In Git bash run:
+
+```bash
+$ ssh-keygen -t ed25519 -C "e.ormerod@mo-weather.uk"
+```
+
+If this command fails:
+
+1. Open the Windows command prompt by searching for **cmd** in the search bar or start menu.
+2. Re-run the command above in the command prompt.
+
+:::
 
 The `-C` flag attaches a comment to the key.
 The comment has no effect on your key, you may place anything here to help
