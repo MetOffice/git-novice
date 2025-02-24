@@ -133,6 +133,286 @@ At the Met Office the KeePass password manager is available.
 Search, "Using KeePass for one-time passwords" on SharePoint for
 setup instructions.
 
+## SSH Setup
+
+::: callout
+
+### What if I already have an SSH key?
+
+Run:
+
+```bash
+ssh -T git@github.com
+```
+
+If you see the following output please skip this setup section:
+
+```output
+Hi <username>! You've successfully authenticated, but GitHub does not provide shell access.
+```
+
+:::
+
+:: spoiler
+
+### Note for Personal Access Token Users
+
+We recommend you move to using SSH Keys
+instead of a PAT (instructions below).
+This material will work using a PAT,
+please note the **Note for Personal Access Token Users** 
+dropdown in the [first GitHub episode](../episodes/07-github.md).
+
+:::
+
+Before you can connect to a repository on GitHub,
+you need to set up a way for your computer to authenticate with GitHub.
+
+We are going to set up the method that is commonly used by many different services to authenticate access on the command line.
+This method is called Secure Shell Protocol (SSH).
+SSH is a cryptographic network protocol that allows secure communication between computers using an otherwise insecure network.
+
+SSH uses what is called a key pair.
+This is two keys that work together to validate access.
+One key is publicly known and called the public key,
+and the other key called the private key is kept private.
+
+You can think of the public key as a padlock,
+and only you have the key (the private key) to open it.
+You use the public key where you want a secure method of communication,
+such as your GitHub account.
+You give this padlock, or public key,
+to GitHub and say "lock the communications to my account with this so that only computers that have my private key can unlock communications and send git commands as my GitHub account."
+
+What we will do now is the minimum required to set up an SSH key
+and add the public key to a GitHub account.
+
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+## Keeping your keys secure
+
+You shouldn't really forget about your SSH keys, since they keep your account secure.
+It's good practice to audit your secure shell keys every so often.
+Especially if you are using multiple computers to access your account.
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Run the list command to check what key pairs already exist on your computer.
+
+```bash
+ls -al ~/.ssh
+```
+
+Your output is going to look a little different depending on whether or not SSH has ever been set up on the computer you are using.
+
+If you have not set up SSH on your computer, you will see
+
+```output
+ls: cannot access '~/.ssh': No such file or directory
+```
+
+If SSH has been set up on the computer you're using, the public and private key pairs will be listed. The file names are either `id_ed25519`/`id_ed25519.pub` or `id_rsa`/`id_rsa.pub` depending on how the key pairs were set up.
+
+### Create an SSH key pair
+
+To create an SSH key pair use the following command, 
+where the `-t` option specifies which type of algorithm to use:
+
+::: group-tab
+
+### Linux and MacOS
+
+```bash
+$ ssh-keygen -t ed25519 -C "e.ormerod@mo-weather.uk"
+```
+
+### Windows
+
+In Git bash run:
+
+```bash
+$ ssh-keygen -t ed25519 -C "e.ormerod@mo-weather.uk"
+```
+
+If this command fails:
+
+Replace the `ssh-keygen` command with `ssh-keygen.exe`.
+
+Or:
+
+1. Open the Windows command prompt by searching for **cmd** in the search bar or start menu.
+2. Re-run the command above in the command prompt.
+
+:::
+
+The `-C` flag attaches a comment to the key.
+The comment has no effect on your key, you may place anything here to help
+you remember what the key is for. It makes no difference whether you use
+a public email or your no-reply private GitHub email in the comment.
+
+If you are using a legacy system that doesn't support the Ed25519 algorithm, use:
+`$ ssh-keygen -t rsa -b 4096 -C "your_email@example.com"`
+
+```output
+Generating public/private ed25519 key pair.
+Enter file in which to save the key (~/.ssh/id_ed25519):
+```
+
+We want to store our key in the file `~/.ssh/id_ed25519_github`.
+
+```output
+Created directory '~/.ssh'.
+Enter passphrase (empty for no passphrase):
+```
+
+Now you will be prompted for a passphrase.
+If the computer you work on is shared between multiple users you should 
+set a passphrase. 
+Be sure to use something memorable or save your passphrase somewhere,
+as there is no "reset my password" option.
+If you do not share your computer there is no need 
+to set a passphrase so just press <kbd>Enter</kbd>.
+
+Note that, when typing a passphrase on a terminal, there won't be any visual feedback of your typing.
+This is normal: your passphrase will be recorded even if you see nothing changing on your screen.
+
+```output
+Enter same passphrase again:
+```
+
+After entering the same passphrase a second time, we receive the confirmation
+
+```output
+Your identification has been saved in ~/.ssh/id_ed25519_github
+Your public key has been saved in ~/.ssh/id_ed25519_github.pub
+The key fingerprint is:
+SHA256:SMSPIStNyA00KPxuYu94KpZgRAYjgt9g4BA4kFy3g1o e.ormerod@mo-weather.uk
+The key's randomart image is:
++--[ED25519 256]--+
+|^B== o.          |
+|%*=.*.+          |
+|+=.E =.+         |
+| .=.+.o..        |
+|....  . S        |
+|.+ o             |
+|+ =              |
+|.o.o             |
+|oo+.             |
++----[SHA256]-----+
+```
+
+The "identification" is actually the private key. You should never share it.
+The public key is appropriately named.
+The "key fingerprint" is a shorter version of a public key.
+
+Now that we have generated the SSH keys, we will find the SSH files when we check.
+
+```bash
+ls -al ~/.ssh
+```
+
+```output
+drwxr-xr-x 1 Eleanor   197121   0 Jul 16 14:48 ./
+drwxr-xr-x 1 Eleanor   197121   0 Jul 16 14:48 ../
+-rw-r--r-- 1 Eleanor   197121 419 Jul 16 14:48 id_ed25519_github
+-rw-r--r-- 1 Eleanor   197121 106 Jul 16 14:48 id_ed25519_github.pub
+```
+
+### Copy the public key to GitHub
+
+Now we have a SSH key pair and we can run this command to check if GitHub can read our authentication.
+
+```bash
+ssh -T git@github.com
+```
+
+```output
+The authenticity of host 'github.com (192.30.255.112)' can't be established.
+RSA key fingerprint is SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? y
+Please type 'yes', 'no' or the fingerprint: yes
+Warning: Permanently added 'github.com' (RSA) to the list of known hosts.
+git@github.com: Permission denied (publickey).
+```
+
+Now we need to give GitHub the public key.
+
+::: spoiler
+
+### Checking the GitHub RSA Key
+
+Ideally before connecting to a new host, like `github.com` in the output above,
+you would check the RSA key fingerprint matches the expected value.
+GitHub publishes their public [SSH key fingerprints](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/githubs-ssh-key-fingerprints)
+for you to check against.
+
+:::
+
+First, we need to copy the public key. 
+Be sure to include the `.pub` at the end, otherwise you're looking at the private key.
+
+```bash
+cat ~/.ssh/id_ed25519_github.pub
+```
+
+```output
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDmRA3d51X0uu9wXek559gfn6UFNF69yZjChyBIU2qKI e.ormerod@mo-weather.uk
+```
+
+Now, go to [GitHub.com](www.github.com), click on your profile icon in the top right corner to get the drop-down menu.
+Click "Settings", then on the settings page, click "SSH and GPG keys",
+on the left side "Access" menu.
+Click the "New SSH key" button on the right side.
+Now, you can add the title (normally an ID for the computer storing the keys such as "Work Linux"),
+paste your SSH key into the field, and click the "Add SSH key" to complete the setup.
+
+::: callout
+
+## Single sign-on (SSO)
+
+If you are part of an organisation that requires single
+sign-on (SSO) to access their GitHub organisation you
+will need to authorise the key for use in the organisation.
+
+Next to the newly created SSH key in the GitHub settings
+click on "Configure SSO".
+Find the organisation in the list and click on "Authorise".
+
+:::
+
+Now check your authentication again from the command line.
+
+```bash
+$ ssh -T git@github.com
+```
+
+```output
+Hi Eleanor! You've successfully authenticated, but GitHub does not provide shell access.
+```
+
+This output confirms that the SSH key works as intended.
+
+::: spoiler
+
+### Troubleshooting SSH Setup
+
+If your new key failed to connect you may need to alter your ssh config.
+
+1. Create the `~/.ssh/config` file if it doesn't exist
+2. Add the following to the file:
+
+```ssh-config
+Host github.com
+  IdentityFile ~/.ssh/id_ed25519_github
+```
+
+This explicitly states which key to use for `github.com`
+and is needed if you have many SSH keys already for other hosts.
+
+:::
+
 ## Optional: Git Autocomplete
 
 Git provides a script which lets us display the version control status in your 

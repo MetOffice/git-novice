@@ -210,6 +210,23 @@ particular set of files in `.gitignore`.
 
 ## [Remotes in GitHub](../episodes/07-github.md)
 
+::: caution
+
+### SSH Setup
+
+Learners should have set up their SSH keys before the lesson.
+If they have skipped this step then pushing to the remote will fail.
+Either before the start of the lesson or before the break for lunch
+get learners to run:
+
+```bash
+$ shh -T git@github.com
+```
+
+to check their connection to GitHub.
+
+:::
+
 - Make it clear that Git and GitHub are not the same thing: Git is an open
   source version control tool, GitHub is a company that hosts Git
   repositories in the web and provides a web interface to interact with repos
