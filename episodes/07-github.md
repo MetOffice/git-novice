@@ -232,7 +232,7 @@ where the `-t` option specifies which type of algorithm to use:
 
 ::: group-tab
 
-### Linux & MacOS
+### Linux and MacOS
 
 ```bash
 $ ssh-keygen -t ed25519 -C "e.ormerod@mo-weather.uk"
