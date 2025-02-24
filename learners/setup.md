@@ -196,6 +196,8 @@ fi
 unset rc
 ```
 
+These lines should only be added to the `~/.bashrc` file. Do not add them to your `prompt.bash` file.
+
 ::: caution
 
 ### GIT_PROMPT_PATH
