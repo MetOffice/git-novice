@@ -17,6 +17,15 @@ exercises: 0
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
+::::::::::::::::::::::::::::::::::::: instructor
+
+Important!
+
+Everyone should run `ssh -T git@github.com`
+to test their SSH access, unless they have a PAT setup.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
 We'll start by exploring how version control can be used
 to keep track of what one person did and when.
 Even if you aren't collaborating with other people,
