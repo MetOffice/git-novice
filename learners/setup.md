@@ -224,7 +224,7 @@ where the `-t` option specifies which type of algorithm to use:
 ### Linux and MacOS
 
 ```bash
-$ ssh-keygen -t ed25519 -C "e.ormerod@mo-weather.uk"
+$ ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519_github -C "e.ormerod@mo-weather.uk new spice"
 ```
 
 ### Windows
@@ -232,7 +232,7 @@ $ ssh-keygen -t ed25519 -C "e.ormerod@mo-weather.uk"
 In Git bash run:
 
 ```bash
-$ ssh-keygen -t ed25519 -C "e.ormerod@mo-weather.uk"
+$ ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519_github -C "e.ormerod@mo-weather.uk new spice"
 ```
 
 If this command fails:
@@ -246,23 +246,18 @@ Or:
 
 :::
 
+The `-f` flag specifies a path to a file to store the key in.
+
 The `-C` flag attaches a comment to the key.
 The comment has no effect on your key, you may place anything here to help
 you remember what the key is for. It makes no difference whether you use
 a public email or your no-reply private GitHub email in the comment.
 
 If you are using a legacy system that doesn't support the Ed25519 algorithm, use:
-`$ ssh-keygen -t rsa -b 4096 -C "your_email@example.com"`
+`$ ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_ed25519_github -C "your_email@example.com"`
 
 ```output
 Generating public/private ed25519 key pair.
-Enter file in which to save the key (~/.ssh/id_ed25519):
-```
-
-We want to store our key in the file `~/.ssh/id_ed25519_github`.
-
-```output
-Created directory '~/.ssh'.
 Enter passphrase (empty for no passphrase):
 ```
 
@@ -321,7 +316,7 @@ drwxr-xr-x 1 Eleanor   197121   0 Jul 16 14:48 ../
 
 ### Copy the public key to GitHub
 
-Now we have a SSH key pair and we can run this command to check if GitHub can read our authentication.
+Now we have an SSH key pair and we can run this command to check if GitHub can read our authentication.
 
 ```bash
 ssh -T git@github.com
