@@ -224,7 +224,7 @@ where the `-t` option specifies which type of algorithm to use:
 ### Linux and MacOS
 
 ```bash
-$ ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519_github -C "e.ormerod@mo-weather.uk new spice"
+$ ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519_github -C "e.ormerod@mo-weather.uk Azure SPICE"
 ```
 
 ### Windows
@@ -232,7 +232,7 @@ $ ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519_github -C "e.ormerod@mo-weather.uk 
 In Git bash run:
 
 ```bash
-$ ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519_github -C "e.ormerod@mo-weather.uk new spice"
+$ ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519_github -C "e.ormerod@mo-weather.uk Azure SPICE"
 ```
 
 If this command fails:
@@ -282,7 +282,7 @@ After entering the same passphrase a second time, we receive the confirmation
 Your identification has been saved in ~/.ssh/id_ed25519_github
 Your public key has been saved in ~/.ssh/id_ed25519_github.pub
 The key fingerprint is:
-SHA256:SMSPIStNyA00KPxuYu94KpZgRAYjgt9g4BA4kFy3g1o e.ormerod@mo-weather.uk
+SHA256:SMSPIStNyA00KPxuYu94KpZgRAYjgt9g4BA4kFy3g1o e.ormerod@mo-weather.uk Azure SPICE
 The key's randomart image is:
 +--[ED25519 256]--+
 |^B== o.          |
