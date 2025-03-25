@@ -401,6 +401,7 @@ If your new key failed to connect you may need to alter your ssh config.
 ```ssh-config
 Host github.com
   IdentityFile ~/.ssh/id_ed25519_github
+  IdentitiesOnly yes
 ```
 
 This explicitly states which key to use for `github.com`
