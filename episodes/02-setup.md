@@ -58,37 +58,6 @@ If you elect to use a private email address with GitHub, then use GitHub's no-re
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-### Line Endings
-
-As with other keys, when you press <kbd>Enter</kbd> or <kbd>↵</kbd> or on Macs, <kbd>Return</kbd> on your keyboard,
-your computer encodes this input as a character.
-Different operating systems use different character(s) to represent the end of a line.
-(You may also hear these referred to as newlines or line breaks.)
-Because Git uses these characters to compare files,
-it may cause unexpected issues when editing a file on different machines.
-Though it is beyond the scope of this lesson, you can read more about this issue
-[in the Pro Git book](https://www.git-scm.com/book/en/v2/Customizing-Git-Git-Configuration#_core_autocrlf).
-
-You can change the way Git recognizes and encodes line endings
-using the `core.autocrlf` command to `git config`.
-The following settings are recommended:
-
-::: group-tab
-
-### Linux and MacOS
-
-```bash
-$ git config --global core.autocrlf input
-```
-
-### Windows
-
-```bash
-$ git config --global core.autocrlf true
-```
-
-:::
-
 ### Text Editor
 
 To set your preferred text editor, 
