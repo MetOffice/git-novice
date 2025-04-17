@@ -1,135 +1,201 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://metoffice.github.io/git-novice/profiles/profiles.html</loc>
-    <lastmod>2025-01-14T22:45:31.532Z</lastmod>
+    <loc>https://swcarpentry.github.io/git-novice/01-basics.html</loc>
   </url>
   <url>
-    <loc>https://metoffice.github.io/git-novice/instructors/instructor-notes.html</loc>
-    <lastmod>2025-01-06T17:49:49.539Z</lastmod>
+    <loc>https://swcarpentry.github.io/git-novice/02-setup.html</loc>
   </url>
   <url>
-    <loc>https://metoffice.github.io/git-novice/learners/reference.html</loc>
-    <lastmod>2025-01-06T17:49:49.540Z</lastmod>
+    <loc>https://swcarpentry.github.io/git-novice/03-create.html</loc>
   </url>
   <url>
-    <loc>https://metoffice.github.io/git-novice/learners/discuss.html</loc>
-    <lastmod>2025-01-06T17:49:49.540Z</lastmod>
+    <loc>https://swcarpentry.github.io/git-novice/04-changes.html</loc>
   </url>
   <url>
-    <loc>https://metoffice.github.io/git-novice/episodes/extract_all_images.html</loc>
-    <lastmod>2025-01-14T22:45:31.450Z</lastmod>
+    <loc>https://swcarpentry.github.io/git-novice/05-history.html</loc>
   </url>
   <url>
-    <loc>https://metoffice.github.io/git-novice/episodes/End.html</loc>
-    <lastmod>2025-01-08T00:04:52.883Z</lastmod>
+    <loc>https://swcarpentry.github.io/git-novice/06-ignore.html</loc>
   </url>
   <url>
-    <loc>https://metoffice.github.io/git-novice/episodes/14-supplemental-rstudio.html</loc>
-    <lastmod>2025-01-06T23:31:21.921Z</lastmod>
+    <loc>https://swcarpentry.github.io/git-novice/06-reverting-changes.html</loc>
   </url>
   <url>
-    <loc>https://metoffice.github.io/git-novice/episodes/12-citation.html</loc>
-    <lastmod>2024-08-06T13:51:34.958Z</lastmod>
+    <loc>https://swcarpentry.github.io/git-novice/07-github.html</loc>
   </url>
   <url>
-    <loc>https://metoffice.github.io/git-novice/episodes/11-configuring-github.html</loc>
-    <lastmod>2025-01-06T17:49:49.518Z</lastmod>
+    <loc>https://swcarpentry.github.io/git-novice/08-github-interface.html</loc>
   </url>
   <url>
-    <loc>https://metoffice.github.io/git-novice/episodes/10-open.html</loc>
-    <lastmod>2025-01-06T17:49:49.517Z</lastmod>
+    <loc>https://swcarpentry.github.io/git-novice/09-branches.html</loc>
   </url>
   <url>
-    <loc>https://metoffice.github.io/git-novice/episodes/09-conflict.html</loc>
-    <lastmod>2024-11-11T14:50:52.632Z</lastmod>
+    <loc>https://swcarpentry.github.io/git-novice/09-github-history.html</loc>
   </url>
   <url>
-    <loc>https://metoffice.github.io/git-novice/episodes/08-github-interface.html</loc>
-    <lastmod>2024-11-11T14:50:52.632Z</lastmod>
+    <loc>https://swcarpentry.github.io/git-novice/10-open.html</loc>
   </url>
   <url>
-    <loc>https://metoffice.github.io/git-novice/episodes/07-github.html</loc>
-    <lastmod>2025-01-06T17:49:49.497Z</lastmod>
+    <loc>https://swcarpentry.github.io/git-novice/10-pull-requests.html</loc>
   </url>
   <url>
-    <loc>https://metoffice.github.io/git-novice/episodes/06-ignore.html</loc>
-    <lastmod>2025-01-06T17:49:49.497Z</lastmod>
+    <loc>https://swcarpentry.github.io/git-novice/11-configuring-github.html</loc>
   </url>
   <url>
-    <loc>https://metoffice.github.io/git-novice/episodes/04-changes.html</loc>
-    <lastmod>2025-01-08T00:04:52.882Z</lastmod>
+    <loc>https://swcarpentry.github.io/git-novice/11-licensing.html</loc>
   </url>
   <url>
-    <loc>https://metoffice.github.io/git-novice/episodes/02-setup.html</loc>
-    <lastmod>2025-01-06T17:49:49.495Z</lastmod>
+    <loc>https://swcarpentry.github.io/git-novice/12-citation.html</loc>
   </url>
   <url>
-    <loc>https://metoffice.github.io/git-novice/index.html</loc>
-    <lastmod>2025-01-08T00:04:52.883Z</lastmod>
+    <loc>https://swcarpentry.github.io/git-novice/13-hosting.html</loc>
   </url>
   <url>
-    <loc>https://metoffice.github.io/git-novice/episodes/01-basics.html</loc>
-    <lastmod>2025-01-08T00:04:52.881Z</lastmod>
+    <loc>https://swcarpentry.github.io/git-novice/14-supplemental-rstudio.html</loc>
   </url>
   <url>
-    <loc>https://metoffice.github.io/git-novice/episodes/03-create.html</loc>
-    <lastmod>2025-01-06T17:49:49.495Z</lastmod>
+    <loc>https://swcarpentry.github.io/git-novice/404.html</loc>
   </url>
   <url>
-    <loc>https://metoffice.github.io/git-novice/episodes/05-history.html</loc>
-    <lastmod>2025-01-06T17:49:49.496Z</lastmod>
+    <loc>https://swcarpentry.github.io/git-novice/Break.html</loc>
   </url>
   <url>
-    <loc>https://metoffice.github.io/git-novice/episodes/06-reverting-changes.html</loc>
-    <lastmod>2025-01-06T17:49:49.497Z</lastmod>
+    <loc>https://swcarpentry.github.io/git-novice/CODE_OF_CONDUCT.html</loc>
   </url>
   <url>
-    <loc>https://metoffice.github.io/git-novice/episodes/08-collab.html</loc>
-    <lastmod>2024-11-11T14:50:52.631Z</lastmod>
+    <loc>https://swcarpentry.github.io/git-novice/End.html</loc>
   </url>
   <url>
-    <loc>https://metoffice.github.io/git-novice/episodes/09-branches.html</loc>
-    <lastmod>2025-01-08T00:04:52.882Z</lastmod>
+    <loc>https://swcarpentry.github.io/git-novice/LICENSE.html</loc>
   </url>
   <url>
-    <loc>https://metoffice.github.io/git-novice/episodes/09-github-history.html</loc>
-    <lastmod>2025-01-06T17:49:49.517Z</lastmod>
+    <loc>https://swcarpentry.github.io/git-novice/aio.html</loc>
   </url>
   <url>
-    <loc>https://metoffice.github.io/git-novice/episodes/10-pull-requests.html</loc>
-    <lastmod>2025-01-06T17:49:49.518Z</lastmod>
+    <loc>https://swcarpentry.github.io/git-novice/discuss.html</loc>
   </url>
   <url>
-    <loc>https://metoffice.github.io/git-novice/episodes/11-licensing.html</loc>
-    <lastmod>2024-11-11T14:50:52.634Z</lastmod>
+    <loc>https://swcarpentry.github.io/git-novice/fcm-git_cheat_sheet.html</loc>
   </url>
   <url>
-    <loc>https://metoffice.github.io/git-novice/episodes/13-hosting.html</loc>
-    <lastmod>2024-08-06T13:51:34.958Z</lastmod>
+    <loc>https://swcarpentry.github.io/git-novice/images.html</loc>
   </url>
   <url>
-    <loc>https://metoffice.github.io/git-novice/episodes/Break.html</loc>
-    <lastmod>2025-01-08T00:04:52.882Z</lastmod>
+    <loc>https://swcarpentry.github.io/git-novice/index.html</loc>
   </url>
   <url>
-    <loc>https://metoffice.github.io/git-novice/episodes/aio.html</loc>
-    <lastmod>2025-01-14T22:45:31.449Z</lastmod>
+    <loc>https://swcarpentry.github.io/git-novice/instructor/01-basics.html</loc>
   </url>
   <url>
-    <loc>https://metoffice.github.io/git-novice/episodes/key-points.html</loc>
-    <lastmod>2025-01-14T22:45:31.451Z</lastmod>
+    <loc>https://swcarpentry.github.io/git-novice/instructor/02-setup.html</loc>
   </url>
   <url>
-    <loc>https://metoffice.github.io/git-novice/learners/fcm-git_cheat_sheet.html</loc>
-    <lastmod>2025-01-06T17:49:49.540Z</lastmod>
+    <loc>https://swcarpentry.github.io/git-novice/instructor/03-create.html</loc>
   </url>
   <url>
-    <loc>https://metoffice.github.io/git-novice/learners/repo-quick-start.html</loc>
-    <lastmod>2025-01-06T17:49:49.540Z</lastmod>
+    <loc>https://swcarpentry.github.io/git-novice/instructor/04-changes.html</loc>
   </url>
   <url>
-    <loc>https://metoffice.github.io/git-novice/profiles/learner-profiles.html</loc>
-    <lastmod>2025-01-06T17:49:49.541Z</lastmod>
+    <loc>https://swcarpentry.github.io/git-novice/instructor/05-history.html</loc>
+  </url>
+  <url>
+    <loc>https://swcarpentry.github.io/git-novice/instructor/06-ignore.html</loc>
+  </url>
+  <url>
+    <loc>https://swcarpentry.github.io/git-novice/instructor/06-reverting-changes.html</loc>
+  </url>
+  <url>
+    <loc>https://swcarpentry.github.io/git-novice/instructor/07-github.html</loc>
+  </url>
+  <url>
+    <loc>https://swcarpentry.github.io/git-novice/instructor/08-github-interface.html</loc>
+  </url>
+  <url>
+    <loc>https://swcarpentry.github.io/git-novice/instructor/09-branches.html</loc>
+  </url>
+  <url>
+    <loc>https://swcarpentry.github.io/git-novice/instructor/09-github-history.html</loc>
+  </url>
+  <url>
+    <loc>https://swcarpentry.github.io/git-novice/instructor/10-open.html</loc>
+  </url>
+  <url>
+    <loc>https://swcarpentry.github.io/git-novice/instructor/10-pull-requests.html</loc>
+  </url>
+  <url>
+    <loc>https://swcarpentry.github.io/git-novice/instructor/11-configuring-github.html</loc>
+  </url>
+  <url>
+    <loc>https://swcarpentry.github.io/git-novice/instructor/11-licensing.html</loc>
+  </url>
+  <url>
+    <loc>https://swcarpentry.github.io/git-novice/instructor/12-citation.html</loc>
+  </url>
+  <url>
+    <loc>https://swcarpentry.github.io/git-novice/instructor/13-hosting.html</loc>
+  </url>
+  <url>
+    <loc>https://swcarpentry.github.io/git-novice/instructor/14-supplemental-rstudio.html</loc>
+  </url>
+  <url>
+    <loc>https://swcarpentry.github.io/git-novice/instructor/404.html</loc>
+  </url>
+  <url>
+    <loc>https://swcarpentry.github.io/git-novice/instructor/Break.html</loc>
+  </url>
+  <url>
+    <loc>https://swcarpentry.github.io/git-novice/instructor/CODE_OF_CONDUCT.html</loc>
+  </url>
+  <url>
+    <loc>https://swcarpentry.github.io/git-novice/instructor/End.html</loc>
+  </url>
+  <url>
+    <loc>https://swcarpentry.github.io/git-novice/instructor/LICENSE.html</loc>
+  </url>
+  <url>
+    <loc>https://swcarpentry.github.io/git-novice/instructor/aio.html</loc>
+  </url>
+  <url>
+    <loc>https://swcarpentry.github.io/git-novice/instructor/discuss.html</loc>
+  </url>
+  <url>
+    <loc>https://swcarpentry.github.io/git-novice/instructor/fcm-git_cheat_sheet.html</loc>
+  </url>
+  <url>
+    <loc>https://swcarpentry.github.io/git-novice/instructor/images.html</loc>
+  </url>
+  <url>
+    <loc>https://swcarpentry.github.io/git-novice/instructor/index.html</loc>
+  </url>
+  <url>
+    <loc>https://swcarpentry.github.io/git-novice/instructor/instructor-notes.html</loc>
+  </url>
+  <url>
+    <loc>https://swcarpentry.github.io/git-novice/instructor/key-points.html</loc>
+  </url>
+  <url>
+    <loc>https://swcarpentry.github.io/git-novice/instructor/profiles.html</loc>
+  </url>
+  <url>
+    <loc>https://swcarpentry.github.io/git-novice/instructor/reference.html</loc>
+  </url>
+  <url>
+    <loc>https://swcarpentry.github.io/git-novice/instructor/repo-quick-start.html</loc>
+  </url>
+  <url>
+    <loc>https://swcarpentry.github.io/git-novice/instructor-notes.html</loc>
+  </url>
+  <url>
+    <loc>https://swcarpentry.github.io/git-novice/key-points.html</loc>
+  </url>
+  <url>
+    <loc>https://swcarpentry.github.io/git-novice/profiles.html</loc>
+  </url>
+  <url>
+    <loc>https://swcarpentry.github.io/git-novice/reference.html</loc>
+  </url>
+  <url>
+    <loc>https://swcarpentry.github.io/git-novice/repo-quick-start.html</loc>
   </url>
 </urlset>
