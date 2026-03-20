@@ -262,12 +262,7 @@ Enter passphrase (empty for no passphrase):
 ```
 
 Now you will be prompted for a passphrase.
-If the computer you work on is shared between multiple users you should 
-set a passphrase. 
-Be sure to use something memorable or save your passphrase somewhere,
-as there is no "reset my password" option.
-If you do not share your computer there is no need 
-to set a passphrase so just press <kbd>Enter</kbd>.
+Do *not* set a password; press enter to leave this field blank.
 
 Note that, when typing a passphrase on a terminal, there won't be any visual feedback of your typing.
 This is normal: your passphrase will be recorded even if you see nothing changing on your screen.
