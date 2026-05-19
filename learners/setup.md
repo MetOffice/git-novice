@@ -126,7 +126,7 @@ Several options exist for setting up MFA, which are summarised here:
        or the [Google Titan key](https://store.google.com/us/product/titan_security_key?hl=en-US&pli=1).
     3. use a password manager such as [KeePass](https://keepass.info/) to generate one-time passwords (OTPs) and
        [set up MFA using OTPs](https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa/configuring-two-factor-authentication#configuring-two-factor-authentication-using-one-time-passwords).
-       At the Met Office, search, "Using KeePass for one-time passwords"
+       At the Met Office, search for "Using KeePass for one-time passwords"
        on SharePoint for setup instructions.
 
 The GitHub documentation provides [more details about configuring MFA](https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa/configuring-two-factor-authentication).
@@ -146,7 +146,7 @@ View your recovery codes by going to your [GitHub account settings](https://gith
 then "Security", and then "Two-factor authentication".
 Click on "Recovery codes" to view and download your recovery codes.
 
-Store these codes somewhere safe, such as a password manager.
+Store these codes somewhere safe, such as in a password manager.
 
 ## SSH Setup
 
