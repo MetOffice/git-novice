@@ -54,33 +54,37 @@ For this lesson, we will be interacting with [GitHub](https://github.com/) and s
 
 ## Keeping your email private
 
-If you elect to use a private email address with GitHub, then use GitHub's no-reply email address for the `user.email` value. It looks like `ID+username@users.noreply.github.com`. You can look up your own address in your GitHub [email settings](https://github.com/settings/emails). Check with your instructor whether your organisation has a policy on keeping emails private. At the Met Office it is up to you whether to keep your email address private.
+If you elect to use a private email address with GitHub, then use GitHub's no-reply email address for the `user.email` value.
+Your `noreply` email address will end in `@users.noreply.github.com`.
+You can look up your own address in your GitHub [email settings](https://github.com/settings/emails).
+Check with your instructor whether your organisation has a policy on keeping emails private.
+At the Met Office it is up to you whether to keep your email address private.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ### Text Editor
 
-To set your preferred text editor, 
+To set your preferred text editor,
 find the correct configuration command from this table:
 
-| Editor                                | Configuration command | 
+| Editor                                | Configuration command |
 | :-----------                          | :------------------------------ |
-| Atom                                  | `$ git config --global core.editor "atom --wait"`                      | 
-| nano                                  | `$ git config --global core.editor "nano -w"`                      | 
-| BBEdit (Mac, with command line tools) | `$ git config --global core.editor "bbedit -w"`                      | 
-| Sublime Text (Mac)                    | `$ git config --global core.editor "/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl -n -w"`                      | 
-| Sublime Text (Win, 32-bit install)    | `$ git config --global core.editor "'c:/program files (x86)/sublime text 3/sublime_text.exe' -w"`                      | 
-| Sublime Text (Win, 64-bit install)    | `$ git config --global core.editor "'c:/program files/sublime text 3/sublime_text.exe' -w"`                      | 
-| Notepad (Win)                         | `$ git config --global core.editor "c:/Windows/System32/notepad.exe"`                      | 
-| Notepad++ (Win, 32-bit install)       | `$ git config --global core.editor "'c:/program files (x86)/Notepad++/notepad++.exe' -multiInst -notabbar -nosession -noPlugin"`                      | 
-| Notepad++ (Win, 64-bit install)       | `$ git config --global core.editor "'c:/program files/Notepad++/notepad++.exe' -multiInst -notabbar -nosession -noPlugin"`                      | 
-| Kate (Linux)                          | `$ git config --global core.editor "kate"`                      | 
-| Gedit (Linux)                         | `$ git config --global core.editor "gedit --wait --new-window"`                      | 
-| Scratch (Linux)                       | `$ git config --global core.editor "scratch-text-editor"`                      | 
-| Emacs                                 | `$ git config --global core.editor "emacs"`                      | 
-| Vim                                   | `$ git config --global core.editor "vim"`                      | 
-| gVim                                  | `$ git config --global core.editor "gvim -f"`                      | 
-| VS Code                               | `$ git config --global core.editor "code --wait"`                      | 
+| Atom                                  | `$ git config --global core.editor "atom --wait"`                      |
+| nano                                  | `$ git config --global core.editor "nano -w"`                      |
+| BBEdit (Mac, with command line tools) | `$ git config --global core.editor "bbedit -w"`                      |
+| Sublime Text (Mac)                    | `$ git config --global core.editor "/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl -n -w"`                      |
+| Sublime Text (Win, 32-bit install)    | `$ git config --global core.editor "'c:/program files (x86)/sublime text 3/sublime_text.exe' -w"`                      |
+| Sublime Text (Win, 64-bit install)    | `$ git config --global core.editor "'c:/program files/sublime text 3/sublime_text.exe' -w"`                      |
+| Notepad (Win)                         | `$ git config --global core.editor "c:/Windows/System32/notepad.exe"`                      |
+| Notepad++ (Win, 32-bit install)       | `$ git config --global core.editor "'c:/program files (x86)/Notepad++/notepad++.exe' -multiInst -notabbar -nosession -noPlugin"`                      |
+| Notepad++ (Win, 64-bit install)       | `$ git config --global core.editor "'c:/program files/Notepad++/notepad++.exe' -multiInst -notabbar -nosession -noPlugin"`                      |
+| Kate (Linux)                          | `$ git config --global core.editor "kate"`                      |
+| Gedit (Linux)                         | `$ git config --global core.editor "gedit --wait --new-window"`                      |
+| Scratch (Linux)                       | `$ git config --global core.editor "scratch-text-editor"`                      |
+| Emacs                                 | `$ git config --global core.editor "emacs"`                      |
+| Vim                                   | `$ git config --global core.editor "vim"`                      |
+| gVim                                  | `$ git config --global core.editor "gvim -f"`                      |
+| VS Code                               | `$ git config --global core.editor "code --wait"`                      |
 
 It is possible to reconfigure the text editor for Git whenever you want to change it.
 
