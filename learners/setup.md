@@ -434,7 +434,7 @@ Some repositories require all commits to be
 signed and verified before they can be merged into the main branch.
 
 Choose whichever method you prefer for signing commits, GPG or SSH.
-GPG is more widely used for signing commits,
+GPG is more traditionally used for signing commits,
 but SSH is easier to set up and maintain.
 GPG keys can be set to expire.
 SSH keys do not expire but can be revoked by removing the public key from GitHub.
