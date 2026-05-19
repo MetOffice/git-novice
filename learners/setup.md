@@ -105,10 +105,11 @@ So if your name is `Eleanor Ormerod` your username would be: `mo-eormerod`
 
 ### Multi-factor Authentication
 
-In 2023, GitHub introduced a requirement for
-all accounts to have
+Since 2023,
+GitHub requires all users who contribute code
+to enable one or more methods of
 [multi-factor authentication (MFA)](https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa/about-two-factor-authentication)
-configured for extra security.
+for extra security.
 Several options exist for setting up MFA, which are summarised here:
 
 1. If you already use an authenticator app,
@@ -117,21 +118,35 @@ Several options exist for setting up MFA, which are summarised here:
    [add GitHub to that app](https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa/configuring-two-factor-authentication#configuring-two-factor-authentication-using-a-totp-mobile-app).
 2. If you have access to a smartphone but do not already use an authenticator app, install one and
    [add GitHub to the app](https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa/configuring-two-factor-authentication#configuring-two-factor-authentication-using-a-totp-mobile-app).
-3. If you do not have access to a smartphone or do not want to install an authenticator app, you have two options:
+3. If you do not have access to a smartphone or do not want to install an authenticator app, you have several options:
     1. [set up MFA via text message](https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa/configuring-two-factor-authentication#configuring-two-factor-authentication-using-text-messages)
        ([list of countries where authentication by SMS is supported](https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa/countries-where-sms-authentication-is-supported)), or
     2. [use a hardware security key](https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa/configuring-two-factor-authentication#configuring-two-factor-authentication-using-a-security-key)
        like [YubiKey](https://www.yubico.com/products/yubikey-5-overview/)
        or the [Google Titan key](https://store.google.com/us/product/titan_security_key?hl=en-US&pli=1).
+    3. use a password manager such as [KeePass](https://keepass.info/) to generate one-time passwords (OTPs) and
+       [set up MFA using OTPs](https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa/configuring-two-factor-authentication#configuring-two-factor-authentication-using-one-time-passwords).
+       At the Met Office, search, "Using KeePass for one-time passwords"
+       on SharePoint for setup instructions.
 
 The GitHub documentation provides [more details about configuring MFA](https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa/configuring-two-factor-authentication).
 
 ### Passkeys
 
 To completely avoid having authentication for work purposes on a personal device you may choose to [set up a passkey](https://docs.github.com/en/authentication/authenticating-with-a-passkey/managing-your-passkeys). Your instructor or organisation will be able to provide guidance on suitable passkey providers and password managers.
-At the Met Office the KeePass password manager is available.
-Search, "Using KeePass for one-time passwords" on SharePoint for
-setup instructions.
+
+### Recovery Codes
+
+[Recovery codes](https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa/recovering-your-account-if-you-lose-your-2fa-credentials)
+can be used to access your account
+in the event you lose access to your device
+and cannot receive two-factor authentication codes.
+
+View your recovery codes by going to your [GitHub account settings](https://github.com/settings/security),
+then "Security", and then "Two-factor authentication".
+Click on "Recovery codes" to view and download your recovery codes.
+
+Store these codes somewhere safe, such as a password manager.
 
 ## SSH Setup
 
