@@ -456,7 +456,7 @@ in the [GPG commit signature verification documentation](https://docs.github.com
 
 :::
 
-Optionally, to configure Git to sign all commits and tags by default,
+To configure Git to sign all commits and tags by default,
 run the following commands in your terminal:
 
 ```bash
