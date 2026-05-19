@@ -210,7 +210,6 @@ You shouldn't really forget about your SSH keys, since they keep your account se
 It's good practice to audit your secure shell keys every so often.
 Especially if you are using multiple computers to access your account.
 
-
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 Run the list command to check what key pairs already exist on your computer.
@@ -424,6 +423,46 @@ that only your GitHub SSH key is offered to github.com.
 This prevents failures caused by trying more key files than the GitHub server accepts.
 
 :::
+
+## Signed/Verified Commits
+
+Using GPG, or SSH, you can [sign tags and commits](https://docs.github.com/en/authentication/managing-commit-signature-verification/about-commit-signature-verification) locally.
+These tags or commits are marked as verified on GitHub
+so other people can be confident that the changes come from a trusted source.
+
+Some repositories require all commits to be
+signed and verified before they can be merged into the main branch.
+
+Choose whichever method you prefer for signing commits, GPG or SSH.
+GPG is more widely used for signing commits,
+but SSH is easier to set up and maintain.
+GPG keys can be set to expire.
+SSH keys do not expire but can be revoked by removing the public key from GitHub.
+
+::: tab
+
+### SSH
+
+To sign commits with SSH follow the instructions
+in the [SSH commit signature verification documentation](https://docs.github.com/en/authentication/managing-commit-signature-verification/about-commit-signature-verification#ssh-commit-signature-verification).
+
+Although you can use the same SSH key for both authentication and signing,
+it is recommended to use a separate key for signing commits.
+
+### GPG
+
+To sign commits with GPG follow the instructions
+in the [GPG commit signature verification documentation](https://docs.github.com/en/authentication/managing-commit-signature-verification/about-commit-signature-verification#gpg-commit-signature-verification).
+
+:::
+
+Optionally, to configure Git to sign all commits and tags by default,
+run the following commands in your terminal:
+
+```bash
+git config --global commit.gpgsign true
+git config --global tag.gpgsign true
+```
 
 ## Optional: Git Autocomplete
 
