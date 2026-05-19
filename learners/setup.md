@@ -81,7 +81,7 @@ $ git --version
 git version 2.47.0
 ```
 
-If a version number is printed like the output above Git is installed and 
+If a version number is printed like the output above Git is installed and
 ready to use.
 Otherwise please follow the instructions in the
 [Git book](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
@@ -105,23 +105,23 @@ So if your name is `Eleanor Ormerod` your username would be: `mo-eormerod`
 
 ### Multi-factor Authentication
 
-In 2023, GitHub introduced a requirement for 
-all accounts to have 
-[multi-factor authentication (MFA)](https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa/about-two-factor-authentication) 
+In 2023, GitHub introduced a requirement for
+all accounts to have
+[multi-factor authentication (MFA)](https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa/about-two-factor-authentication)
 configured for extra security.
 Several options exist for setting up MFA, which are summarised here:
 
-1. If you already use an authenticator app, 
-   like [Google Authenticator](https://support.google.com/accounts/answer/1066447?hl=en&co=GENIE.Platform%3DiOS&oco=0) 
-   or [Duo Mobile](https://duo.com/product/multi-factor-authentication-mfa/duo-mobile-app) on your smartphone for example, 
+1. If you already use an authenticator app,
+   like [Google Authenticator](https://support.google.com/accounts/answer/1066447?hl=en&co=GENIE.Platform%3DiOS&oco=0)
+   or [Duo Mobile](https://duo.com/product/multi-factor-authentication-mfa/duo-mobile-app) on your smartphone for example,
    [add GitHub to that app](https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa/configuring-two-factor-authentication#configuring-two-factor-authentication-using-a-totp-mobile-app).
-2. If you have access to a smartphone but do not already use an authenticator app, install one and 
+2. If you have access to a smartphone but do not already use an authenticator app, install one and
    [add GitHub to the app](https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa/configuring-two-factor-authentication#configuring-two-factor-authentication-using-a-totp-mobile-app).
 3. If you do not have access to a smartphone or do not want to install an authenticator app, you have two options:
-    1. [set up MFA via text message](https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa/configuring-two-factor-authentication#configuring-two-factor-authentication-using-text-messages) 
+    1. [set up MFA via text message](https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa/configuring-two-factor-authentication#configuring-two-factor-authentication-using-text-messages)
        ([list of countries where authentication by SMS is supported](https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa/countries-where-sms-authentication-is-supported)), or
-    2. [use a hardware security key](https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa/configuring-two-factor-authentication#configuring-two-factor-authentication-using-a-security-key) 
-       like [YubiKey](https://www.yubico.com/products/yubikey-5-overview/) 
+    2. [use a hardware security key](https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa/configuring-two-factor-authentication#configuring-two-factor-authentication-using-a-security-key)
+       like [YubiKey](https://www.yubico.com/products/yubikey-5-overview/)
        or the [Google Titan key](https://store.google.com/us/product/titan_security_key?hl=en-US&pli=1).
 
 The GitHub documentation provides [more details about configuring MFA](https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa/configuring-two-factor-authentication).
@@ -160,7 +160,7 @@ Hi <username>! You've successfully authenticated, but GitHub does not provide sh
 We recommend you move to using SSH Keys
 instead of a PAT (instructions below).
 This material will work using a PAT,
-please see the **Note for Personal Access Token Users** 
+please see the **Note for Personal Access Token Users**
 dropdown in the [first GitHub episode](../episodes/07-github.md).
 
 :::
@@ -216,7 +216,7 @@ If SSH has been set up on the computer you're using, the public and private key 
 
 ### Create an SSH key pair
 
-To create an SSH key pair use the following command, 
+To create an SSH key pair use the following command,
 where the `-t` option specifies which type of algorithm to use:
 
 ::: group-tab
@@ -262,11 +262,11 @@ Enter passphrase (empty for no passphrase):
 ```
 
 Now you will be prompted for a passphrase.
-If the computer you work on is shared between multiple users you should 
-set a passphrase. 
+If the computer you work on is shared between multiple users you should
+set a passphrase.
 Be sure to use something memorable or save your passphrase somewhere,
 as there is no "reset my password" option.
-If you do not share your computer there is no need 
+If you do not share your computer there is no need
 to set a passphrase so just press <kbd>Enter</kbd>.
 
 Note that, when typing a passphrase on a terminal, there won't be any visual feedback of your typing.
@@ -345,7 +345,7 @@ for you to check against.
 
 :::
 
-First, we need to copy the public key. 
+First, we need to copy the public key.
 Be sure to include the `.pub` at the end, otherwise you're looking at the private key.
 
 ```bash
@@ -356,9 +356,7 @@ cat ~/.ssh/id_ed25519_github.pub
 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDmRA3d51X0uu9wXek559gfn6UFNF69yZjChyBIU2qKI e.ormerod@mo-weather.uk
 ```
 
-Now, go to [GitHub.com](www.github.com), click on your profile icon in the top right corner to get the drop-down menu.
-Click "Settings", then on the settings page, click "SSH and GPG keys",
-on the left side "Access" menu.
+Now, go to [GitHub.com/settings/ssh](https://github.com/settings/ssh).
 Click the "New SSH key" button on the right side.
 Now, you can add the title (normally an ID for the computer storing the keys such as "Work Linux"),
 paste your SSH key into the field, and click the "Add SSH key" to complete the setup.
@@ -414,14 +412,14 @@ This prevents failures caused by trying more key files than the GitHub server ac
 
 ## Optional: Git Autocomplete
 
-Git provides a script which lets us display the version control status in your 
+Git provides a script which lets us display the version control status in your
 terminal prompt.
 The following instructions have been tested on **Linux**.
 If you are using MacOS or Windows please consult the
 [Git autocomplete instructions](https://github.com/git/git/blob/master/contrib/completion/git-prompt.sh)
 at the top of the linked file and
 [reach out for support](./learners/setup.md#how-to-get-help) if you require help.
-To enable this script add the following to a new `~/.bashrc.d/prompt.bash` 
+To enable this script add the following to a new `~/.bashrc.d/prompt.bash`
 file:
 
 ```bash
@@ -442,7 +440,7 @@ if [[ $- =~ i ]]; then
         export GIT_PS1_SHOWUNTRACKEDFILES=1 # this can potentially slow down the prompt
 
         export PS1='[\u@\h:\w]$(__git_ps1 "(%s)"):\$ ' # style to your taste
-    #else # optional, if you need to style the default prompt without Git 
+    #else # optional, if you need to style the default prompt without Git
     #    export PS1='[\u@\h:\w] \$ '
     fi
 fi
@@ -481,7 +479,7 @@ These lines should only be added to the `~/.bashrc` file. Do not add them to you
 The path in the output above is correct for Met Office systems.
 If you are not using Met Office systems please consult
 your institutions IT services or download your own copy of the `git-prompt.sh` script.
-Download the latest version from the 
+Download the latest version from the
 [Git repository contrib directory](https://github.com/git/git/blob/master/contrib/completion/git-prompt.sh).
 Ensure the `GIT_PROMPT_PATH` matches where you decide to store the `git-prompt.sh` file.
 
