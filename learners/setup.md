@@ -428,7 +428,7 @@ This prevents failures caused by trying more key files than the GitHub server ac
 
 Using GPG, or SSH, you can [sign tags and commits](https://docs.github.com/en/authentication/managing-commit-signature-verification/about-commit-signature-verification) locally.
 These tags or commits are marked as verified on GitHub
-so other people can be confident that the changes come from a trusted source.
+so other people can be confident that the changes come from you.
 
 Some repositories require all commits to be
 signed and verified before they can be merged into the main branch.
