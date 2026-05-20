@@ -446,8 +446,8 @@ SSH keys do not expire but can be revoked by removing the public key from GitHub
 To sign commits with SSH follow the instructions
 in the [SSH commit signature verification documentation](https://docs.github.com/en/authentication/managing-commit-signature-verification/about-commit-signature-verification#ssh-commit-signature-verification).
 
-Although you can use the same SSH key for both authentication and signing,
-it is recommended to use a separate key for signing commits.
+You can use the same SSH key for both authentication and signing,
+or create a new SSH key for signing commits.
 
 ### GPG
 
